@@ -8,7 +8,7 @@
     background-color: var(--main-bg);
     position: fixed;
     left: 0px;
-    z-index: 1000;
+    z-index: 10;
 }
 .header__nav ul {
     display: flex;
