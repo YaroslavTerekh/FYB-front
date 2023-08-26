@@ -1,0 +1,112 @@
+@font-face {
+    font-family: vetrino;
+    src: url(../../public/Vetrino.ttf);
+}
+
+.vetrino {
+    font-family: vetrino;
+}
+
+body {
+
+}
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0px 15px;
+}
+
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-bg);
+}
+
+.tlt {
+    color: var(--second-bg);
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 50px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 25px;
+    background-color: var(--second-bg);
+    transition: all 0.3s ease 0s;
+    min-width: 175px;
+}
+
+.btn button {
+    color: var(--main-bg);
+    background-color: var(--second-bg);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.btn:hover {
+    font-weight: 600;
+    box-shadow: 4px 2px 6px 0px rgba(255, 237, 228, 0.35);
+}
+
+.whom__title {
+    color: #011e26;
+}
+
+.button-training__blu {
+    background-color: var(--main-bg);
+    border: 2px solid var(--beige, var(--second-bg));
+    display: block;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 13px 23px;
+    transition: all 0.3s ease 0s;
+    color: var(--second-bg);
+}
+
+.button-training__blu:hover {
+    background-color: var(--second-bg);
+    box-shadow: none;
+    color: var(--main-bg);
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+        max-width: 930px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 610px;
+    }
+    .btn button {
+        font-size: 16px;
+    }
+    .button-training__blu {
+        font-size: 16px;
+    }
+    .tlt {
+        font-size: 30px;
+        margin: 0 0 30px 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container {
+        max-width: 460px;
+    }
+    .tlt {
+        margin: 0 0 20px 0;
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .container {
+        max-width: 340px;
+    }
+}

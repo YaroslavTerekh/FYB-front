@@ -1,0 +1,235 @@
+.training {
+    margin: 65px 0 136px 0;
+}
+
+.training-block {
+    border: 2px solid var(--beige, var(--second-bg));
+    max-width: 1085px;
+    margin: 14px auto;
+    padding: 33px 80px;
+}
+
+.items-training {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.items-training__img {
+    flex: 0 0 50%;
+    position: relative;
+    min-height: 545px;
+    max-width: 380px;
+    margin: 0 50px 0 0;
+}
+
+.img-training {
+    border-radius: 200px 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease 0s;
+}
+
+.img-training:hover {
+    width: 102%;
+    height: 102%;
+}
+
+.info-training {
+    max-width: 485px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.info-training__title {
+    color: var(--second-bg);
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0 0 30px 0;
+}
+
+.info-training__subtitle {
+    color: var(--second-bg);
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 30px 0;
+}
+
+.picture-training {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 0 30px 0;
+    align-items: center;
+}
+
+.picture-training__numerosity {
+    display: flex;
+    align-items: center;
+}
+
+.picture-training__icon {
+    margin: 0 10px 0 0;
+}
+
+.picture-training__time {
+    background-image: url(../../../../../img/components/icon4.svg);
+    background-repeat: no-repeat;
+    background-position: 0 10px;
+    background-size: 40px 30px;
+    padding: 15px 0 15px 55px;
+}
+
+.picture-training__gift {
+    background-image: url(../../../../../img/components/icon3.png);
+    background-repeat: no-repeat;
+    background-position: 0 10px;
+    background-size: 40px 30px;
+    padding: 15px 0 15px 55px;
+}
+
+.picture-training__text {
+    color: var(--second-bg);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.info-training__price {
+    color: var(--second-bg);
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0 0 30px 0;
+}
+
+.button-training {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1000px) {
+    .training-block {
+        padding: 50px 33px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .training {
+        margin: 35px 0 86px 0;
+    }
+    .items-training__img {
+        min-height: 465px;
+        max-width: 325px;
+    }
+    .items-training__img {
+        margin: 0 30px 0 0;
+    }
+    .img-training {
+        border-radius: 150px 0px;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .button-training {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .button-training__white {
+        margin: 0 0 20px 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .training {
+        margin: 5px 0 56px 0;
+    }
+    .items-training__img {
+        min-height: 355px;
+        max-width: 245px;
+    }
+    .info-training__title {
+        font-size: 20px;
+        margin: 0 0 6% 0;
+    }
+    .info-training__subtitle {
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0 0 6% 0;
+    }
+    .img-training {
+        border-radius: 100px 0px;
+    }
+    .button-training__blu {
+        font-size: 16px;
+    }
+    .training-block {
+        padding: 40px 13px;
+    }
+    .picture-training__gift {
+        padding: 15px 0 15px 45px;
+    }
+    .img-training {
+        width: 110%;
+        height: 110%;
+    }
+    .picture-training {
+        margin: 0 0 6% 0;
+    }
+    .info-training__price {
+        margin: 0 0 6% 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .items-training__img {
+        min-height: 200px;
+        max-width: 290px;
+    }
+    .items-training {
+        flex-direction: column;
+    }
+    .img-training {
+        position: static;
+        margin: 0 0 5% 0;
+    }
+    .training-block {
+        border-radius: 100px 0px;
+        padding: 20px 13px;
+    }
+    .button-training {
+        width: 100%;
+    }
+    .button-training__blu button {
+        width: 85%;
+    }
+    .button-training__white {
+        width: 85%;
+    }
+    .button-training_blu {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .button-training__blu {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .training {
+        margin: -15px 0 36px 0;
+    }
+    .training-block {
+        border-radius: 60px 0px;
+    }
+}

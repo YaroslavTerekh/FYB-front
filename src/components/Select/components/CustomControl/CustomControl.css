@@ -1,0 +1,26 @@
+.custom-control {
+	display: flex;
+	padding: 20px 40px;
+	cursor: pointer;
+}
+
+.custom-control div {
+	padding: 0 10px;
+	color: var(--second-bg);
+}
+
+
+@media screen and (max-width: 768px) {
+	.custom-control {
+		 padding: 5px 5px;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.custom-control {
+		padding: 0px 0px;
+  }
+}
+
+
+

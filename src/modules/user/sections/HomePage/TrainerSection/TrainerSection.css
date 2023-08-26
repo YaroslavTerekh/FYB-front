@@ -1,0 +1,213 @@
+.trainer {
+    margin: 75px 0;
+    padding: 75px 0;
+}
+
+.trainer__block {
+    display: flex;
+    flex-direction: column;
+}
+
+.block-main__items_Lyda {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 0.5fr 1fr;
+    grid-column-gap: 51px;
+    grid-row-gap: 25px;
+    margin: 0 0 25px 0;
+}
+
+.block-main__items_Lera {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 0.5fr 1fr;
+    grid-column-gap: 51px;
+    grid-row-gap: 25px;
+    margin: 25px 0 0 0;
+}
+
+.item__img1 {
+    grid-area: 1 / 2 / 2 / 3;
+    position: relative;
+    padding: 0 0 90% 0;
+    margin: 0 0 20px 0;
+}
+
+.item__img1 img,
+.item__img2 img,
+.item__img3 img,
+.item__img4 img,
+.item__img5 img,
+.item__img6 img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+.info-item__title {
+    color: var(--second-bg);
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.info-item__text_item li {
+    color: var(--second-bg);
+    font-size: 20px;
+    font-weight: 500;
+    background-image: url(../../../../../img/components/icon17.png);
+    padding: 0 0 10px 30px;
+    background-repeat: no-repeat;
+    background-position: 0 0px;
+    background-size: auto;
+}
+
+.info-item__text_item li:not(:last-child) {
+    margin: 0 0 20px 0;
+}
+
+.info-item_Lyda {
+    grid-area: 1 / 3 / 3 / 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 46px 27px;
+    border: 2px solid var(--beige, var(--second-bg));
+}
+
+.info-item_Lera {
+    grid-area: 1 / 1 / 3 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 46px 27px;
+    border: 2px solid var(--beige, var(--second-bg));
+}
+
+.info-item__text {
+    margin: 50px 0;
+}
+
+.item__img2 {
+    grid-area: 2 / 1 / 4 / 3;
+    position: relative;
+    padding: 0 0 90% 0;
+    margin: 0 0 20px 0;
+}
+
+.item__img3 {
+    grid-area: 3 / 3 / 4 / 4;
+    position: relative;
+    padding: 0 0 90% 0;
+    margin: 0 0 20px 0;
+}
+
+.item__img4 {
+    position: relative;
+    padding: 0 0 90% 0;
+    margin: 0 0 20px 0;
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.item__img5 {
+    position: relative;
+    padding: 0 0 90% 0;
+    margin: 0 0 20px 0;
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.item__img6 {
+    position: relative;
+    padding: 0 0 90% 0;
+    margin: 0 0 20px 0;
+    grid-area: 2 / 3 / 4 / 5;
+}
+
+@media screen and (max-width: 1000px) {
+    .trainer {
+        margin: 50px 0;
+        padding: 50px 0;
+    }
+    .info-item__title {
+        font-size: 30px;
+    }
+    .info-item__text_item li {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .trainer {
+        margin: 35px 0;
+        padding: 35px 0;
+    }
+    .item__img1,
+    .item__img3,
+    .item__img4,
+    .item__img5 {
+        display: none;
+    }
+    .block-main__items_Lyda {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        border-radius: 200px 0px;
+        border: 2px solid var(--second-bg);
+    }
+
+    .block-main__items_Lera {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        border-radius: 200px 0px;
+        border: 2px solid var(--second-bg);
+    }
+    .item__img2,
+    .item__img6 {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+    .item__img2 img,
+    .item__img6 img {
+        border-radius: 200px 0px 0px 0px;
+    }
+    .info-item_Lyda {
+        grid-area: 2 / 1 / 3 / 2;
+        border: none;
+        padding: 0px 17px;
+    }
+    .info-item_Lera {
+        grid-area: 2 / 1 / 3 / 2;
+        border: none;
+        padding: 0px 17px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .info-item_Lyda,
+    .info-item_Lera {
+        padding: 20px 17px;
+    }
+    .block-main__items_Lyda,
+    .block-main__items_Lera {
+        border-radius: 70px 0px;
+    }
+    .item__img2 img,
+    .item__img6 img {
+        border-radius: 70px 0px 0px 0px;
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .trainer {
+        margin: 25px 0;
+        padding: 25px 0;
+    }
+}

@@ -1,0 +1,113 @@
+.header__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100px;
+    width: 100%;
+    padding: 0px 10px;
+    background-color: var(--main-bg);
+    position: fixed;
+    left: 0px;
+    z-index: 1000;
+}
+.header__nav ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+.nav__menu li:not(:last-child) {
+    margin: 0px 100px 0px 0px;
+}
+.nav__menu_items a {
+    font-size: 20px;
+    color: var(--second-bg);
+    transition: all 0.2s ease 0s;
+}
+.nav__menu_items a:hover {
+    font-weight: 600;
+}
+.header__burger {
+    display: none;
+}
+@media screen and (max-width: 992px) {
+    .nav__menu li:not(:last-child) {
+        margin: 0px 50px 0px 0px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .header__burger {
+        display: block;
+        position: relative;
+        width: 50px;
+        height: 23px;
+        z-index: 5;
+    }
+    .header__burger span {
+        position: absolute;
+        background-color: var(--second-bg);
+        left: 0;
+        width: 100%;
+        height: 3px;
+        top: 10px;
+    }
+    .header__burger:before,
+    .header__burger:after {
+        content: '';
+        background-color: var(--second-bg);
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        left: 0;
+        transition: all 0.3s ease 0s;
+    }
+    .header__burger:before {
+        top: 0;
+    }
+    .header__burger:after {
+        bottom: 0;
+    }
+    .header__burger.active:before {
+        transform: rotate(45deg);
+        top: 10px;
+    }
+    .header__burger.active:after {
+        transform: rotate(-45deg);
+        bottom: 10px;
+    }
+    .header__burger.active span {
+        transform: scale(0);
+    }
+    .nav__menu {
+        position: fixed;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--main-bg);
+        transition: all 0.3s ease 0s;
+        padding: 115px 20px 0px 10px;
+        z-index: 4;
+    }
+    .nav__menu.active {
+        top: 0;
+    }
+    .header__row:before {
+        z-index: 5;
+    }
+    .nav__menu_items li a {
+        color: var(--second-bg);
+        font-size: 30px;
+    }
+    .nav__menu_items {
+        display: block;
+        text-align: center;
+    }
+    .nav__menu_items li:not(:last-child) {
+        margin: 0px 0 30px 0;
+    }
+    .header__logo {
+        flex: 1 1 auto;
+    }
+    .header__nav ul {
+        flex-direction: column;
+    }
+}

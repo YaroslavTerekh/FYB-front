@@ -1,0 +1,5 @@
+.customSelectContainer {
+    display: flex;
+    flex-direction: column;
+}
+
