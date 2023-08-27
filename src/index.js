@@ -7,10 +7,14 @@ import './styles/reset.css';
 import './styles/variables.css';
 import './styles/common.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Provider } from 'react-redux';
+import store from './context/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App />
+        <Provider store={store}>
+            <App />
+        </Provider>
     </React.StrictMode>
 );

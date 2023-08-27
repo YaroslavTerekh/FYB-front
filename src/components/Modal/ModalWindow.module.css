@@ -1,0 +1,13 @@
+.box {
+    position: relative;
+}
+
+.closeBox {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 20;
+}

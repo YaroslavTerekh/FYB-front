@@ -17,20 +17,24 @@ export const HEADER_NAVIGATION = [
         type: HEADER_NAVIGATION_LINK_TYPES.pseudoLink,
         title: 'Тренування',
         href: 'training',
+        name: 'training'
     },
     {
         type: HEADER_NAVIGATION_LINK_TYPES.pseudoLink,
         title: 'Тренери',
         href: 'trainers',
+        name: 'trainers'
     },
     {
         type: HEADER_NAVIGATION_LINK_TYPES.pseudoLink,
         title: 'FAQ',
         href: 'FAQ',
+        name: 'FAQ'
     },
     {
         type: HEADER_NAVIGATION_LINK_TYPES.link,
         title: 'Мій кабінет',
         href: '/profile',
+        name: 'profile'
     },
 ];

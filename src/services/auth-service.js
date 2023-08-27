@@ -1,11 +1,28 @@
-import API from '../axios-settings';
-import { LoginModel } from '../models/user-models/login-model';
-import { RegisterModel } from '../models/user-models/register-model';
+import type { BaseUserModel } from '../models/user-models/base-user-model';
+import type { LoginModel } from '../models/user-models/login-model';
+import { Login, Register } from '../api/auth-api';
+import type { RegisterModel } from '../models/user-models/register-model';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccessToken } from './local-storage-service';
 
-export function Login(model: LoginModel): any {
-    return API.post(`auth/register`, model);
-}
+export default class AuthService {
+     dispatch = useDispatch();
+     currentUser = useSelector(state => state.user);
+     _user: BaseUserModel | undefined;
 
-export function Register(registerUser: RegisterModel): any {
-    return API.post(`auth/register`, registerUser);
+     async login(model: LoginModel): Promise<void> {
+        const response = await Login(model);
+
+        // TODO setAccessToken
+    }
+
+    async register(model: RegisterModel): Promise<boolean> {
+        const response = await Register(model);
+
+        return response.status === 200;
+    }
+
+    isAuthorized(): boolean {
+         return getAccessToken() || this.currentUser.token;
+    }
 }

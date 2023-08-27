@@ -3,14 +3,25 @@ import CustomInput from '../../../components/Input/CustomInput';
 import CustomPasswordInput from '../../../components/Input/CustomPasswordInput';
 import ModalWindow from '../../../components/Modal/ModalWindow';
 import styles from '../Auth.module.css';
+import closeIcon from '../../../img/components/icon8.png';
 import Button from '../../../components/Button/Button';
 import AuthService from '../../../services/auth-service';
 
-const LoginModal = ({ isOpen, onClose, registerRequested }) => {
+const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
     const userService = new AuthService();
 
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    function changeNameHandler(e) {
+        setName(e?.target?.value);
+    }
+
+    function changePhoneHandler(e) {
+        setPhone(e?.target?.value);
+    }
 
     function changeEmailHandler(e) {
         setEmail(e?.target?.value);
@@ -20,8 +31,10 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
         setPassword(e?.target?.value);
     }
 
-    async function login() {
-        await userService.login({ email, password });
+    async function register() {
+        const isSuccess = await userService.register({ email, password, firstName: name, phoneNumber: phone });
+
+        setRegistrationFinished(isSuccess);
     }
 
     return <>
@@ -29,27 +42,28 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
             element={
                 <section className={styles.authBox} >
                     <div className={`${styles.content} vetrino`} >
-                        <h2 className={styles.contentTitle}>Увійти</h2>
+                        <h2 className={styles.contentTitleR}>Реєстрація</h2>
+                        <div className={styles.inputBox}>
+                            <CustomInput onChange={changeNameHandler} className={""} placeholder={"Ім'я"} type={"text"} required={true}/>
+                        </div>
+                        <div className={styles.inputBox}>
+                            <CustomInput onChange={changePhoneHandler} className={""} placeholder={"Телефон"} type={"tel"} required={true}/>
+                        </div>
                         <div className={styles.inputBox}>
                             <CustomInput onChange={changeEmailHandler} className={""} placeholder={"Email"} type={"email"} required={true}/>
                         </div>
-                        <div className={styles.inputBox}>
+                        <div className=''>
                             <CustomPasswordInput onChange={changePasswordHandler} className={""} placeholder={"Пароль"} required={true}/>
                         </div>
-                        <button className={styles.linkBox} onClick={registerRequested}>
-                            <p className={styles.text}>Ще не маєте особистого кабінету?</p>
-                            <p className={styles.link}>Зареєструватися</p>
-                        </button>
                         <Button
                             className={styles.btn}
                             aria-expanded={true}
                             aria-controls={`example-panel-`}
-                            onClick={login}
+                            onClick={register}
                         >
                             <p>Далі</p>
                         </Button>
                     </div>
-
                 </section>
             }
             isOpen={isOpen}
@@ -58,4 +72,4 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
     </>
 }
 
-export default LoginModal;
+export default RegisterModal;

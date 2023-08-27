@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Header.css';
 
 import logoImg from '../../img/logo.svg';
+import AuthService from '../../services/auth-service';
+import LoginModal from '../../modules/auth/LoginModal/LoginModal';
+import RegisterModal from '../../modules/auth/RegisterModal/RegisterModal';
 
 export default function Header({ navigationData }) {
+    const userService = new AuthService();
+    const navigate = useNavigate();
+
     const [nav, setNav] = useState(false);
+
+    const [loginIsOpen, setLoginIsOpen] = useState(false);
+    const [registerIsOpen, setRegisterIsOpen] = useState(false);
+    const [finishRegistrationIsOpen, setFinishRegistrationIsOpen] = useState(false);
 
     const handleHeaderClick = (event) => {
         event.preventDefault();
@@ -47,51 +57,91 @@ export default function Header({ navigationData }) {
         }
     };
 
+    function handleProfileClick(elementLink) {
+        if(userService.isAuthorized()) {
+            navigate(elementLink);
+        } else {
+            setLoginIsOpen(true);
+        }
+    }
+
+    function onLoginCloseModalHandler() {
+        setLoginIsOpen(false);
+    }
+
+    function onRegisterCloseModalHandler() {
+        setRegisterIsOpen(false);
+    }
+
+    function onRegisterRequestedModalHandler() {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(true);
+    }
+
+    function onRegisterFinishedModalHandler(value: boolean) {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(false);
+        setFinishRegistrationIsOpen(value);
+    }
+    
     return (
-        <header className='header'>
-            <div className='container'>
-                <div className='header__row'>
-                    <div className='header__logo'>
-                        <a href='/'>
-                            <img src={logoImg} alt='Logo' />
-                        </a>
-                    </div>
-                    <div
-                        onClick={() => setNav(!nav)}
-                        className={`header__burger ${nav ? 'active' : ''}`}
-                    >
-                        <span></span>
-                    </div>
-                    <div className='header__nav'>
-                        <nav className={`nav__menu ${nav ? 'active' : ''}`}>
-                            <ul className='nav__menu_items'>
-                                {navigationData.map((item, index) => {
-                                    if (item.type === 'link') {
-                                        return (
-                                            <li key={index}>
-                                                <Link to={item.href}>
-                                                    {item.title}
-                                                </Link>
-                                            </li>
-                                        );
-                                    } else {
-                                        return (
-                                            <li key={index}>
-                                                <a
-                                                    href='/'
-                                                    onClick={handleHeaderClick}
-                                                >
-                                                    {item.title}
-                                                </a>
-                                            </li>
-                                        );
-                                    }
-                                })}
-                            </ul>
-                        </nav>
+        <>
+            <LoginModal
+                onClose={onLoginCloseModalHandler}
+                isOpen={loginIsOpen}
+                registerRequested={onRegisterRequestedModalHandler} />
+            <RegisterModal
+                onClose={onRegisterCloseModalHandler}
+                isOpen={registerIsOpen}
+                setRegistrationFinished={onRegisterFinishedModalHandler}
+            />
+            <header className='header'>
+                <div className='container'>
+                    <div className='header__row'>
+                        <div className='header__logo'>
+                            <a href='/'>
+                                <img src={logoImg} alt='Logo' />
+                            </a>
+                        </div>
+                        <div
+                            onClick={() => setNav(!nav)}
+                            className={`header__burger ${nav ? 'active' : ''}`}
+                        >
+                            <span></span>
+                        </div>
+                        <div className='header__nav'>
+                            <nav className={`nav__menu ${nav ? 'active' : ''}`}>
+                                <ul className='nav__menu_items'>
+                                    {navigationData.map((item, index) => {
+                                        if (item.name === "profile") {
+                                            return (
+                                                <li key={index}>
+                                                    <p
+                                                        onClick={() => handleProfileClick(item.link)}
+                                                    >
+                                                        {item.title}
+                                                    </p>
+                                                </li>
+                                            );
+                                        } else {
+                                            return (
+                                                <li key={index}>
+                                                    <a
+                                                        href='/'
+                                                        onClick={handleHeaderClick}
+                                                    >
+                                                        {item.title}
+                                                    </a>
+                                                </li>
+                                            );
+                                        }
+                                    })}
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </>
     );
 }
