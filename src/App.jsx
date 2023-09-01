@@ -11,6 +11,8 @@ import Footer from './components/Footer/Footer';
 import { HEADER_NAVIGATION, ROUTES } from './constants';
 import AdminHome from './modules/admin/AdminHome';
 import UserMainPage from './modules/user/UserMainPage';
+import CoachesPage from './modules/admin/pages/coaches/CoachesPage';
+import { AxiosInterceptor } from './axios-settings';
 
 const App = () => (
     <div className=''>
@@ -23,20 +25,23 @@ const App = () => (
         {/*    </Routes>*/}
         {/*    <Footer />*/}
         {/*</Router>*/}
-        <Router>
-            <Routes>
-                <Route path={ROUTES.home} element={<UserMainPage />}>
-                    <Route exact path={ROUTES.home} element={<HomePage />} />
-                    <Route path={ROUTES.profile} element={<ProfilePage />} />
-                    <Route path={ROUTES.details} element={<DetailsPage />} />
-                </Route>
-                <Route path={ROUTES.admin} element={<AdminHome />}>
-                    {/*<Route path="/admin/dashboard" element={<Dashboard />} />*/}
+        <AxiosInterceptor>
+            <Router>
+                <Routes>
+                    <Route path={ROUTES.home} element={<UserMainPage />}>
+                        <Route exact path={ROUTES.home} element={<HomePage />} />
+                        <Route path={ROUTES.profile} element={<ProfilePage />} />
+                        <Route path={ROUTES.details} element={<DetailsPage />} />
+                    </Route>
+                    <Route path={ROUTES.admin} element={<AdminHome />}>
+                        <Route path={ROUTES.coaches} element={<CoachesPage />} />
+                        {/*<Route path="/admin-models/dashboard" element={<Dashboard />} />*/}
 
-                    {/*<Route path="*" element={<NotFound />} />*/}
-                </Route>
-            </Routes>
-        </Router>
+                        {/*<Route path="*" element={<NotFound />} />*/}
+                    </Route>
+                </Routes>
+            </Router>
+        </AxiosInterceptor>
     </div>
 );
 

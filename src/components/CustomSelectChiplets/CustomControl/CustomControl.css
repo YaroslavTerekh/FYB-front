@@ -1,0 +1,34 @@
+.custom-control {
+	display: flex;
+	/*padding: 20px 40px;*/
+	cursor: pointer;
+	padding: 0;
+}
+
+.custom-control div {
+	/*padding: 0 10px;*/
+	color: #B5B5B5;
+	font-family: Inter;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	padding: 0;
+	text-align: start;
+}
+
+
+@media screen and (max-width: 768px) {
+	/*.custom-control {*/
+	/*	 padding: 5px 5px;*/
+	/*}*/
+}
+
+@media screen and (max-width: 450px) {
+	.custom-control {
+		padding: 0px 0px;
+  }
+}
+
+
+

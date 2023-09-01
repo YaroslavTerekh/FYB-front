@@ -1,3 +1,86 @@
 .box {
+    display: flex;
+    box-sizing: border-box;
+}
 
+.content {
+    width: 100%;
+}
+
+.mainAddBtn {
+    display: inline-flex;
+    padding: 15px 30px;
+    align-items: center;
+    gap: 15px;
+    border-radius: 50px;
+    background: #FFEDDB;
+}
+
+.mainAddBtnText {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding: 0;
+    margin: auto;
+}
+
+.mainAddBtnIcon {
+    width: 15px;
+    height: 15px;
+    fill: #000;
+    /*margin: auto;*/
+}
+
+.headBlock, .bodyBlock {
+    display: flex;
+    width: 100%;
+}
+
+.headBlock {
+    margin-bottom: 20px;
+}
+
+.blockItem {
+    height: 60px;
+    border-bottom: 1px solid #FFEDDB;
+    background-color: #FFFCF9 !important;
+    /*padding: 50px 20px !important;*/
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: 50px !important;
+    width: 100%;
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.blockItem:last-child{
+    width: 80%;
+}
+
+.tableActions {
+    display: flex;
+    box-sizing: border-box;
+    width: 126px;
+    justify-content: space-between;
+}
+
+.tableBtn {
+    background: none;
+    border: none;
+}
+
+.tableBtn img {
+    height: 15px;
+    fill: #676767;
+}
+
+.adminPage {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }

@@ -17,13 +17,13 @@
 .nav__menu li:not(:last-child) {
     margin: 0px 100px 0px 0px;
 }
-.nav__menu_items a, p {
+.nav__menu_items a, .nav__menu_items p {
     text-decoration: underline;
     font-size: 20px;
     color: var(--second-bg);
     transition: all 0.2s ease 0s;
 }
-.nav__menu_items a:hover, p:hover  {
+.nav__menu_items a:hover, .nav__menu_items p:hover  {
     font-weight: 600;
     text-decoration: none;
 }

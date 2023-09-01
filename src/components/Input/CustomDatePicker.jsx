@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './CustomInput.module.css';
-import PropTypes from 'prop-types';
-import eye from '../../img/components/eye.png';
-import eyeOff from '../../img/components/eyeOff.png';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 const customStyles = {
     control: () => ({}),
     option: () => ({}),
 };
 
-const CustomInput = ({ onChange, className, placeholder, type, required,  customInputContainer, icon, value}) => {
+const CustomDatePicker = ({ onChange, className, placeholder, required,  customInputContainer, icon, value}) => {
+    const [startDate, setStartDate] = useState(value ?? new Date());
+
+    function onChangeHandler(date) {
+        debugger;
+        setStartDate(date);
+        onChange(date)
+    }
+
     return (
         <div className={customInputContainer ?? styles.customInputContainer}>
-            <input
-                required={required}
-                onChange={onChange}
+            <DatePicker
                 className={className}
-                placeholder={placeholder}
-                type={type}
-                value={value}
+                selected={startDate}
+                onChange={(date) => onChangeHandler(date)}
+                placeholderText={placeholder}
             />
             { icon &&
                 <span
@@ -31,7 +37,7 @@ const CustomInput = ({ onChange, className, placeholder, type, required,  custom
     );
 };
 
-CustomInput.propTypes = {
+CustomDatePicker.propTypes = {
     // options: PropTypes.arrayOf(
     //     PropTypes.shape({
     //         value: PropTypes.string.isRequired,
@@ -42,4 +48,4 @@ CustomInput.propTypes = {
     // onChange: PropTypes.func.isRequired,
 };
 
-export default CustomInput;
+export default CustomDatePicker;

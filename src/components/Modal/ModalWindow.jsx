@@ -1,14 +1,25 @@
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
-import closeIcon from '../../img/components/icon8.png';
+import closeIconDef from '../../img/components/icon8.png';
 import styles from './ModalWindow.module.css'
 import { element } from 'prop-types';
 
 type ModalType = {
     element: any,
     isOpen: boolean,
-    onClose: () => void
+    onClose: () => void,
+    styles: ModalStyles,
+    closeIcon: any
 }
+
+type ModalStyles = {
+    bgColor: string,
+    width: string,
+    height: string,
+    border: string,
+    overlayBgColor: ''
+}
+
 
 const ModalWindow = (prop: ModalType) => {
 
@@ -23,16 +34,17 @@ const ModalWindow = (prop: ModalType) => {
             isOpen={prop.isOpen}
             style={{
                 overlay: {
-                    backgroundColor: 'none',
-                    zIndex: 100
+                    backgroundColor: prop.styles.overlayBgColor,
+                    zIndex: 100,
+
                 },
                 content: {
                     color: 'lightsteelblue',
-                    width: '609px',
-                    height: '480px',
+                    width: prop.styles.width,
+                    height: prop.styles.height,
                     margin: 'auto',
-                    border: '1px solid white',
-                    backgroundColor: 'var(--main-bg)',
+                    border: prop.styles.border,
+                    backgroundColor: prop.styles.bgColor,
                     padding: 0,
                     boxSizing: 'border-box'
                 }
@@ -40,7 +52,7 @@ const ModalWindow = (prop: ModalType) => {
         >
             <div className={styles.box}>
                 <button className={styles.closeBox} onClick={onCloseHandler}>
-                    <img src={closeIcon} alt='close' />
+                    <img src={prop.closeIcon ? prop.closeIcon : closeIconDef} alt='close' />
                 </button>
                 {prop.element}
             </div>

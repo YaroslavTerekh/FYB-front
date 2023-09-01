@@ -3,7 +3,8 @@ import type { LoginModel } from '../models/user-models/login-model';
 import { Login, Register } from '../api/auth-api';
 import type { RegisterModel } from '../models/user-models/register-model';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccessToken } from './local-storage-service';
+import { getAccessToken, setAccessToken } from './local-storage-service';
+import { setToken, setUser } from '../context/auth-context/user-actions';
 
 export default class AuthService {
      dispatch = useDispatch();
@@ -12,6 +13,13 @@ export default class AuthService {
 
      async login(model: LoginModel): Promise<void> {
         const response = await Login(model);
+debugger;
+        if (response.data.token) {
+            this.dispatch(setToken(response.data.token));
+            setAccessToken(response.data.token);
+
+            this.dispatch(setUser({ firstName: "Роман", token: response.data.token, role: "Admin" }));
+        }
 
         // TODO setAccessToken
     }

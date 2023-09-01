@@ -1,37 +1,27 @@
 import React from 'react';
 import styles from './CustomInput.module.css';
 import PropTypes from 'prop-types';
-import eye from '../../img/components/eye.png';
-import eyeOff from '../../img/components/eyeOff.png';
 
 const customStyles = {
     control: () => ({}),
     option: () => ({}),
 };
 
-const CustomInput = ({ onChange, className, placeholder, type, required,  customInputContainer, icon, value}) => {
+const CustomTextArea = ({ onChange, className, placeholder, required,  customInputContainer, value}) => {
     return (
         <div className={customInputContainer ?? styles.customInputContainer}>
-            <input
+            <textarea
                 required={required}
                 onChange={onChange}
                 className={className}
                 placeholder={placeholder}
-                type={type}
                 value={value}
             />
-            { icon &&
-                <span
-                    className={styles.passwordIconBox}
-                >
-                     <img src={icon}/>
-                </span>
-            }
         </div>
     );
 };
 
-CustomInput.propTypes = {
+CustomTextArea.propTypes = {
     // options: PropTypes.arrayOf(
     //     PropTypes.shape({
     //         value: PropTypes.string.isRequired,
@@ -42,4 +32,4 @@ CustomInput.propTypes = {
     // onChange: PropTypes.func.isRequired,
 };
 
-export default CustomInput;
+export default CustomTextArea;

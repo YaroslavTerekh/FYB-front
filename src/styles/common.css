@@ -3,6 +3,10 @@
     src: url(../../public/Vetrino.ttf);
 }
 
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
 .vetrino {
     font-family: vetrino;
 }

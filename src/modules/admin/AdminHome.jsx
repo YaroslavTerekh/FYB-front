@@ -7,13 +7,17 @@ import styles from './Admin.module.css'
 const Admin = () => {
 
     return (
-        <>
+        <div className={styles.adminPage}>
             <AdminHeader />
             <div className={styles.box}>
-                <AdminSideBar />
-                <Outlet />
+                <div className='sidebar'>
+                    <AdminSideBar />
+                </div>
+                <div className={styles.content}>
+                    <Outlet />
+                </div>
             </div>
-        </>
+        </div>
     );
 };
 

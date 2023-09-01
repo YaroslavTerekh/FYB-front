@@ -44,13 +44,13 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                     <div className={`${styles.content} vetrino`} >
                         <h2 className={styles.contentTitleR}>Реєстрація</h2>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changeNameHandler} className={""} placeholder={"Ім'я"} type={"text"} required={true}/>
+                            <CustomInput onChange={changeNameHandler} className={styles.customInput} placeholder={"Ім'я"} type={"text"} required={true}/>
                         </div>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changePhoneHandler} className={""} placeholder={"Телефон"} type={"tel"} required={true}/>
+                            <CustomInput onChange={changePhoneHandler}className={styles.customInput}placeholder={"Телефон"} type={"tel"} required={true}/>
                         </div>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changeEmailHandler} className={""} placeholder={"Email"} type={"email"} required={true}/>
+                            <CustomInput onChange={changeEmailHandler} className={styles.customInput} placeholder={"Email"} type={"email"} required={true}/>
                         </div>
                         <div className=''>
                             <CustomPasswordInput onChange={changePasswordHandler} className={""} placeholder={"Пароль"} required={true}/>
@@ -68,6 +68,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
             }
             isOpen={isOpen}
             onClose={onClose}
+            styles={{ bgColor:'var(--main-bg)', width: '609px', height: '480px', border: '2px solid var(--beige, #FFEDE4);', overlayBgColor: 'none' }}
         />
     </>
 }

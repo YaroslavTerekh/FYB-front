@@ -31,10 +31,10 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                     <div className={`${styles.content} vetrino`} >
                         <h2 className={styles.contentTitle}>Увійти</h2>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changeEmailHandler} className={""} placeholder={"Email"} type={"email"} required={true}/>
+                            <CustomInput onChange={changeEmailHandler} className={styles.customInput} placeholder={"Email"} type={"email"} required={true}/>
                         </div>
                         <div className={styles.inputBox}>
-                            <CustomPasswordInput onChange={changePasswordHandler} className={""} placeholder={"Пароль"} required={true}/>
+                            <CustomPasswordInput onChange={changePasswordHandler} className={styles.customInput} placeholder={"Пароль"} required={true}/>
                         </div>
                         <button className={styles.linkBox} onClick={registerRequested}>
                             <p className={styles.text}>Ще не маєте особистого кабінету?</p>
@@ -54,6 +54,7 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
             }
             isOpen={isOpen}
             onClose={onClose}
+            styles={{ bgColor:'var(--main-bg)', width: '609px', height: '480px', border: '2px solid var(--beige, #FFEDE4);', overlayBgColor: 'none'}}
         />
     </>
 }

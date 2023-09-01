@@ -1,5 +1,8 @@
 .headerBox {
     width: 100%;
     position: relative;
+}
+
+.h75 {
     height: 70px;
 }

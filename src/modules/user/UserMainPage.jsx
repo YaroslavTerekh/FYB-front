@@ -8,7 +8,6 @@ import RegisterModal from '../auth/RegisterModal/RegisterModal';
 const UserMainPage = () => (
     <>
        <div className='wrapper'>
-           <LoginModal />
            <Header navigationData={HEADER_NAVIGATION} />
            <Outlet />
            <Footer />

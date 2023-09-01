@@ -1,14 +1,9 @@
 import { REMOVE_TOKEN, SET_TOKEN, SET_USER } from './user-actions';
 import type { BaseUserModel } from '../../models/user-models/base-user-model';
 
-export type a ={
-    q : string
-}
-
 const initialState: BaseUserModel = {
     email: "",
     firstName: "",
-    password: "",
     phoneNumber: "",
     token: "",
 };
