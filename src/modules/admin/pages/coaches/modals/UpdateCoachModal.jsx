@@ -15,7 +15,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCoachHelper, updateCoachHelper } from '../../../../../context/admin-data-context/admin-context.helper';
 import CoachModal from './CoachModal';
-import type { CoachModel } from '../../../../../models/admin-models/coach-model';
+import type { CoachModel } from '../../../../../models/coach-models/coach-model';
+import selectIcon from '../../../../../img/components/vector.png';
 
 const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
                 setLastName(selectedCoach.lastName);
                 setDescription(selectedCoach.description);
                 setInstagramLink(selectedCoach.instagramLink);
-                setBirthDate(selectedCoach.birthDate);
+                setBirthDate(new Date(selectedCoach.birthDate));
             }
         }
     }, [selectedCoachId]);
@@ -93,10 +94,13 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
                     <section className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Зміна тренера</h2>
-                            <div className={styles.imgBox}>
-                                <PhotoUploader onChange={changeAvatarHandler}/>
-                            </div>
+
                             <div className='inputsBox'>
+                                <div className={styles.inputBox}>
+                                    <div className={styles.imgInput}>
+                                        <PhotoUploader onChange={changeAvatarHandler} placeholder={"Аватар"} inputMode={true} icon={selectIcon} />
+                                    </div>
+                                </div>
                                 <div className={styles.inputBox}>
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
@@ -151,7 +155,7 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
                                         value={birthDate}
                                     />
                                 </div>
-                                <div className=''>
+                                <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}
                                         aria-expanded={true}

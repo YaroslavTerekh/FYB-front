@@ -1,13 +1,16 @@
 import type { BaseUserModel } from '../../models/user-models/base-user-model';
-import { CoachModel } from '../../models/admin-models/coach-model';
-import { SET_COACHES } from './admin-actions';
+import { CoachModel } from '../../models/coach-models/coach-model';
+import { SET_COACHES, SET_FEEDBACKS } from './admin-actions';
+import { FeedbackModel } from '../../models/feedbacks-models/feedback-model';
 
 export type AdminContextStateModel = {
     coaches: CoachModel[];
+    feedbacks: FeedbackModel[];
 }
 
 const initialState: AdminContextStateModel = {
-    coaches: []
+    coaches: [],
+    feedbacks: []
 };
 
 function adminReducer(state = initialState, action): AdminContextStateModel {
@@ -17,8 +20,14 @@ function adminReducer(state = initialState, action): AdminContextStateModel {
                 ...state,
                 coaches: action.payload
             };
+        case SET_FEEDBACKS:
+            return {
+                ...state,
+                feedbacks: action.payload
+            };
         default:
             return state;
     }
 }
+
 export default adminReducer;

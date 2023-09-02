@@ -1,0 +1,46 @@
+.modalBox {
+    padding: 100px 200px;
+}
+
+.content {
+    text-align: center;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    width: 375px;
+    margin: auto;
+}
+
+.contentTitle {
+    color: #011E26;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.btn {
+    border-radius: 15px;
+    border: 1px solid #000;
+    width: 160px;
+    height: 45px;
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: white;
+    margin: 0 12px;
+}
+
+.btn p {
+    margin: 0;
+}
+
+.btnDark {
+    background-color: #000000;
+    color: white;
+}

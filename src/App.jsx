@@ -13,6 +13,7 @@ import AdminHome from './modules/admin/AdminHome';
 import UserMainPage from './modules/user/UserMainPage';
 import CoachesPage from './modules/admin/pages/coaches/CoachesPage';
 import { AxiosInterceptor } from './axios-settings';
+import FeedbackPage from './modules/admin/pages/feedbacks/FeedbackPage';
 
 const App = () => (
     <div className=''>
@@ -35,7 +36,8 @@ const App = () => (
                     </Route>
                     <Route path={ROUTES.admin} element={<AdminHome />}>
                         <Route path={ROUTES.coaches} element={<CoachesPage />} />
-                        {/*<Route path="/admin-models/dashboard" element={<Dashboard />} />*/}
+                        <Route path={ROUTES.feedbacks} element={<FeedbackPage />} />
+                        {/*<Route path="/coach-models/dashboard" element={<Dashboard />} />*/}
 
                         {/*<Route path="*" element={<NotFound />} />*/}
                     </Route>

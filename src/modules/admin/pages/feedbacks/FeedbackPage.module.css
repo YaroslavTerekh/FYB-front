@@ -32,6 +32,7 @@
     display: flex;
     flex-flow: wrap;
     justify-content: center;
+    margin: auto;
 }
 
 .contentTitle {
@@ -43,14 +44,23 @@
 
 .modalBox {
     padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
 }
 
 .imgBox {
-    width: 182px;
-    height: 182px;
+    width: 99px;
+    height: 99px;
     margin-right: 20px;
+    margin-bottom: 10px;
     display: flex;
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+.imgContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .imgInput {

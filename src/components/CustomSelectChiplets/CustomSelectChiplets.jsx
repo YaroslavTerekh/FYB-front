@@ -13,16 +13,21 @@ const customStyles = {
         // This line disable the blue border
         boxShadow: 'none'
     }),
-    option: () => ({}),
+    option: () => ({
+        textAlign: 'center',
+        display: 'flex',
+        width: '350px',
+        padding: '5px 10px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottom: '0.5px solid #FFEDDB',
+        background: '#FFFCF9',
+        color: '#000',
+        fontSize: '14px'
+    }),
 };
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-]
-
-const CustomSelectChiplets = ({ onChange, className, placeholder, type, required,  customInputContainer, icon}) => {
+const CustomSelectChiplets = ({ onChange, options, className, placeholder, type, required,  customInputContainer, icon, isMulti}) => {
     return (
         <div className={customInputContainer ?? styles.customInputContainer}>
             <Select
@@ -34,9 +39,9 @@ const CustomSelectChiplets = ({ onChange, className, placeholder, type, required
                 components={{
                     // Control: (props) => <CustomControl {...props} selectProps={props.selectProps} />,
                     // Option: CustomOption,
-                     DropdownIndicator: CustomDropdownArrow,
+                    //  DropdownIndicator: CustomDropdownArrow,
                 }}
-                isMulti
+                isMulti={isMulti}
                 placeholder={"Список стренувань"}
                 styles={customStyles}
             />

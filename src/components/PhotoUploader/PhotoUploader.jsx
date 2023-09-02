@@ -2,9 +2,10 @@ import React, { useRef, useState } from 'react';
 import defaultImg from '../../img/components/admin-img-def.svg';
 import styles from './PhotoUploader.module.css';
 
-function PhotoUploader( { onChange } ) {
+function PhotoUploader( { onChange, icon, inputMode, placeholder, imgName } ) {
     const fileInputRef = useRef(null);
     const [imageBlob, setImageBlob] = useState(null);
+    const [imageName, setImageName] = useState(null);
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
@@ -15,6 +16,7 @@ function PhotoUploader( { onChange } ) {
 
         if (selectedImage) {
             onChange(selectedImage);
+            setImageName(selectedImage.name);
 
             const reader = new FileReader();
 
@@ -29,13 +31,22 @@ function PhotoUploader( { onChange } ) {
 
     return (
         <>
-            <div className={ imageBlob ? styles.imgData : ''} onClick={handleButtonClick}>
-                { imageBlob ?
-                    <img src={URL.createObjectURL(imageBlob)} alt="Uploaded" className={styles.img} />
-                    :
-                    <img src={defaultImg} alt='' />
-                }
-            </div>
+            { inputMode ?
+                <div className={styles.imgInput} onClick={handleButtonClick}>
+                    { !imageName && <p className={styles.placeholder}>{placeholder}</p>}
+                    { imageName && <p className={styles.text}>{imageName}</p>}
+                    <img src={icon} alt='' />
+                </div>
+                :
+                <div className={ imageBlob ? styles.imgData : ''} onClick={handleButtonClick}>
+                    { imageBlob ?
+                        <img src={URL.createObjectURL(imageBlob)} alt="Uploaded" className={styles.img} />
+                        :
+                        <img src={icon ?? defaultImg} alt='' />
+                    }
+                </div>
+            }
+
             <input type="file" accept="image/*"  ref={fileInputRef} style={{ display: 'none' }} onChange={handleImageChange} />
         </>
     );
