@@ -6,12 +6,17 @@ import type { FeedbackModel } from '../feedbacks-models/feedback-model';
 import type { CoachingVideoModel } from './coaching-video-model';
 
 export type CoachingModel = {
+    id: string,
+    title: string,
+    description: string,
+    price: number,
     coachId: string,
     coach: CoachModel,
     foodId: string,
     food: FoodModel,
     coachingPhotoId: string,
     coachingPhoto: AppFileModel,
+    accessDays: number,
     coachingDetails: CoachingDetailModel[],
     feedbacks: FeedbackModel[],
     examplePhotos: AppFileModel[],

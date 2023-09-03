@@ -14,6 +14,7 @@ import UserMainPage from './modules/user/UserMainPage';
 import CoachesPage from './modules/admin/pages/coaches/CoachesPage';
 import { AxiosInterceptor } from './axios-settings';
 import FeedbackPage from './modules/admin/pages/feedbacks/FeedbackPage';
+import CoachingPage from './modules/admin/pages/coaching/CoachingPage';
 
 const App = () => (
     <div className=''>
@@ -37,6 +38,7 @@ const App = () => (
                     <Route path={ROUTES.admin} element={<AdminHome />}>
                         <Route path={ROUTES.coaches} element={<CoachesPage />} />
                         <Route path={ROUTES.feedbacks} element={<FeedbackPage />} />
+                        <Route path={ROUTES.coaching} element={<CoachingPage />} />
                         {/*<Route path="/coach-models/dashboard" element={<Dashboard />} />*/}
 
                         {/*<Route path="*" element={<NotFound />} />*/}

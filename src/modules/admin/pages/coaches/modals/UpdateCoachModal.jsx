@@ -32,7 +32,6 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
     useEffect(() => {
         if (selectedCoachId) {
             const selectedCoach: CoachModel = currentAdminState.coaches.filter(c => c.id === selectedCoachId)?.[0];
-            debugger;
             if (selectedCoach) {
                 setName(selectedCoach.firstName);
                 setLastName(selectedCoach.lastName);
@@ -68,7 +67,6 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
     }
 
     function onSaveHandler() {
-        debugger;
         if(name && lastName && description && instagramLink && birthDate && avatar) {
             const form = new FormData();
 

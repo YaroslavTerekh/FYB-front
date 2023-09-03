@@ -23,11 +23,12 @@ const customStyles = {
         borderBottom: '0.5px solid #FFEDDB',
         background: '#FFFCF9',
         color: '#000',
-        fontSize: '14px'
+        fontSize: '14px',
+        cursor: 'pointer'
     }),
 };
 
-const CustomSelectChiplets = ({ onChange, options, className, placeholder, type, required,  customInputContainer, icon, isMulti}) => {
+const CustomSelectChiplets = ({ onChange, options, className, placeholder, required,  customInputContainer, icon, isMulti}) => {
     return (
         <div className={customInputContainer ?? styles.customInputContainer}>
             <Select
@@ -42,8 +43,9 @@ const CustomSelectChiplets = ({ onChange, options, className, placeholder, type,
                     //  DropdownIndicator: CustomDropdownArrow,
                 }}
                 isMulti={isMulti}
-                placeholder={"Список стренувань"}
+                placeholder={placeholder}
                 styles={customStyles}
+                required={required}
             />
         </div>
     );

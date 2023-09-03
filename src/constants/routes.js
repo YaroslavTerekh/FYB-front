@@ -6,7 +6,8 @@ export const ROUTES = {
     details: `${BASE_ROUTE}details`,
     admin: `${BASE_ROUTE}admin`,
     coaches: `coaches`,
-    feedbacks: 'feedback'
+    feedbacks: 'feedback',
+    coaching: 'coaching'
 };
 
 export const HEADER_NAVIGATION_LINK_TYPES = {

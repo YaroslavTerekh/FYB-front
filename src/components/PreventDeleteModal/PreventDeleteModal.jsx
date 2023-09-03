@@ -40,8 +40,8 @@ const PreventDeleteModal = ({ text, isOpen, onSummit, onClose }) => {
                 onClose={onClose}
                 styles={{
                     bgColor:' #FFF',
-                    width: '870px',
-                    height: '315px',
+                    width: '650px',
+                    height: '250px',
                     border: '1px solid #A5A5A5',
                     overlayBgColor: 'none',
                 }}

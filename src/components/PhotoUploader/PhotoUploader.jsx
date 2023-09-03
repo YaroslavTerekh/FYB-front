@@ -1,11 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import defaultImg from '../../img/components/admin-img-def.svg';
 import styles from './PhotoUploader.module.css';
 
-function PhotoUploader( { onChange, icon, inputMode, placeholder, imgName } ) {
+function PhotoUploader( { onChange, icon, inputMode, placeholder, imgName, removePhoto, setRemoved } ) {
     const fileInputRef = useRef(null);
     const [imageBlob, setImageBlob] = useState(null);
     const [imageName, setImageName] = useState(null);
+    useEffect(() => {
+        if(removePhoto) {
+            setRemoved(false);
+            setImageName(null);
+            setImageName(null);
+        }
+    }, [removePhoto]);
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
@@ -39,12 +46,14 @@ function PhotoUploader( { onChange, icon, inputMode, placeholder, imgName } ) {
                 </div>
                 :
                 <div className={ imageBlob ? styles.imgData : ''} onClick={handleButtonClick}>
-                    { imageBlob ?
+                    { imageBlob  ?
                         <img src={URL.createObjectURL(imageBlob)} alt="Uploaded" className={styles.img} />
                         :
                         <img src={icon ?? defaultImg} alt='' />
                     }
+
                 </div>
+
             }
 
             <input type="file" accept="image/*"  ref={fileInputRef} style={{ display: 'none' }} onChange={handleImageChange} />

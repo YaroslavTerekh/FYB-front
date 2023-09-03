@@ -4,9 +4,15 @@ import addIcon from  '../../../../img/components/add_icon.png';
 import editIcon from '../../../../img/components/edit_icon.png';
 import deleteIcon from '../../../../img/components/delete_icon.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getCoachesHelper, getFeedbacksHelper } from '../../../../context/admin-data-context/admin-context.helper';
+import React, { useEffect, useState } from 'react';
+import {
+    getCoachesHelper,
+    getCoachingHelper,
+    getFeedbacksHelper,
+} from '../../../../context/admin-data-context/admin-context.helper';
 import FeedbackModal from './modals/FeedbackModal';
+import UpdateCoaching from '../coaching/modals/UpdateCoaching';
+import FeedbackModalUpdate from './modals/FeedbackModalUpdate';
 const FeedbackPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -14,22 +20,29 @@ const FeedbackPage = () => {
 
     const [addFeedbackIsOpen, setFeedbackCoachIsOpen] = useState(false);
     const [editCoachIsOpen, setEditCoachIsOpen] = useState(false);
-    const [selectedCoachId, setSelectedCoachId] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {
         getFeedbacksHelper(dispatch);
+        getCoachingHelper(dispatch);
     }, []);
 
     useEffect(() => {
-        setFeedbacksList(currentAdminState.feedbacks);
+        if(currentAdminState.feedbacks) {
+            debugger;
+            setFeedbacksList(currentAdminState.feedbacks);
+        }
+
     }, [currentAdminState.feedbacks]);
 
-    function onEditCoachHandler(id: string) {
-
+    function onEditHandler(id: string) {
+        setSelectedId(id);
+        setEditCoachIsOpen(true);
     }
 
-    function onEditCloseCoachHandler() {
-
+    function onEditCloseHandler() {
+        setSelectedId(null);
+        setEditCoachIsOpen(false);
     }
 
     function addFeedbackCloseHandler() {
@@ -38,6 +51,7 @@ const FeedbackPage = () => {
 
     return (
         <>
+            <FeedbackModalUpdate  isOpen={editCoachIsOpen} selectedId={selectedId} onClose={onEditCloseHandler} />
             <FeedbackModal isOpen={addFeedbackIsOpen}  onClose={addFeedbackCloseHandler} />
             <div className={styles.box}>
                 <div className={styles.header}>
@@ -62,11 +76,11 @@ const FeedbackPage = () => {
                     {feedbacksList && feedbacksList.map(c =>
                         <div className={mainStyles.bodyBlock} key={c.id}>
                             <div className={mainStyles.blockItem}>
-                                <p>{c.name}</p>
+                                <p>{c.feedbackText}</p>
                             </div>
                             <div className={mainStyles.blockItem}>
                                 <div className={mainStyles.tableActions}>
-                                    <button className={mainStyles.tableBtn} onClick={() => onEditCoachHandler(c.id)}>
+                                    <button className={mainStyles.tableBtn} onClick={() => onEditHandler(c.id)}>
                                         <img src={editIcon} alt='' />
                                     </button>
                                     <button className={mainStyles.tableBtn}>

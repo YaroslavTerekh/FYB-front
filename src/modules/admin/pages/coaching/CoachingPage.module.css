@@ -49,22 +49,9 @@
     height: 100%;
 }
 
-.rmvImgBtn {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-
-}
-
-.rmvImgBtn img, .rmvImgBtn p {
-    color: black;
-    font-size: 16px;
-    text-decoration: underline;
-}
-
 .imgBox {
-    width: 99px;
-    height: 99px;
+    width: 180px;
+    height: 180px;
     margin-right: 20px;
     margin-bottom: 10px;
     display: flex;
@@ -91,8 +78,26 @@
 
 .inputBox {
     padding-bottom: 10px;
+    display: flex;
 }
 
+.rmvImgBtn {
+    width: 180px;
+    height: 45px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+
+}
+
+.rmvImgBtn img, .rmvImgBtn p {
+    margin: auto 10px;
+    color: black;
+    font-size: 16px;
+    text-decoration: underline;
+}
 
 .btnBox {
     display: flex;
@@ -131,4 +136,23 @@
     width: 350px;
     height: 100px;
     flex-shrink: 0;
+}
+
+
+.imgInputWithBtn {
+    width: 100%;
+}
+
+.addIcon {
+    width: 54px;
+    height: 42px;
+    background: #FFF;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15);
+    display: flex;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.addIcon img {
+    margin: auto;
 }

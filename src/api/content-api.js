@@ -5,5 +5,9 @@ export function getCoaches(): Promise<any> {
 }
 
 export function getFeedbacks(): Promise<any> {
-    return API.get(`content/coaches/feedbacks/all`);
+    return API.get(`admin/coaching/feedbacks/all`);
+}
+
+export function getCoaching(): Promise<any> {
+    return API.get(`content/coachings/all`);
 }

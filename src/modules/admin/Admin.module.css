@@ -7,6 +7,22 @@
     width: 100%;
 }
 
+.toggleArrow {
+    background: none;
+    margin-right: 20px;
+}
+
+.toggleArrow img.active {
+    transform: rotate(-180deg);
+    transition: all 0.3s ease 0s;
+    background: none;
+}
+
+
+.toggleArrow img {
+    transition: all 0.3s ease 0s;
+}
+
 .mainAddBtn {
     display: inline-flex;
     padding: 15px 30px;
@@ -48,13 +64,18 @@
 }
 
 .blockItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.blockItem, .blockSubItem {
     height: 60px;
     border-bottom: 1px solid #FFEDDB;
-    background-color: #FFFCF9 !important;
+    background-color: #FFFCF9;
     /*padding: 50px 20px !important;*/
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
-    padding-left: 50px !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
     width: 100%;
     color: #000;
     font-size: 16px;
@@ -63,20 +84,41 @@
     line-height: normal;
 }
 
-.blockItem:last-child{
-    width: 80%;
+.blockSubItem {
+    background-color: #FFFFFE;
+    color: #000;
 }
+
+/*.blockItem:last-child, .blockSubItem:last-child{*/
+/*    width: 100%;*/
+/*}*/
 
 .tableActions {
     display: flex;
     box-sizing: border-box;
-    width: 126px;
+    /*width: 126px;*/
     justify-content: space-between;
 }
 
 .tableBtn {
     background: none;
     border: none;
+    margin-right: 70px;
+    /*display: flex;*/
+}
+
+.tableBtn .box p {
+    margin: 0;
+}
+
+.tableBtn .box img {
+    margin: auto 10px auto auto;
+    height: 15px;
+    fill: #676767;
+}
+
+.tableBtn:last-child {
+    margin-right: 0;
 }
 
 .tableBtn img {

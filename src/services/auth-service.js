@@ -13,7 +13,7 @@ export default class AuthService {
 
      async login(model: LoginModel): Promise<void> {
         const response = await Login(model);
-debugger;
+
         if (response.data.token) {
             this.dispatch(setToken(response.data.token));
             setAccessToken(response.data.token);

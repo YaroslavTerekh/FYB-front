@@ -17,8 +17,9 @@ import {
     addNewCoachHelper,
     addNewFeedbacksHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
+import deleteIcon from '../../../../../img/components/delete_icon.png';
 
-const FeedbackModal = ({ isOpen, onClose }) => {
+const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
 
@@ -28,6 +29,15 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     const [firstPhoto, setFirstPhoto] = useState(null);
     const [secondPhoto, setSecondPhoto] = useState(null);
     const [coachingId, setCoachingId] = useState();
+
+    useEffect(() => {
+        if (selectedId) {
+            debugger;
+            const item = currentAdminState.feedbacks.find(x=> x.id === selectedId);
+            setFeedback(item.feedbackText);
+            setInstagramLink(item.instagramLink);
+        }
+    }, [selectedId]);
 
     useEffect(() => {
         if (currentAdminState.coaching) {
@@ -72,6 +82,20 @@ const FeedbackModal = ({ isOpen, onClose }) => {
         }
     }
 
+    const [removeFirstPhoto, setRemoveFirstPhoto] = useState(false);
+
+    function removeFirstPhotoHandler() {
+        setFirstPhoto(null);
+        setRemoveFirstPhoto(true);
+    }
+
+    const [removeSecondPhoto, setRemoveSecondPhoto] = useState(false);
+
+    function removeSecondPhotoHandler() {
+        setFirstPhoto(null);
+        setRemoveSecondPhoto(true);
+    }
+
     return (
         <>
             <ModalWindow
@@ -80,11 +104,35 @@ const FeedbackModal = ({ isOpen, onClose }) => {
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Відгук</h2>
                             <div className={styles.imgContainer}>
-                                <div className={styles.imgBox}>
-                                    <PhotoUploader onChange={changeFirstPhotoHandler}/>
+                                <div>
+                                    <div className={styles.imgBox}>
+                                        <PhotoUploader onChange={changeFirstPhotoHandler} removePhoto={removeFirstPhoto} setRemoved={setRemoveFirstPhoto}/>
+                                    </div>
+                                    <div className=''>
+                                        <Button
+                                            className={styles.rmvImgBtn}
+                                            aria-expanded={true}
+                                            aria-controls={`coach-modal`}
+                                            onClick={removeFirstPhotoHandler}
+                                        >
+                                            <p>Видалити фото</p>
+                                        </Button>
+                                    </div>
                                 </div>
-                                <div className={styles.imgBox}>
-                                    <PhotoUploader onChange={changeSecondPhotoHandler}/>
+                                <div>
+                                    <div className={styles.imgBox}>
+                                        <PhotoUploader onChange={changeSecondPhotoHandler} removePhoto={removeSecondPhoto} setRemoved={setRemoveSecondPhoto}/>
+                                    </div>
+                                    <div className=''>
+                                        <Button
+                                            className={styles.rmvImgBtn}
+                                            aria-expanded={true}
+                                            aria-controls={`coach-modal`}
+                                            onClick={removeSecondPhotoHandler}
+                                        >
+                                            <p>Видалити фото</p>
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                             <div className='inputsBox'>
@@ -154,4 +202,4 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     );
 };
 
-export default FeedbackModal;
+export default FeedbackModalUpdate;

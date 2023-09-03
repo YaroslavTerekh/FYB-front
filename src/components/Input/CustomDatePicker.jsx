@@ -13,7 +13,7 @@ const CustomDatePicker = ({ onChange, className, placeholder, required,  customI
     const [startDate, setStartDate] = useState(value ?? new Date());
 
     function onChangeHandler(date) {
-        debugger;
+
         setStartDate(date);
         onChange(date)
     }

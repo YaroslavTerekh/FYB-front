@@ -1,7 +1,6 @@
 const TokenKey = "TOKEN";
 
 export function getAccessToken(): string {
-    debugger;
     return localStorage.getItem(TokenKey);
 }
 

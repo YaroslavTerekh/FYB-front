@@ -1,49 +1,50 @@
-import styles from '../CoachesPage.module.css';
+import styles from '../CoachingPage.module.css';
+import mainStyles from '../../../Admin.module.css';
 import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
 import CustomTextArea from '../../../../../components/Input/CustomTextArea';
-import instagramIcon from '../../../../../img/components/instagram.png';
-import CustomDatePicker from '../../../../../components/Input/CustomDatePicker';
-import calendarIcon from '../../../../../img/components/calendar.png';
-import CustomSelect from '../../../../../components/Select/Select';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
-import defaultImg from '../../../../../img/components/admin-img-def.svg';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewCoachHelper } from '../../../../../context/admin-data-context/admin-context.helper';
+import { addNewCoachingHelper } from '../../../../../context/admin-data-context/admin-context.helper';
 
-const CoachModal = ({ isOpen, onClose }) => {
+const CoachingModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
+    const [coachesList, setCoachesList] = useState([]);
 
     const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [description, setDescription] = useState("");
-    const [instagramLink, setInstagramLink] = useState("");
-    const [birthDate, setBirthDate] = useState(null);
+    const [coach, setCoach] = useState("");
+    const [price, setPrice] = useState(null);
+    const [days, setDays] = useState(null);
     const [avatar, setAvatar] = useState(null);
+
+    useEffect(() => {
+        setCoachesList(currentAdminState.coaches);
+    }, [currentAdminState.coaches]);
+
+    function changeCoachHandler(e) {
+        setCoach(e);
+    }
 
     function changeNameHandler(e) {
         setName(e?.target?.value);
-    }
-
-    function changeLastNameHandler(e) {
-        setLastName(e?.target?.value);
     }
 
     function changeDescriptionHandler(e) {
         setDescription(e?.target?.value);
     }
 
-    function changeInstagramLinkHandler(e) {
-        setInstagramLink(e?.target?.value);
+    function changePriceHandler(e) {
+        setPrice(e?.target?.value);
     }
 
-    function changeBirthDateHandler(e) {
-        setBirthDate(e);
+    function changeDaysHandler(e) {
+        setDays(e?.target?.value);
     }
 
     function changeAvatarHandler(file) {
@@ -51,18 +52,17 @@ const CoachModal = ({ isOpen, onClose }) => {
     }
 
     function onSaveHandler() {
-        if(name && lastName && description && instagramLink && birthDate && avatar) {
+        if(name && coach && coach.value && description && price && days && avatar) {
             const form = new FormData();
 
-            // Append form data fields
-            form.append('FirstName', name);
-            form.append('LastName', lastName);
+            form.append('Title', name);
             form.append('Description', description);
-            form.append('InstagramLink', instagramLink);
-            form.append('BirthDate', birthDate.toDateString());
-            form.append('Avatar', avatar);
+            form.append('Price', price);
+            form.append('CoachId', coach.value);
+            form.append('AccessDays', days);
+            form.append('CoachingPhoto', avatar);
 
-            addNewCoachHelper(dispatch, form);
+            addNewCoachingHelper(dispatch, form);
 
         } else {
             // TODO error
@@ -75,32 +75,22 @@ const CoachModal = ({ isOpen, onClose }) => {
                 element={
                     <section className={styles.modalBox} >
                         <div className={`${styles.content}`} >
-                            <h2 className={styles.contentTitle}>Тренер</h2>
+                            <h2 className={styles.contentTitle}>Тренування</h2>
                             <div className={styles.imgBox}>
                                 <PhotoUploader onChange={changeAvatarHandler}/>
                             </div>
                             <div className='inputsBox'>
                                 <div className={styles.inputBox}>
                                     <CustomInput
-                                         customInputContainer={styles.customInputContainer}
-                                         className={styles.customInput}
-                                         placeholder={"Ім'я"} type={"text"}
-                                         required={true}
-                                         onChange={changeNameHandler}
-                                         value={name}
-                                    />
-                                </div>
-                                <div className={styles.inputBox}>
-                                    <CustomInput
                                         customInputContainer={styles.customInputContainer}
                                         className={styles.customInput}
-                                        placeholder={"Прізвище"}
-                                        type={"text"}
+                                        placeholder={"Назва"} type={"text"}
                                         required={true}
-                                        onChange={changeLastNameHandler}
-                                        value={lastName}
+                                        onChange={changeNameHandler}
+                                        value={name}
                                     />
                                 </div>
+
                                 <div className={styles.inputBox}>
                                     <CustomTextArea
                                         customInputContainer={styles.customTextAreaContainer}
@@ -115,23 +105,34 @@ const CoachModal = ({ isOpen, onClose }) => {
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
                                         className={styles.customInput}
-                                        placeholder={"Instagram"}
-                                        type={"text"}
+                                        placeholder={"Ціна"}
+                                        type={"number"}
                                         required={true}
-                                        icon={instagramIcon}
-                                        onChange={changeInstagramLinkHandler}
-                                        value={instagramLink}
+                                        onChange={changePriceHandler}
+                                        value={price}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
-                                    <CustomDatePicker
+                                    <CustomInput
                                         customInputContainer={styles.customInputContainer}
                                         className={styles.customInput}
-                                        placeholder={"Дата народження"}
+                                        placeholder={"Дні доступу"}
+                                        type={"number"}
                                         required={true}
-                                        icon={calendarIcon}
-                                        onChange={changeBirthDateHandler}
-                                        value={birthDate}
+                                        onChange={changeDaysHandler}
+                                        value={days}
+                                    />
+                                </div>
+                                <div className={styles.inputBox}>
+                                    <CustomSelectChiplets
+                                        customInputContainer={styles.customInputContainer}
+                                        className={styles.customSelect}
+                                        placeholder={"Тренер"}
+                                        required={true}
+                                        //icon={instagramIcon}
+                                        onChange={changeCoachHandler}
+                                        // value={instagramLink}
+                                        options={coachesList?.map(c=> { return {value: c.id, label: c.firstName }})}
                                     />
                                 </div>
                                 <div className=''>
@@ -145,10 +146,7 @@ const CoachModal = ({ isOpen, onClose }) => {
                                     </Button>
                                 </div>
                             </div>
-
-
                         </div>
-
                     </section>
                 }
                 isOpen={isOpen}
@@ -166,4 +164,4 @@ const CoachModal = ({ isOpen, onClose }) => {
     );
 };
 
-export default CoachModal;
+export default CoachingModal;

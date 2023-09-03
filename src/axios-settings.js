@@ -20,7 +20,7 @@ const AxiosInterceptor = ({ children }: any) => {
     const reqInterceptor = async (config: AxiosRequestConfig<Headers>) => {
         API.defaults.headers.common.authorization = `Bearer ${getAccessToken()}`;
         config.headers['Authorization'] = `Bearer ${getAccessToken()}`;
-        debugger
+
         return config;
     };
 

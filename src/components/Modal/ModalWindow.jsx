@@ -24,11 +24,10 @@ type ModalStyles = {
 const ModalWindow = (prop: ModalType) => {
 
     function onCloseHandler() {
-        debugger;
         prop.onClose();
     }
 
-    return <>
+    return <> { prop.isOpen &&
         <Modal
             appElement={document.getElementById('root')}
             isOpen={prop.isOpen}
@@ -57,7 +56,7 @@ const ModalWindow = (prop: ModalType) => {
                 {prop.element}
             </div>
         </Modal>
-
+        }
     </>
 }
 
