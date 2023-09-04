@@ -6,17 +6,13 @@ import deleteIcon from '../../../../img/components/delete_icon.png';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
-    deleteCoachingDetailsHelper,
-    deleteCoachingHelper,
-    getCoachesHelper,
     getCoachingHelper, getFoodHelper,
 } from '../../../../context/admin-data-context/admin-context.helper';
 import Button from '../../../../components/Button/Button';
 import arrowIcon from '../../../../img/components/ri_arrow-up-line.png';
 import AnimateHeight from 'react-animate-height';
-import FoodPageModal from './modals/FoodPageModal';
-import FoodPointModal from './modals/FoodPointModal';
-const FoodPage = () => {
+
+const UsersPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
     const [coachingList, setCoachingList] = useState([]);
@@ -89,21 +85,6 @@ const FoodPage = () => {
 
     return (
         <>
-            {/*<UpdateCoaching  isOpen={editCoachIsOpen} selectedCoachingId={selectedCoachId} onClose={onEditCloseCoachHandler} />*/}
-            {/*<CoachingDetails onClose={() => setAddDetailsIsOpen(false)} isOpen={addDetailsIsOpen} coachingId={selectedCoachId}/>*/}
-            {/*<PreventDeleteModal onClose={() => setDeleteIsOpen(false)} isOpen={deleteIsOpen} text={"Ви точно бажаєте видалити тренування?"} onSummit={deleteCoaching}/>*/}
-            <FoodPageModal
-                onClose={addFoodCloseHandler}
-                isOpen={addFoodIsOpen}
-                editMode={editMode}
-                selectedId={selectedItem} />
-            <FoodPointModal
-                selectedId={selectedFoodPointItem}
-                foodId={selectedItem}
-                editMode={editFoodPointMode}
-                isOpen={addFoodPointIsOpen}
-                onClose={onAddFoodPointCloseHandler} />
-
             <div className={styles.box}>
                 <div className={styles.header}>
                     <h1>Тренер</h1>
@@ -163,29 +144,6 @@ const FoodPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <AnimateHeight
-                                id={`example-panel-${f.id}`}
-                                duration={500}
-                                height={selectedItem === f.id ? 'auto' : 0}
-                                className=''
-                            >
-                                { f.foodPoints && f.foodPoints.map(d =>
-                                    <div className=''>
-                                        <div className={mainStyles.bodyBlock} key={d.id}>
-                                            <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
-                                                <p>{d.title}</p>
-                                            </div>
-                                            <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
-                                                <div className={mainStyles.tableActions}>
-                                                    <button className={mainStyles.tableBtn}  onClick={() => onDeleteFoodPointHandler(d.id)}>
-                                                        <img src={deleteIcon} alt='' />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </AnimateHeight>
                         </div>
                     )}
                 </div>
@@ -194,4 +152,4 @@ const FoodPage = () => {
     );
 };
 
-export default FoodPage;
+export default UsersPage;

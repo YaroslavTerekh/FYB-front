@@ -40,6 +40,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     }
 
     function onSaveHandler() {
+        debugger;
         if(foodId && name && description && weight) {
 
             const data = { title: name, description: description,  portionMass: weight, FoodId: foodId};
