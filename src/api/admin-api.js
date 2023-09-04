@@ -33,9 +33,25 @@ export function addFeedback(model): Promise<any> {
 }
 
 export function updateFeedback(id, model): Promise<any> {
-    return API.post(`admin/coaching/feedback/modify/` + id, model);
+    return API.put(`admin/coaching/feedback/modify/` + id, model);
 }
 
-export function пуе(id, model): Promise<any> {
-    return API.post(`admin/coaching/feedback/modify/` + id, model);
+export function deleteFeedback(id: string): Promise<any> {
+    return API.delete(`admin/coaching/feedback/delete` + id);
+}
+
+export function addFood(model): Promise<any> {
+    return API.post(`admin/food/create`, model);
+}
+
+export function updateFood(id, model): Promise<any> {
+    return API.put(`admin/food/modify/` + id, model);
+}
+
+export function addFoodPoint(model): Promise<any> {
+    return API.post(`admin/food/point/create`, model);
+}
+
+export function updateFoodPoint(id, model): Promise<any> {
+    return API.put(`admin/food/point/modify/` + id, model);
 }

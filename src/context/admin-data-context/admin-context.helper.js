@@ -1,15 +1,15 @@
 import {
     addCoach,
     addCoaching,
-    addCoachingDetails, addFeedback,
+    addCoachingDetails, addFeedback, addFood, addFoodPoint,
     deleteCoach,
-    deleteCoaching, deleteCoachingDetails,
-    updateCoach,
+    deleteCoaching, deleteCoachingDetails, deleteFeedback,
+    updateCoach, updateFeedback, updateFood, updateFoodPoint,
 } from '../../api/admin-api';
 import { Dispatch } from 'redux';
 import { AnyAction } from 'redux';
-import { setCoaches, setCoaching, setFeedbacks } from './admin-actions';
-import { getCoaches, getCoaching, getFeedbacks } from '../../api/content-api';
+import { setCoaches, setCoaching, setFeedbacks, setFood } from './admin-actions';
+import { getCoaches, getCoaching, getFeedbacks, getFood } from '../../api/content-api';
 
 export function addNewCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData) {
     addCoach(data).then(res => {
@@ -96,11 +96,22 @@ export function addNewFeedbacksHelper(dispatch: Dispatch<AnyAction>, data) {
     }).catch(err => {});
 }
 
-export function updateFeedbacksHelper(dispatch: Dispatch<AnyAction>, data) {
-    addFeedback(data).then(res => {
+export function updateFeedbacksHelper(dispatch: Dispatch<AnyAction>, id, data) {
+    updateFeedback(id, data).then(res => {
         getFeedbacks()
             .then(res => {
 
+                dispatch(setFeedbacks(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function deleteFeedbackHelper(dispatch: Dispatch<AnyAction>, id: string) {
+    deleteFeedback(id).then(res => {
+        getFeedbacks()
+            .then(res => {
                 dispatch(setFeedbacks(res.data));
             })
             .catch(err => {});
@@ -137,3 +148,56 @@ export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
         })
         .catch(err => {});
 }
+
+export function getFoodHelper(dispatch: Dispatch<AnyAction>){
+    getFood()
+        .then(res => {
+            dispatch(setFood(res.data));
+        })
+        .catch(err => {});
+}
+
+export function addNewFoodHelper(dispatch: Dispatch<AnyAction>, data) {
+    addFood(data).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function updateFoodHelper(dispatch: Dispatch<AnyAction>, id, data) {
+    updateFood(id, data).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function addNewFoodPointHelper(dispatch: Dispatch<AnyAction>, data) {
+    addFoodPoint(data).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function updateFoodPointHelper(dispatch: Dispatch<AnyAction>, id, data) {
+    updateFoodPoint(id, data).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+

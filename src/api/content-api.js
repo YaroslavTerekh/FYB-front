@@ -11,3 +11,7 @@ export function getFeedbacks(): Promise<any> {
 export function getCoaching(): Promise<any> {
     return API.get(`content/coachings/all`);
 }
+
+export function getFood(): Promise<any> {
+    return API.get(`content/food/all`);
+}

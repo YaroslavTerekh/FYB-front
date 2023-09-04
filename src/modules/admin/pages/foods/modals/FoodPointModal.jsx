@@ -1,53 +1,54 @@
-import styles from '../FeedbackPage.module.css';
+import styles from '../FoodPage.module.css';
 import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
 import CustomTextArea from '../../../../../components/Input/CustomTextArea';
-import instagramIcon from '../../../../../img/components/instagram.png';
-import CustomDatePicker from '../../../../../components/Input/CustomDatePicker';
-import calendarIcon from '../../../../../img/components/calendar.png';
-import CustomSelect from '../../../../../components/Select/Select';
-import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
-import defaultImg from '../../../../../img/components/admin-img-def.svg';
-import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    addNewCoachHelper,
-    addNewFeedbacksHelper, updateFeedbacksHelper,
+    addNewFoodPointHelper, updateFoodPointHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
-import deleteIcon from '../../../../../img/components/delete_icon.png';
 
-const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
+const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
 
-    const [feedback, setFeedback] = useState("");
-    const [instagramLink, setInstagramLink] = useState("");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [weight, setWeight] = useState(null);
 
     useEffect(() => {
-        if (selectedId) {
-            debugger;
-            const item = currentAdminState.feedbacks.find(x=> x.id === selectedId);
-            setFeedback(item.feedbackText);
-            setInstagramLink(item.instagramLink);
+        if (editMode && selectedId && foodId) {
+            const data = currentAdminState.food.find(x=> x.id === foodId).foodPoints.find(x=> x.id === selectedId);
+            setName(data.title);
+            setDescription(data.description);
+            setWeight(data.portionMass);
         }
-    }, [selectedId]);
+    }, [selectedId, editMode]);
 
-    function changeFeedbackHandler(e) {
-        setFeedback(e?.target?.value);
+    function changeNameHandler(e) {
+        setName(e?.target?.value);
     }
 
-    function changeInstagramLinkHandler(e) {
-        setInstagramLink(e?.target?.value);
+    function changeDescriptionHandler(e) {
+        setDescription(e?.target?.value);
+    }
+
+    function changeWeightHandler(e) {
+        setWeight(e?.target?.value);
     }
 
     function onSaveHandler() {
-        if(selectedId && feedback && instagramLink) {
-            const model = { id: selectedId, feedbackText: feedback, instagramLink: instagramLink };
+        if(foodId && name && description && weight) {
 
-            updateFeedbacksHelper(dispatch, selectedId, model);
+            const data = { title: name, description: description,  portionMass: weight, FoodId: foodId};
+
+            if(editMode && selectedId) {
+                updateFoodPointHelper(dispatch, foodId, data);
+            } else {
+                addNewFoodPointHelper(dispatch, data);
+            }
 
         } else {
             // TODO error
@@ -60,28 +61,38 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
                 element={
                     <section className={styles.modalBox} >
                         <div className={`${styles.content}`} >
-                            <h2 className={styles.contentTitle}>Відгук</h2>
+                            <h2 className={styles.contentTitle}>Харчування</h2>
                             <div className='inputsBox'>
+                                <div className={styles.inputBox}>
+                                    <CustomInput
+                                        customInputContainer={styles.customInputContainer}
+                                        className={styles.customInput}
+                                        placeholder={"Назва"}
+                                        type={"text"}
+                                        required={true}
+                                        onChange={changeNameHandler}
+                                        value={name}
+                                    />
+                                </div>
                                 <div className={styles.inputBox}>
                                     <CustomTextArea
                                         customInputContainer={styles.customTextAreaContainer}
                                         className={styles.customTextArea}
-                                        placeholder={"Відгук"}
+                                        placeholder={"Опис"}
                                         required={true}
-                                        onChange={changeFeedbackHandler}
-                                        value={feedback}
+                                        onChange={changeDescriptionHandler}
+                                        value={description}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
                                         className={styles.customInput}
-                                        placeholder={"Instagram"}
-                                        type={"text"}
+                                        placeholder={"Вага порції"}
+                                        type={"number"}
                                         required={true}
-                                        icon={instagramIcon}
-                                        onChange={changeInstagramLinkHandler}
-                                        value={instagramLink}
+                                        onChange={changeWeightHandler}
+                                        value={weight}
                                     />
                                 </div>
                                 <div className=''>
@@ -95,10 +106,7 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
                                     </Button>
                                 </div>
                             </div>
-
-
                         </div>
-
                     </section>
                 }
                 isOpen={isOpen}
@@ -116,4 +124,4 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
     );
 };
 
-export default FeedbackModalUpdate;
+export default FoodPointModal;

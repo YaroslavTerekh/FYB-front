@@ -11,5 +11,5 @@ export type FoodModel = {
     unixExpireTime: number,
     coachingId: string,
     coaching: CoachingModel,
-    foodPoints: FoodPointModel
+    foodPoints: FoodPointModel[]
 }

@@ -6,6 +6,7 @@ import deleteIcon from '../../../../img/components/delete_icon.png';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
+    deleteCoachingHelper, deleteFeedbackHelper,
     getCoachesHelper,
     getCoachingHelper,
     getFeedbacksHelper,
@@ -13,6 +14,7 @@ import {
 import FeedbackModal from './modals/FeedbackModal';
 import UpdateCoaching from '../coaching/modals/UpdateCoaching';
 import FeedbackModalUpdate from './modals/FeedbackModalUpdate';
+import PreventDeleteModal from '../../../../components/PreventDeleteModal/PreventDeleteModal';
 const FeedbackPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -49,8 +51,21 @@ const FeedbackPage = () => {
         setFeedbackCoachIsOpen(false);
     }
 
+    const [deleteIsOpen, setDeleteIsOpen] = useState(false);
+
+    function deleteFeedback() {
+        setDeleteIsOpen(false);
+        deleteFeedbackHelper(dispatch, selectedId);
+    }
+
+    function onDeleteHandler(id: string) {
+        setSelectedId(id);
+        setDeleteIsOpen(true);
+    }
+
     return (
         <>
+            <PreventDeleteModal onClose={() => setDeleteIsOpen(false)} isOpen={deleteIsOpen} text={"Ви точно бажаєте видалити відгук?"} onSummit={deleteFeedback}/>
             <FeedbackModalUpdate  isOpen={editCoachIsOpen} selectedId={selectedId} onClose={onEditCloseHandler} />
             <FeedbackModal isOpen={addFeedbackIsOpen}  onClose={addFeedbackCloseHandler} />
             <div className={styles.box}>
@@ -83,7 +98,7 @@ const FeedbackPage = () => {
                                     <button className={mainStyles.tableBtn} onClick={() => onEditHandler(c.id)}>
                                         <img src={editIcon} alt='' />
                                     </button>
-                                    <button className={mainStyles.tableBtn}>
+                                    <button className={mainStyles.tableBtn} onClick={() => onDeleteHandler(c.id)}>
                                         <img src={deleteIcon} alt='' />
                                     </button>
                                 </div>

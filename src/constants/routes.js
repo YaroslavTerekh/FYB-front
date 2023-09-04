@@ -7,7 +7,8 @@ export const ROUTES = {
     admin: `${BASE_ROUTE}admin`,
     coaches: `coaches`,
     feedbacks: 'feedback',
-    coaching: 'coaching'
+    coaching: 'coaching',
+    food: 'food'
 };
 
 export const HEADER_NAVIGATION_LINK_TYPES = {
