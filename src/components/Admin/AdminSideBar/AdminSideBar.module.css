@@ -3,9 +3,9 @@
     width: 260px;
     box-sizing: border-box;
     padding: 0;
-    border: 1px solid red;
     height: 100%;
     min-height: 100%;
+    position: fixed;
 }
 
 .menu {
@@ -21,4 +21,19 @@
     font-weight: 500;
     line-height: normal;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.navItem .link {
+    color: black;
+    text-decoration: none;
+}
+
+.navItem .link:hover {
+    text-decoration: underline;
+}
+
+.navItem .activeLink {
+    color: black;
+    text-decoration: underline;
 }

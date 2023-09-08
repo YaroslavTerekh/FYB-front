@@ -5,6 +5,7 @@ import type { RegisterModel } from '../models/user-models/register-model';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccessToken, setAccessToken } from './local-storage-service';
 import { setToken, setUser } from '../context/auth-context/user-actions';
+import { getCurrentUserHelper } from '../context/auth-context/user-context-helper';
 
 export default class AuthService {
      dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default class AuthService {
             this.dispatch(setToken(response.data.token));
             setAccessToken(response.data.token);
 
-            this.dispatch(setUser({ firstName: "Роман", token: response.data.token, role: "Admin" }));
+            getCurrentUserHelper(this.dispatch);
         }
 
         // TODO setAccessToken

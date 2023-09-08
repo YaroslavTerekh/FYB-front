@@ -90,7 +90,7 @@ const CoachingPage = () => {
             <CoachingModal onClose={addCoachingCloseHandler} isOpen={addCoachingIsOpen} />
             <div className={styles.box}>
                 <div className={styles.header}>
-                    <h1>Тренер</h1>
+                    <h1>Тренування</h1>
                 </div>
                 <div className=''>
                     <button className={mainStyles.mainAddBtn} onClick={() => setAddCoachingIsOpen(true)}>

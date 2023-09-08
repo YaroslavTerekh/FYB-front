@@ -6,15 +6,13 @@ const initialState: BaseUserModel = {
     firstName: "",
     phoneNumber: "",
     token: "",
+    role: ""
 };
 
 function userReducer(state = initialState, action): BaseUserModel {
     switch(action.type) {
         case SET_USER:
-            return {
-                ...state,
-                ...action.payload
-            };
+            return action.payload;
         case SET_TOKEN:
             return {
                 ...state,

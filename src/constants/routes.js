@@ -8,7 +8,9 @@ export const ROUTES = {
     coaches: `coaches`,
     feedbacks: 'feedback',
     coaching: 'coaching',
-    food: 'food'
+    food: 'food',
+    users: 'users',
+    faq: 'faq'
 };
 
 export const HEADER_NAVIGATION_LINK_TYPES = {

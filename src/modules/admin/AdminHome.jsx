@@ -10,7 +10,7 @@ const Admin = () => {
         <div className={styles.adminPage}>
             <AdminHeader />
             <div className={styles.box}>
-                <div className='sidebar'>
+                <div className={styles.sidebar}>
                     <AdminSideBar />
                 </div>
                 <div className={styles.content}>

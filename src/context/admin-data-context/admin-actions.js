@@ -8,6 +8,8 @@ export const SET_COACHES = 'SET_COACHES';
 export const SET_FEEDBACKS = 'SET_FEEDBACKS';
 export const SET_COACHING = 'SET_COACHING';
 export const SET_FOOD = 'SET_FOOD';
+export const SET_USERS = 'SET_USERS';
+export const SET_FAQ = 'SET_FAQ';
 
 export const setCoaches = (coaches: CoachModel[]) => {
     return {
@@ -33,6 +35,20 @@ export const setCoaching = (coaching: CoachingModel[]) => {
 export const setFood = (data: FoodModel[]) => {
     return {
         type: SET_FOOD,
+        payload: data,
+    };
+};
+
+export const setUsers = (data: BaseUserModel[]) => {
+    return {
+        type: SET_USERS,
+        payload: data,
+    };
+};
+
+export const setFAQ = (data: BaseUserModel[]) => {
+    return {
+        type: SET_FAQ,
         payload: data,
     };
 };

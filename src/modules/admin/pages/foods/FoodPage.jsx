@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
     deleteCoachingDetailsHelper,
-    deleteCoachingHelper,
+    deleteCoachingHelper, deleteFoodHelper, deleteFoodPointHelper,
     getCoachesHelper,
     getCoachingHelper, getFoodHelper,
 } from '../../../../context/admin-data-context/admin-context.helper';
@@ -16,6 +16,7 @@ import arrowIcon from '../../../../img/components/ri_arrow-up-line.png';
 import AnimateHeight from 'react-animate-height';
 import FoodPageModal from './modals/FoodPageModal';
 import FoodPointModal from './modals/FoodPointModal';
+import PreventDeleteModal from '../../../../components/PreventDeleteModal/PreventDeleteModal';
 const FoodPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -25,6 +26,7 @@ const FoodPage = () => {
     const [addFoodIsOpen, setAddFoodIsOpen] = useState(false);
     const [editMode, setIsEditMode] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedToggleItem, setSelectedToggleItem] = useState(null);
 
 
     const [addFoodPointIsOpen, setAddFoodPointIsOpen] = useState(false);
@@ -32,7 +34,7 @@ const FoodPage = () => {
     const [selectedFoodPointItem, setSelectedFoodPointItem] = useState(null);
 
     const handleToggle = (index) => {
-        setSelectedItem((prevSelectedItem) =>
+        setSelectedToggleItem((prevSelectedItem) =>
             prevSelectedItem === index ? null : index
         );
     };
@@ -65,18 +67,19 @@ const FoodPage = () => {
 
     function onAddFoodPointCloseHandler() {
         setSelectedItem(null);
-        setSelectedFoodPointItem(null)
+        setSelectedFoodPointItem(null);
         setAddFoodPointIsOpen(false);
+        setIsEditFoodPointMode(false);
     }
 
     function onDeleteFoodHandler(id: string) {
-        // setSelectedCoachId(null);
-        // setEditCoachIsOpen(false);
+        setSelectedItem(id);
+        setDeleteFoodIsOpen(true);
     }
 
     function onDeleteFoodPointHandler(id: string) {
-        // setSelectedCoachId(null);
-        // setEditCoachIsOpen(false);
+        setSelectedFoodPointItem(id);
+        setDeleteFoodPointIsOpen(true);
     }
 
     function addFoodCloseHandler() {
@@ -85,13 +88,41 @@ const FoodPage = () => {
         setAddFoodIsOpen(false);
     }
 
+    function onEditFoodPointHandler(id: string, foodId: string) {
+        setSelectedItem(foodId);
+        setSelectedFoodPointItem(id);
+        setIsEditFoodPointMode(true);
+        setAddFoodPointIsOpen(true);
+    }
 
+    const [deleteFoodIsOpen, setDeleteFoodIsOpen] = useState(false);
+
+    function deleteFood() {
+        deleteFoodHelper(selectedItem);
+        setSelectedItem(null);
+        setDeleteFoodIsOpen(false)
+    }
+
+    const [deleteFoodPointIsOpen, setDeleteFoodPointIsOpen] = useState(false);
+
+    function deleteFoodPoint() {
+        deleteFoodPointHelper(selectedFoodPointItem);
+        setSelectedFoodPointItem(null);
+        setDeleteFoodPointIsOpen(false)
+    }
 
     return (
         <>
-            {/*<UpdateCoaching  isOpen={editCoachIsOpen} selectedCoachingId={selectedCoachId} onClose={onEditCloseCoachHandler} />*/}
-            {/*<CoachingDetails onClose={() => setAddDetailsIsOpen(false)} isOpen={addDetailsIsOpen} coachingId={selectedCoachId}/>*/}
-            {/*<PreventDeleteModal onClose={() => setDeleteIsOpen(false)} isOpen={deleteIsOpen} text={"Ви точно бажаєте видалити тренування?"} onSummit={deleteCoaching}/>*/}
+            <PreventDeleteModal
+                onClose={() => setDeleteFoodPointIsOpen(false)}
+                isOpen={deleteFoodPointIsOpen}
+                text={"Ви точно бажаєте видалити пункт харчування?"}
+                onSummit={deleteFoodPoint}/>
+            <PreventDeleteModal
+                onClose={() => setDeleteFoodIsOpen(false)}
+                isOpen={deleteFoodIsOpen}
+                text={"Ви точно бажаєте видалити харчування?"}
+                onSummit={deleteFood}/>
             <FoodPageModal
                 onClose={addFoodCloseHandler}
                 isOpen={addFoodIsOpen}
@@ -106,7 +137,7 @@ const FoodPage = () => {
 
             <div className={styles.box}>
                 <div className={styles.header}>
-                    <h1>Тренер</h1>
+                    <h1>Харчування</h1>
                 </div>
                 <div className=''>
                     <button className={mainStyles.mainAddBtn} onClick={() => setAddFoodIsOpen(true)}>
@@ -148,13 +179,13 @@ const FoodPage = () => {
                                     <div className='toggle'>
                                         <Button
                                             className={mainStyles.toggleArrow}
-                                            aria-expanded={selectedItem === f.id}
+                                            aria-expanded={selectedToggleItem === f.id}
                                             aria-controls={`example-panel-${f.id}`}
                                             onClick={() => handleToggle(f.id)}
                                         >
                                             <img
                                                 className={
-                                                    selectedItem === f.id ? mainStyles.active : ''
+                                                    selectedToggleItem === f.id ? mainStyles.active : ''
                                                 }
                                                 src={arrowIcon}
                                                 alt={`Toggle ${f.id}`}
@@ -166,7 +197,7 @@ const FoodPage = () => {
                             <AnimateHeight
                                 id={`example-panel-${f.id}`}
                                 duration={500}
-                                height={selectedItem === f.id ? 'auto' : 0}
+                                height={selectedToggleItem === f.id ? 'auto' : 0}
                                 className=''
                             >
                                 { f.foodPoints && f.foodPoints.map(d =>
@@ -177,6 +208,9 @@ const FoodPage = () => {
                                             </div>
                                             <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
                                                 <div className={mainStyles.tableActions}>
+                                                    <button className={mainStyles.tableBtn} onClick={() => onEditFoodPointHandler(d.id, f.id)}>
+                                                        <img src={editIcon} alt='' />
+                                                    </button>
                                                     <button className={mainStyles.tableBtn}  onClick={() => onDeleteFoodPointHandler(d.id)}>
                                                         <img src={deleteIcon} alt='' />
                                                     </button>

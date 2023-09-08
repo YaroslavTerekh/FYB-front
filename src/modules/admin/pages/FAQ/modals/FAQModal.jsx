@@ -1,55 +1,49 @@
-import styles from '../FoodPage.module.css';
+import styles from '../FAQPage.module.css';
 import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
-import CustomTextArea from '../../../../../components/Input/CustomTextArea';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    addNewFoodPointHelper, updateFoodPointHelper,
+    addNewFAQHelper,
+    updateFAQHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
 
-const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
+const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [weight, setWeight] = useState(null);
+    const [question, setQuestion] = useState("");
+    const [answer, setAnswer] = useState("");
 
     useEffect(() => {
-        if (editMode && selectedId && foodId) {
+        if (editMode && selectedId) {
             debugger;
-            const data = currentAdminState.food.find(x=> x.id === foodId).foodPoints.find(x=> x.id === selectedId);
-            setName(data.title);
-            setDescription(data.description);
-            setWeight(data.portionMass);
+            const data = currentAdminState.faq.find(x=> x.id === selectedId);
+            setQuestion(data.question);
+            setAnswer(data.answer);
         }
-    }, [selectedId, editMode, foodId]);
+    }, [selectedId, editMode]);
 
-    function changeNameHandler(e) {
-        setName(e?.target?.value);
+    function changeQuestionHandler(e) {
+        setQuestion(e?.target?.value);
     }
 
-    function changeDescriptionHandler(e) {
-        setDescription(e?.target?.value);
-    }
-
-    function changeWeightHandler(e) {
-        setWeight(e?.target?.value);
+    function changeAnswerHandler(e) {
+        setAnswer(e?.target?.value);
     }
 
     function onSaveHandler() {
-        debugger;
-        if(foodId && name && description && weight) {
+        if(answer && question) {
 
-            const data = { title: name, description: description,  portionMass: weight, FoodId: foodId};
+            const data = { question: question, answer: answer };
 
             if(editMode && selectedId) {
-                updateFoodPointHelper(dispatch, foodId, data);
+                data.id = selectedId;
+                updateFAQHelper(dispatch, selectedId, data);
             } else {
-                addNewFoodPointHelper(dispatch, data);
+                addNewFAQHelper(dispatch, data);
             }
 
         } else {
@@ -63,38 +57,28 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                 element={
                     <section className={styles.modalBox} >
                         <div className={`${styles.content}`} >
-                            <h2 className={styles.contentTitle}>Харчування</h2>
+                            <h2 className={styles.contentTitle}>FAQ</h2>
                             <div className='inputsBox'>
                                 <div className={styles.inputBox}>
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
                                         className={styles.customInput}
-                                        placeholder={"Назва"}
+                                        placeholder={"Запитання"}
                                         type={"text"}
                                         required={true}
-                                        onChange={changeNameHandler}
-                                        value={name}
-                                    />
-                                </div>
-                                <div className={styles.inputBox}>
-                                    <CustomTextArea
-                                        customInputContainer={styles.customTextAreaContainer}
-                                        className={styles.customTextArea}
-                                        placeholder={"Опис"}
-                                        required={true}
-                                        onChange={changeDescriptionHandler}
-                                        value={description}
+                                        onChange={changeQuestionHandler}
+                                        value={question}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
                                         className={styles.customInput}
-                                        placeholder={"Вага порції"}
-                                        type={"number"}
+                                        placeholder={"Відповідь"}
+                                        type={"text"}
                                         required={true}
-                                        onChange={changeWeightHandler}
-                                        value={weight}
+                                        onChange={changeAnswerHandler}
+                                        value={answer}
                                     />
                                 </div>
                                 <div className=''>
@@ -126,4 +110,4 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     );
 };
 
-export default FoodPointModal;
+export default FAQModal;

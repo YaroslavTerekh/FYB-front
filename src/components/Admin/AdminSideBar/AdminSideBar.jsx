@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './AdminSideBar.module.css';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../constants';
 
 const AdminSideBar = () => {
 
@@ -11,40 +13,44 @@ const AdminSideBar = () => {
                     id="menu">
                     <li className={styles.navItem}>
                         <p className=" align-middle px-0">
-                            <i className="fs-4 bi-house"></i> <span
-                            className="ms-1 d-none d-sm-inline">Тренери</span>
+                            <i className="fs-4 bi-house"></i>
+                            <Link className={`ms-1 d-none d-sm-inline ${styles.link}`} activeClassName={styles.activeLink} to={ROUTES.coaches} > Тренери </Link>
                         </p>
                     </li>
 
                     <li className={styles.navItem}>
                         <p className=" align-middle px-0">
-                            <i className="fs-4 bi-house"></i> <span
-                            className="ms-1 d-none d-sm-inline">Тренування</span>
+                            <i className="fs-4 bi-house"></i>
+                            <Link className={`ms-1 d-none d-sm-inline ${styles.link}`} activeClassName={styles.activeLink} to={ROUTES.coaching} > Тренування </Link>
                         </p>
                     </li>
 
                     <li className={styles.navItem}>
                         <p className=" px-0 align-middle">
-                            <i className="fs-4 bi-table"></i> <span
-                            className="ms-1 d-none d-sm-inline">Відгуки</span></p>
+                            <i className="fs-4 bi-table"></i>
+                            <Link className={`ms-1 d-none d-sm-inline ${styles.link}`} activeClassName={styles.activeLink} to={ROUTES.feedbacks} > Відгуки </Link>
+                        </p>
                     </li>
 
                     <li className={styles.navItem}>
                         <p className=" px-0 align-middle">
-                            <i className="fs-4 bi-people"></i> <span
-                            className="ms-1 d-none d-sm-inline">Харчування</span> </p>
+                            <i className="fs-4 bi-people"></i>
+                            <Link className={`ms-1 d-none d-sm-inline ${styles.link}`} activeClassName={styles.activeLink} to={ROUTES.food} > Харчування </Link>
+                        </p>
                     </li>
 
                     <li className={styles.navItem}>
                         <p className=" px-0 align-middle">
-                            <i className="fs-4 bi-people"></i> <span
-                            className="ms-1 d-none d-sm-inline">FAQ</span> </p>
+                            <i className="fs-4 bi-people"></i>
+                            <Link className={`ms-1 d-none d-sm-inline ${styles.link}`} activeClassName={styles.activeLink} to={ROUTES.faq} > FAQ </Link>
+                        </p>
                     </li>
 
                     <li className={styles.navItem}>
                         <p className=" px-0 align-middle">
-                            <i className="fs-4 bi-people"></i> <span
-                            className="ms-1 d-none d-sm-inline">Користувачі</span> </p>
+                            <i className="fs-4 bi-people"></i>
+                            <Link className={`ms-1 d-none d-sm-inline ${styles.link}`} activeClassName={styles.activeLink} to={ROUTES.users} > Користувачі </Link>
+                        </p>
                     </li>
                 </ul>
             </div>

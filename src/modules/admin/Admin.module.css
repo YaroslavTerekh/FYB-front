@@ -1,6 +1,7 @@
 .box {
     display: flex;
     box-sizing: border-box;
+    height: 100%;
 }
 
 .content {
@@ -130,4 +131,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.sidebar {
+    width: 260px;
 }

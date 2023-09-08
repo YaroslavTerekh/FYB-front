@@ -37,7 +37,7 @@ export function updateFeedback(id, model): Promise<any> {
 }
 
 export function deleteFeedback(id: string): Promise<any> {
-    return API.delete(`admin/coaching/feedback/delete` + id);
+    return API.delete(`admin/coaching/feedback/delete/` + id);
 }
 
 export function addFood(model): Promise<any> {
@@ -48,10 +48,35 @@ export function updateFood(id, model): Promise<any> {
     return API.put(`admin/food/modify/` + id, model);
 }
 
+export function deleteFood(id: string): Promise<any> {
+    return API.delete(`admin/food/delete/` + id);
+}
+
+export function deleteFoodPoint(id: string): Promise<any> {
+    return API.delete(`admin/food/point/delete/` + id);
+}
+
+
 export function addFoodPoint(model): Promise<any> {
     return API.post(`admin/food/point/create`, model);
 }
 
 export function updateFoodPoint(id, model): Promise<any> {
     return API.put(`admin/food/point/modify/` + id, model);
+}
+
+export function getUsers(): Promise<any> {
+    return API.get(`admin/users/all`);
+}
+
+export function addFAQPoint(model): Promise<any> {
+    return API.post(`admin/faq/create`, model);
+}
+
+export function updateFAQPoint(id, model): Promise<any> {
+    return API.put(`admin/faq/modify/` + id, model);
+}
+
+export function deleteFAQ(id: string): Promise<any> {
+    return API.delete(`admin/faq/delete/` + id);
 }

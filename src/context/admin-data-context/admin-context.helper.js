@@ -1,15 +1,15 @@
 import {
     addCoach,
     addCoaching,
-    addCoachingDetails, addFeedback, addFood, addFoodPoint,
+    addCoachingDetails, addFAQPoint, addFeedback, addFood, addFoodPoint,
     deleteCoach,
-    deleteCoaching, deleteCoachingDetails, deleteFeedback,
-    updateCoach, updateFeedback, updateFood, updateFoodPoint,
+    deleteCoaching, deleteCoachingDetails, deleteFAQ, deleteFeedback, deleteFood, deleteFoodPoint, getUsers,
+    updateCoach, updateFAQPoint, updateFeedback, updateFood, updateFoodPoint,
 } from '../../api/admin-api';
 import { Dispatch } from 'redux';
 import { AnyAction } from 'redux';
-import { setCoaches, setCoaching, setFeedbacks, setFood } from './admin-actions';
-import { getCoaches, getCoaching, getFeedbacks, getFood } from '../../api/content-api';
+import { setCoaches, setCoaching, setFAQ, setFeedbacks, setFood, setUsers } from './admin-actions';
+import { getCoaches, getCoaching, getFaq, getFeedbacks, getFood } from '../../api/content-api';
 
 export function addNewCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData) {
     addCoach(data).then(res => {
@@ -190,6 +190,28 @@ export function addNewFoodPointHelper(dispatch: Dispatch<AnyAction>, data) {
     }).catch(err => {});
 }
 
+export function deleteFoodHelper(dispatch: Dispatch<AnyAction>, id: string) {
+    deleteFood(id).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function deleteFoodPointHelper(dispatch: Dispatch<AnyAction>, id: string) {
+    deleteFoodPoint(id).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
 export function updateFoodPointHelper(dispatch: Dispatch<AnyAction>, id, data) {
     updateFoodPoint(id, data).then(res => {
         getFood()
@@ -201,3 +223,46 @@ export function updateFoodPointHelper(dispatch: Dispatch<AnyAction>, id, data) {
     }).catch(err => {});
 }
 
+export function getUsersHelper(dispatch: Dispatch<AnyAction>) {
+    getUsers().then(res => {
+        dispatch(setUsers(res.data));
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function getFAQHelper(dispatch: Dispatch<AnyAction>) {
+    getFaq().then(res => {
+        dispatch(setFAQ(res.data));
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function addNewFAQHelper(dispatch: Dispatch<AnyAction>, data) {
+    addFAQPoint(data).then(res => {
+        getFaq().then(res => {
+            dispatch(setFAQ(res.data));
+        })
+        .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function updateFAQHelper(dispatch: Dispatch<AnyAction>, id, data) {
+    updateFAQPoint(id, data).then(res => {
+        getFaq().then(res => {
+            dispatch(setFAQ(res.data));
+        })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function deleteFAQHelper(dispatch: Dispatch<AnyAction>, id: string) {
+    deleteFAQ(id).then(res => {
+        getFaq().then(res => {
+            dispatch(setFAQ(res.data));
+        })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}

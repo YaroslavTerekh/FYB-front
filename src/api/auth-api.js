@@ -10,3 +10,7 @@ export function Login(model: LoginModel): any {
 export function Register(registerUser: RegisterModel): any {
     return API.post(`auth/register`, registerUser);
 }
+
+export function getCurrentUser(): any {
+    return API.get(`auth/get-user`);
+}

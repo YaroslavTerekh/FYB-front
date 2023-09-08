@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import './Header.css';
@@ -7,8 +7,22 @@ import logoImg from '../../img/logo.svg';
 import AuthService from '../../services/auth-service';
 import LoginModal from '../../modules/auth/LoginModal/LoginModal';
 import RegisterModal from '../../modules/auth/RegisterModal/RegisterModal';
+import { useSelector } from 'react-redux';
+import styles from '../Admin/AdminHeader/AdminHeader.module.css';
+import { deleteAccessToken } from '../../services/local-storage-service';
+import logOutIcon from '../../img/components/logout.png';
 
 export default function Header({ navigationData }) {
+    const currentUserState = useSelector(state => state.user);
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    useEffect(() => {
+        if(currentUserState?.firstName) {
+            debugger;
+            setSelectedUser(currentUserState);
+        }
+    }, [currentUserState]);
+
     const userService = new AuthService();
     const navigate = useNavigate();
 
@@ -103,6 +117,16 @@ export default function Header({ navigationData }) {
                                 <img src={logoImg} alt='Logo' />
                             </a>
                         </div>
+                        {selectedUser?.firstName}
+                        <button className={styles.tableBtn}  >
+                            <div className={styles.box} onClick={deleteAccessToken}>
+                                <p>Log out</p>
+                                <img src={logOutIcon} alt='' />
+                            </div>
+                        </button>
+                        <Link to='/admin'>
+                            <img src={logoImg} alt='Logo' />
+                        </Link>
                         <div
                             onClick={() => setNav(!nav)}
                             className={`header__burger ${nav ? 'active' : ''}`}

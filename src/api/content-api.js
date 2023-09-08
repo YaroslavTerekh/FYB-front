@@ -15,3 +15,7 @@ export function getCoaching(): Promise<any> {
 export function getFood(): Promise<any> {
     return API.get(`content/food/all`);
 }
+export function getFaq(): Promise<any> {
+    return API.get(`content/faq`);
+}
+
