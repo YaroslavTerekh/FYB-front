@@ -4,6 +4,11 @@ import functionalPhoto from '../../../../img/photo/trainings/photo4.jpg';
 import stretchingPhoto from '../../../../img/photo/trainings/photo1.jpg';
 import kidsPhoto from '../../../../img/photo/trainings/photo3.jpg';
 
+import training1 from '../../../../img/photo/trainings/photo1.jpg';
+import training2 from '../../../../img/photo/trainings/photo2.jpg';
+import training3 from '../../../../img/photo/trainings/photo3.jpg';
+import training4 from '../../../../img/photo/trainings/photo4.jpg';
+
 export const MOCKED_TRAININGS_TYPES = {
     healthy_diet: 'healthy_diet',
     sexy_buttocks: 'sexy_buttocks',
@@ -11,6 +16,8 @@ export const MOCKED_TRAININGS_TYPES = {
     stretching: 'stretching',
     stretching_kids: 'stretching_kids',
 };
+
+
 
 export const MOCKED_TRAININGS_DATA = {
     [MOCKED_TRAININGS_TYPES.healthy_diet]: {
@@ -56,6 +63,7 @@ export const MOCKED_TRAININGS_DATA = {
             'video_url_Functional_6.mp4',
         ],
         isPurchased: false,
+        count: 8
     },
     [MOCKED_TRAININGS_TYPES.stretching]: {
         src: stretchingPhoto,
@@ -74,6 +82,42 @@ export const MOCKED_TRAININGS_DATA = {
             'video_url_Stretching_8.mp4',
         ],
         isPurchased: false,
+        count: 8,
+        time: 2,
+        price: 600,
+        coachingDetails: [
+            {
+                title: 'Декілька причин закохатись у stretching',
+                details: [
+                    { icon: 0, detail: 'послаблює болючі відчуття, що виникають внаслідок нервової напруги або стресу' },
+                    { icon: 0, detail: 'покращує поставу, оскільки сутулість викликана саме зажимами у м’язах' },
+                    { icon: 0, detail: 'покращує рух крові та лімфи в організмі, що допомагає ефективно боротися з жировими відкладеннями та прискорити метаболізм' }
+                ]
+            },
+            {
+                title: 'На тренуваннях ми працюємо:',
+                details: [
+                    { icon: 1, detail: 'над балансом та координацією' },
+                    { icon: 1, detail: 'з еластичністю м`язів' },
+                    { icon: 1, detail: 'з мобільністю тазостегнових суглобів' },
+                    { icon: 1, detail: 'навчаємось новим дихальним практикам' }
+                ]
+            },
+            {
+                title: 'Інвентар для тренування',
+                details: [
+                    { icon: 2, detail: 'фітнес килимок' },
+                    { icon: 2, detail: '2 йога блоки' },
+                    { icon: 2, detail: 'для більшого навантаження можливі фітнес резинки' },
+                ]
+            }
+        ],
+        examplePhotos: [
+            training1,
+            training2,
+            training3,
+            training4
+        ]
     },
     [MOCKED_TRAININGS_TYPES.stretching_kids]: {
         src: kidsPhoto,

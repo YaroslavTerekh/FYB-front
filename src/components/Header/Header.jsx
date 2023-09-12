@@ -109,7 +109,7 @@ export default function Header({ navigationData }) {
                 isOpen={registerIsOpen}
                 setRegistrationFinished={onRegisterFinishedModalHandler}
             />
-            <header className='header'>
+            <header className='header' style={{height:'112px'}}>
                 <div className='container'>
                     <div className='header__row'>
                         <div className='header__logo'>

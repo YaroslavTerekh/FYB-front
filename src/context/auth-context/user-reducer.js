@@ -6,7 +6,8 @@ const initialState: BaseUserModel = {
     firstName: "",
     phoneNumber: "",
     token: "",
-    role: ""
+    role: "",
+    phoneNumberConfirmed: null
 };
 
 function userReducer(state = initialState, action): BaseUserModel {

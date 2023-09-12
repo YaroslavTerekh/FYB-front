@@ -21,8 +21,6 @@ export default class AuthService {
 
             getCurrentUserHelper(this.dispatch);
         }
-
-        // TODO setAccessToken
     }
 
     async register(model: RegisterModel): Promise<boolean> {
@@ -32,6 +30,6 @@ export default class AuthService {
     }
 
     isAuthorized(): boolean {
-         return getAccessToken() || this.currentUser.token;
+        return (getAccessToken() || this.currentUser.token);
     }
 }
