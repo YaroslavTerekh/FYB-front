@@ -3,18 +3,22 @@
 	/*padding: 20px 40px;*/
 	cursor: pointer;
 	padding: 0;
+	justify-content: space-between;
+	width: 100%;
+	text-align: center;
 }
 
 .custom-control div {
 	/*padding: 0 10px;*/
-	color: #B5B5B5;
+	color: var(--beige, #FFEDE4);
 	font-family: Inter;
-	font-size: 14px;
+	font-size: 30px;
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;
 	padding: 0;
 	text-align: start;
+	text-align: center;
 }
 
 

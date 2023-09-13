@@ -3,7 +3,7 @@ import iconArrow from '../../../../modules/user/sections/HomePage/FAQSection/ima
 
 export default function CustomDropdownArrow() {
   return (
-	 <div>
+	 <div style={{paddingLeft:'20px', paddingRight:'20px'}}>
 		<img src={iconArrow}/>
 	 </div>
   )

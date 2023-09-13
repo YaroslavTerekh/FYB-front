@@ -61,6 +61,7 @@ const ReviewsAnimateHeight = ({ index }) => {
                     className='detal-spoiler__photo'
                 >
                     <img
+                        className={selectedItem === index ? 'active' : ''}
                         src={BEFORE_AFTER_PHOTOS[index]}
                         alt={`Review ${index + 1}`}
                     />

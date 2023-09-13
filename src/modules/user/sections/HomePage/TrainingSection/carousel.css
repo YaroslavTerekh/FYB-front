@@ -33,12 +33,12 @@
 
 .custom-arrow.slick-next {
     right: 450px;
-    top: 767px;
+    top: 881px;
 }
 
 .custom-arrow.slick-prev {
     left: 450px;
-    top: 755px;
+    top: 870px;
 }
 @media screen and (max-width: 1110px) {
     .custom-arrow.slick-next {

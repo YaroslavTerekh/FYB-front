@@ -22,9 +22,9 @@ const ProfilePage = () => {
 
     return (
         <>
-            <div className='profile'>
-                {/* Place any other components related to user account here */}
-            </div>
+            {/*<div className='profile'>*/}
+            {/*    /!* Place any other components related to user account here *!/*/}
+            {/*</div>*/}
             <VideoTrainingsSection
                 selectedTrainingType={selectedTrainingType}
                 handleSelectChange={handleSelectChange}

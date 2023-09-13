@@ -67,6 +67,24 @@ const TrainingDetailsContent = (props: { training: null }) => {
                             ) }
                         </div>
                     </div>
+                    <div className={styles.photosGrid}>
+                        { props.training.examplePhotos && props.training.examplePhotos.map((x, i) =>
+                            <div className={styles.gridItem}>
+                                <div className={styles.gridImgBox}>
+                                    <img src={x} alt='' />
+                                </div>
+                            </div>
+                        ) }
+                    </div>
+
+                    <Button
+                        className={styles.btn}
+                        aria-expanded={true}
+                        aria-controls={`coach-modal`}
+                        onClick={() => {}}
+                    >
+                        <p>Купити</p>
+                    </Button>
                 </div>
             </div>
         </>

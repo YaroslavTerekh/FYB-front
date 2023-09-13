@@ -1,4 +1,4 @@
-import heartIcon from '../img/components/icon1.svg';
+import heartIcon from '../img/components/iconHeartBold.svg';
 import starIcon from '../img/components/icon6.svg';
 import checkIcon from '../img/components/icon15.svg';
 
