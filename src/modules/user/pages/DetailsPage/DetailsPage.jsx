@@ -4,6 +4,7 @@ import TrainingCarouselSection from '../../sections/ProfilePage/TrainingCarousel
 
 import { MOCKED_TRAININGS_DATA } from '../ProfilePage/constants';
 import TrainingDetailsContent from '../../sections/TainingDetailsContent/TainingDetailsContent';
+import FoodDetailsContent from '../../sections/TainingDetailsContent/FoodDetailsContent';
 
 const DetailsPage = () => {
     const [selectedTrainingType] = useState(MOCKED_TRAININGS_DATA);
@@ -11,7 +12,8 @@ const DetailsPage = () => {
     const { [selectedTrainingType]: _, ...filteredTrainingData } = MOCKED_TRAININGS_DATA;
     return (
         <>
-            <TrainingDetailsContent training={filteredTrainingData.stretching}/>
+            {/*<TrainingDetailsContent training={filteredTrainingData.stretching}/>*/}
+            <FoodDetailsContent training={filteredTrainingData.healthy_diet}/>
             <ReviewsSection />
             <TrainingCarouselSection
                 filteredTrainingData={filteredTrainingData}

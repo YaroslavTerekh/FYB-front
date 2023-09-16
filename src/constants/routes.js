@@ -10,7 +10,8 @@ export const ROUTES = {
     coaching: 'coaching',
     food: 'food',
     users: 'users',
-    faq: 'faq'
+    faq: 'faq',
+    confirmNumber: 'confirm-number'
 };
 
 export const HEADER_NAVIGATION_LINK_TYPES = {

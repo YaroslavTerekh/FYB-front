@@ -19,9 +19,9 @@ const VideoTrainingsSection = ({
 
     useEffect(() => {
         const selectedTraining = MOCKED_TRAININGS_DATA[selectedTrainingType];
-
-        if (selectedTraining?.videos?.length) {
-            setTrainingVideoSource(selectedTraining.videos[0]);
+debugger;
+        if (selectedTrainingType) {
+            setTrainingVideoSource(selectedTrainingType);
         }
     }, [selectedTrainingType]);
 
@@ -36,68 +36,41 @@ const VideoTrainingsSection = ({
      * @param {Object} options
      * @returns {Array<Object>}
      */
-    const formatSelectOptions = (options) =>
-        Object.entries(options).map(([itemType, itemData]) => ({
-            value: itemType,
-            label: itemData.title,
-            isPurchased: itemData.isPurchased,
-        }));
+;
 
     return (
         <section className={styles.videoTrainings}>
             <div className='container'>
-                <div
-                    className={`videoTrainingsButton ${styles.videoTrainingsButton}`}
-                >
-                    <Select
-                        className={styles.videoTrainingsSelectCustom} 
-                        options={formatSelectOptions(MOCKED_TRAININGS_DATA)}
-                        selectedOptionValue={selectedTrainingType}
-                        onChange={handleSelectChange}
-                    />
-                </div>
-
-                {selectedTrainingType ===
-                MOCKED_TRAININGS_TYPES.healthy_diet ? (
-                    <div>Custom menu</div>
-                ) : (
-                    <div className={styles.videoTrainingsBlock}>
-                        <div className={styles.videoTrainingsNumber}>
-                            {Object.entries(MOCKED_TRAININGS_DATA).map(
-                                ([trainingType, trainingData]) => (
-                                    <div key={trainingType}>
-                                        {selectedTrainingType ===
-                                            trainingType &&
-                                            trainingData.videos.map(
-                                                (videoSource, videoIndex) => (
-                                                    <Button
-                                                        key={videoIndex}
-                                                        onClick={() =>
-                                                            handleSelectTrainingVideo(
-                                                                videoSource
-                                                            )
-                                                        }
-                                                    >
-                                                        {`Тренування ${
-                                                            videoIndex + 1
-                                                        }`}
-                                                    </Button>
+                <div className={styles.videoTrainingsBlock}>
+                    <div className={styles.videoTrainingsNumber}>
+                        <div>
+                            {selectedTrainingType && selectedTrainingType.videos && selectedTrainingType.videos.map(
+                                    (videoSource, videoIndex) => (
+                                        <Button
+                                            key={videoIndex}
+                                            onClick={() =>
+                                                handleSelectTrainingVideo(
+                                                    videoSource
                                                 )
-                                            )}
-                                    </div>
-                                )
-                            )}
-                        </div>
-
-                        <div className={styles.videoTrainingsVideo}>
-                            {trainingVideoSource && (
-                                <VideoPlayer
-                                    videoSource={trainingVideoSource}
-                                />
-                            )}
+                                            }
+                                        >
+                                            {`Тренування ${
+                                                videoIndex + 1
+                                            }`}
+                                        </Button>
+                                    )
+                                )}
                         </div>
                     </div>
-                )}
+
+                    <div className={styles.videoTrainingsVideo}>
+                        {trainingVideoSource && (
+                            <VideoPlayer
+                                videoSource={trainingVideoSource}
+                            />
+                        )}
+                    </div>
+                </div>
             </div>
         </section>
     );

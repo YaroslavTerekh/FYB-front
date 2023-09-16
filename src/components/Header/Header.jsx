@@ -109,31 +109,25 @@ export default function Header({ navigationData }) {
                 isOpen={registerIsOpen}
                 setRegistrationFinished={onRegisterFinishedModalHandler}
             />
-            <header className='header' style={{height:'112px'}}>
+            <header className='header' style={{height:'120px'}}>
                 <div className='container'>
-                    <div className='header__row'>
-                        <div className='header__logo'>
-                            <a href='/'>
-                                <img src={logoImg} alt='Logo' />
-                            </a>
-                        </div>
-                        {selectedUser?.firstName}
-                        <button className={styles.tableBtn}  >
-                            <div className={styles.box} onClick={deleteAccessToken}>
-                                <p>Log out</p>
-                                <img src={logOutIcon} alt='' />
-                            </div>
-                        </button>
-                        <Link to='/admin'>
-                            <img src={logoImg} alt='Logo' />
-                        </Link>
-                        <div
-                            onClick={() => setNav(!nav)}
-                            className={`header__burger ${nav ? 'active' : ''}`}
-                        >
-                            <span></span>
-                        </div>
-                        <div className='header__nav'>
+
+                        <div className='header__row'>
+                            <div className='header_box'>
+                                <div className='header__logo'>
+                                    <a href='/'>
+                                        <img src={logoImg} alt='Logo' />
+                                    </a>
+                                </div>
+                                {selectedUser?.firstName}
+
+                                <div
+                                    onClick={() => setNav(!nav)}
+                                    className={`header__burger ${nav ? 'active' : ''}`}
+                                >
+                                    <span></span>
+                                </div>
+                                <div className='header__nav'>
                             <nav className={`nav__menu ${nav ? 'active' : ''}`}>
                                 <ul className='nav__menu_items'>
                                     {navigationData.map((item, index) => {
@@ -160,9 +154,24 @@ export default function Header({ navigationData }) {
                                             );
                                         }
                                     })}
+                                    <li>
+                                        <p
+                                            onClick={() => deleteAccessToken()}
+                                        >
+                                            Log out
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p
+
+                                        >
+                                            Admin
+                                        </p>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
+                            </div>
                     </div>
                 </div>
             </header>

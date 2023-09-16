@@ -20,6 +20,7 @@ import UsersPage from './modules/admin/pages/users/UsersPage';
 import FAQPage from './modules/admin/pages/FAQ/FAQPage';
 import { useSelector } from 'react-redux';
 import { AdminRole } from './constants/roles';
+import ConfirmPhoneNumberPage from './modules/auth/ConfirmPhoneNumber/ConfirmPhoneNumberPage';
 
 function App() {
     const currentUserState = useSelector(state => state.user);
@@ -50,7 +51,10 @@ function App() {
                             <Route exact path={ROUTES.home} element={<HomePage />} />
                             <Route path={ROUTES.profile} element={<ProfilePage />} />
                             <Route path={ROUTES.details} element={<DetailsPage />} />
+                            <Route path={ROUTES.confirmNumber} element={<ConfirmPhoneNumberPage />} />
                         </Route>
+
+
 
                         {selectedUser?.role && selectedUser.role === AdminRole &&
                             <Route path={ROUTES.admin} element={<AdminHome />}>

@@ -8,6 +8,7 @@ import training1 from '../../../../img/photo/trainings/photo1.jpg';
 import training2 from '../../../../img/photo/trainings/photo2.jpg';
 import training3 from '../../../../img/photo/trainings/photo3.jpg';
 import training4 from '../../../../img/photo/trainings/photo4.jpg';
+import training6 from '../../../../img/photo/trainings/photo6.png';
 
 export const MOCKED_TRAININGS_TYPES = {
     healthy_diet: 'healthy_diet',
@@ -28,6 +29,43 @@ export const MOCKED_TRAININGS_DATA = {
             'Стереотип «Збалансоване харчування дороге» - це справжній міф. Наш Раціон харчування побудований на основі простих та доступних кожному продуктів!',
         videos: ['video_url_SEXY_1.mp4'],
         isPurchased: true,
+        isFood: true,
+        count: 8,
+        time: 2,
+        price: 600,
+        coachingDetails: [
+            {
+                title: 'Декілька причин закохатись у stretching',
+                details: [
+                    {  detail: 'послаблює болючі відчуття, що виникають внаслідок нервової напруги або стресу' },
+                    { detail: 'покращує поставу, оскільки сутулість викликана саме зажимами у м’язах' },
+                    {  detail: 'покращує рух крові та лімфи в організмі, що допомагає ефективно боротися з жировими відкладеннями та прискорити метаболізм' }
+                ]
+            },
+            {
+                title: 'На тренуваннях ми працюємо:',
+                details: [
+                    { detail: 'над балансом та координацією' },
+                    { detail: 'з еластичністю м`язів' },
+                    { detail: 'з мобільністю тазостегнових суглобів' },
+                    {  detail: 'навчаємось новим дихальним практикам' }
+                ]
+            },
+            {
+                title: 'Інвентар для тренування',
+                details: [
+                    { detail: 'фітнес килимок' },
+                    { detail: '2 йога блоки' },
+                    {  detail: 'для більшого навантаження можливі фітнес резинки' },
+                ]
+            }
+        ],
+        examplePhotos: [
+            training1,
+            training6,
+            training3,
+            training4
+        ]
     },
     [MOCKED_TRAININGS_TYPES.sexy_buttocks]: {
         src: sexyPhoto,
