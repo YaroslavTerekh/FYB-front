@@ -28,10 +28,11 @@ const customStyles = {
     }),
 };
 
-const CustomSelectChiplets = ({ onChange, options, className, placeholder, required,  customInputContainer, icon, isMulti}) => {
+const CustomSelectChiplets = ({ onChange, options, className, placeholder, required,  customInputContainer, icon, isMulti, selectStyles, isDisabled}) => {
     return (
         <div className={customInputContainer ?? styles.customInputContainer}>
             <Select
+                isDisabled={isDisabled}
                 className={className}
                 // defaultValue={options[0]}
                 // name='video-trainings'
@@ -44,7 +45,7 @@ const CustomSelectChiplets = ({ onChange, options, className, placeholder, requi
                 }}
                 isMulti={isMulti}
                 placeholder={placeholder}
-                styles={customStyles}
+                styles={selectStyles ?? customStyles}
                 required={required}
             />
         </div>

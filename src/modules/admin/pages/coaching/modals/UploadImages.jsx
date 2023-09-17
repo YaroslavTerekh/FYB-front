@@ -28,8 +28,8 @@ const UploadImagesCarousel = ({ isOpen, onClose }) => {
                 onClose={onClose}
                 styles={{
                     bgColor:' #FFF',
-                    width: '70vw',
-                    height: '80vh',
+                    width: '40vw',
+                    height: '67vh',
                     border: '1px solid #A5A5A5',
                     overlayBgColor: 'none',
                 }}
