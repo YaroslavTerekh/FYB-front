@@ -1,28 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomInput from '../../../components/Input/CustomInput';
-import CustomPasswordInput from '../../../components/Input/CustomPasswordInput';
-import ModalWindow from '../../../components/Modal/ModalWindow';
 import styles from '../Auth.module.css';
-import closeIcon from '../../../img/components/icon8.png';
 import Button from '../../../components/Button/Button';
 import AuthService from '../../../services/auth-service';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAlert } from '../../../context/alert-context/alert-actions';
 
-const ConfirmPhoneNumber = ({ isOpen, onClose, setRegistrationFinished }) => {
+const ConfirmPhoneNumber = () => {
     const userService = new AuthService();
+    const dispatch = useDispatch();
+    const alert = useSelector(state => state.alert);
+    const [code, setCode] = useState("");
+    const [requested, setRequested] = useState(false);
 
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    useEffect(() => {
+        debugger;
+        requestCode();
+    }, []);
 
-    function changeNameHandler(e) {
-        setName(e?.target?.value);
+    function requestCode() {
+        userService.requestCode().then(r => {});
     }
 
-    async function register() {
-        const isSuccess = await userService.register({ email, password, firstName: name, phoneNumber: phone });
+    function changeCodeHandler(e) {
+        setCode(e?.target?.value);
+    }
 
-        setRegistrationFinished(isSuccess);
+    async function verifyCode() {
+        const isSuccess = await userService.verifyCode(+code);
+
+        if (isSuccess) {
+            dispatch(setAlert({ icon:"", isSuccess: true, message: "Номер телефону, підтверджено!" }))
+        } else {
+            dispatch(setAlert({ icon:"", isSuccess: false, message: "Упс, щось пішло не так!" }))
+        }
+
     }
 
     return <>
@@ -32,12 +44,12 @@ const ConfirmPhoneNumber = ({ isOpen, onClose, setRegistrationFinished }) => {
                     Ми надіслаи код-підтвердження на Ваш номер телефону, будь ласка, введіть його в поле нижче:
                 </p>
                 <div className={styles.inputBox}>
-                    <CustomInput onChange={changeNameHandler} className={styles.customInput} placeholder={"Ім'я"} type={"text"} required={true}/>
+                    <CustomInput onChange={changeCodeHandler} className={styles.customInput} placeholder={"Введіть код"} type={"tel"} required={true}/>
                     <Button
                         className={styles.btn}
                         aria-expanded={true}
                         aria-controls={`example-panel-`}
-                        onClick={register}
+                        onClick={verifyCode}
                     >
                         <p>Підтвердити</p>
                     </Button>

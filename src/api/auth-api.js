@@ -11,6 +11,14 @@ export function Register(registerUser: RegisterModel): any {
     return API.post(`auth/register`, registerUser);
 }
 
+export function RequestCode(phoneNumber: string): any {
+    return API.post(`auth/generate-verify-code`, { phoneNumber });
+}
+
+export function VerifyCode(phoneNumber: string, code: number): any {
+    return API.post(`auth/verify-code`, { phoneNumber, code });
+}
+
 export function getCurrentUser(): any {
     return API.get(`auth/get-user`);
 }

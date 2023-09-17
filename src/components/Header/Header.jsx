@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import styles from '../Admin/AdminHeader/AdminHeader.module.css';
 import { deleteAccessToken } from '../../services/local-storage-service';
 import logOutIcon from '../../img/components/logout.png';
+import FinishRegistrationModal from '../../modules/auth/FinishRegistrationModal/FinishRegistrationModal';
+import { AdminRole } from '../../constants/roles';
 
 export default function Header({ navigationData }) {
     const currentUserState = useSelector(state => state.user);
@@ -97,6 +99,16 @@ export default function Header({ navigationData }) {
         setRegisterIsOpen(false);
         setFinishRegistrationIsOpen(value);
     }
+
+
+    function onRegisterFinishedModalCloseHandler() {
+        setFinishRegistrationIsOpen(false);
+        navigate("/confirm-number");
+    }
+
+    function goToAdmin() {
+        navigate("/admin");
+    }
     
     return (
         <>
@@ -109,6 +121,10 @@ export default function Header({ navigationData }) {
                 isOpen={registerIsOpen}
                 setRegistrationFinished={onRegisterFinishedModalHandler}
             />
+            <FinishRegistrationModal
+                onClose={onRegisterFinishedModalCloseHandler}
+                isOpen={finishRegistrationIsOpen}
+            />
             <header className='header' style={{height:'120px'}}>
                 <div className='container'>
 
@@ -119,8 +135,6 @@ export default function Header({ navigationData }) {
                                         <img src={logoImg} alt='Logo' />
                                     </a>
                                 </div>
-                                {selectedUser?.firstName}
-
                                 <div
                                     onClick={() => setNav(!nav)}
                                     className={`header__burger ${nav ? 'active' : ''}`}
@@ -155,18 +169,15 @@ export default function Header({ navigationData }) {
                                         }
                                     })}
                                     <li>
-                                        <p
-                                            onClick={() => deleteAccessToken()}
-                                        >
-                                            Log out
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p
+                                        {userService.isAuthorized() &&
+                                            <>
+                                                <img src={logOutIcon} alt='' onClick={deleteAccessToken} />
 
-                                        >
-                                            Admin
-                                        </p>
+                                                {currentUserState.role === AdminRole &&
+                                                    <img src={logOutIcon} alt='' onClick={goToAdmin} />
+                                                }
+                                            </>
+                                        }
                                     </li>
                                 </ul>
                             </nav>

@@ -21,6 +21,7 @@ import FAQPage from './modules/admin/pages/FAQ/FAQPage';
 import { useSelector } from 'react-redux';
 import { AdminRole } from './constants/roles';
 import ConfirmPhoneNumberPage from './modules/auth/ConfirmPhoneNumber/ConfirmPhoneNumberPage';
+import SystemAlert from './components/Alert/SystemAlert';
 
 function App() {
     const currentUserState = useSelector(state => state.user);
@@ -28,22 +29,12 @@ function App() {
 
     useEffect(() => {
         if(currentUserState?.firstName) {
-            debugger;
             setSelectedUser(currentUserState);
         }
     }, [currentUserState]);
 
     return (
         <div className=''>
-            {/*<Router>*/}
-            {/*    <Header navigationData={HEADER_NAVIGATION} />*/}
-            {/*    <Routes>*/}
-            {/*        <Route exact path={ROUTES.home} element={<HomePage />} />*/}
-            {/*        <Route path={ROUTES.profile} element={<ProfilePage />} />*/}
-            {/*        <Route path={ROUTES.details} element={<DetailsPage />} />*/}
-            {/*    </Routes>*/}
-            {/*    <Footer />*/}
-            {/*</Router>*/}
             <AxiosInterceptor>
                 <Router>
                     <Routes>
@@ -71,6 +62,7 @@ function App() {
                     </Routes>
                 </Router>
             </AxiosInterceptor>
+            <SystemAlert />
         </div>
     );
 }

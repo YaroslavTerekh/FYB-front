@@ -112,8 +112,15 @@
     margin: 0;
 }
 
+.finishModalBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .confNum {
     margin-top: 80px;
+    padding-bottom: 150px;
 }
 
 .confNum .btn {
@@ -137,7 +144,7 @@
 }
 
 .confNum .inputBox {
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

@@ -1,6 +1,6 @@
 import type { BaseUserModel } from '../models/user-models/base-user-model';
 import type { LoginModel } from '../models/user-models/login-model';
-import { Login, Register } from '../api/auth-api';
+import { Login, Register, RequestCode, VerifyCode } from '../api/auth-api';
 import type { RegisterModel } from '../models/user-models/register-model';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccessToken, setAccessToken } from './local-storage-service';
@@ -26,10 +26,34 @@ export default class AuthService {
     async register(model: RegisterModel): Promise<boolean> {
         const response = await Register(model);
 
+
+        if (response.status === 200) {
+            debugger;
+            this.dispatch(setUser(response.data));
+
+            return true
+        }
+
+        return false
+    }
+
+    requestCode(): Promise<boolean> {
+        return RequestCode(this.currentUser.phoneNumber);
+    }
+
+    async verifyCode(code: number): Promise<boolean> {
+        const response = await VerifyCode(this.currentUser.phoneNumber, code);
+
         return response.status === 200;
     }
 
     isAuthorized(): boolean {
-        return (getAccessToken() || this.currentUser.token);
+
+         if (this.currentUser?.firstName) {
+             return (getAccessToken() || this.currentUser.token);
+         }
+         else {
+             getCurrentUserHelper(this.dispatch);
+         }
     }
 }

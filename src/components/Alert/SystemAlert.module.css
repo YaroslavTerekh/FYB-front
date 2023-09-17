@@ -1,0 +1,23 @@
+.alertBox {
+    position: fixed;
+    bottom: 5px;
+    width: 100vw;
+    z-index: 10;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alertBox .alert {
+    border-radius: 10px;
+    padding: 7px;
+    margin: 5px;
+    width: 30vw;
+    font-size: 18px;
+    font-weight: 500;
+    border: 2px solid var(--beige, var(--main-bg));
+    background-color: white;
+    box-shadow: 1px 1px 9px rgba(0,0,0, 0.5);
+}
