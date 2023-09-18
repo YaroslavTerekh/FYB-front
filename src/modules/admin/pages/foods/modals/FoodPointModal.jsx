@@ -20,7 +20,6 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
 
     useEffect(() => {
         if (editMode && selectedId && foodId) {
-            debugger;
             const data = currentAdminState.food.find(x=> x.id === foodId).foodPoints.find(x=> x.id === selectedId);
             setName(data.title);
             setDescription(data.description);
@@ -41,9 +40,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     }
 
     function onSaveHandler() {
-        debugger;
         if(foodId && name && description && weight) {
-
             const data = { title: name, description: description,  portionMass: weight, FoodId: foodId};
 
             if(editMode && selectedId) {

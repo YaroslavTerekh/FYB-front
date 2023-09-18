@@ -28,7 +28,6 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
 
     useEffect(() => {
         if (selectedId) {
-            debugger;
             const item = currentAdminState.feedbacks.find(x=> x.id === selectedId);
             setFeedback(item.feedbackText);
             setInstagramLink(item.instagramLink);

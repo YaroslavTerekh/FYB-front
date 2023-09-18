@@ -31,7 +31,6 @@ const FeedbackPage = () => {
 
     useEffect(() => {
         if(currentAdminState.feedbacks) {
-            debugger;
             setFeedbacksList(currentAdminState.feedbacks);
         }
 

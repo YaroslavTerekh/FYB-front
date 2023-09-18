@@ -48,7 +48,7 @@ const CoachesPage = () => {
 
     function deleteCoach() {
         setDeleteIsOpen(false);
-        deleteCoachHelper(selectedCoachId);
+        deleteCoachHelper(dispatch, selectedCoachId);
     }
 
 
@@ -84,10 +84,12 @@ const CoachesPage = () => {
                             </div>
                             <div className={mainStyles.blockItem}>
                                 <div className={mainStyles.tableActions}>
-                                    <button className={mainStyles.tableBtn} onClick={() => onEditCoachHandler(c.id)}>
+                                    <button className={mainStyles.tableBtn} onClick={() => onEditCoachHandler(c.id
+                                    )}>
                                         <img src={editIcon} alt='' />
                                     </button>
-                                    <button className={mainStyles.tableBtn}  onClick={() => onDeleteCoachHandler(c.id)}>
+                                    <button className={mainStyles.tableBtn}  onClick={() => onDeleteCoachHandler(c.id
+                                    )}>
                                         <img src={deleteIcon} alt='' />
                                     </button>
                                 </div>

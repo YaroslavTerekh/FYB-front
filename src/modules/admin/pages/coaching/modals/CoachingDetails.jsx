@@ -30,7 +30,6 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
     }
 
     function changeNameHandler(e, id) {
-        debugger;
         let newList = nameList;
         newList[id - 1].text = e?.target?.value;
 

@@ -28,7 +28,6 @@ const FAQPage = () => {
 
     useEffect(() => {
         if (currentAdminState.faq) {
-            debugger;
             setFaqList(currentAdminState.faq);
         }
     }, [currentAdminState.faq]);

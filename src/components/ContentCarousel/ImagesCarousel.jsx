@@ -11,6 +11,8 @@ import { MOCKED_TRAININGS_DATA } from '../../modules/user/pages/ProfilePage/cons
 import CustomSelectChiplets from '../CustomSelectChiplets/CustomSelectChiplets';
 import { number } from 'prop-types';
 import deleteIcon from '../../img/components/delete_icon.png';
+import addIcon from  '../../img/components/add_icon.png';
+import Button from '../Button/Button';
 
 const customStyles = {
     control: base => ({
@@ -34,16 +36,20 @@ const customStyles = {
     }),
 };
 
-const ImagesCarousel = ( props: { imageList:[] } ) => {
+const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
     const [currentImages, setCurrentImages] = useState([]);
     const fileInputRef = useRef(null);
 
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState(currentImages[0]);
 
-    // useEffect(() => {
-    //     setCurrentImages(props.imageList);
-    // }, [props.imageList]);
+    useEffect(() => {
+
+        if(props.imageList && props.imageList.length && props.imageList.length > 0) {
+            setCurrentImages(props.imageList);
+        }
+
+    }, [props.imageList]);
 
 
     function onChange(e) {
@@ -57,23 +63,27 @@ const ImagesCarousel = ( props: { imageList:[] } ) => {
     }
 
     function onClickThumb(e) {
-        debugger
         setSelectedIndex(e);
         setSelectedImage(currentImages[e]);
     }
 
     function handleSelectChange(e) {
-        debugger;
-        const data = currentImages.findIndex(x => x.index === e.value);
+
+        if(e < 1 || e > 4) return;
+
+        const data = currentImages.findIndex(x => x.index === e);
         const selected = currentImages.findIndex(x => x.index === selectedImage.index);
 
-        const newList = currentImages;
+        const newList = currentImages.map(a => Object.assign({}, a));
 
         if (data > -1) {
-            newList[data].index = selectedIndex.index;
+            newList[data].index = selectedImage.index;
         }
-        newList[selected].index = e.value;
 
+        newList[selected].index = e;
+
+        setCurrentImages(newList);
+        props.setList(newList);
         setSelectedImage(newList[selected]);
     }
 
@@ -92,9 +102,23 @@ const ImagesCarousel = ( props: { imageList:[] } ) => {
 
                 const newList = currentImages.length > 0
                     ? [...currentImages] : [];
-                newList.push({data: blob, index: currentImages.length +1});
+
+                const index = !currentImages.find(x=> x.index === 1)
+                    ? 1
+                    : !currentImages.find(x=> x.index === 2)
+                        ? 2
+                        : !currentImages.find(x=> x.index === 3)
+                            ? 3
+                            : 4;
+
+                newList.push({data: blob, index: currentImages.length + 1});
 
                 setCurrentImages(newList);
+                props.setList(newList);
+
+                if(currentImages.length === 0) {
+                    setSelectedImage(newList[0])
+                }
             };
 
             reader.readAsArrayBuffer(selectedImage);
@@ -105,34 +129,36 @@ const ImagesCarousel = ( props: { imageList:[] } ) => {
         setCurrentImages(currentImages.filter(x => x.index !== selectedImage.index));
     }
 
+    function onOk() {
+        props.onOk(currentImages);
+    }
+
     return <div className={styles.box}>
         <div className={styles.imgBox}>
             <div className={styles.imgInput} onClick={handleButtonClick}>
                 <p className={styles.placeholder}>Upload new photo</p>
                 <img src={selectIcon} alt='' />
             </div>
-            <CustomSelectChiplets
-                isDisabled={currentImages.length === 0}
-                customInputContainer={styles.customInputContainer}
-                className={styles.customSelect}
-                placeholder={"Порядок фотографій на сторінці 'Деталі'"}
-                required={true}
-                //icon={instagramIcon}
-                options={[
-                    { value: 1, label: 1,},
-                    { value: 2, label: 2,},
-                    { value: 3, label: 3,},
-                    { value: 4, label: 4,}
-                ]}
-                selectedOptionValue={selectedImage?.index}
-                isMulti={false}
-                onChange={handleSelectChange}
-                selectStyles={customStyles}
-            />
+            <div className={styles.indexBox}>
+                <p>Порядок фотографій на сторінці 'Деталі':</p>
+                <div className={styles.indexBtn}>
+                    <img src={addIcon} alt='' onClick={() => handleSelectChange(selectedImage?.index - 1)} />
+                    <p>{selectedImage?.index}</p>
+                    <img src={addIcon} alt='' onClick={() => handleSelectChange(selectedImage?.index + 1)} />
+                </div>
+            </div>
             <div className={styles.imgInput} onClick={deleteImageHandler}>
                 <p className={styles.placeholder}>Видалити фото</p>
                 <img src={deleteIcon} alt='' />
             </div>
+            <Button
+                className={styles.btn}
+                aria-expanded={true}
+                aria-controls={`coach-modal`}
+                onClick={onOk}
+            >
+                <p>OK</p>
+            </Button>
         </div>
 
         { (currentImages && currentImages.length > 0)

@@ -19,7 +19,6 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
 
     useEffect(() => {
         if (editMode && selectedId) {
-            debugger;
             const data = currentAdminState.faq.find(x=> x.id === selectedId);
             setQuestion(data.question);
             setAnswer(data.answer);

@@ -19,7 +19,7 @@ const VideoTrainingsSection = ({
 
     useEffect(() => {
         const selectedTraining = MOCKED_TRAININGS_DATA[selectedTrainingType];
-debugger;
+
         if (selectedTrainingType) {
             setTrainingVideoSource(selectedTrainingType);
         }

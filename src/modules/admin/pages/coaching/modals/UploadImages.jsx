@@ -9,27 +9,49 @@ import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewCoachingHelper } from '../../../../../context/admin-data-context/admin-context.helper';
+import {
+    addNewCoachingHelper,
+    addPhotosToCoachingHelper,
+} from '../../../../../context/admin-data-context/admin-context.helper';
 import ImagesCarousel from '../../../../../components/ContentCarousel/ImagesCarousel';
 
-const UploadImagesCarousel = ({ isOpen, onClose }) => {
+const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
+
+    const [currentImages, setCurrentImages] = useState([]);
+
+
+
+    function onSaveHandler(currentImages: []) {
+
+        currentImages.forEach((image, index) => {
+            const form = new FormData();
+            debugger;
+            form.append('Id', coachingId);
+            form.append('PhotoFile', image.data);
+            form.append('OrderId', image.index);
+
+            addPhotosToCoachingHelper(dispatch, form);
+        });
+    }
 
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
-                       <ImagesCarousel />
-                    </section>
+                    <>
+                        <section className={styles.modalBox} >
+                            <ImagesCarousel imageList={currentImages}  onOk={onSaveHandler} setList={setCurrentImages} />
+                        </section>
+                    </>
                 }
                 isOpen={isOpen}
                 onClose={onClose}
                 styles={{
                     bgColor:' #FFF',
                     width: '40vw',
-                    height: '67vh',
+                    height: '75vh',
                     border: '1px solid #A5A5A5',
                     overlayBgColor: 'none',
                 }}

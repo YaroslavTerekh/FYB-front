@@ -29,6 +29,7 @@ const CoachingPage = () => {
     const [editCoachIsOpen, setEditCoachIsOpen] = useState(false);
     const [selectedCoachId, setSelectedCoachId] = useState(null);
     const [deleteIsOpen, setDeleteIsOpen] = useState(false);
+    const [imagesIsOpenOpen, setImagesIsOpen] = useState(false);
     const [addDetailsIsOpen, setAddDetailsIsOpen] = useState(false);
 
     const [selectedItem, setSelectedItem] = useState(null);
@@ -68,7 +69,6 @@ const CoachingPage = () => {
     }
 
     function onDeleteCoachHandler(id) {
-        debugger
         setSelectedCoachId(id);
         setDeleteIsOpen(true);
     }
@@ -82,10 +82,20 @@ const CoachingPage = () => {
         deleteCoachingDetailsHelper(dispatch, id);
     }
 
+    function onImagesOpenHandler(id: string) {
+        setImagesIsOpen(true);
+        setSelectedCoachId(id);
+    }
+
+    function onImagesCloseHandler(id: string) {
+        setImagesIsOpen(false);
+        setSelectedCoachId(null);
+    }
+
 
     return (
         <>
-            <UploadImagesCarousel  isOpen={true}/>
+            <UploadImagesCarousel isOpen={imagesIsOpenOpen} onClose={onImagesCloseHandler} coachingId={selectedCoachId}/>
             <UpdateCoaching  isOpen={editCoachIsOpen} selectedCoachingId={selectedCoachId} onClose={onEditCloseCoachHandler} />
             <CoachingDetails onClose={() => setAddDetailsIsOpen(false)} isOpen={addDetailsIsOpen} coachingId={selectedCoachId}/>
             <PreventDeleteModal onClose={() => setDeleteIsOpen(false)} isOpen={deleteIsOpen} text={"Ви точно бажаєте видалити тренування?"} onSummit={deleteCoaching}/>
@@ -127,8 +137,14 @@ const CoachingPage = () => {
                                         <button className={mainStyles.tableBtn}  onClick={() => onAddDetailsHandler(c.id)}>
                                            <div className={mainStyles.box}>
                                                <img src={addIcon} alt='' />
-                                               <p>Додати деталі тренування</p>
+                                               <p>Деталі тренування</p>
                                            </div>
+                                        </button>
+                                        <button className={mainStyles.tableBtn}  onClick={() => onImagesOpenHandler(c.id)}>
+                                            <div className={mainStyles.box}>
+                                                <img src={addIcon} alt='' />
+                                                <p>Фото</p>
+                                            </div>
                                         </button>
                                     </div>
                                     <div className='toggle'>

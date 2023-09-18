@@ -12,7 +12,6 @@ const AdminHeader = () => {
 
     useEffect(() => {
         if(currentAdminState?.firstName) {
-            debugger;
             setSelectedUser(currentAdminState);
         }
     }, [currentAdminState]);

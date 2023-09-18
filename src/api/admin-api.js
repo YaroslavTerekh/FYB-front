@@ -80,3 +80,7 @@ export function updateFAQPoint(id, model): Promise<any> {
 export function deleteFAQ(id: string): Promise<any> {
     return API.delete(`admin/faq/delete/` + id);
 }
+
+export function addPhotosToCoaching(model): Promise<any> {
+    return API.patch(`admin/coachings/examples/add/`, model);
+}

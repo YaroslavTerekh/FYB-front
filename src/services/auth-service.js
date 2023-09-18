@@ -28,7 +28,6 @@ export default class AuthService {
 
 
         if (response.status === 200) {
-            debugger;
             this.dispatch(setUser(response.data));
 
             return true

@@ -18,7 +18,6 @@ const UsersPage = () => {
 
     useEffect(() => {
         if (currentAdminState.users) {
-            debugger;
             setUsersList(currentAdminState.users);
         }
     }, [currentAdminState.users]);

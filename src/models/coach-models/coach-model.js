@@ -1,5 +1,5 @@
 export type CoachModel = {
-    id: string | undefined,
+    id: string,
     firstName: string | undefined,
     lastName: string | undefined,
     description: string | undefined,

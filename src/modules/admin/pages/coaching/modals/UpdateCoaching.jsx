@@ -28,7 +28,6 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
     const [removePhoto, setRemovePhoto] = useState(false);
 
     useEffect(() => {
-        debugger
         if (selectedCoachingId) {
             const selectedCoaching: CoachingModel = currentAdminState.coaching.find(c => c.id === selectedCoachingId);
             if (selectedCoaching) {

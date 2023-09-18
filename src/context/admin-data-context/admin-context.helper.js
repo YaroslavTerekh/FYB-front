@@ -1,7 +1,7 @@
 import {
     addCoach,
     addCoaching,
-    addCoachingDetails, addFAQPoint, addFeedback, addFood, addFoodPoint,
+    addCoachingDetails, addFAQPoint, addFeedback, addFood, addFoodPoint, addPhotosToCoaching,
     deleteCoach,
     deleteCoaching, deleteCoachingDetails, deleteFAQ, deleteFeedback, deleteFood, deleteFoodPoint, getUsers,
     updateCoach, updateFAQPoint, updateFeedback, updateFood, updateFoodPoint,
@@ -78,7 +78,6 @@ export function getCoachesHelper(dispatch: Dispatch<AnyAction>){
 export function getFeedbacksHelper(dispatch: Dispatch<AnyAction>){
     getFeedbacks()
         .then(res => {
-            debugger;
             dispatch(setFeedbacks(res.data));
         })
         .catch(err => {});
@@ -140,6 +139,18 @@ export function addNewCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, data)
         return res.status === 200;
     }).catch(err => {});
 }
+
+export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
+    addPhotosToCoaching(data).then(res => {
+        getCoaching()
+            .then(res => {
+                dispatch(setCoaching(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
 
 export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
     getCoaching()

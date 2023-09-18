@@ -20,7 +20,6 @@ export default function Header({ navigationData }) {
 
     useEffect(() => {
         if(currentUserState?.firstName) {
-            debugger;
             setSelectedUser(currentUserState);
         }
     }, [currentUserState]);

@@ -14,7 +14,6 @@ const ConfirmPhoneNumber = () => {
     const [requested, setRequested] = useState(false);
 
     useEffect(() => {
-        debugger;
         requestCode();
     }, []);
 

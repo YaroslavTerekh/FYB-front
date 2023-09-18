@@ -25,7 +25,7 @@
 .imgBox {
     width: 50%;
     padding: 0 30px;
-    cursor: pointer;
+    /*cursor: pointer;*/
     display: flex;
     flex-direction: column;
 }
@@ -82,3 +82,40 @@
     margin: auto;
 }
 
+.indexBox {
+    margin: 10px 0;
+    color: black;
+    font-size: 16px;
+
+}
+
+.indexBox .indexBtn {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.indexBox .indexBtn img {
+    width: 15px;
+    height: 15px;
+}
+
+
+.btn {
+    width: 160px;
+    height: 45px;
+    border-radius: 15px;
+    background: #000;
+    margin-top: 30px;
+}
+
+.btn p {
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+}

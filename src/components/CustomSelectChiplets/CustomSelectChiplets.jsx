@@ -28,7 +28,7 @@ const customStyles = {
     }),
 };
 
-const CustomSelectChiplets = ({ onChange, options, className, placeholder, required,  customInputContainer, icon, isMulti, selectStyles, isDisabled}) => {
+const CustomSelectChiplets = ({ onChange, options, className, placeholder, required, selectedOptionValue, customInputContainer, icon, isMulti, selectStyles, isDisabled}) => {
     return (
         <div className={customInputContainer ?? styles.customInputContainer}>
             <Select
@@ -38,11 +38,12 @@ const CustomSelectChiplets = ({ onChange, options, className, placeholder, requi
                 // name='video-trainings'
                 options={options}
                 onChange={onChange}
-                components={{
-                    // Control: (props) => <CustomControl {...props} selectProps={props.selectProps} />,
-                    // Option: CustomOption,
-                    //  DropdownIndicator: CustomDropdownArrow,
-                }}
+                // components={{
+                //     // Control: (props) => <CustomControl {...props} selectProps={props.selectProps} />,
+                //     // Option: CustomOption,
+                //     //  DropdownIndicator: CustomDropdownArrow,
+                // }}
+                value={selectedOptionValue}
                 isMulti={isMulti}
                 placeholder={placeholder}
                 styles={selectStyles ?? customStyles}
