@@ -5,5 +5,6 @@ export type CoachModel = {
     description: string | undefined,
     instagramLink: string | undefined,
     birthDate: Date | undefined,
-    avatarId: string | undefined,
+    avatar: { id: string },
+    avatarUrl: string
 }

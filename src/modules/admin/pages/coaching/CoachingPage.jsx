@@ -121,8 +121,8 @@ const CoachingPage = () => {
                     </div>
 
                     {coachingList && coachingList.map(c =>
-                        <div>
-                            <div className={mainStyles.bodyBlock} key={c.id}>
+                        <div key={c.id}>
+                            <div className={mainStyles.bodyBlock} >
                                 <div className={mainStyles.blockItem}>
                                     <p>{c.title}</p>
                                 </div>

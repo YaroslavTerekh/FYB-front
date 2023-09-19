@@ -21,7 +21,11 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
 
     const [currentImages, setCurrentImages] = useState([]);
 
-
+    useEffect(() => {
+        if(currentAdminState.coaching && currentAdminState.coaching.length > 0) {
+            setCurrentImages(setCurrentImages);
+        }
+    }, [currentAdminState.coaching]);
 
     function onSaveHandler(currentImages: []) {
 
@@ -30,7 +34,7 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
             debugger;
             form.append('Id', coachingId);
             form.append('PhotoFile', image.data);
-            form.append('OrderId', image.index);
+            form.append('OrderId', 1);
 
             addPhotosToCoachingHelper(dispatch, form);
         });

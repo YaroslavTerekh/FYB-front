@@ -12,7 +12,6 @@ const API = axios.create({
 
 const AxiosInterceptor = ({ children }: any) => {
 
-
     useEffect(() => {
         API.interceptors.request.use(reqInterceptor, errInterceptor);
     }, []);

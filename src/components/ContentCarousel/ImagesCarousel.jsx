@@ -92,9 +92,9 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
     };
 
     const handleImageChange = (e) => {
-        const selectedImage = e.target.files[0];
+        const selectedImageData = e.target.files[0];
 
-        if (selectedImage) {
+        if (selectedImageData) {
             const reader = new FileReader();
 
             reader.onload = (event) => {
@@ -102,14 +102,6 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
 
                 const newList = currentImages.length > 0
                     ? [...currentImages] : [];
-
-                const index = !currentImages.find(x=> x.index === 1)
-                    ? 1
-                    : !currentImages.find(x=> x.index === 2)
-                        ? 2
-                        : !currentImages.find(x=> x.index === 3)
-                            ? 3
-                            : 4;
 
                 newList.push({data: blob, index: currentImages.length + 1});
 
@@ -121,7 +113,7 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
                 }
             };
 
-            reader.readAsArrayBuffer(selectedImage);
+            reader.readAsArrayBuffer(selectedImageData);
         }
     };
 
@@ -138,14 +130,6 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
             <div className={styles.imgInput} onClick={handleButtonClick}>
                 <p className={styles.placeholder}>Upload new photo</p>
                 <img src={selectIcon} alt='' />
-            </div>
-            <div className={styles.indexBox}>
-                <p>Порядок фотографій на сторінці 'Деталі':</p>
-                <div className={styles.indexBtn}>
-                    <img src={addIcon} alt='' onClick={() => handleSelectChange(selectedImage?.index - 1)} />
-                    <p>{selectedImage?.index}</p>
-                    <img src={addIcon} alt='' onClick={() => handleSelectChange(selectedImage?.index + 1)} />
-                </div>
             </div>
             <div className={styles.imgInput} onClick={deleteImageHandler}>
                 <p className={styles.placeholder}>Видалити фото</p>
