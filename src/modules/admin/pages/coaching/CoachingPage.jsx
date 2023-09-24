@@ -20,6 +20,7 @@ import CoachingDetails from './modals/CoachingDetails';
 import UpdateCoachModal from '../coaches/modals/UpdateCoachModal';
 import UpdateCoaching from './modals/UpdateCoaching';
 import UploadImagesCarousel from './modals/UploadImages';
+import UploadVideosCarousel from './modals/UploadVideos';
 const CoachingPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -31,7 +32,7 @@ const CoachingPage = () => {
     const [deleteIsOpen, setDeleteIsOpen] = useState(false);
     const [imagesIsOpenOpen, setImagesIsOpen] = useState(false);
     const [addDetailsIsOpen, setAddDetailsIsOpen] = useState(false);
-
+    const [videosIsOpen, setVideosIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
     const handleToggle = (index) => {
@@ -92,9 +93,19 @@ const CoachingPage = () => {
         setSelectedCoachId(null);
     }
 
+    function onVideosCloseHandler(id: string) {
+        setVideosIsOpen(false);
+        setSelectedCoachId(null);
+    }
+
+    function onVideosOpenHandler(id: string) {
+        setVideosIsOpen(true);
+        setSelectedCoachId(id);
+    }
 
     return (
         <>
+            <UploadVideosCarousel isOpen={videosIsOpen} onClose={onVideosCloseHandler} coachingId={selectedCoachId}/>
             <UploadImagesCarousel isOpen={imagesIsOpenOpen} onClose={onImagesCloseHandler} coachingId={selectedCoachId}/>
             <UpdateCoaching  isOpen={editCoachIsOpen} selectedCoachingId={selectedCoachId} onClose={onEditCloseCoachHandler} />
             <CoachingDetails onClose={() => setAddDetailsIsOpen(false)} isOpen={addDetailsIsOpen} coachingId={selectedCoachId}/>
@@ -146,6 +157,12 @@ const CoachingPage = () => {
                                                 <p>Фото</p>
                                             </div>
                                         </button>
+                                        <button className={mainStyles.tableBtn}  onClick={() => onVideosOpenHandler(c.id)}>
+                                            <div className={mainStyles.box}>
+                                                <img src={addIcon} alt='' />
+                                                <p>Відео</p>
+                                            </div>
+                                        </button>
                                     </div>
                                     <div className='toggle'>
                                         <Button
@@ -171,11 +188,11 @@ const CoachingPage = () => {
                                 height={selectedItem === c.id ? 'auto' : 0}
                                 className=''
                             >
-                                { c.coachingDetails && c.coachingDetails.map(d =>
+                                { c?.coachingDetailParents && c.coachingDetailParents.map(d =>
                                     <div className=''>
                                         <div className={mainStyles.bodyBlock} key={d.id}>
                                             <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
-                                                <p>{d.detail}</p>
+                                                <p>{d.title}</p>
                                             </div>
                                             <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
                                                 <div className={mainStyles.tableActions}>
@@ -185,6 +202,21 @@ const CoachingPage = () => {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        { d.details && d.details.map(x=>
+                                            <div className={mainStyles.bodyBlock} key={d.id}>
+                                                <div style={{paddingLeft:'100px'}}  className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
+                                                    <p>{x.detail}</p>
+                                                </div>
+                                                <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
+                                                    <div className={mainStyles.tableActions}>
+                                                        <button className={mainStyles.tableBtn}  onClick={() => deleteCoachingDetails(x.id)}>
+                                                            <img src={deleteIcon} alt='' />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </AnimateHeight>

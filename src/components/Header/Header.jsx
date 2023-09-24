@@ -73,6 +73,7 @@ export default function Header({ navigationData }) {
     };
 
     function handleProfileClick(elementLink) {
+        debugger;
         if(userService.isAuthorized()) {
             navigate(elementLink);
         } else {
@@ -148,7 +149,7 @@ export default function Header({ navigationData }) {
                                             return (
                                                 <li key={index}>
                                                     <p
-                                                        onClick={() => handleProfileClick(item.link)}
+                                                        onClick={() => handleProfileClick(item.href)}
                                                     >
                                                         {item.title}
                                                     </p>

@@ -1,0 +1,171 @@
+.authBox {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.customInput {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-bg);
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 0 30px;
+}
+
+.customInput::placeholder {
+    color: #B5C6C6;
+}
+
+.content {
+    color: #FFEDE4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.contentTitle {
+    font-size: 30px;
+    margin-bottom: 35px;
+    margin-top: 72px;
+}
+
+.mB35 {
+    margin-bottom: 35px;
+}
+
+.contentTitleR {
+    font-size: 30px;
+    margin-bottom: 35px;
+    margin-top: 30px;
+}
+
+.closeBox {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 12px;
+}
+
+.closeBoxR {
+    position: absolute;
+
+}
+
+.inputBox {
+    margin-bottom: 15px;
+}
+
+.text {
+    color: var(--beige, #FFEDE4);
+    text-align: center;
+    font-family: Montserrat, serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.link {
+    color: var(--beige, #FFEDE4);
+    font-family: Montserrat, serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.linkBox {
+    text-decoration: none;
+    border: none;
+    background: none;
+}
+
+.btn {
+    display: flex;
+    width: 180px;
+    padding: 15px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: var(--beige, #FFEDE4);
+    margin-top: 35px;
+}
+.btn p {
+    color: var(--torauoise-bg, #1E7689);
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+}
+
+.finishModalBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confNum {
+    margin-top: 80px;
+    padding-bottom: 150px;
+}
+
+.confNum .btn {
+    margin: 0;
+    border: 1px solid var(--beige, #FFEDE4);
+    background: none;
+    padding: 0;
+}
+
+.confNum .customInput {
+    border: 1px solid var(--beige, #FFEDE4);
+    border-right: none;
+}
+
+.confNum .btn p {
+    color: var(--beige, #FFEDE4);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.confNum .inputBox {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.confNum .text {
+    max-width: 750px;
+    margin-bottom: 50px;
+}
+
+.confNum .tip {
+    color: var(--beige, #FFEDE4);
+    width: 100%;
+    /* Text16 */
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 20px;
+}

@@ -33,9 +33,8 @@ const ModalWindow = (prop: ModalType) => {
             isOpen={prop.isOpen}
             style={{
                 overlay: {
-                    backgroundColor: prop.styles.overlayBgColor,
+                    // backgroundColor: prop.styles.overlayBgColor,
                     zIndex: 100,
-
                 },
                 content: {
                     color: 'lightsteelblue',

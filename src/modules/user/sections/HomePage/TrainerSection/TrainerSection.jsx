@@ -21,11 +21,6 @@ const TrainerSection = () => {
 
     useEffect( () => {
         if(currentContentState.coaches && currentContentState.coaches.length > 0) {
-            currentContentState.coaches.forEach(async x=> {
-                debugger;
-                x.avatarUrl = await GetImgUrl(x?.avatar?.id);
-            });
-
             setTrainers(currentContentState.coaches);
         }
     }, [currentContentState.coaches]);
@@ -39,16 +34,15 @@ const TrainerSection = () => {
                 <div className='trainer__block'>
                     {/* TODO: It makes sense to make a common component for the trainer */}
 
-                    { trainers && trainers.map(t =>
-                        <TrainerLyda data={t} />)
-                    }
+                    {/*{ trainers && trainers.map(t =>*/}
+                    {/*    <TrainerLyda data={t}/>)*/}
+                    {/*}*/}
 
-                    {/*{ trainers && trainers.map((t, i) => {*/}
-                    {/*    return (i % 2 === 0)*/}
-                    {/*        ? <TrainerLyda data={t} />*/}
-                    {/*        : <TrainerLera {...MOCKED_TRAINERS_DATA.lera} />*/}
-
-                    {/*}) }*/}
+                    { trainers && trainers.map((t, i) => {
+                        return (i % 2 === 0)
+                            ? <TrainerLyda data={t} />
+                            : <TrainerLyda data={t} />
+                    }) }
 
 
 

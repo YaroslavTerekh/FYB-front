@@ -22,10 +22,16 @@ import { useSelector } from 'react-redux';
 import { AdminRole } from './constants/roles';
 import ConfirmPhoneNumberPage from './modules/auth/ConfirmPhoneNumber/ConfirmPhoneNumberPage';
 import SystemAlert from './components/Alert/SystemAlert';
+import AuthService from './services/auth-service';
 
 function App() {
+    const userService = new AuthService();
     const currentUserState = useSelector(state => state.user);
     const [selectedUser, setSelectedUser] = useState(null);
+
+    useEffect(() => {
+        userService.isAuthorized();
+    }, [])
 
     useEffect(() => {
         if(currentUserState?.firstName) {

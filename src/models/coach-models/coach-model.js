@@ -1,3 +1,5 @@
+import type { AppFileModel } from '../app-files-models/app-file-model';
+
 export type CoachModel = {
     id: string,
     firstName: string | undefined,
@@ -6,5 +8,6 @@ export type CoachModel = {
     instagramLink: string | undefined,
     birthDate: Date | undefined,
     avatar: { id: string },
-    avatarUrl: string
+    avatarUrl: any,
+    photos: AppFileModel[]
 }

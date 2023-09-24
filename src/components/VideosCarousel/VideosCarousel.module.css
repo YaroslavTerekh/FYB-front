@@ -1,0 +1,122 @@
+.box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    padding-top: 30px;
+}
+
+.main {
+    width: 50%;
+}
+
+.imgData {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.imgBox {
+    width: 40%;
+    padding: 0 30px;
+    /*cursor: pointer;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.imgInput {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    border: 1px solid rgb(165, 165, 165);
+    margin-bottom: 10px;
+}
+
+.imgInput .placeholder {
+    color: #bbbbbb;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: auto 20px;
+}
+
+
+.imgInput img {
+    margin: auto 0;
+    padding-right: 30px;
+}
+
+.text {
+    color: #000;
+    margin: auto 20px;
+}
+
+.customInputContainer {
+    margin: 10px 0;
+    border: 1px solid rgb(165, 165, 165);
+}
+
+.customSelect {
+    background-color: white;
+}
+
+.defaultImg {
+    display: flex;
+    /*height: 100%;*/
+    width: 50%;
+    border: 1px solid rgb(165, 165, 165);
+    margin: 0 30px 30px 0;
+    box-sizing: border-box;
+}
+
+.defaultImg img {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.indexBox {
+    margin: 10px 0;
+    color: black;
+    font-size: 16px;
+
+}
+
+.indexBox .indexBtn {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.indexBox .indexBtn img {
+    width: 15px;
+    height: 15px;
+}
+
+
+.btn {
+    width: 160px;
+    height: 45px;
+    border-radius: 15px;
+    background: #000;
+    margin-top: 30px;
+}
+
+.btn p {
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+}

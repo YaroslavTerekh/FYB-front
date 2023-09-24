@@ -1,32 +1,26 @@
-import styles from '../CoachingPage.module.css';
+import styles from '../CoachesPage.module.css';
 import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
-import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+    addNewCoachDetailsHelper,
     addNewCoachHelper,
-    addNewCoachingDetailsHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
-import selectIcon from '../../../../../img/components/vector.png';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import addIcon from  '../../../../../img/components/add_icon.png';
 import { iconList } from '../../../../../constants/icons-const';
-const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
+const CoachDetails = ({ isOpen, onClose, coachId }) => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
 
     const [nameList, setNameList] = useState([{ id: 1, text: "" }]);
     const [icon, setIcon] = useState(null);
-    const [title, setTitle] = useState(null);
+
     function changeIconHandler(e) {
         setIcon(e);
-    }
-
-    function changeTitleChandler(e) {
-        setTitle(e?.target?.value);
     }
 
     function addItemHandler() {
@@ -41,18 +35,13 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
     }
 
     function onSaveHandler() {
-        if(coachingId && icon && nameList[0] && nameList[0].text?.length > 0) {
+        if(coachId && nameList[0] && nameList[0].text?.length > 0) {
 
-            const dataParent = {
-                coachingId: coachingId,
-                title: title
-            }
+            const coachingDetails = nameList.map(d => { return  { coachId: coachId,  detail: d.text }})
 
-            const data = {
-                coachingDetails: nameList.map(d => { return  { icon: icon.value,  detail: d.text }})
-            }
-
-            addNewCoachingDetailsHelper(dispatch,dataParent, data);
+            coachingDetails.forEach(x=> {
+                addNewCoachDetailsHelper(dispatch, coachId, x);
+            });
 
         } else {
             // TODO error
@@ -65,30 +54,8 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
                 element={
                     <section className={styles.modalBox} >
                         <div className={`${styles.content}`} >
-                            <h2 className={styles.contentTitle}>Деталі тренування</h2>
+                            <h2 className={styles.contentTitle}>Основний опис тренера на головній сторінці</h2>
                             <div className='inputsBox'>
-                                <div className={styles.inputBox}>
-                                    <CustomInput
-                                        customInputContainer={styles.customInputContainer}
-                                        className={styles.customInput}
-                                        placeholder={"Заголовок"} type={"text"}
-                                        required={true}
-                                        onChange={changeTitleChandler}
-                                        value={title}
-                                    />
-                                </div>
-                                <div className={styles.inputBox}>
-                                    <CustomSelectChiplets
-                                        customInputContainer={styles.customInputContainer}
-                                        className={styles.customSelect}
-                                        placeholder={"Іконка"}
-                                        required={true}
-                                        //icon={instagramIcon}
-                                        onChange={changeIconHandler}
-                                        // value={instagramLink}
-                                        options={iconList}
-                                    />
-                                </div>
                                 { nameList && nameList.map(n =>
                                     <div className={styles.inputBox} key={n.id}>
                                         <CustomInput
@@ -125,8 +92,8 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
                 onClose={onClose}
                 styles={{
                     bgColor:' #FFF',
-                    width: '870px',
-                    height: '670px',
+                    width: '40vw',
+                    height: '60vh',
                     border: '1px solid #A5A5A5',
                     overlayBgColor: 'none',
                 }}
@@ -136,4 +103,4 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
     );
 };
 
-export default CoachingDetails;
+export default CoachDetails;

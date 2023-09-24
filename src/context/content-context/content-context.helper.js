@@ -17,6 +17,7 @@ import {
     setContentFood,
     setContentUsers,
 } from './content-actions';
+import { GetImgUrl } from '../../services/images-service';
 
 export function getContentCoachesHelper(dispatch: Dispatch<AnyAction>){
     getCoaches()

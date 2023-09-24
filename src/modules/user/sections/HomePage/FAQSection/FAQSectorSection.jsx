@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AnimateHeight from 'react-animate-height';
 
 import Button from '../../../../../components/Button/Button';
@@ -8,9 +8,25 @@ import { MOCKED_FAQ_DATA } from './constants';
 import './FAQSectorSection.css';
 
 import faqIcon from './images/icon1.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFAQHelper } from '../../../../../context/content-context/content-context.helper';
 
 const FAQSection = () => {
+    const dispatch = useDispatch();
+    const currentContentState = useSelector(state => state.content);
+
     const [selectedItem, setSelectedItem] = useState(null);
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        getFAQHelper(dispatch);
+    }, []);
+
+    useEffect(() => {
+        if (currentContentState.faq && currentContentState.faq.length > 0) {
+            setList(currentContentState.faq);
+        }
+    }, [currentContentState.faq]);
 
     const handleToggle = (index) => {
         setSelectedItem((prevSelectedItem) =>
@@ -25,7 +41,7 @@ const FAQSection = () => {
                     <h2>FAQ</h2>
                 </div>
                 <div className='faq__block'>
-                    {MOCKED_FAQ_DATA.map((faqItem, index) => (
+                    {list.map((faqItem, index) => (
                         <div className='block-main' key={index}>
                             <Button
                                 className='block-main__question'

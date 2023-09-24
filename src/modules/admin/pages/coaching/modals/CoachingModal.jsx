@@ -10,6 +10,7 @@ import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCoachingHelper } from '../../../../../context/admin-data-context/admin-context.helper';
+import VideoUploader from '../../../../../components/VideoUploader/VideoUploader';
 
 const CoachingModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
@@ -78,6 +79,9 @@ const CoachingModal = ({ isOpen, onClose }) => {
                             <h2 className={styles.contentTitle}>Тренування</h2>
                             <div className={styles.imgBox}>
                                 <PhotoUploader onChange={changeAvatarHandler}/>
+                            </div>
+                            <div className={styles.imgBox}>
+                                <VideoUploader onChange={changeAvatarHandler}/>
                             </div>
                             <div className='inputsBox'>
                                 <div className={styles.inputBox}>

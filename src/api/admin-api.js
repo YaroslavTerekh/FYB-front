@@ -16,8 +16,15 @@ export function addCoaching(model: FormData): Promise<any> {
     return API.post(`admin/coachings/add`, model);
 }
 
+export function addCoachDetails(id: string, model): Promise<any> {
+    return API.post(`admin/coaches/${id}/details/add`, model);
+}
+
 export function addCoachingDetails(model): Promise<any> {
     return API.patch(`admin/coaching/details/add`, model);
+}
+export function addCoachingParentDetails(model): Promise<any> {
+    return API.post(`admin/coachings/details/parents/add`, model);
 }
 
 export function deleteCoaching(id: string): Promise<any> {
@@ -26,6 +33,10 @@ export function deleteCoaching(id: string): Promise<any> {
 
 export function deleteCoachingDetails(id): Promise<any> {
     return API.delete(`admin/coaching/details/remove/` + id);
+}
+
+export function deleteCoachDetails(id): Promise<any> {
+    return API.delete(`admin/coaches/details/${id}/delete`);
 }
 
 export function addFeedback(model): Promise<any> {
@@ -83,4 +94,8 @@ export function deleteFAQ(id: string): Promise<any> {
 
 export function addPhotosToCoaching(model): Promise<any> {
     return API.patch(`admin/coachings/examples/add/`, model);
+}
+
+export function addVideoToCoaching(id, model): Promise<any> {
+    return API.post(`admin/video/${id}/add`, model);
 }

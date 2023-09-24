@@ -1,10 +1,29 @@
 import {
     addCoach,
+    addCoachDetails,
     addCoaching,
-    addCoachingDetails, addFAQPoint, addFeedback, addFood, addFoodPoint, addPhotosToCoaching,
+    addCoachingDetails,
+    addCoachingParentDetails,
+    addFAQPoint,
+    addFeedback,
+    addFood,
+    addFoodPoint,
+    addPhotosToCoaching,
+    addVideoToCoaching,
     deleteCoach,
-    deleteCoaching, deleteCoachingDetails, deleteFAQ, deleteFeedback, deleteFood, deleteFoodPoint, getUsers,
-    updateCoach, updateFAQPoint, updateFeedback, updateFood, updateFoodPoint,
+    deleteCoachDetails,
+    deleteCoaching,
+    deleteCoachingDetails,
+    deleteFAQ,
+    deleteFeedback,
+    deleteFood,
+    deleteFoodPoint,
+    getUsers,
+    updateCoach,
+    updateFAQPoint,
+    updateFeedback,
+    updateFood,
+    updateFoodPoint,
 } from '../../api/admin-api';
 import { Dispatch } from 'redux';
 import { AnyAction } from 'redux';
@@ -13,6 +32,17 @@ import { getCoaches, getCoaching, getFaq, getFeedbacks, getFood } from '../../ap
 
 export function addNewCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData) {
     addCoach(data).then(res => {
+        getCoaches()
+            .then(res => {
+                dispatch(setCoaches(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+export function deleteCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
+    deleteCoachDetails(id).then(res => {
         getCoaches()
             .then(res => {
                 dispatch(setCoaches(res.data));
@@ -74,6 +104,16 @@ export function getCoachesHelper(dispatch: Dispatch<AnyAction>){
         .catch(err => {});
 }
 
+export function addNewCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id, data) {
+    addCoachDetails(id, data).then(res => {
+        getCoaches()
+            .then(res => {
+                dispatch(setCoaches(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
 
 export function getFeedbacksHelper(dispatch: Dispatch<AnyAction>){
     getFeedbacks()
@@ -129,15 +169,19 @@ export function addNewCoachingHelper(dispatch: Dispatch<AnyAction>, data: FormDa
     }).catch(err => {});
 }
 
-export function addNewCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, data) {
-    addCoachingDetails(data).then(res => {
-        getCoaching()
-            .then(res => {
-                dispatch(setCoaching(res.data));
-            })
-            .catch(err => {});
-        return res.status === 200;
+export function addNewCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, dataParent, data) {
+
+    addCoachingParentDetails(dataParent).then(res => {
+        data.id = res.data;
+        addCoachingDetails(data).then(res => {
+            getCoaching()
+                .then(res => {
+                    dispatch(setCoaching(res.data));
+                })
+                .catch(err => {});
+        }).catch(err => {});
     }).catch(err => {});
+
 }
 
 export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
@@ -151,6 +195,16 @@ export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
     }).catch(err => {});
 }
 
+export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data) {
+    addVideoToCoaching(id, data).then(res => {
+        getCoaching()
+            .then(res => {
+                dispatch(setCoaching(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
 
 export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
     getCoaching()

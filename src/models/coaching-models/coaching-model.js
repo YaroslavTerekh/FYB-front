@@ -15,10 +15,10 @@ export type CoachingModel = {
     foodId: string,
     food: FoodModel,
     coachingPhotoId: string,
-    coachingPhoto: AppFileModel,
     accessDays: number,
     coachingDetails: CoachingDetailModel[],
     feedbacks: FeedbackModel[],
-    examplePhotos: AppFileModel[],
-    videos: CoachingVideoModel[]
+    coachingPhoto: AppFileModel[],
+    videos: CoachingVideoModel[],
+    icon: string
 }

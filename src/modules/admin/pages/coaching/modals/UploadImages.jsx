@@ -1,12 +1,6 @@
 import styles from '../CoachingPage.module.css';
-import mainStyles from '../../../Admin.module.css';
 import ModalWindow from '../../../../../components/Modal/ModalWindow';
-import CustomInput from '../../../../../components/Input/CustomInput';
-import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
-import CustomTextArea from '../../../../../components/Input/CustomTextArea';
-import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
-import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -23,7 +17,10 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
 
     useEffect(() => {
         if(currentAdminState.coaching && currentAdminState.coaching.length > 0) {
-            setCurrentImages(setCurrentImages);
+            const data = currentAdminState.coaching.find(x=> x.id === coachingId);
+            if (data?.coachingPhoto) {
+                setCurrentImages(data.coachingPhoto);
+            }
         }
     }, [currentAdminState.coaching]);
 
@@ -31,7 +28,6 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
 
         currentImages.forEach((image, index) => {
             const form = new FormData();
-            debugger;
             form.append('Id', coachingId);
             form.append('PhotoFile', image.data);
             form.append('OrderId', 1);

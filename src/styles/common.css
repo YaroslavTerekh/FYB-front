@@ -70,6 +70,7 @@ body {
     padding: 13px 23px;
     transition: all 0.3s ease 0s;
     color: var(--second-bg);
+    text-decoration: none;
 }
 
 .button-training__blu:hover {

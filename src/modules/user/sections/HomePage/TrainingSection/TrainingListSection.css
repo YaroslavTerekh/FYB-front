@@ -115,6 +115,24 @@
     flex-wrap: wrap;
 }
 
+.button-training__white button{
+    color: var(--main-bg);
+    border: 2px solid var(--beige, var(--second-bg));
+    display: block;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 13px 23px;
+    transition: all 0.3s ease 0s;
+    width: 207px;
+}
+
+
+.button-training__white button:hover {
+    background-color: var(--main-bg);
+    box-shadow: none;
+    color: var(--second-bg);
+}
+
 @media screen and (max-width: 1000px) {
     .training-block {
         padding: 50px 33px;

@@ -5,10 +5,18 @@ import editIcon from '../../../../img/components/edit_icon.png';
 import deleteIcon from '../../../../img/components/delete_icon.png';
 import CoachModal from './modals/CoachModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UpdateCoachModal from './modals/UpdateCoachModal';
-import { deleteCoachHelper, getCoachesHelper } from '../../../../context/admin-data-context/admin-context.helper';
+import {
+    deleteCoachDetailsHelper,
+    deleteCoachHelper,
+    getCoachesHelper,
+} from '../../../../context/admin-data-context/admin-context.helper';
 import PreventDeleteModal from '../../../../components/PreventDeleteModal/PreventDeleteModal';
+import CoachDetails from './modals/CoachDetails';
+import AnimateHeight from 'react-animate-height';
+import Button from '../../../../components/Button/Button';
+import arrowIcon from '../../../../img/components/ri_arrow-up-line.png';
 const CoachesPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -18,6 +26,16 @@ const CoachesPage = () => {
     const [editCoachIsOpen, setEditCoachIsOpen] = useState(false);
     const [selectedCoachId, setSelectedCoachId] = useState(null);
     const [deleteIsOpen, setDeleteIsOpen] = useState(false);
+    const [addDetailsIsOpen, setAddDetailsIsOpen] = useState(false);
+
+
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    const handleToggle = (index) => {
+        setSelectedItem((prevSelectedItem) =>
+            prevSelectedItem === index ? null : index
+        );
+    };
 
     useEffect(() => {
         getCoachesHelper(dispatch);
@@ -51,9 +69,18 @@ const CoachesPage = () => {
         deleteCoachHelper(dispatch, selectedCoachId);
     }
 
+    function onAddDetailsHandler(id: string) {
+        setSelectedCoachId(id);
+        setAddDetailsIsOpen(true);
+    }
+
+    function deleteCoachDetails(id: string) {
+        deleteCoachDetailsHelper(dispatch, id);
+    }
 
     return (
         <>
+            <CoachDetails onClose={() => setAddDetailsIsOpen(false)} isOpen={addDetailsIsOpen} coachId={selectedCoachId}/>
             <PreventDeleteModal onClose={() => setDeleteIsOpen(false)} isOpen={deleteIsOpen} text={"Ви точно бажаєте видалити тренера?"} onSummit={deleteCoach}/>
             <UpdateCoachModal  isOpen={editCoachIsOpen} selectedCoachId={selectedCoachId} onClose={onEditCloseCoachHandler} />
             <CoachModal isOpen={addCoachIsOpen} onClose={addCoachCloseHandler} />
@@ -78,22 +105,69 @@ const CoachesPage = () => {
                     </div>
 
                     {coachesList && coachesList.map(c =>
-                        <div className={mainStyles.bodyBlock} key={c.id}>
-                            <div className={mainStyles.blockItem}>
-                                <p>{c.firstName}</p>
-                            </div>
-                            <div className={mainStyles.blockItem}>
-                                <div className={mainStyles.tableActions}>
-                                    <button className={mainStyles.tableBtn} onClick={() => onEditCoachHandler(c.id
-                                    )}>
-                                        <img src={editIcon} alt='' />
-                                    </button>
-                                    <button className={mainStyles.tableBtn}  onClick={() => onDeleteCoachHandler(c.id
-                                    )}>
-                                        <img src={deleteIcon} alt='' />
-                                    </button>
+                        <div>
+                            <div className={mainStyles.bodyBlock} key={c.id}>
+                                <div className={mainStyles.blockItem}>
+                                    <p>{c.firstName}</p>
+                                </div>
+                                <div className={mainStyles.blockItem}>
+                                    <div className={mainStyles.tableActions}>
+                                        <button className={mainStyles.tableBtn} onClick={() => onEditCoachHandler(c.id
+                                        )}>
+                                            <img src={editIcon} alt='' />
+                                        </button>
+                                        <button className={mainStyles.tableBtn}  onClick={() => onAddDetailsHandler(c.id)}>
+                                            <div className={mainStyles.box}>
+                                                <img src={addIcon} alt='' />
+                                                <p>Деталі</p>
+                                            </div>
+                                        </button>
+                                        <button className={mainStyles.tableBtn}  onClick={() => onDeleteCoachHandler(c.id
+                                        )}>
+                                            <img src={deleteIcon} alt='' />
+                                        </button>
+                                    </div>
+                                    <div className='toggle'>
+                                        <Button
+                                            className={mainStyles.toggleArrow}
+                                            aria-expanded={selectedItem === c.id}
+                                            aria-controls={`example-panel-${c.id}`}
+                                            onClick={() => handleToggle(c.id)}
+                                        >
+                                            <img
+                                                className={
+                                                    selectedItem === c.id ? mainStyles.active : ''
+                                                }
+                                                src={arrowIcon}
+                                                alt={`Toggle ${c.id}`}
+                                            />
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
+                            <AnimateHeight
+                                id={`example-panel-${c.id}`}
+                                duration={500}
+                                height={selectedItem === c.id ? 'auto' : 0}
+                                className=''
+                            >
+                                { c.details && c.details.map(d =>
+                                    <div className=''>
+                                        <div className={mainStyles.bodyBlock} key={d.id}>
+                                            <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
+                                                <p>{d.detail}</p>
+                                            </div>
+                                            <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
+                                                <div className={mainStyles.tableActions}>
+                                                    <button className={mainStyles.tableBtn}  onClick={() => deleteCoachDetails(d.id)}>
+                                                        <img src={deleteIcon} alt='' />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </AnimateHeight>
                         </div>
                     )}
                 </div>

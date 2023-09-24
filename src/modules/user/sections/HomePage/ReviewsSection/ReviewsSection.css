@@ -3,6 +3,16 @@
     background-color: var(--second-bg);
 }
 
+.review_photos {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    background: #ffcdd2;
+
+}
+
 .reviews__slider {
     display: flex;
     flex-wrap: nowrap;

@@ -7,22 +7,33 @@ import data from 'bootstrap/js/src/dom/data';
 import instagramIcon from '../../../../../../img/instagram.svg';
 
 const TrainerLyda = ({data}) => (
-    <div className='block-main__Lyda'>
+    <div className='block-main__Lyda' key={data.id}>
         <div className='block-main__items_Lyda'>
-            <div className='item__img1'>
-                <img src={data.avatarUrl} alt='Фото'></img>
-            </div>
-            <div className='item__img2'>
-                <img src={data.avatarUrl} alt='Фото'></img>
-            </div>
-            <div className='item__img3'>
-                <img src={data.avatarUrl} alt='Фото'></img>
-            </div>
+            { data?.photos && data?.photos.map(d =>
+                <div className='item__img1'>
+                    <img src={d.filePath} alt='Фото'></img>
+                </div>
+            ) }
+            { data?.photos && data?.photos.map(d =>
+                <div className='item__img2'>
+                    <img src={d.filePath} alt='Фото'></img>
+                </div>
+            ) }
+
+            { data?.photos && data?.photos.map(d =>
+                <div className='item__img3'>
+                    <img src={d.filePath} alt='Фото'></img>
+                </div>
+            ) }
+
             <div className='info-item_Lyda'>
                 <div className='info-item__title vetrino'>{data.firstName}</div>
                 <div className='info-item__text'>
                     <ul className='info-item__text_item'>
-                        <li >{data.description}</li>
+                        { data.details && data.details.map(d =>
+                            <li >{d.detail}</li>
+                        )}
+
                     </ul>
                 </div>
                 <div className='info-item__inst'>

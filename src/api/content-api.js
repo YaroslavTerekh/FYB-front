@@ -19,3 +19,12 @@ export function getFaq(): Promise<any> {
     return API.get(`content/faq`);
 }
 
+
+export function getPayForm(id: string, type: number): Promise<any> {
+    const queryParams = {
+        productType: type,
+    };
+
+    return API.get(`content/generate-pay-form/` + id, { params: queryParams });
+}
+
