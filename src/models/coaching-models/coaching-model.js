@@ -18,7 +18,8 @@ export type CoachingModel = {
     accessDays: number,
     coachingDetails: CoachingDetailModel[],
     feedbacks: FeedbackModel[],
-    coachingPhoto: AppFileModel[],
+    coachingPhoto: AppFileModel,
+    examplePhotos: AppFileModel[],
     videos: CoachingVideoModel[],
     icon: string
 }

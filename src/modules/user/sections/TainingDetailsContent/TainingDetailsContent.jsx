@@ -23,17 +23,17 @@ const TrainingDetailsContent = (props: { training: null }) => {
                                 {props.training.title}
                             </h3>
                             <p className={styles.subText}>
-                                {props.training.subtitle}
+                                {props.training.description}
                             </p>
 
                             <div className={styles.trainingPeriod}>
                                 <div className={styles.data}>
                                     <img src={trainingIcon} alt='' />
-                                    <p>{props.training.count} тренувань</p>
+                                    <p>{props.training.videos?.length} тренувань</p>
                                 </div>
                                 <div className={styles.data}>
                                     <img src={trainingTimeIcon} alt='' />
-                                    <p>{props.training.time} { props.training.time > 1 ? ' місяці доступу' : 'місяць доступу'}</p>
+                                    <p>{props.training.accessDays} { props.training.accessDays > 1 ? ' місяці доступу' : 'місяць доступу'}</p>
                                 </div>
                             </div>
 
@@ -68,10 +68,10 @@ const TrainingDetailsContent = (props: { training: null }) => {
                         </div>
                     </div>
                     <div className={styles.photosGrid}>
-                        { props.training.examplePhotos && props.training.examplePhotos.map((x, i) =>
+                        { props.training?.examplePhotos && props.training.examplePhotos.map((x, i) =>
                             <div className={styles.gridItem}>
                                 <div className={styles.gridImgBox}>
-                                    <img src={x} alt='' />
+                                    <img src={x.filePath} alt='' />
                                 </div>
                             </div>
                         ) }

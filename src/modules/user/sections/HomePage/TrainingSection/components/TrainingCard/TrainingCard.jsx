@@ -26,12 +26,9 @@ const TrainingCard = ({
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
 
-
-
     function onModalCloseHandler() {
         setModalIsOpen(false);
     }
-
 
     return (
         <>
@@ -82,7 +79,7 @@ const TrainingCard = ({
                         <div className='button-training_blu'>
                             <Link
                                 className='button-training__blu'
-                                to={ROUTES.details}
+                                to={ROUTES.details+"/" + id}
                             >
                                 Детальніше
                             </Link>

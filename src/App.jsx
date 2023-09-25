@@ -47,6 +47,7 @@ function App() {
                         <Route path={ROUTES.home} element={<UserMainPage />}>
                             <Route exact path={ROUTES.home} element={<HomePage />} />
                             <Route path={ROUTES.profile} element={<ProfilePage />} />
+                            <Route path={`${ROUTES.details}/:id`} element={<DetailsPage />} />
                             <Route path={ROUTES.details} element={<DetailsPage />} />
                             <Route path={ROUTES.confirmNumber} element={<ConfirmPhoneNumberPage />} />
                         </Route>

@@ -4,6 +4,7 @@ export const ROUTES = {
     home: BASE_ROUTE,
     profile: `${BASE_ROUTE}profile`,
     details: `${BASE_ROUTE}details`,
+    foodDetails: `${BASE_ROUTE}food-details`,
     admin: `${BASE_ROUTE}admin`,
     coaches: `coaches`,
     feedbacks: 'feedback',
