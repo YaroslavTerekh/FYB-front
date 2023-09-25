@@ -35,6 +35,10 @@ export function deleteCoachingDetails(id): Promise<any> {
     return API.delete(`admin/coaching/details/remove/` + id);
 }
 
+export function deleteCoachingParentDetails(id): Promise<any> {
+    return API.delete(`coachings/details/parents/${id}/delete/`);
+}
+
 export function deleteCoachDetails(id): Promise<any> {
     return API.delete(`admin/coaches/details/${id}/delete`);
 }

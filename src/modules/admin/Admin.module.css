@@ -70,7 +70,7 @@
 }
 
 .blockItem, .blockSubItem {
-    height: 60px;
+    min-height: 60px;
     border-bottom: 1px solid #FFEDDB;
     background-color: #FFFCF9;
     /*padding: 50px 20px !important;*/
@@ -90,9 +90,9 @@
     color: #000;
 }
 
-/*.blockItem:last-child, .blockSubItem:last-child{*/
-/*    width: 100%;*/
-/*}*/
+.blockItem p {
+    margin: 0;
+}
 
 .tableActions {
     display: flex;

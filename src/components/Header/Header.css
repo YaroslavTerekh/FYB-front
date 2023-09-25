@@ -28,6 +28,19 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.header__nav li .admin-nav {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.header__nav li .admin-nav path{
+    fill: white;
+}
+
 .nav__menu li:not(:last-child) {
     margin: 0px 100px 0px 0px;
 }

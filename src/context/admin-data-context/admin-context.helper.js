@@ -13,7 +13,7 @@ import {
     deleteCoach,
     deleteCoachDetails,
     deleteCoaching,
-    deleteCoachingDetails,
+    deleteCoachingDetails, deleteCoachingParentDetails,
     deleteFAQ,
     deleteFeedback,
     deleteFood,
@@ -95,6 +95,18 @@ export function deleteCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
         return res.status === 200;
     }).catch(err => {});
 }
+
+export function deleteCoachingParentDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
+    deleteCoachingParentDetails(id).then(res => {
+        getCoaching()
+            .then(res => {
+                dispatch(setCoaching(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
 
 export function getCoachesHelper(dispatch: Dispatch<AnyAction>){
     getCoaches()

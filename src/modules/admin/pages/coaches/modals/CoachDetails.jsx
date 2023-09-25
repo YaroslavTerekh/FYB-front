@@ -71,7 +71,7 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
                                         </div>
                                     </div>
                                 ) }
-                                <div className=''>
+                                <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}
                                         aria-expanded={true}
@@ -92,7 +92,7 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
                 onClose={onClose}
                 styles={{
                     bgColor:' #FFF',
-                    width: '40vw',
+                    width: '50vw',
                     height: '60vh',
                     border: '1px solid #A5A5A5',
                     overlayBgColor: 'none',

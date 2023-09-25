@@ -104,7 +104,7 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
                                         </div>
                                     </div>
                                 ) }
-                                <div className=''>
+                                <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}
                                         aria-expanded={true}

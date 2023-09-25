@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
     deleteCoachingDetailsHelper,
-    deleteCoachingHelper,
+    deleteCoachingHelper, deleteCoachingParentDetailsHelper,
     getCoachesHelper,
     getCoachingHelper,
 } from '../../../../context/admin-data-context/admin-context.helper';
@@ -81,6 +81,10 @@ const CoachingPage = () => {
 
     function deleteCoachingDetails(id: string) {
         deleteCoachingDetailsHelper(dispatch, id);
+    }
+
+    function deleteCoachingParentDetails(id: string) {
+        deleteCoachingParentDetailsHelper(dispatch, id);
     }
 
     function onImagesOpenHandler(id: string) {
@@ -188,15 +192,15 @@ const CoachingPage = () => {
                                 height={selectedItem === c.id ? 'auto' : 0}
                                 className=''
                             >
-                                { c?.coachingDetailParents && c.coachingDetailParents.map(d =>
+                                { c?.coachingDetailParents && c.coachingDetailParents.map((d, i) =>
                                     <div className=''>
                                         <div className={mainStyles.bodyBlock} key={d.id}>
                                             <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
-                                                <p>{d.title}</p>
+                                                <p>{i + 1}. {d.title}</p>
                                             </div>
                                             <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
                                                 <div className={mainStyles.tableActions}>
-                                                    <button className={mainStyles.tableBtn}  onClick={() => deleteCoachingDetails(d.id)}>
+                                                    <button className={mainStyles.tableBtn}  onClick={() => deleteCoachingParentDetails(d.id)}>
                                                         <img src={deleteIcon} alt='' />
                                                     </button>
                                                 </div>

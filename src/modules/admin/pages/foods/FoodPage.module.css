@@ -1,9 +1,6 @@
 .box {
-    padding-top: 40px;
-    padding-left: 71px;
-    padding-right: 79px;
+    padding: 40px 79px 40px 71px;
 }
-
 .header {
     text-align: center;
     margin-bottom: 30px;

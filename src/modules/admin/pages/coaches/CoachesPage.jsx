@@ -17,6 +17,7 @@ import CoachDetails from './modals/CoachDetails';
 import AnimateHeight from 'react-animate-height';
 import Button from '../../../../components/Button/Button';
 import arrowIcon from '../../../../img/components/ri_arrow-up-line.png';
+import UploadImagesCarousel from '../coaching/modals/UploadImages';
 const CoachesPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -78,8 +79,21 @@ const CoachesPage = () => {
         deleteCoachDetailsHelper(dispatch, id);
     }
 
+    const [imagesIsOpenOpen, setImagesIsOpen] = useState(false);
+
+    function onImagesOpenHandler(id: string) {
+        setImagesIsOpen(true);
+        setSelectedCoachId(id);
+    }
+
+    function onImagesCloseHandler(id: string) {
+        setImagesIsOpen(false);
+        setSelectedCoachId(null);
+    }
+
     return (
         <>
+            <UploadImagesCarousel isOpen={imagesIsOpenOpen} onClose={onImagesCloseHandler} coachingId={selectedCoachId}/>
             <CoachDetails onClose={() => setAddDetailsIsOpen(false)} isOpen={addDetailsIsOpen} coachId={selectedCoachId}/>
             <PreventDeleteModal onClose={() => setDeleteIsOpen(false)} isOpen={deleteIsOpen} text={"Ви точно бажаєте видалити тренера?"} onSummit={deleteCoach}/>
             <UpdateCoachModal  isOpen={editCoachIsOpen} selectedCoachId={selectedCoachId} onClose={onEditCloseCoachHandler} />
@@ -120,6 +134,12 @@ const CoachesPage = () => {
                                             <div className={mainStyles.box}>
                                                 <img src={addIcon} alt='' />
                                                 <p>Деталі</p>
+                                            </div>
+                                        </button>
+                                        <button className={mainStyles.tableBtn}  onClick={() => onImagesOpenHandler(c.id)}>
+                                            <div className={mainStyles.box}>
+                                                <img src={addIcon} alt='' />
+                                                <p>Фото</p>
                                             </div>
                                         </button>
                                         <button className={mainStyles.tableBtn}  onClick={() => onDeleteCoachHandler(c.id

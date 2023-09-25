@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,7 @@ import '../../HomePage/TrainingSection/TrainingListSection.css';
 import '../../HomePage/TrainingSection/carousel.css';
 
 import { ROUTES } from '../../../../../constants';
+import { useDispatch, useSelector } from 'react-redux';
 
 const TrainingCarouselSection = ({ filteredTrainingData }) => {
     const responsiveSettings = [
@@ -46,6 +47,19 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
         },
     ];
 
+    const dispatch = useDispatch();
+    const currentContentState = useSelector(state => state.content);
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+
+        if (currentContentState.coaching) {
+            setList(currentContentState.coaching);
+        }
+
+    }, [currentContentState.coaching]);
+
+
     return (
         <section id='training' className='training__carousel'>
             <div className='container'>
@@ -72,23 +86,23 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
                     }
                     responsive={responsiveSettings}
                 >
-                    {Object.entries(filteredTrainingData).map(
-                        ([trainingType, trainingData]) => (
+                    {list.map(
+                        (trainingData, i) => (
                             // TODO: it makes sense to put it in ./components/TrainingCard/TrainingCard.jsx
-                            <div className='carusel-block' key={trainingType}>
+                            <div className='carusel-block' key={i}>
                                 <div className='carusel-block__inf'>
                                     <div className='carusel-block__img'>
                                         <img
                                             className=''
-                                            src={trainingData.src}
-                                            alt={trainingData.alt}
+                                            src={trainingData.coachingPhoto.filePath}
+
                                         />
                                     </div>
                                     <div className='info-training__title vetrino'>
                                         {trainingData.title}
                                     </div>
                                     <div className='info-training__subtitle'>
-                                        {trainingData.subtitle}
+                                        {trainingData.description}
                                     </div>
                                 </div>
                                 <div className='carusel-block__button'>

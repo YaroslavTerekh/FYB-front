@@ -77,12 +77,15 @@ const CoachingModal = ({ isOpen, onClose }) => {
                     <section className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Тренування</h2>
-                            <div className={styles.imgBox}>
-                                <PhotoUploader onChange={changeAvatarHandler}/>
+                            <div>
+                                <div className={styles.imgBox}>
+                                    <PhotoUploader onChange={changeAvatarHandler}/>
+                                </div>
+                                <div className={styles.imgBox}>
+                                    <VideoUploader onChange={changeAvatarHandler}/>
+                                </div>
                             </div>
-                            <div className={styles.imgBox}>
-                                <VideoUploader onChange={changeAvatarHandler}/>
-                            </div>
+
                             <div className='inputsBox'>
                                 <div className={styles.inputBox}>
                                     <CustomInput
