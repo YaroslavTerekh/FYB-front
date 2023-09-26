@@ -7,7 +7,7 @@ import closeIcon from '../../../../../img/components/regularClose.png';
 import CustomTextArea from '../../../../../components/Input/CustomTextArea';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCoachingHelper } from '../../../../../context/admin-data-context/admin-context.helper';
 import VideoUploader from '../../../../../components/VideoUploader/VideoUploader';
@@ -70,11 +70,18 @@ const CoachingModal = ({ isOpen, onClose }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form onBlur={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Тренування</h2>
                             <div>
@@ -95,6 +102,8 @@ const CoachingModal = ({ isOpen, onClose }) => {
                                         required={true}
                                         onChange={changeNameHandler}
                                         value={name}
+                                        formRef={formRef}
+                                        name={"CoachingModalName"}
                                     />
                                 </div>
 
@@ -106,6 +115,8 @@ const CoachingModal = ({ isOpen, onClose }) => {
                                         required={true}
                                         onChange={changeDescriptionHandler}
                                         value={description}
+                                        formRef={formRef}
+                                        name={"CoachingModalDescription"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -117,6 +128,8 @@ const CoachingModal = ({ isOpen, onClose }) => {
                                         required={true}
                                         onChange={changePriceHandler}
                                         value={price}
+                                        formRef={formRef}
+                                        name={"CoachingModalPrice"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -128,6 +141,8 @@ const CoachingModal = ({ isOpen, onClose }) => {
                                         required={true}
                                         onChange={changeDaysHandler}
                                         value={days}
+                                        formRef={formRef}
+                                        name={"CoachingModalDays"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -154,7 +169,7 @@ const CoachingModal = ({ isOpen, onClose }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

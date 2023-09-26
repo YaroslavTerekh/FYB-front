@@ -11,7 +11,7 @@ import CustomSelect from '../../../../../components/Select/Select';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import defaultImg from '../../../../../img/components/admin-img-def.svg';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewCoachHelper,
@@ -76,11 +76,18 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form ref={formRef} onBlur={onBlurHandler} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Харчування</h2>
                             <div className='inputsBox'>
@@ -93,6 +100,8 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changeNameHandler}
                                         value={name}
+                                        formRef={formRef}
+                                        name={"FoodPointPageName"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -103,6 +112,8 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changeDescriptionHandler}
                                         value={description}
+                                        formRef={formRef}
+                                        name={"FoodPointPageDescription"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -114,6 +125,8 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changePriceHandler}
                                         value={price}
+                                        formRef={formRef}
+                                        name={"FoodPointPagePrice"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -138,7 +151,7 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

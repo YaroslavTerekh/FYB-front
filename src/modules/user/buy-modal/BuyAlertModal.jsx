@@ -13,7 +13,6 @@ const BuyAlertModal = ({ isOpen, onClose, text, purchaseProductType, productId }
     function payForProduct() {
         getPayForm(productId, purchaseProductType)
             .then(r => {
-                debugger;
                 divRef.current.innerHTML = r.data;
                 const inputElement = divRef.current.querySelector(`input[name="btn_text"]`);
                 inputElement.click();

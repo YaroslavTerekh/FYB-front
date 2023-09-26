@@ -207,7 +207,18 @@ export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
     }).catch(err => {});
 }
 
-export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data) {
+export function addPhotosToCoachHelper(dispatch: Dispatch<AnyAction>, data) {
+    addPhotosToCoaching(data).then(res => {
+        getCoaching()
+            .then(res => {
+                dispatch(setCoaching(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
+        export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data) {
     addVideoToCoaching(id, data).then(res => {
         getCoaching()
             .then(res => {

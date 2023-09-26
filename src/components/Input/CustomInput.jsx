@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CustomInput.module.css';
+import { InputValidation } from '../helpers/input-validator';
 import PropTypes from 'prop-types';
-import eye from '../../img/components/eye.png';
-import eyeOff from '../../img/components/eyeOff.png';
 
 const customStyles = {
     control: () => ({}),
     option: () => ({}),
 };
 
-const CustomInput = ({ onChange, className, placeholder, type, required,  customInputContainer, icon, value}) => {
+const CustomInput = ({
+         onChange,
+         className,
+         placeholder,
+         type,
+         required,
+         customInputContainer,
+         icon,
+         value,
+         formRef,
+         name
+}) => {
+
+    const { inputValidator } = InputValidation(formRef)
+    const [inputIsValue, setInputIsValue] = useState(false);
+
+    useEffect(() => {
+       if (value) {
+           setInputIsValue(true);
+       } else {
+           setInputIsValue(false);
+       }
+    }, [value]);
+
+    const mainStyles = customInputContainer ?? styles.customInputContainer;
+    const errorStyles = mainStyles + " " + styles.inputError;
+
     return (
-        <div className={customInputContainer ?? styles.customInputContainer}>
+        <div className={(inputValidator(name) && inputIsValue) ? mainStyles : errorStyles }>
             <input
                 required={required}
                 onChange={onChange}
@@ -19,6 +44,7 @@ const CustomInput = ({ onChange, className, placeholder, type, required,  custom
                 placeholder={placeholder}
                 type={type}
                 value={value}
+                name={name}
             />
             { icon &&
                 <span
@@ -32,14 +58,13 @@ const CustomInput = ({ onChange, className, placeholder, type, required,  custom
 };
 
 CustomInput.propTypes = {
-    // options: PropTypes.arrayOf(
-    //     PropTypes.shape({
-    //         value: PropTypes.string.isRequired,
-    //         label: PropTypes.string.isRequired,
-    //         isPurchased: PropTypes.bool,
-    //     })
-    // ).isRequired,
-    // onChange: PropTypes.func.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            formRef: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 
 export default CustomInput;

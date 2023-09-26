@@ -33,7 +33,6 @@ const ConfirmPhoneNumber = () => {
         } else {
             dispatch(setAlert({ icon:"", isSuccess: false, message: "Упс, щось пішло не так!" }))
         }
-
     }
 
     return <>

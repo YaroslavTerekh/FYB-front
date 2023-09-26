@@ -11,7 +11,7 @@ import CustomSelect from '../../../../../components/Select/Select';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import defaultImg from '../../../../../img/components/admin-img-def.svg';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCoachHelper, updateCoachHelper } from '../../../../../context/admin-data-context/admin-context.helper';
 import CoachModal from './CoachModal';
@@ -67,16 +67,15 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
     }
 
     function onSaveHandler() {
-        if(name && lastName && description && instagramLink && birthDate && avatar) {
+        if(name && lastName && instagramLink && birthDate) {
             const form = new FormData();
 
             // Append form data fields
             form.append('FirstName', name);
             form.append('LastName', lastName);
-            form.append('Description', description);
+            // form.append('Description', description);
             form.append('InstagramLink', instagramLink);
             form.append('BirthDate', birthDate.toDateString());
-            form.append('Avatar', avatar);
 
             updateCoachHelper(dispatch, form);
 
@@ -85,20 +84,27 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form onBlur={onBlurHandler} onChange={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Зміна тренера</h2>
 
                             <div className='inputsBox'>
-                                <div className={styles.inputBox}>
-                                    <div className={styles.imgInput}>
-                                        <PhotoUploader onChange={changeAvatarHandler} placeholder={"Аватар"} inputMode={true} icon={selectIcon} />
-                                    </div>
-                                </div>
+                                {/*<div className={styles.inputBox}>*/}
+                                {/*    <div className={styles.imgInput}>*/}
+                                {/*        <PhotoUploader onChange={changeAvatarHandler} placeholder={"Аватар"} inputMode={true} icon={selectIcon} />*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                                 <div className={styles.inputBox}>
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
@@ -107,6 +113,8 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
                                         required={true}
                                         onChange={changeNameHandler}
                                         value={name}
+                                        formRef={formRef}
+                                        name={"UpdateCoachModalName"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -118,18 +126,22 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
                                         required={true}
                                         onChange={changeLastNameHandler}
                                         value={lastName}
+                                        formRef={formRef}
+                                        name={"UpdateCoachModalLastName"}
                                     />
                                 </div>
-                                <div className={styles.inputBox}>
-                                    <CustomTextArea
-                                        customInputContainer={styles.customTextAreaContainer}
-                                        className={styles.customTextArea}
-                                        placeholder={"Опис"}
-                                        required={true}
-                                        onChange={changeDescriptionHandler}
-                                        value={description}
-                                    />
-                                </div>
+                                {/*<div className={styles.inputBox}>*/}
+                                {/*    <CustomTextArea*/}
+                                {/*        customInputContainer={styles.customTextAreaContainer}*/}
+                                {/*        className={styles.customTextArea}*/}
+                                {/*        placeholder={"Опис"}*/}
+                                {/*        required={true}*/}
+                                {/*        onChange={changeDescriptionHandler}*/}
+                                {/*        value={description}*/}
+                                {/*        formRef={formRef}*/}
+                                {/*        name={"UpdateCoachModalDescription"}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
                                 <div className={styles.inputBox}>
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
@@ -140,6 +152,8 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
                                         icon={instagramIcon}
                                         onChange={changeInstagramLinkHandler}
                                         value={instagramLink}
+                                        formRef={formRef}
+                                        name={"UpdateCoachModalInstagram"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -168,7 +182,7 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
 
                         </div>
 
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

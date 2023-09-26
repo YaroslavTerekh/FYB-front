@@ -3,7 +3,7 @@ import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewFAQHelper,
@@ -50,11 +50,18 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form onBlur={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>FAQ</h2>
                             <div className='inputsBox'>
@@ -67,6 +74,8 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changeQuestionHandler}
                                         value={question}
+                                        formRef={formRef}
+                                        name={"FAQQuestion"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -78,6 +87,8 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changeAnswerHandler}
                                         value={answer}
+                                        formRef={formRef}
+                                        name={"FAQAnswer"}
                                     />
                                 </div>
                                 <div className=''>
@@ -92,7 +103,7 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

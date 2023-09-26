@@ -11,7 +11,7 @@ import CustomSelect from '../../../../../components/Select/Select';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import defaultImg from '../../../../../img/components/admin-img-def.svg';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewCoachHelper,
@@ -72,11 +72,18 @@ const FeedbackModal = ({ isOpen, onClose }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form onBlur={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Відгук</h2>
                             <div className={styles.imgContainer}>
@@ -96,6 +103,8 @@ const FeedbackModal = ({ isOpen, onClose }) => {
                                         required={true}
                                         onChange={changeFeedbackHandler}
                                         value={feedback}
+                                        formRef={formRef}
+                                        name={"FeedbackFeedback"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -108,6 +117,8 @@ const FeedbackModal = ({ isOpen, onClose }) => {
                                         icon={instagramIcon}
                                         onChange={changeInstagramLinkHandler}
                                         value={instagramLink}
+                                        formRef={formRef}
+                                        name={"FeedbackInstagram"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -137,7 +148,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
 
                         </div>
 
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

@@ -11,7 +11,7 @@ import CustomSelect from '../../../../../components/Select/Select';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import defaultImg from '../../../../../img/components/admin-img-def.svg';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewCoachHelper,
@@ -53,11 +53,18 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <section onBlur={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Відгук</h2>
                             <div className='inputsBox'>
@@ -69,6 +76,8 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
                                         required={true}
                                         onChange={changeFeedbackHandler}
                                         value={feedback}
+                                        formRef={formRef}
+                                        name={"FeedbackUpdate"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -81,6 +90,8 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
                                         icon={instagramIcon}
                                         onChange={changeInstagramLinkHandler}
                                         value={instagramLink}
+                                        formRef={formRef}
+                                        name={"FeedbackUpdateInstagram"}
                                     />
                                 </div>
                                 <div className=''>

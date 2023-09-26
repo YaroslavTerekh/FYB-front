@@ -98,7 +98,7 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
             const reader = new FileReader();
 
             reader.onload = (event) => {
-                const blob = new Blob([event.target.result], { type: selectedImage.type });
+                const blob = new Blob([event.target.result], { type: selectedImageData.type });
 
                 const newList = currentImages.length > 0
                     ? [...currentImages] : [];

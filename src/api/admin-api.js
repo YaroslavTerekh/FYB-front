@@ -100,6 +100,10 @@ export function addPhotosToCoaching(model): Promise<any> {
     return API.patch(`admin/coachings/examples/add/`, model);
 }
 
+export function addPhotosToCoach(model): Promise<any> {
+    return API.patch(`admin/coachings/examples/add/`, model);
+}
+
 export function addVideoToCoaching(id, model): Promise<any> {
     return API.post(`admin/video/${id}/add`, model);
 }

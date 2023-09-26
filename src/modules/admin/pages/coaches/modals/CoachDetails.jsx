@@ -3,7 +3,7 @@ import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewCoachDetailsHelper,
@@ -48,15 +48,22 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form className={styles.modalBox} ref={formRef} onBlur={onBlurHandler}>
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Основний опис тренера на головній сторінці</h2>
                             <div className='inputsBox'>
-                                { nameList && nameList.map(n =>
+                                { nameList && nameList.map((n, i) =>
                                     <div className={styles.inputBox} key={n.id}>
                                         <CustomInput
                                             customInputContainer={styles.customInputContainer + " " + styles.imgInputWithBtn}
@@ -65,6 +72,8 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
                                             required={true}
                                             onChange={(e) => changeNameHandler(e, n.id)}
                                             value={n.text}
+                                            formRef={formRef}
+                                            name={`CoachDetails${i}`}
                                         />
                                         <div className={styles.addIcon} onClick={addItemHandler}>
                                             <img src={addIcon} alt='' />
@@ -82,11 +91,8 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
                                     </Button>
                                 </div>
                             </div>
-
-
                         </div>
-
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

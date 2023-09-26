@@ -7,7 +7,7 @@ import closeIcon from '../../../../../img/components/regularClose.png';
 import CustomTextArea from '../../../../../components/Input/CustomTextArea';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCoachingHelper } from '../../../../../context/admin-data-context/admin-context.helper';
 import type { CoachModel } from '../../../../../models/coach-models/coach-model';
@@ -91,11 +91,18 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form onBlur={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Тренування</h2>
 
@@ -124,6 +131,8 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
                                         required={true}
                                         onChange={changeNameHandler}
                                         value={name}
+                                        formRef={formRef}
+                                        name={"UpdateCoachingName"}
                                     />
                                 </div>
 
@@ -135,6 +144,8 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
                                         required={true}
                                         onChange={changeDescriptionHandler}
                                         value={description}
+                                        formRef={formRef}
+                                        name={"UpdateCoachingDescription"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -146,6 +157,8 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
                                         required={true}
                                         onChange={changePriceHandler}
                                         value={price}
+                                        formRef={formRef}
+                                        name={"UpdateCoachingPrice"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -157,6 +170,8 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
                                         required={true}
                                         onChange={changeDaysHandler}
                                         value={days}
+                                        formRef={formRef}
+                                        name={"UpdateCoachingDays"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -183,7 +198,7 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

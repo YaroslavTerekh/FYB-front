@@ -4,7 +4,7 @@ import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewCoachHelper,
@@ -59,11 +59,18 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form onBlur={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Деталі тренування</h2>
                             <div className='inputsBox'>
@@ -75,6 +82,8 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
                                         required={true}
                                         onChange={changeTitleChandler}
                                         value={title}
+                                        formRef={formRef}
+                                        name={"CoachingDetailsTitle"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -89,7 +98,7 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
                                         options={iconList}
                                     />
                                 </div>
-                                { nameList && nameList.map(n =>
+                                { nameList && nameList.map((n, i) =>
                                     <div className={styles.inputBox} key={n.id}>
                                         <CustomInput
                                             customInputContainer={styles.customInputContainer + " " + styles.imgInputWithBtn}
@@ -98,6 +107,8 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
                                             required={true}
                                             onChange={(e) => changeNameHandler(e, n.id)}
                                             value={n.text}
+                                            formRef={formRef}
+                                            name={`CoachingDetails${i}`}
                                         />
                                         <div className={styles.addIcon} onClick={addItemHandler}>
                                             <img src={addIcon} alt='' />
@@ -119,7 +130,7 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
 
                         </div>
 
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

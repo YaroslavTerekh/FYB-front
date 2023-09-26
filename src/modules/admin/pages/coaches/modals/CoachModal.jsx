@@ -11,9 +11,10 @@ import CustomSelect from '../../../../../components/Select/Select';
 import CustomSelectChiplets from '../../../../../components/CustomSelectChiplets/CustomSelectChiplets';
 import defaultImg from '../../../../../img/components/admin-img-def.svg';
 import PhotoUploader from '../../../../../components/PhotoUploader/PhotoUploader';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCoachHelper } from '../../../../../context/admin-data-context/admin-context.helper';
+import { InputValidation } from '../../../../../components/helpers/input-validator';
 
 const CoachModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
@@ -51,16 +52,16 @@ const CoachModal = ({ isOpen, onClose }) => {
     }
 
     function onSaveHandler() {
-        if(name && lastName && description && instagramLink && birthDate && avatar) {
+        if(name && lastName  && instagramLink && birthDate) {
             const form = new FormData();
 
             // Append form data fields
             form.append('FirstName', name);
             form.append('LastName', lastName);
-            form.append('Description', description);
+            // form.append('Description', description);
             form.append('InstagramLink', instagramLink);
             form.append('BirthDate', birthDate.toDateString());
-            form.append('Avatar', avatar);
+            // form.append('Photos', avatar);
 
             addNewCoachHelper(dispatch, form);
 
@@ -69,16 +70,24 @@ const CoachModal = ({ isOpen, onClose }) => {
         }
     }
 
+
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form ref={formRef} onBlur={onBlurHandler} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Тренер</h2>
-                            <div className={styles.imgBox}>
-                                <PhotoUploader onChange={changeAvatarHandler}/>
-                            </div>
+                            {/*<div className={styles.imgBox}>*/}
+                            {/*    <PhotoUploader onChange={changeAvatarHandler}/>*/}
+                            {/*</div>*/}
                             <div className='inputsBox'>
                                 <div className={styles.inputBox}>
                                     <CustomInput
@@ -88,6 +97,8 @@ const CoachModal = ({ isOpen, onClose }) => {
                                          required={true}
                                          onChange={changeNameHandler}
                                          value={name}
+                                         formRef={formRef}
+                                         name={"CoachModalName"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -99,18 +110,22 @@ const CoachModal = ({ isOpen, onClose }) => {
                                         required={true}
                                         onChange={changeLastNameHandler}
                                         value={lastName}
+                                        formRef={formRef}
+                                        name={"CoachModalLastName"}
                                     />
                                 </div>
-                                <div className={styles.inputBox}>
-                                    <CustomTextArea
-                                        customInputContainer={styles.customTextAreaContainer}
-                                        className={styles.customTextArea}
-                                        placeholder={"Опис"}
-                                        required={true}
-                                        onChange={changeDescriptionHandler}
-                                        value={description}
-                                    />
-                                </div>
+                                {/*<div className={styles.inputBox}>*/}
+                                {/*    <CustomTextArea*/}
+                                {/*        customInputContainer={styles.customTextAreaContainer}*/}
+                                {/*        className={styles.customTextArea}*/}
+                                {/*        placeholder={"Опис"}*/}
+                                {/*        required={true}*/}
+                                {/*        onChange={changeDescriptionHandler}*/}
+                                {/*        value={description}*/}
+                                {/*        formRef={formRef}*/}
+                                {/*        name={"CoachModalDescription"}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
                                 <div className={styles.inputBox}>
                                     <CustomInput
                                         customInputContainer={styles.customInputContainer}
@@ -121,6 +136,8 @@ const CoachModal = ({ isOpen, onClose }) => {
                                         icon={instagramIcon}
                                         onChange={changeInstagramLinkHandler}
                                         value={instagramLink}
+                                        formRef={formRef}
+                                        name={"CoachModalInstagram"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -149,7 +166,7 @@ const CoachModal = ({ isOpen, onClose }) => {
 
                         </div>
 
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}

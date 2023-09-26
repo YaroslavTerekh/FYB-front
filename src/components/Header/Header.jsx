@@ -74,7 +74,6 @@ export default function Header({ navigationData }) {
     };
 
     function handleProfileClick(elementLink) {
-        debugger;
         if(userService.isAuthorized()) {
             navigate(elementLink);
         } else {

@@ -4,7 +4,7 @@ import CustomInput from '../../../../../components/Input/CustomInput';
 import Button from '../../../../../components/Button/Button';
 import closeIcon from '../../../../../img/components/regularClose.png';
 import CustomTextArea from '../../../../../components/Input/CustomTextArea';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewFoodPointHelper, updateFoodPointHelper,
@@ -54,11 +54,18 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
         }
     }
 
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function onBlurHandler(e) {
+        setFormIsTouched(true);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
-                    <section className={styles.modalBox} >
+                    <form onBlur={onBlurHandler} ref={formRef} className={styles.modalBox} >
                         <div className={`${styles.content}`} >
                             <h2 className={styles.contentTitle}>Харчування</h2>
                             <div className='inputsBox'>
@@ -71,6 +78,8 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changeNameHandler}
                                         value={name}
+                                        formRef={formRef}
+                                        name={"FoodPointName"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -81,6 +90,8 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changeDescriptionHandler}
                                         value={description}
+                                        formRef={formRef}
+                                        name={"FoodPointDescription"}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -92,6 +103,8 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                                         required={true}
                                         onChange={changeWeightHandler}
                                         value={weight}
+                                        formRef={formRef}
+                                        name={"FoodPointWeight"}
                                     />
                                 </div>
                                 <div className=''>
@@ -106,7 +119,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </form>
                 }
                 isOpen={isOpen}
                 onClose={onClose}
