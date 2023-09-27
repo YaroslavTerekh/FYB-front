@@ -29,7 +29,7 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
         //         setCurrentVideos(data.coachingPhoto);
         //     }
         // }
-    }, [currentAdminState.coaching]);
+    }, [coachingId]);
 
     function onSaveHandler(currentVideos: []) {
 

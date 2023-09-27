@@ -22,7 +22,7 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
                 setCurrentImages(data.coachingPhoto);
             }
         }
-    }, [currentAdminState.coaching]);
+    }, [coachingId]);
 
     function onSaveHandler(currentImages: []) {
 

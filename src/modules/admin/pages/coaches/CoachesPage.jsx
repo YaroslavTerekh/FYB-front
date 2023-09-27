@@ -17,7 +17,7 @@ import CoachDetails from './modals/CoachDetails';
 import AnimateHeight from 'react-animate-height';
 import Button from '../../../../components/Button/Button';
 import arrowIcon from '../../../../img/components/ri_arrow-up-line.png';
-import UploadImagesCarousel from '../coaching/modals/UploadImages';
+import UploadImages from './modals/UploadImages';
 const CoachesPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -93,7 +93,7 @@ const CoachesPage = () => {
 
     return (
         <>
-            <UploadImagesCarousel isOpen={imagesIsOpenOpen} onClose={onImagesCloseHandler} coachingId={selectedCoachId}/>
+            <UploadImages isOpen={imagesIsOpenOpen} onClose={onImagesCloseHandler} coachingId={selectedCoachId}/>
             <CoachDetails onClose={() => setAddDetailsIsOpen(false)} isOpen={addDetailsIsOpen} coachId={selectedCoachId}/>
             <PreventDeleteModal onClose={() => setDeleteIsOpen(false)} isOpen={deleteIsOpen} text={"Ви точно бажаєте видалити тренера?"} onSummit={deleteCoach}/>
             <UpdateCoachModal  isOpen={editCoachIsOpen} selectedCoachId={selectedCoachId} onClose={onEditCloseCoachHandler} />

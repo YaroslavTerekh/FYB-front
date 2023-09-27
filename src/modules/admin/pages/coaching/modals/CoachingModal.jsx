@@ -23,6 +23,7 @@ const CoachingModal = ({ isOpen, onClose }) => {
     const [price, setPrice] = useState(null);
     const [days, setDays] = useState(null);
     const [avatar, setAvatar] = useState(null);
+    const [video, setVideo] = useState(null);
 
     useEffect(() => {
         setCoachesList(currentAdminState.coaches);
@@ -52,8 +53,13 @@ const CoachingModal = ({ isOpen, onClose }) => {
         setAvatar(file);
     }
 
+    function changeVideoHandler(file) {
+        setVideo(file);
+    }
+
     function onSaveHandler() {
-        if(name && coach && coach.value && description && price && days && avatar) {
+        debugger;
+        if(name && coach && coach.value && description && price && days && avatar && video) {
             const form = new FormData();
 
             form.append('Title', name);
@@ -63,7 +69,7 @@ const CoachingModal = ({ isOpen, onClose }) => {
             form.append('AccessDays', days);
             form.append('CoachingPhoto', avatar);
 
-            addNewCoachingHelper(dispatch, form);
+            addNewCoachingHelper(dispatch, form, video);
 
         } else {
             // TODO error
@@ -89,7 +95,7 @@ const CoachingModal = ({ isOpen, onClose }) => {
                                     <PhotoUploader onChange={changeAvatarHandler}/>
                                 </div>
                                 <div className={styles.imgBox}>
-                                    <VideoUploader onChange={changeAvatarHandler}/>
+                                    <VideoUploader onChange={changeVideoHandler}/>
                                 </div>
                             </div>
 

@@ -7,7 +7,7 @@ import {
     addFAQPoint,
     addFeedback,
     addFood,
-    addFoodPoint,
+    addFoodPoint, addPhotosToCoach,
     addPhotosToCoaching,
     addVideoToCoaching,
     deleteCoach,
@@ -170,13 +170,10 @@ export function deleteFeedbackHelper(dispatch: Dispatch<AnyAction>, id: string) 
     }).catch(err => {});
 }
 
-export function addNewCoachingHelper(dispatch: Dispatch<AnyAction>, data: FormData) {
+export function addNewCoachingHelper(dispatch: Dispatch<AnyAction>, data: FormData, video) {
     addCoaching(data).then(res => {
-        getCoaching()
-            .then(res => {
-                dispatch(setCoaching(res.data));
-            })
-            .catch(err => {});
+        debugger;
+        addVideoToCoachingHelper(dispatch, res.data.id, video);
         return res.status === 200;
     }).catch(err => {});
 }
@@ -208,17 +205,17 @@ export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
 }
 
 export function addPhotosToCoachHelper(dispatch: Dispatch<AnyAction>, data) {
-    addPhotosToCoaching(data).then(res => {
-        getCoaching()
+    addPhotosToCoach(data).then(res => {
+        getCoaches()
             .then(res => {
-                dispatch(setCoaching(res.data));
+                dispatch(setCoaches(res.data));
             })
             .catch(err => {});
         return res.status === 200;
     }).catch(err => {});
 }
 
-        export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data) {
+export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data) {
     addVideoToCoaching(id, data).then(res => {
         getCoaching()
             .then(res => {

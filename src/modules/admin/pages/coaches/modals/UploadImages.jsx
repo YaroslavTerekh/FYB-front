@@ -1,10 +1,10 @@
-import styles from '../CoachingPage.module.css';
+import styles from '../CoachesPage.module.css';
 import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import closeIcon from '../../../../../img/components/regularClose.png';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    addNewCoachingHelper,
+    addNewCoachingHelper, addPhotosToCoachHelper,
     addPhotosToCoachingHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
 import ImagesCarousel from '../../../../../components/ContentCarousel/ImagesCarousel';
@@ -16,23 +16,25 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
     const [currentImages, setCurrentImages] = useState([]);
 
     useEffect(() => {
-        if(currentAdminState.coaching && currentAdminState.coaching.length > 0) {
-            const data = currentAdminState.coaching.find(x=> x.id === coachingId);
-            if (data?.coachingPhoto) {
-                setCurrentImages(data.coachingPhoto);
+        if(currentAdminState.coaches && currentAdminState.coaches.length > 0) {
+            debugger;
+            const data = currentAdminState.coaches.find(x=> x.id === coachingId);
+            if (data?.photos) {
+                setCurrentImages(data.photos);
             }
         }
-    }, [currentAdminState.coaching]);
+    }, [coachingId]);
 
     function onSaveHandler(currentImages: []) {
 
         currentImages.forEach((image, index) => {
             const form = new FormData();
             form.append('Id', coachingId);
-            form.append('PhotoFile', image.data);
-            form.append('OrderId', 1);
+            form.append('Files', image.data);
+            form.append('FileName', image.name);
+            // form.append('OrderId', index);
 
-            addPhotosToCoachingHelper(dispatch, form);
+            addPhotosToCoachHelper(dispatch, form);
         });
     }
 

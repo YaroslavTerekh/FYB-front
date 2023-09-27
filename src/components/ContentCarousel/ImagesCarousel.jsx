@@ -98,12 +98,15 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
             const reader = new FileReader();
 
             reader.onload = (event) => {
-                const blob = new Blob([event.target.result], { type: selectedImageData.type });
+                const blob = new Blob([event.target.result], {
+                    type: selectedImageData.type,
+                    name: selectedImageData.name,
+                });
 
                 const newList = currentImages.length > 0
                     ? [...currentImages] : [];
 
-                newList.push({data: blob, index: currentImages.length + 1});
+                newList.push({data: blob, name: selectedImageData.name, index: currentImages.length + 1});
 
                 setCurrentImages(newList);
                 props.setList(newList);
@@ -154,7 +157,10 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
                 onClickThumb={onClickThumb}>
                 { currentImages.map((x, i) =>
                     <div key={i}>
-                        <img src={URL.createObjectURL(x.data)}  alt="Uploaded" />
+                        { x?.filePath
+                            ? <img src={x.filePath}  alt="Uploaded" />
+                            : <img src={URL.createObjectURL(x.data)}  alt="Uploaded" />
+                        }
                     </div>
                 )}
 
