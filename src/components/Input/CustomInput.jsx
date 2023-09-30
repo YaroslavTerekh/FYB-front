@@ -30,7 +30,12 @@ const CustomInput = ({
        } else {
            setInputIsValue(false);
        }
-    }, [value]);
+
+        if (type === "number" && (+value === 0 || +value <= 0)) {
+            setInputIsValue(false);
+        }
+
+    }, [value, type]);
 
     const mainStyles = customInputContainer ?? styles.customInputContainer;
     const errorStyles = mainStyles + " " + styles.inputError;

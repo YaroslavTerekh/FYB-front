@@ -49,7 +49,13 @@ function PhotoUploader( { onChange, icon, inputMode, placeholder, imgName, remov
                     { imageBlob  ?
                         <img src={URL.createObjectURL(imageBlob)} alt="Uploaded" className={styles.img} />
                         :
-                        <img src={icon ?? defaultImg} alt='' />
+                        imgName
+
+                            ? <div className={styles.imgData} >
+                                <img src={imgName} alt='' className={styles.img}/>
+                            </div>
+                            : <img src={icon ?? defaultImg}   alt='' />
+
                     }
 
                 </div>

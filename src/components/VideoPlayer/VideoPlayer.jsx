@@ -5,8 +5,7 @@ import './VideoPlayer.css';
 
 const VideoPlayer = ({ videoSource = '' }) => (
     <div>
-        <video controls>
-            <source src={videoSource} type='video/mp4' />
+        <video controls src={videoSource}>
         </video>
     </div>
 );

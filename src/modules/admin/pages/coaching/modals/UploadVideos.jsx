@@ -37,6 +37,7 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
             const form = new FormData();
             form.append('File', video.data);
             form.append('IsPreview', false);
+            form.append('FileName', video.name);
 
             addVideoToCoachingHelper(dispatch, coachingId, form);
         });

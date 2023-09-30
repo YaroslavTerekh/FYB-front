@@ -60,7 +60,7 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
     }
 
     function onSaveHandler() {
-        if(coachingId && name && description && price) {
+        if(name && description && price) {
 
             const data = { title: name, description: description,  price: price, coachingId: coachingId};
 
@@ -139,7 +139,7 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                         options={coaching}
                                     />
                                 </div>
-                                <div className=''>
+                                <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}
                                         aria-expanded={true}

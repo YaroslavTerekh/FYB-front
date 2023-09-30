@@ -71,6 +71,9 @@ export function deleteFoodPoint(id: string): Promise<any> {
     return API.delete(`admin/food/point/delete/` + id);
 }
 
+export function addFoodPointParentDay(day, id): Promise<any> {
+    return API.post(`food/${id}/point-parents/add`, { dayNumber: day, foodId: id });
+}
 
 export function addFoodPoint(model): Promise<any> {
     return API.post(`admin/food/point/create`, model);

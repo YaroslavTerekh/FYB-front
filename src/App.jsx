@@ -55,7 +55,9 @@ function App() {
 
 
                         {selectedUser?.role && selectedUser.role === AdminRole &&
-                            <Route path={ROUTES.admin} element={<AdminHome />}>
+                            <Route path={ROUTES.admin} element={<AdminHome />}
+
+                            >
                                 <Route path={ROUTES.coaches} element={<CoachesPage />} />
                                 <Route path={ROUTES.feedbacks} element={<FeedbackPage />} />
                                 <Route path={ROUTES.coaching} element={<CoachingPage />} />

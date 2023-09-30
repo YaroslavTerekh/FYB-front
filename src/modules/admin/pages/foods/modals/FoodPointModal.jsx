@@ -16,6 +16,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [coockingMethod, setCoockingMethod] = useState("");
     const [weight, setWeight] = useState(null);
 
     useEffect(() => {
@@ -26,6 +27,10 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
             setWeight(data.portionMass);
         }
     }, [selectedId, editMode, foodId]);
+
+    function changeCoockingMethodHandler(e) {
+        setCoockingMethod(e?.target?.value);
+    }
 
     function changeNameHandler(e) {
         setName(e?.target?.value);
@@ -40,8 +45,8 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     }
 
     function onSaveHandler() {
-        if(foodId && name && description && weight) {
-            const data = { title: name, description: description,  portionMass: weight, FoodId: foodId};
+        if(foodId && name && description && weight && coockingMethod) {
+            const data = { title: name, description: description,  portionMass: weight, FoodId: foodId , coockingMethod:coockingMethod };
 
             if(editMode && selectedId) {
                 updateFoodPointHelper(dispatch, foodId, data);
@@ -107,7 +112,19 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                                         name={"FoodPointWeight"}
                                     />
                                 </div>
-                                <div className=''>
+                                <div className={styles.inputBox}>
+                                    <CustomTextArea
+                                        customInputContainer={styles.customTextAreaContainer}
+                                        className={styles.customTextArea}
+                                        placeholder={"Спосіб приготування"}
+                                        required={true}
+                                        onChange={changeCoockingMethodHandler}
+                                        value={coockingMethod}
+                                        formRef={formRef}
+                                        name={"FoodPointСoockingMethod"}
+                                    />
+                                </div>
+                                <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}
                                         aria-expanded={true}

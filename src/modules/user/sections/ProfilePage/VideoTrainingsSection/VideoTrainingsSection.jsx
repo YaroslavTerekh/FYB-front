@@ -18,25 +18,17 @@ const VideoTrainingsSection = ({
     const [trainingVideoSource, setTrainingVideoSource] = useState('');
 
     useEffect(() => {
-        const selectedTraining = MOCKED_TRAININGS_DATA[selectedTrainingType];
+        const selectedTraining = selectedTrainingType?.videos?.[0].filePath;
 
-        if (selectedTrainingType) {
-            setTrainingVideoSource(selectedTrainingType);
+        if (selectedTrainingType && trainingVideoSource === '') {
+            setTrainingVideoSource(selectedTraining);
         }
     }, [selectedTrainingType]);
 
-    /**
-     * @param {string} videoSource
-     */
     const handleSelectTrainingVideo = (videoSource) => {
+        debugger;
         setTrainingVideoSource(videoSource);
     };
-
-    /**
-     * @param {Object} options
-     * @returns {Array<Object>}
-     */
-;
 
     return (
         <section className={styles.videoTrainings}>
@@ -44,13 +36,15 @@ const VideoTrainingsSection = ({
                 <div className={styles.videoTrainingsBlock}>
                     <div className={styles.videoTrainingsNumber}>
                         <div>
-                            {selectedTrainingType && selectedTrainingType.videos && selectedTrainingType.videos.map(
+                            {selectedTrainingType
+                                && selectedTrainingType.videos
+                                && selectedTrainingType.videos.filter(x => !x?.isPreview).map(
                                     (videoSource, videoIndex) => (
                                         <Button
                                             key={videoIndex}
                                             onClick={() =>
                                                 handleSelectTrainingVideo(
-                                                    videoSource
+                                                    videoSource?.filePath
                                                 )
                                             }
                                         >

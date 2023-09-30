@@ -69,7 +69,11 @@ const CoachingModal = ({ isOpen, onClose }) => {
             form.append('AccessDays', days);
             form.append('CoachingPhoto', avatar);
 
-            addNewCoachingHelper(dispatch, form, video);
+            const form1 = new FormData();
+            form1.append('File', video);
+            form1.append('IsPreview', true);
+
+            addNewCoachingHelper(dispatch, form, form1);
 
         } else {
             // TODO error

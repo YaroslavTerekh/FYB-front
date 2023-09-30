@@ -77,7 +77,7 @@ const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any } ) => {
 
             const newList = currentVideos.length > 0 ? [...currentVideos] : [];
 
-            newList.push({ data: blob, index: currentVideos.length + 1 });
+            newList.push({ data: blob, name: selectedVideoData.name, index: currentVideos.length + 1 });
 
             setCurrentVideos(newList);
             props.setList(newList);

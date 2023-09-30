@@ -106,7 +106,7 @@ const FoodPage = () => {
     const [deleteFoodPointIsOpen, setDeleteFoodPointIsOpen] = useState(false);
 
     function deleteFoodPoint() {
-        deleteFoodPointHelper(selectedFoodPointItem);
+        deleteFoodPointHelper(dispatch, selectedFoodPointItem);
         setSelectedFoodPointItem(null);
         setDeleteFoodPointIsOpen(false)
     }

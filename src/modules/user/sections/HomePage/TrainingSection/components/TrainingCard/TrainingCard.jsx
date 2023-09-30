@@ -42,7 +42,7 @@ const TrainingCard = ({
         <div className='training-block'>
             <div className={`training-block__items items-training ${className}`}>
                 <div className='items-training__img'>
-                    <img className='img-training' src={coachingPhoto.filePath} />
+                    <img className='img-training' src={coachingPhoto?.filePath} />
                 </div>
                 <div className='items-training__info info-training'>
                     <div className='info-training__title vetrino'>{title}</div>

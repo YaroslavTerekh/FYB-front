@@ -14,6 +14,8 @@ import '../../HomePage/TrainingSection/carousel.css';
 
 import { ROUTES } from '../../../../../constants';
 import { useDispatch, useSelector } from 'react-redux';
+import ReviewsCarouselArrow from '../../HomePage/ReviewsSection/components/ReviewsCarouselArrow/ReviewsCarouselArrow';
+import { useMediaQuery } from 'react-responsive';
 
 const TrainingCarouselSection = ({ filteredTrainingData }) => {
     const responsiveSettings = [
@@ -53,12 +55,44 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
 
     useEffect(() => {
 
-        if (currentContentState.coaching) {
-            setList(currentContentState.coaching);
+        return () => {
+            setList([]);
+        }
+    }, []);
+
+    useEffect(() => {
+
+        if (currentContentState.coaching && list.length === 0) {
+
+            const a = [...currentContentState.coaching];
+
+            setList(a);
         }
 
     }, [currentContentState.coaching]);
 
+
+    const isMobile = useMediaQuery({ maxWidth: 900 });
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: isMobile ? 1 : 2,
+        slidesToScroll: 1,
+        prevArrow:
+            <TrainingCarouselArrow
+                direction='prev'
+                additionalClassName='custom-arrow'
+                onClick={() => {}}
+            />,
+        nextArrow:
+            <TrainingCarouselArrow
+                direction='next'
+                additionalClassName='custom-arrow'
+                onClick={() => {}}
+            />,
+        responsive: responsiveSettings
+    };
 
     return (
         <section id='training' className='training__carousel'>
@@ -66,43 +100,73 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
                 <div className='training__title tlt vetrino'>
                     <h2>Інші тренування</h2>
                 </div>
-                <Slider
-                    dots={false}
-                    infinite={true}
-                    speed={500}
-                    prevArrow={
-                        <TrainingCarouselArrow
-                            direction='prev'
-                            additionalClassName='custom-arrow'
-                            onClick={() => {}}
-                        />
-                    }
-                    nextArrow={
-                        <TrainingCarouselArrow
-                            direction='next'
-                            additionalClassName='custom-arrow'
-                            onClick={() => {}}
-                        />
-                    }
-                    responsive={responsiveSettings}
-                >
+                <Slider {...settings}>
+                {/*<Slider*/}
+                {/*    dots={false}*/}
+                {/*    infinite={true}*/}
+                {/*    speed={500}*/}
+                {/*    prevArrow={*/}
+                {/*        <TrainingCarouselArrow*/}
+                {/*            direction='prev'*/}
+                {/*            additionalClassName='custom-arrow'*/}
+                {/*            onClick={() => {}}*/}
+                {/*        />*/}
+                {/*    }*/}
+                {/*    nextArrow={*/}
+                {/*        <TrainingCarouselArrow*/}
+                {/*            direction='next'*/}
+                {/*            additionalClassName='custom-arrow'*/}
+                {/*            onClick={() => {}}*/}
+                {/*        />*/}
+                {/*    }*/}
+                {/*    responsive={responsiveSettings}*/}
+                {/*>*/}
+                    {/*{list.map(*/}
+                    {/*    (trainingData, i) => (*/}
+                    {/*        <div className='carusel-block' key={i}>*/}
+                    {/*            <div className='carusel-block__inf'>*/}
+                    {/*                <div className='carusel-block__img'>*/}
+                    {/*                    <img*/}
+                    {/*                        className=''*/}
+                    {/*                        src={trainingData.coachingPhoto.filePath}*/}
+                    {/*                    />*/}
+                    {/*                </div>*/}
+                    {/*                <div className='info-training__title vetrino'>*/}
+                    {/*                    {trainingData.title}*/}
+                    {/*                </div>*/}
+                    {/*                <div className='info-training__subtitle'>*/}
+                    {/*                    {trainingData.description}*/}
+                    {/*                </div>*/}
+                    {/*            </div>*/}
+                    {/*            <div className='carusel-block__button'>*/}
+                    {/*                <Link*/}
+                    {/*                    className='button-training__blu'*/}
+                    {/*                    to={ROUTES.details}*/}
+                    {/*                >*/}
+                    {/*                    Детальніше*/}
+                    {/*                </Link>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    )*/}
+                    {/*)}*/}
+
                     {list.map(
-                        (trainingData, i) => (
+                        (trainingData, index) => (
                             // TODO: it makes sense to put it in ./components/TrainingCard/TrainingCard.jsx
-                            <div className='carusel-block' key={i}>
+                            <div className='carusel-block' key={index}>
                                 <div className='carusel-block__inf'>
                                     <div className='carusel-block__img'>
                                         <img
                                             className=''
-                                            src={trainingData.coachingPhoto.filePath}
-
+                                            src={trainingData.coachingPhoto?.filePath}
+                                            alt={trainingData.alt}
                                         />
                                     </div>
                                     <div className='info-training__title vetrino'>
                                         {trainingData.title}
                                     </div>
                                     <div className='info-training__subtitle'>
-                                        {trainingData.description}
+                                        <p style={{textOverflow: "ellipsis"}}>{trainingData.description}</p>
                                     </div>
                                 </div>
                                 <div className='carusel-block__button'>
@@ -116,6 +180,7 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
                             </div>
                         )
                     )}
+
                 </Slider>
             </div>
         </section>

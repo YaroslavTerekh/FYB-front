@@ -10,15 +10,15 @@ const TrainerLyda = ({data}) => (
     <div className='block-main__Lyda' key={data.id}>
         <div className='block-main__items_Lyda'>
             <div className='item__img1'>
-                <img src={data?.photos[0].filePath} alt='Фото'></img>
+                <img src={data?.photos[0]?.filePath} alt='Фото'></img>
             </div>
 
             <div className='item__img2'>
-                <img src={data?.photos[0].filePath} alt='Фото'></img>
+                <img src={data?.photos[1]?.filePath} alt='Фото'></img>
             </div>
 
             <div className='item__img3'>
-                <img src={data?.photos[2].filePath} alt='Фото'></img>
+                <img src={data?.photos[2]?.filePath} alt='Фото'></img>
             </div>
 
             <div className='info-item_Lyda'>

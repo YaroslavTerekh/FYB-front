@@ -27,10 +27,14 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
     const [avatar, setAvatar] = useState(null);
     const [removePhoto, setRemovePhoto] = useState(false);
 
+    const [selectedCoachingData, setSelectedCoachingData] = useState([]);
+
     useEffect(() => {
         if (selectedCoachingId) {
             const selectedCoaching: CoachingModel = currentAdminState.coaching.find(c => c.id === selectedCoachingId);
             if (selectedCoaching) {
+                setSelectedCoachingData(selectedCoaching);
+
                 setName(selectedCoaching.title);
                 setDescription(selectedCoaching.description);
                 setCoach({ value:selectedCoaching.coach.id, label: selectedCoaching.coach.firstName });
@@ -108,7 +112,7 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
 
                             <div>
                                 <div className={styles.imgBox}>
-                                    <PhotoUploader onChange={changeAvatarHandler} removePhoto={removePhoto} setRemoved={setRemovePhoto}/>
+                                    <PhotoUploader onChange={changeAvatarHandler} imgName={selectedCoachingData?.coachingPhoto?.filePath} removePhoto={removePhoto} setRemoved={setRemovePhoto}/>
                                 </div>
                                 <div className=''>
                                     <Button

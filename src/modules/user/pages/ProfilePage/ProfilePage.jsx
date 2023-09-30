@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import VideoTrainingsSection from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection';
 import TrainingCarouselSection from '../../sections/ProfilePage/TrainingCarouselSection/TrainingCarouselSection';
@@ -9,6 +9,7 @@ import './ProfilePage.css';
 import styles from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection.module.css';
 import Select from '../../../../components/Select/Select';
 import FoodSection from '../../sections/ProfilePage/FoodSection/FoodSection';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProfilePage = () => {
     const [selectedTrainingType, setSelectedTrainingType] = useState(
@@ -23,13 +24,45 @@ const ProfilePage = () => {
     const { [selectedTrainingType]: _, ...filteredTrainingData } =
         MOCKED_TRAININGS_DATA;
 
-    const formatSelectOptions = (options) =>
-        Object.entries(options).map(([itemType, itemData]) => ({
+    const dispatch = useDispatch();
+    const currentContentState = useSelector(state => state.content);
+    const [list, setList] = useState([]);
+    const [food, setFoodList] = useState([]);
+
+    useEffect(() => {
+        if (currentContentState.coaching) {
+            setList(currentContentState.coaching);
+        }
+    }, [currentContentState.coaching]);
+
+    useEffect(() => {
+        if (currentContentState.food) {
+            setFoodList(currentContentState.food);
+        }
+    }, [currentContentState.food]);
+
+    const formatSelectOptions = (coaching, food) => {
+        let res = [];
+        let item1 = Object.entries(coaching).map(([itemType, itemData]) => ({
             value: itemData,
             label: itemData.title,
-            isPurchased: itemData.isPurchased,
-            isFood: itemData?.isFood
-        }))
+            isPurchased: true,
+            isFood: false
+        }));
+
+        if (food) {
+            const item2 = Object.entries(coaching).map(([itemType, itemData]) => ({
+                value: itemData,
+                label: itemData.title,
+                isPurchased: true,
+                isFood: true
+            }));
+
+            item1 = item1.concat(item2)
+        }
+
+        return item1;
+    }
 
     return (
         <>
@@ -42,7 +75,7 @@ const ProfilePage = () => {
             >
                 <Select
                     className={styles.videoTrainingsSelectCustom}
-                    options={formatSelectOptions(MOCKED_TRAININGS_DATA)}
+                    options={formatSelectOptions(list)}
                     selectedOptionValue={selectedTrainingType}
                     onChange={handleSelectChange}
                 />

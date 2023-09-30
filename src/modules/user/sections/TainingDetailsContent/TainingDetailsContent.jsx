@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TrainingDetailsContent.module.css';
 import Button from '../../../../components/Button/Button';
 import trainingIcon from '../../../../img/components/icon10.svg';
@@ -7,6 +7,14 @@ import { GetIconHelper } from '../../../../constants/icons-const';
 
 const TrainingDetailsContent = (props: { training: null }) => {
 
+    const [video, setVideo] = useState(null);
+
+    useEffect(() => {
+        if(props.training) {
+            setVideo(props.training?.videos?.find(x => x?.isPreview))
+        }
+    }, [props.training]);
+
     return (
         <>
             <div className='container vetrino'>
@@ -14,8 +22,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                 <div className={styles.box}>
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
-                            <video controls>
-                                <source src="https://www.youtube.com/embed/36YnV9STBqc?si=VccPdjR9MQSlJhw-" type="video/mp4" />
+                            <video src={video?.filePath}  controls>
                             </video>
                         </div>
                         <div className={styles.infoBlock}>
@@ -53,7 +60,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                     </div>
                     <div className={styles.trainingDetailsBlock}>
                         <div className={styles.trainingDetailsList}>
-                            { props.training.coachingDetails && props.training.coachingDetails.map(d =>
+                            { props.training.coachingDetailParents && props.training.coachingDetailParents.map(d =>
                                 <div className={styles.trainingDetailsItem}>
                                     <h4>{d.title}</h4>
 

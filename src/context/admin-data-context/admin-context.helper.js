@@ -7,7 +7,7 @@ import {
     addFAQPoint,
     addFeedback,
     addFood,
-    addFoodPoint, addPhotosToCoach,
+    addFoodPoint, addFoodPointParentDay, addPhotosToCoach,
     addPhotosToCoaching,
     addVideoToCoaching,
     deleteCoach,
@@ -270,9 +270,10 @@ export function addNewFoodPointHelper(dispatch: Dispatch<AnyAction>, data) {
             .then(res => {
                 dispatch(setFood(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+            });
         return res.status === 200;
-    }).catch(err => {});
+    });
 }
 
 export function deleteFoodHelper(dispatch: Dispatch<AnyAction>, id: string) {

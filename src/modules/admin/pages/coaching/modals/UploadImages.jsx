@@ -31,6 +31,7 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
             form.append('Id', coachingId);
             form.append('PhotoFile', image.data);
             form.append('OrderId', 1);
+            form.append('FileName', image.name);
 
             addPhotosToCoachingHelper(dispatch, form);
         });
