@@ -20,7 +20,9 @@ const TrainingCard = ({
     className,
     foodId,
     food,
-    purchaseProductType
+    foodPoints,
+    purchaseProductType,
+    isFood
 }) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -48,21 +50,27 @@ const TrainingCard = ({
                     <div className='info-training__title vetrino'>{title}</div>
                     <div className='info-training__subtitle'>{description}</div>
                     <div className='info-training__picture picture-training'>
-                        <div className='picture-training__numerosity'>
-                            {<img src={icon} /> && (
-                                <div className='picture-training__icon'>
-                                    <img src={icon} />
-                                </div>
-                            )}
-                            {videos && (
-                                <div className='picture-training__text'>
-                                    {videos.length} тренувань
-                                </div>
-                            )}
-                        </div>
-                        {accessDays && (
+
+                        { !isFood
+                            ? <div className='picture-training__numerosity'>
+                                    {<img src={icon} /> && (
+                                        <div className='picture-training__icon'>
+                                            <img src={icon} />
+                                        </div>
+                                    )}
+                                    {videos && (
+                                        <div className='picture-training__text'>
+                                            {videos.length} тренувань
+                                        </div>
+                                    )}
+                            </div>
+                            :  <div className='picture-training__time picture-training__text'>
+                                Раціон на {foodPoints.length} день
+                            </div>
+                        }
+                        { accessDays > 0 && !isFood && (
                             <div className='picture-training__time picture-training__text'>
-                                {accessDays}
+                                {accessDays} місяці доступу
                             </div>
                         )}
                         {gift && (

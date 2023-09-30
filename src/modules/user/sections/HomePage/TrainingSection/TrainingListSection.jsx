@@ -31,7 +31,7 @@ const TrainingListSection = () =>  {
     useEffect(() => {
 
         if (currentContentState.food) {
-            setList(currentContentState.food);
+            setFood(currentContentState.food);
         }
 
     }, [currentContentState.food]);
@@ -43,10 +43,10 @@ const TrainingListSection = () =>  {
                     <h2>Тренування</h2>
                 </div>
                 {list.map((training, index) => (
-                    <TrainingCard key={index} {...training} purchaseProductType={PurchaseProductTypeCoaching}/>
+                    <TrainingCard key={index} {...training} isFood={false} purchaseProductType={PurchaseProductTypeCoaching}/>
                 ))}
                 {food.map((training, index) => (
-                    <TrainingCard key={index} {...training}  purchaseProductType={PurchaseProductTypeCoaching}/>
+                    <TrainingCard key={index+"f"} {...training} isFood={true}  purchaseProductType={PurchaseProductTypeCoaching}/>
                 ))}
             </div>
         </section>
