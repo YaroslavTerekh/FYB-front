@@ -7,7 +7,7 @@ import { MOCKED_TRAININGS_LIST } from './constants';
 import './TrainingListSection.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCoachingHelper, getFoodHelper } from '../../../../../context/content-context/content-context.helper';
-import { PurchaseProductTypeCoaching } from '../../../../../constants/roles';
+import { PurchaseProductTypeCoaching, PurchaseProductTypeFood } from '../../../../../constants/roles';
 
 const TrainingListSection = () =>  {
     const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const TrainingListSection = () =>  {
                     <TrainingCard key={index} {...training} isFood={false} purchaseProductType={PurchaseProductTypeCoaching}/>
                 ))}
                 {food.map((training, index) => (
-                    <TrainingCard key={index+"f"} {...training} isFood={true}  purchaseProductType={PurchaseProductTypeCoaching}/>
+                    <TrainingCard key={index+"f"} {...training} isFood={true}  purchaseProductType={PurchaseProductTypeFood}/>
                 ))}
             </div>
         </section>

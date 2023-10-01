@@ -28,6 +28,16 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
     const [coaching, setCoaching] = useState([]);
     const [coachingId, setCoachingId] = useState();
 
+    function cleanUp() {
+        setName("");
+        setDescription("");
+        setCoaching([]);
+        setPrice(null);
+        setCoachingId(null);
+
+        onClose();
+    }
+
     useEffect(() => {
         if (editMode && selectedId) {
             const data = currentAdminState.food.find(x=> x.id === selectedId);
@@ -154,7 +164,7 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '670px',

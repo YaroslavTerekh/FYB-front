@@ -29,6 +29,19 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
 
     const [selectedCoachingData, setSelectedCoachingData] = useState([]);
 
+    function cleanUp() {
+        setName("");
+        setDescription("");
+        setCoach("");
+        setPrice(null);
+        setDays(null);
+        setAvatar(null);
+        setRemovePhoto(false);
+        setSelectedCoachingData([]);
+
+        onClose();
+    }
+
     useEffect(() => {
         if (selectedCoachingId) {
             const selectedCoaching: CoachingModel = currentAdminState.coaching.find(c => c.id === selectedCoachingId);
@@ -205,7 +218,7 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '870px',

@@ -26,6 +26,13 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
     const [feedback, setFeedback] = useState("");
     const [instagramLink, setInstagramLink] = useState("");
 
+    function cleanUp() {
+        setFeedback("");
+        setInstagramLink("");
+
+        onClose();
+    }
+
     useEffect(() => {
         if (selectedId) {
             const item = currentAdminState.feedbacks.find(x=> x.id === selectedId);
@@ -112,7 +119,7 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
                     </section>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '670px',

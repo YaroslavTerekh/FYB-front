@@ -23,6 +23,7 @@ import { AdminRole } from './constants/roles';
 import ConfirmPhoneNumberPage from './modules/auth/ConfirmPhoneNumber/ConfirmPhoneNumberPage';
 import SystemAlert from './components/Alert/SystemAlert';
 import AuthService from './services/auth-service';
+import FoodDetailsPage from './modules/user/pages/DetailsPage/FoodDetailsPage';
 
 function App() {
     const userService = new AuthService();
@@ -48,7 +49,7 @@ function App() {
                             <Route exact path={ROUTES.home} element={<HomePage />} />
                             <Route path={ROUTES.profile} element={<ProfilePage />} />
                             <Route path={`${ROUTES.details}/:id`} element={<DetailsPage />} />
-                            <Route path={ROUTES.details} element={<DetailsPage />} />
+                            <Route path={`${ROUTES.foodDetails}/:id`} element={<FoodDetailsPage />} />
                             <Route path={ROUTES.confirmNumber} element={<ConfirmPhoneNumberPage />} />
                         </Route>
 

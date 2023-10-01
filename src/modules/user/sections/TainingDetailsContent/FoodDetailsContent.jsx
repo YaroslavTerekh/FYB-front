@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TrainingDetailsContent.module.css';
 import Button from '../../../../components/Button/Button';
 import trainingIcon from '../../../../img/components/icon10.svg';
@@ -7,6 +7,11 @@ import { GetIconHelper } from '../../../../constants/icons-const';
 
 const FoodDetailsContent = (props: { training: null }) => {
 
+    useEffect(() => {
+        debugger;
+        console.log(props.training);
+    }, [props.training]);
+
     return (
         <>
             <div className=' vetrino'>
@@ -14,17 +19,17 @@ const FoodDetailsContent = (props: { training: null }) => {
                 <div className={styles.box}>
                     <div className={styles.headerBlock}>
                         <div className={styles.titlePhotos}>
-                            { props.training.examplePhotos &&
+                            { props.training.examplePhotos || true &&
                                 <div className={styles.titleGrid}>
                                     <div className={styles.titleGridItem}>
-                                        <div className={styles.gridImgBox}>
-                                            <img src={props.training.examplePhotos[0]} alt='' />
-                                        </div>
+                                        {/*<div className={styles.gridImgBox}>*/}
+                                        {/*    <img src={props.training.examplePhotos[0]} alt='' />*/}
+                                        {/*</div>*/}
                                     </div>
                                     <div className={styles.titleGridItem}>
-                                        <div className={styles.gridImgBox}>
-                                            <img src={props.training.examplePhotos[1]} alt='' />
-                                        </div>
+                                        {/*<div className={styles.gridImgBox}>*/}
+                                        {/*    <img src={props.training.examplePhotos[1]} alt='' />*/}
+                                        {/*</div>*/}
                                     </div>
                                     <div className={styles.titleGridItem}>
                                         <div className={styles.infoBlock}>
@@ -32,7 +37,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                                                 {props.training.title}
                                             </h3>
                                             <p className={styles.subText}>
-                                                {props.training.subtitle}
+                                                {props.training.description}
                                             </p>
 
                                             <div className={styles.trainingPeriod}>
@@ -61,30 +66,30 @@ const FoodDetailsContent = (props: { training: null }) => {
                         </div>
 
                     </div>
-                    <div className={styles.trainingDetailsBlock}>
-                        <div className={styles.trainingDetailsList}>
-                            { props.training.coachingDetails && props.training.coachingDetails.map(d =>
-                                <div className={styles.trainingDetailsItem}>
-                                    <h4>{d.title}</h4>
+                    {/*<div className={styles.trainingDetailsBlock}>*/}
+                    {/*    <div className={styles.trainingDetailsList}>*/}
+                    {/*        { props.training.coachingDetails && props.training.coachingDetails.map(d =>*/}
+                    {/*            <div className={styles.trainingDetailsItem}>*/}
+                    {/*                <h4>{d.title}</h4>*/}
 
-                                    { d.details && d.details.map(details =>
-                                        <div className={styles.detailsData}>
-                                            <p>{details.detail}</p>
-                                        </div>
-                                    ) }
-                                </div>
-                            ) }
-                        </div>
-                    </div>
-                    <div className={styles.photosGrid}>
-                        { props.training.examplePhotos && props.training.examplePhotos.map((x, i) =>
-                            <div className={styles.gridItem}>
-                                <div className={styles.gridImgBox}>
-                                    <img src={x} alt='' />
-                                </div>
-                            </div>
-                        ) }
-                    </div>
+                    {/*                { d.details && d.details.map(details =>*/}
+                    {/*                    <div className={styles.detailsData}>*/}
+                    {/*                        <p>{details.detail}</p>*/}
+                    {/*                    </div>*/}
+                    {/*                ) }*/}
+                    {/*            </div>*/}
+                    {/*        ) }*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className={styles.photosGrid}>*/}
+                    {/*    { props.training.examplePhotos && props.training.examplePhotos.map((x, i) =>*/}
+                    {/*        <div className={styles.gridItem}>*/}
+                    {/*            <div className={styles.gridImgBox}>*/}
+                    {/*                <img src={x} alt='' />*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    ) }*/}
+                    {/*</div>*/}
 
                     <Button
                         className={styles.btn}

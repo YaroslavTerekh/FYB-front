@@ -11,7 +11,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
 
     useEffect(() => {
         if(props.training) {
-            setVideo(props.training?.videos?.find(x => x?.isPreview))
+            setVideo(props.training?.videos?.find(x => x?.isPreview)?.filePath)
         }
     }, [props.training]);
 
@@ -22,8 +22,10 @@ const TrainingDetailsContent = (props: { training: null }) => {
                 <div className={styles.box}>
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
-                            <video src={video?.filePath}  controls>
-                            </video>
+                            { video &&
+                                <video controls src={video}>
+                                </video>
+                            }
                         </div>
                         <div className={styles.infoBlock}>
                             <h3 className={styles.header}>

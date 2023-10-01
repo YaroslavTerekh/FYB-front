@@ -15,6 +15,12 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
 
     const [currentImages, setCurrentImages] = useState([]);
 
+    function cleanUp() {
+        setCurrentImages([]);
+
+        onClose();
+    }
+
     useEffect(() => {
         if(currentAdminState.coaching && currentAdminState.coaching.length > 0) {
             const data = currentAdminState.coaching.find(x=> x.id === coachingId);
@@ -48,7 +54,7 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
                     </>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '40vw',

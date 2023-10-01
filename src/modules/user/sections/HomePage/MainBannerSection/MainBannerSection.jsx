@@ -13,13 +13,13 @@ const MainBannerSection = () => (
             <div className='main-block'>
                 <div className='main-block__text'>
                     <div className='title-main_up vetrino'>
-                        Тренування в повному записі,
+                           Тренування в повному записі,
                     </div>
                     <div className='title-main_down vetrino'>
                         вмикай та повторюй!
                     </div>
-                    <div className='text-main__button btn'>
-                        <Button>Обрати тренування</Button>
+                    <div className='text-main__button'>
+                        <Button >Обрати тренування</Button>
                     </div>
                 </div>
                 <div className='main-block__img'>

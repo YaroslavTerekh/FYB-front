@@ -29,6 +29,17 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
     const [birthDate, setBirthDate] = useState(null);
     const [avatar, setAvatar] = useState(null);
 
+    function cleanUp() {
+        setName("");
+        setLastName("");
+        setDescription("");
+        setInstagramLink("");
+        setBirthDate(null);
+        setAvatar(null);
+
+        onClose();
+    }
+
     useEffect(() => {
         if (selectedCoachId) {
             const selectedCoach: CoachModel = currentAdminState.coaches.filter(c => c.id === selectedCoachId)?.[0];
@@ -185,7 +196,7 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '870px',

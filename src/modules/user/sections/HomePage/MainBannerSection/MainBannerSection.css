@@ -2,7 +2,7 @@
     display: flex;
     padding: 91px 0 135px 0;
     position: relative;
-    margin: 115px 0 90px 0;
+    margin: 10px 0 90px 0;
 }
 
 .main {
@@ -23,6 +23,9 @@
     background-color: var(--second-bg);
     padding: 7px 10px;
     margin: 0 0 40px 0;
+    box-sizing: border-box;
+    height: 54px;
+    line-height: 37px;
 }
 
 .title-main_down {
@@ -32,16 +35,35 @@
     background-color: var(--second-bg);
     padding: 7px 10px;
     max-width: 580px;
+    box-sizing: border-box;
+    height: 54px;
+    line-height: 37px;
 }
 
 .text-main__button {
-    margin: 80px 0 0 0;
+    margin: 50px 0 0 0;
+}
+
+.text-main__button button{
+    color: var(--main-bg);
+    border: 2px solid var(--beige, var(--second-bg));
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 13px 23px;
+    transition: all 0.3s ease 0s;
+}
+
+.text-main__button button:hover {
+    background-color: var(--main-bg);
+    box-shadow: none;
+    color: var(--second-bg);
 }
 
 .main-block__img {
     position: absolute;
     top: 0;
-    right: -150px;
+    right: -100px;
     overflow: hidden;
     height: 695px;
     object-fit: cover;

@@ -19,6 +19,16 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     const [coockingMethod, setCoockingMethod] = useState("");
     const [weight, setWeight] = useState(null);
 
+    function cleanUp() {
+        setName("");
+        setDescription("");
+        setCoockingMethod("");
+        setWeight(null);
+
+        onClose();
+    }
+
+
     useEffect(() => {
         if (editMode && selectedId && foodId) {
             const data = currentAdminState.food.find(x=> x.id === foodId).foodPoints.find(x=> x.id === selectedId);
@@ -139,7 +149,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '670px',

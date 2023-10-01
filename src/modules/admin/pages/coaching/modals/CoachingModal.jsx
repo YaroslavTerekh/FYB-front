@@ -25,6 +25,18 @@ const CoachingModal = ({ isOpen, onClose }) => {
     const [avatar, setAvatar] = useState(null);
     const [video, setVideo] = useState(null);
 
+    function cleanUp() {
+        setName("");
+        setDescription("");
+        setCoach("");
+        setPrice(null);
+        setDays(null);
+        setAvatar(null);
+        setVideo(null);
+
+        onClose();
+    }
+
     useEffect(() => {
         setCoachesList(currentAdminState.coaches);
     }, [currentAdminState.coaches]);
@@ -182,7 +194,7 @@ const CoachingModal = ({ isOpen, onClose }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '870px',

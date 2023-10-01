@@ -22,14 +22,11 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
 
     const [currentVideos, setCurrentVideos] = useState([]);
 
-    useEffect(() => {
-        // if(currentAdminState.coaching && currentAdminState.coaching.length > 0) {
-        //     const data = currentAdminState.coaching.find(x=> x.id === coachingId);
-        //     if (data.coachingPhoto) {
-        //         setCurrentVideos(data.coachingPhoto);
-        //     }
-        // }
-    }, [coachingId]);
+    function cleanUp() {
+        setCurrentVideos([]);
+
+        onClose();
+    }
 
     function onSaveHandler(currentVideos: []) {
 
@@ -54,7 +51,7 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
                     </>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '40vw',

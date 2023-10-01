@@ -29,6 +29,17 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     const [secondPhoto, setSecondPhoto] = useState(null);
     const [coachingId, setCoachingId] = useState();
 
+    function cleanUp() {
+        setFeedback("");
+        setInstagramLink("");
+        setCoaching([]);
+        setFirstPhoto(null);
+        setSecondPhoto(null);
+        setCoachingId(null);
+
+        onClose();
+    }
+
     useEffect(() => {
         if (currentAdminState.coaching) {
             setCoaching(currentAdminState.coaching.map(x=> { return  { value: x.id,  label: x.title}}));
@@ -151,7 +162,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '670px',

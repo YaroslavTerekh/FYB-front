@@ -19,6 +19,13 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
     const [nameList, setNameList] = useState([{ id: 1, text: "" }]);
     const [icon, setIcon] = useState(null);
 
+    function cleanUp() {
+        setNameList("");
+        setIcon("");
+
+        onClose();
+    }
+
     function changeIconHandler(e) {
         setIcon(e);
     }
@@ -95,7 +102,7 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '50vw',

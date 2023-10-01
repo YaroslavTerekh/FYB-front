@@ -17,6 +17,13 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
 
+    function cleanUp() {
+        setAnswer("");
+        setQuestion("");
+
+        onClose();
+    }
+
     useEffect(() => {
         if (editMode && selectedId) {
             const data = currentAdminState.faq.find(x=> x.id === selectedId);
@@ -106,7 +113,7 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '670px',

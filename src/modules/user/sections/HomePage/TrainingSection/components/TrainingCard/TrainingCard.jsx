@@ -84,14 +84,24 @@ const TrainingCard = ({
                         <div className='button-training__white'>
                             <Button onClick={() => setModalIsOpen(true)}>{'Купити'}</Button>
                         </div>
-                        <div className='button-training_blu'>
-                            <Link
-                                className='button-training__blu'
-                                to={ROUTES.details+"/" + id}
-                            >
-                                Детальніше
-                            </Link>
-                        </div>
+                        { isFood
+                            ?   <div className='button-training_blu'>
+                                    <Link
+                                        className='button-training__blu'
+                                        to={ROUTES.foodDetails+"/" + id}
+                                    >
+                                        Детальніше
+                                    </Link>
+                                </div>
+                            :  <div className='button-training_blu'>
+                                    <Link
+                                        className='button-training__blu'
+                                        to={ROUTES.details+"/" + id}
+                                    >
+                                        Детальніше
+                                    </Link>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

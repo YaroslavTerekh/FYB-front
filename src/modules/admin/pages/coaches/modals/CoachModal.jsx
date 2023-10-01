@@ -27,6 +27,17 @@ const CoachModal = ({ isOpen, onClose }) => {
     const [birthDate, setBirthDate] = useState(null);
     const [avatar, setAvatar] = useState(null);
 
+    function cleanUp() {
+        setName("");
+        setLastName("");
+        setDescription("");
+        setInstagramLink("");
+        setBirthDate(null);
+        setAvatar(null);
+
+        onClose();
+    }
+
     function changeNameHandler(e) {
         setName(e?.target?.value);
     }
@@ -169,7 +180,7 @@ const CoachModal = ({ isOpen, onClose }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '870px',

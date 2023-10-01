@@ -21,6 +21,19 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
     const [nameList, setNameList] = useState([{ id: 1, text: "" }]);
     const [icon, setIcon] = useState(null);
     const [title, setTitle] = useState(null);
+
+    const [formIsTouched, setFormIsTouched] = useState(false);
+    const formRef = useRef(null);
+
+    function cleanUp() {
+        setNameList([{ id: 1, text: "" }]);
+        setIcon(null);
+        setTitle(null);
+        setFormIsTouched(false);
+
+        onClose();
+    }
+
     function changeIconHandler(e) {
         setIcon(e);
     }
@@ -58,9 +71,6 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
             // TODO error
         }
     }
-
-    const [formIsTouched, setFormIsTouched] = useState(false);
-    const formRef = useRef(null);
 
     function onBlurHandler(e) {
         setFormIsTouched(true);
@@ -133,7 +143,7 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
                     </form>
                 }
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={cleanUp}
                 styles={{
                     bgColor:' #FFF',
                     width: '870px',
