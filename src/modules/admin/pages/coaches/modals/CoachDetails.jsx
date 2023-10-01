@@ -50,6 +50,7 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
                 addNewCoachDetailsHelper(dispatch, coachId, x);
             });
 
+            cleanUp();
         } else {
             // TODO error
         }

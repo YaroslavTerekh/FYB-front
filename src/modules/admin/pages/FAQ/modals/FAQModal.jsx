@@ -52,6 +52,7 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
                 addNewFAQHelper(dispatch, data);
             }
 
+            cleanUp();
         } else {
             // TODO error
         }

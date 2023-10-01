@@ -54,7 +54,7 @@ const FeedbackModalUpdate = ({ isOpen, onClose, selectedId }) => {
             const model = { id: selectedId, feedbackText: feedback, instagramLink: instagramLink };
 
             updateFeedbacksHelper(dispatch, selectedId, model);
-
+            cleanUp();
         } else {
             // TODO error
         }

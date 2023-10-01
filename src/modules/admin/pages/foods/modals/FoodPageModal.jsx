@@ -81,6 +81,7 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
                 addNewFoodHelper(dispatch, data);
             }
 
+            cleanUp();
         } else {
             // TODO error
         }

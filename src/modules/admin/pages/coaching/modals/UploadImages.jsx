@@ -41,6 +41,8 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
 
             addPhotosToCoachingHelper(dispatch, form);
         });
+
+        cleanUp();
     }
 
     return (

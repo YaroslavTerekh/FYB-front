@@ -38,6 +38,8 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
 
             addVideoToCoachingHelper(dispatch, coachingId, form);
         });
+
+        cleanUp();
     }
 
     return (

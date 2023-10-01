@@ -102,7 +102,7 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
             form.append('CoachingPhoto', avatar);
 
             addNewCoachingHelper(dispatch, form);
-
+            cleanUp();
         } else {
             // TODO error
         }

@@ -66,7 +66,7 @@ const CoachingDetails = ({ isOpen, onClose, coachingId }) => {
             }
 
             addNewCoachingDetailsHelper(dispatch,dataParent, data);
-
+            cleanUp();
         } else {
             // TODO error
         }

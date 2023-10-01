@@ -89,7 +89,7 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
             form.append('BirthDate', birthDate.toDateString());
 
             updateCoachHelper(dispatch, form);
-
+            cleanUp();
         } else {
             // TODO error
         }

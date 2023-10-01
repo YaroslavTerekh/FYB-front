@@ -77,7 +77,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
             form.append('Photos', secondPhoto);
 
             addNewFeedbacksHelper(dispatch, form);
-
+            cleanUp();
         } else {
             // TODO error
         }

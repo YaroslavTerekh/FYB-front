@@ -75,7 +75,7 @@ const CoachModal = ({ isOpen, onClose }) => {
             // form.append('Photos', avatar);
 
             addNewCoachHelper(dispatch, form);
-
+            cleanUp();
         } else {
             // TODO error
         }

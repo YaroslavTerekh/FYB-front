@@ -64,6 +64,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                 addNewFoodPointHelper(dispatch, data);
             }
 
+            cleanUp();
         } else {
             // TODO error
         }

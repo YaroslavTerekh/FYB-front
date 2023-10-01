@@ -86,7 +86,7 @@ const CoachingModal = ({ isOpen, onClose }) => {
             form1.append('IsPreview', true);
 
             addNewCoachingHelper(dispatch, form, form1);
-
+            cleanUp();
         } else {
             // TODO error
         }
