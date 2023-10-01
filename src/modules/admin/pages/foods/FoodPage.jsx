@@ -17,6 +17,7 @@ import AnimateHeight from 'react-animate-height';
 import FoodPageModal from './modals/FoodPageModal';
 import FoodPointModal from './modals/FoodPointModal';
 import PreventDeleteModal from '../../../../components/PreventDeleteModal/PreventDeleteModal';
+import FoodDetails from './modals/FoodDetails';
 const FoodPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -32,6 +33,7 @@ const FoodPage = () => {
     const [addFoodPointIsOpen, setAddFoodPointIsOpen] = useState(false);
     const [editFoodPointMode, setIsEditFoodPointMode] = useState(false);
     const [selectedFoodPointItem, setSelectedFoodPointItem] = useState(null);
+    const [editFoodDetails, setIsEditFoodDetails] = useState(false);
 
     const handleToggle = (index) => {
         setSelectedToggleItem((prevSelectedItem) =>
@@ -64,6 +66,17 @@ const FoodPage = () => {
         setSelectedItem(id);
         setAddFoodPointIsOpen(true);
     }
+
+    function onEditFoodDetailsClose() {
+        setSelectedItem(null);
+        setIsEditFoodDetails(false);
+    }
+
+    function onAddFoodDetailsHandler(id: string) {
+        setSelectedItem(id);
+        setIsEditFoodDetails(true);
+    }
+
 
     function onAddFoodPointCloseHandler() {
         setSelectedItem(null);
@@ -134,6 +147,10 @@ const FoodPage = () => {
                 editMode={editFoodPointMode}
                 isOpen={addFoodPointIsOpen}
                 onClose={onAddFoodPointCloseHandler} />
+            <FoodDetails
+                foodId={selectedItem}
+                isOpen={editFoodDetails}
+                onClose={onEditFoodDetailsClose} />
 
             <div className={styles.box}>
                 <div className={styles.header}>
@@ -173,6 +190,12 @@ const FoodPage = () => {
                                             <div className={mainStyles.box}>
                                                 <img src={addIcon} alt='' />
                                                 <p>Додати пункт харчування</p>
+                                            </div>
+                                        </button>
+                                        <button className={mainStyles.tableBtn}  onClick={() => onAddFoodDetailsHandler(f.id)}>
+                                            <div className={mainStyles.box}>
+                                                <img src={addIcon} alt='' />
+                                                <p>Деталі</p>
                                             </div>
                                         </button>
                                     </div>

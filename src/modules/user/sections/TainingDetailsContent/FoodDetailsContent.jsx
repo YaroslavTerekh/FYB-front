@@ -4,8 +4,14 @@ import Button from '../../../../components/Button/Button';
 import trainingIcon from '../../../../img/components/icon10.svg';
 import trainingTimeIcon from '../../../../img/components/icon4.svg';
 import { GetIconHelper } from '../../../../constants/icons-const';
+import BuyAlertModal from '../../buy-modal/BuyAlertModal';
+import { PurchaseProductTypeFood } from '../../../../constants/roles';
 
 const FoodDetailsContent = (props: { training: null }) => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    function onModalCloseHandler() {
+        setModalIsOpen(false);
+    }
 
     useEffect(() => {
         debugger;
@@ -14,6 +20,13 @@ const FoodDetailsContent = (props: { training: null }) => {
 
     return (
         <>
+            <BuyAlertModal
+                purchaseProductType={PurchaseProductTypeFood}
+                onClose={onModalCloseHandler}
+                isOpen={modalIsOpen}
+                text={"Підвердіть покупку"}
+                productId={props.training.id}
+            />
             <div className=' vetrino'>
                 <div className={styles.navigation}></div>
                 <div className={styles.box}>
@@ -55,7 +68,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                                                 className={styles.btn}
                                                 aria-expanded={true}
                                                 aria-controls={`coach-modal`}
-                                                onClick={() => {}}
+                                                onClick={() => setModalIsOpen(true)}
                                             >
                                                 <p>Купити</p>
                                             </Button>
@@ -66,21 +79,19 @@ const FoodDetailsContent = (props: { training: null }) => {
                         </div>
 
                     </div>
-                    {/*<div className={styles.trainingDetailsBlock}>*/}
-                    {/*    <div className={styles.trainingDetailsList}>*/}
-                    {/*        { props.training.coachingDetails && props.training.coachingDetails.map(d =>*/}
-                    {/*            <div className={styles.trainingDetailsItem}>*/}
-                    {/*                <h4>{d.title}</h4>*/}
+                    <div className={styles.trainingDetailsBlock}>
+                        <div className={styles.trainingDetailsList}>
+                            { props.training.foodDetails && props.training.foodDetails.map(d =>
+                                <div className={styles.trainingDetailsItem}>
+                                    <h4>{d.title}</h4>
 
-                    {/*                { d.details && d.details.map(details =>*/}
-                    {/*                    <div className={styles.detailsData}>*/}
-                    {/*                        <p>{details.detail}</p>*/}
-                    {/*                    </div>*/}
-                    {/*                ) }*/}
-                    {/*            </div>*/}
-                    {/*        ) }*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                                    <div className={styles.detailsData}>
+                                        <p>{d.detail}</p>
+                                    </div>
+                                </div>
+                            ) }
+                        </div>
+                    </div>
                     {/*<div className={styles.photosGrid}>*/}
                     {/*    { props.training.examplePhotos && props.training.examplePhotos.map((x, i) =>*/}
                     {/*        <div className={styles.gridItem}>*/}
@@ -95,7 +106,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                         className={styles.btn}
                         aria-expanded={true}
                         aria-controls={`coach-modal`}
-                        onClick={() => {}}
+                        onClick={() => setModalIsOpen(true)}
                     >
                         <p>Купити</p>
                     </Button>

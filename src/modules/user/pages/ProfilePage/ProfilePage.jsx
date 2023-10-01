@@ -51,7 +51,7 @@ const ProfilePage = () => {
         }));
 
         if (food) {
-            const item2 = Object.entries(coaching).map(([itemType, itemData]) => ({
+            const item2 = Object.entries(food).map(([itemType, itemData]) => ({
                 value: itemData,
                 label: itemData.title,
                 isPurchased: true,
@@ -75,7 +75,7 @@ const ProfilePage = () => {
             >
                 <Select
                     className={styles.videoTrainingsSelectCustom}
-                    options={formatSelectOptions(list)}
+                    options={formatSelectOptions(list, food)}
                     selectedOptionValue={selectedTrainingType}
                     onChange={handleSelectChange}
                 />

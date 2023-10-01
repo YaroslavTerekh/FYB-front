@@ -62,14 +62,13 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
 
     useEffect(() => {
 
-        if (currentContentState.coaching && list.length === 0) {
 
-            const a = [...currentContentState.coaching];
+        const a = [...currentContentState.coaching, ...currentContentState.food];
 
-            setList(a);
-        }
+        setList(a);
 
-    }, [currentContentState.coaching]);
+    }, [currentContentState.coaching, currentContentState.food]);
+
 
 
     const isMobile = useMediaQuery({ maxWidth: 900 });
@@ -101,55 +100,6 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
                     <h2>Інші тренування</h2>
                 </div>
                 <Slider {...settings}>
-                {/*<Slider*/}
-                {/*    dots={false}*/}
-                {/*    infinite={true}*/}
-                {/*    speed={500}*/}
-                {/*    prevArrow={*/}
-                {/*        <TrainingCarouselArrow*/}
-                {/*            direction='prev'*/}
-                {/*            additionalClassName='custom-arrow'*/}
-                {/*            onClick={() => {}}*/}
-                {/*        />*/}
-                {/*    }*/}
-                {/*    nextArrow={*/}
-                {/*        <TrainingCarouselArrow*/}
-                {/*            direction='next'*/}
-                {/*            additionalClassName='custom-arrow'*/}
-                {/*            onClick={() => {}}*/}
-                {/*        />*/}
-                {/*    }*/}
-                {/*    responsive={responsiveSettings}*/}
-                {/*>*/}
-                    {/*{list.map(*/}
-                    {/*    (trainingData, i) => (*/}
-                    {/*        <div className='carusel-block' key={i}>*/}
-                    {/*            <div className='carusel-block__inf'>*/}
-                    {/*                <div className='carusel-block__img'>*/}
-                    {/*                    <img*/}
-                    {/*                        className=''*/}
-                    {/*                        src={trainingData.coachingPhoto.filePath}*/}
-                    {/*                    />*/}
-                    {/*                </div>*/}
-                    {/*                <div className='info-training__title vetrino'>*/}
-                    {/*                    {trainingData.title}*/}
-                    {/*                </div>*/}
-                    {/*                <div className='info-training__subtitle'>*/}
-                    {/*                    {trainingData.description}*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*            <div className='carusel-block__button'>*/}
-                    {/*                <Link*/}
-                    {/*                    className='button-training__blu'*/}
-                    {/*                    to={ROUTES.details}*/}
-                    {/*                >*/}
-                    {/*                    Детальніше*/}
-                    {/*                </Link>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    )*/}
-                    {/*)}*/}
-
                     {list.map(
                         (trainingData, index) => (
                             // TODO: it makes sense to put it in ./components/TrainingCard/TrainingCard.jsx

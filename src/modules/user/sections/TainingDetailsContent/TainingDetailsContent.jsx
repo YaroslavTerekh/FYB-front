@@ -4,8 +4,14 @@ import Button from '../../../../components/Button/Button';
 import trainingIcon from '../../../../img/components/icon10.svg';
 import trainingTimeIcon from '../../../../img/components/icon4.svg';
 import { GetIconHelper } from '../../../../constants/icons-const';
+import BuyAlertModal from '../../buy-modal/BuyAlertModal';
+import { PurchaseProductTypeCoaching } from '../../../../constants/roles';
 
 const TrainingDetailsContent = (props: { training: null }) => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    function onModalCloseHandler() {
+        setModalIsOpen(false);
+    }
 
     const [video, setVideo] = useState(null);
 
@@ -17,6 +23,13 @@ const TrainingDetailsContent = (props: { training: null }) => {
 
     return (
         <>
+            <BuyAlertModal
+                purchaseProductType={PurchaseProductTypeCoaching}
+                onClose={onModalCloseHandler}
+                isOpen={modalIsOpen}
+                text={"Підвердіть покупку"}
+                productId={props.training.id}
+            />
             <div className='container vetrino'>
                 <div className={styles.navigation}></div>
                 <div className={styles.box}>
@@ -54,7 +67,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                                 className={styles.btn}
                                 aria-expanded={true}
                                 aria-controls={`coach-modal`}
-                                onClick={() => {}}
+                                onClick={() => setModalIsOpen(true)}
                             >
                                 <p>Купити</p>
                             </Button>
@@ -90,7 +103,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                         className={styles.btn}
                         aria-expanded={true}
                         aria-controls={`coach-modal`}
-                        onClick={() => {}}
+                        onClick={() => setModalIsOpen(true)}
                     >
                         <p>Купити</p>
                     </Button>

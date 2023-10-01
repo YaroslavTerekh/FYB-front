@@ -6,7 +6,7 @@ import {
     addCoachingParentDetails,
     addFAQPoint,
     addFeedback,
-    addFood,
+    addFood, addFoodDetail,
     addFoodPoint, addFoodPointParentDay, addPhotosToCoach,
     addPhotosToCoaching,
     addVideoToCoaching,
@@ -252,6 +252,18 @@ export function addNewFoodHelper(dispatch: Dispatch<AnyAction>, data) {
         return res.status === 200;
     }).catch(err => {});
 }
+
+export function addNewFoodDetailsHelper(dispatch: Dispatch<AnyAction>, id,  data) {
+    addFoodDetail(id, data).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {});
+        return res.status === 200;
+    }).catch(err => {});
+}
+
 
 export function updateFoodHelper(dispatch: Dispatch<AnyAction>, id, data) {
     updateFood(id, data).then(res => {

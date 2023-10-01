@@ -59,6 +59,10 @@ export function addFood(model): Promise<any> {
     return API.post(`admin/food/create`, model);
 }
 
+export function addFoodDetail(id, model): Promise<any> {
+    return API.patch(`admin/foods/${id}/details/add`, model);
+}
+
 export function updateFood(id, model): Promise<any> {
     return API.put(`admin/food/modify/` + id, model);
 }
