@@ -26,7 +26,6 @@ const VideoTrainingsSection = ({
     }, [selectedTrainingType]);
 
     const handleSelectTrainingVideo = (videoSource) => {
-        debugger;
         setTrainingVideoSource(videoSource);
     };
 

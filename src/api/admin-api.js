@@ -107,6 +107,10 @@ export function addPhotosToCoaching(model): Promise<any> {
     return API.patch(`admin/coachings/examples/add/`, model);
 }
 
+export function addPhotosToFood(model): Promise<any> {
+    return API.patch(`foods/photos/add`, model);
+}
+
 export function addPhotosToCoach(model): Promise<any> {
     return API.put(`admin/coaches/photos/add/`, model);
 }

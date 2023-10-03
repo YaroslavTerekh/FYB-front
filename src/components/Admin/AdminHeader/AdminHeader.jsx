@@ -19,7 +19,7 @@ const AdminHeader = () => {
     return <>
             <div className={`${styles.headerBox} ${styles.h75}`}>
                 <nav className={`navbar navbar-dark bg-dark position-fixed w-100 d-flex justify-content-between ${styles.h75}`}>
-                    <a className={`navbar-brand ${styles.text}`}>Feel Your Body</a>
+                    <a className={`navbar-brand ${styles.text}`} href={"/"}>Feel Your Body</a>
                     <div className={styles.mainBtns}>
                         <div className={styles.name}>
                             <p>{selectedUser?.firstName}</p>

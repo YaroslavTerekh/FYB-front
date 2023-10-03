@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';
 import { AxiosError } from 'axios';
+import { setAlert } from './context/alert-context/alert-actions';
+import { useDispatch } from 'react-redux';
 
 const API = axios.create({
     baseURL: "https://localhost:1488/api/",
@@ -11,6 +13,7 @@ const API = axios.create({
 });
 
 const AxiosInterceptor = ({ children }: any) => {
+    const dispatch = useDispatch();
 
     useEffect(() => {
         API.interceptors.request.use(reqInterceptor, errInterceptor);
@@ -28,10 +31,14 @@ const AxiosInterceptor = ({ children }: any) => {
     const errInterceptor = async (error: AxiosError) =>
         error.response?.status === 401
             ? handleUnauthorized(error)
-            : Promise.reject(error);
+            : handleError(error);
 
     async function handleUnauthorized(error: AxiosError<any, any>) {
+        return Promise.reject(error);
+    }
 
+    async function handleError(error: AxiosError<any, any>) {
+        dispatch(setAlert({ icon:"", isSuccess: false, message: error?.error ?? error?.message}));
         return Promise.reject(error);
     }
 

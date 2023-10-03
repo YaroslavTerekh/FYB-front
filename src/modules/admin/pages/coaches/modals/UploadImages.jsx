@@ -23,7 +23,6 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
 
     useEffect(() => {
         if(currentAdminState.coaches && currentAdminState.coaches.length > 0) {
-            debugger;
             const data = currentAdminState.coaches.find(x=> x.id === coachingId);
             if (data?.photos) {
                 setCurrentImages(data.photos);
@@ -51,7 +50,11 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
                 element={
                     <>
                         <section className={styles.modalBox} >
-                            <ImagesCarousel imageList={currentImages}  onOk={onSaveHandler} setList={setCurrentImages} />
+                            <ImagesCarousel
+                                imageList={currentImages}
+                                onOk={onSaveHandler}
+                                setList={setCurrentImages}
+                                maxCount={3} />
                         </section>
                     </>
                 }

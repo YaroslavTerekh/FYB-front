@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CustomInput from '../../../components/Input/CustomInput';
 import CustomPasswordInput from '../../../components/Input/CustomPasswordInput';
 import ModalWindow from '../../../components/Modal/ModalWindow';
@@ -21,20 +21,40 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
     }
 
     async function login() {
-        await userService.login({ email, password });
+        if(email && email.length > 0 && password && password.length > 0) {
+            await userService.login({ email, password }).then(x=> onClose());
+        }
     }
+
+    const formRef = useRef(null);
 
     return <>
         <ModalWindow
             element={
-                <section className={styles.authBox} >
+                <form ref={formRef} className={styles.authBox} >
                     <div className={`${styles.content} vetrino`} >
                         <h2 className={styles.contentTitle}>Увійти</h2>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changeEmailHandler} className={styles.customInput} placeholder={"Email"} type={"email"} required={true}/>
+                            <CustomInput
+                                onChange={changeEmailHandler}
+                                className={styles.customInput}
+                                placeholder={"Email"}
+                                type={"email"}
+                                required={true}
+                                formRef={formRef}
+                                name={"LoginEmail"}
+                                value={email}
+                            />
                         </div>
                         <div className={styles.inputBox}>
-                            <CustomPasswordInput onChange={changePasswordHandler} className={styles.customInput} placeholder={"Пароль"} required={true}/>
+                            <CustomPasswordInput
+                                onChange={changePasswordHandler}
+                                className={styles.customInput}
+                                placeholder={"Пароль"}
+                                formRef={formRef}
+                                name={"LoginPassword"}
+                                value={password}
+                            />
                         </div>
                         <button className={styles.linkBox} onClick={registerRequested}>
                             <p className={styles.text}>Ще не маєте особистого кабінету?</p>
@@ -50,7 +70,7 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                         </Button>
                     </div>
 
-                </section>
+                </form>
             }
             isOpen={isOpen}
             onClose={onClose}

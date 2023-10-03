@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CustomInput from '../../../components/Input/CustomInput';
 import CustomPasswordInput from '../../../components/Input/CustomPasswordInput';
 import ModalWindow from '../../../components/Modal/ModalWindow';
@@ -32,28 +32,70 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
     }
 
     async function register() {
-        const isSuccess = await userService.register({ email, password, firstName: name, phoneNumber: phone });
+        const isSuccess = await userService.register(
+            {
+                email,
+                password,
+                firstName: name,
+                phoneNumber: phone }).then(x=> onClose());
 
         setRegistrationFinished(isSuccess);
     }
 
+    const formRef = useRef(null);
+
     return <>
         <ModalWindow
             element={
-                <section className={styles.authBox} >
+                <form ref={formRef} className={styles.authBox} >
                     <div className={`${styles.content} vetrino`} >
                         <h2 className={styles.contentTitleR}>Реєстрація</h2>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changeNameHandler} className={styles.customInput} placeholder={"Ім'я"} type={"text"} required={true}/>
+                            <CustomInput
+                                onChange={changeNameHandler}
+                                className={styles.customInput}
+                                placeholder={"Ім'я"}
+                                type={"text"}
+                                required={true}
+                                formRef={formRef}
+                                name={"RegisterName"}
+                                value={name}
+                            />
                         </div>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changePhoneHandler}className={styles.customInput}placeholder={"Телефон"} type={"tel"} required={true}/>
+                            <CustomInput
+                                onChange={changePhoneHandler}
+                                className={styles.customInput}
+                                placeholder={"Телефон"}
+                                type={"tel"}
+                                required={true}
+                                formRef={formRef}
+                                name={"RegisterPhone"}
+                                value={phone}
+                            />
                         </div>
                         <div className={styles.inputBox}>
-                            <CustomInput onChange={changeEmailHandler} className={styles.customInput} placeholder={"Email"} type={"email"} required={true}/>
+                            <CustomInput
+                                onChange={changeEmailHandler}
+                                className={styles.customInput}
+                                placeholder={"Email"}
+                                type={"email"}
+                                required={true}
+                                formRef={formRef}
+                                name={"RegisterEmail"}
+                                value={email}
+                            />
                         </div>
                         <div className=''>
-                            <CustomPasswordInput onChange={changePasswordHandler} className={""} placeholder={"Пароль"} required={true}/>
+                            <CustomPasswordInput
+                                onChange={changePasswordHandler}
+                                className={""}
+                                placeholder={"Пароль"}
+                                required={true}
+                                formRef={formRef}
+                                name={"RegisterPassword"}
+                                value={password}
+                            />
                         </div>
                         <Button
                             className={styles.btn}
@@ -64,7 +106,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                             <p>Далі</p>
                         </Button>
                     </div>
-                </section>
+                </form>
             }
             isOpen={isOpen}
             onClose={onClose}

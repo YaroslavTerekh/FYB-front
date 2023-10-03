@@ -10,16 +10,17 @@ const SystemAlert = () => {
     const [currentList, setCurrentList] = useState([]);
 
     useEffect(() => {
-
         if(alert.length > currentList.length) {
             setCurrentList([...alert]);
 
             const timeoutId = setTimeout(() => {
                dispatch(removeAlert());
-               currentList.shift();
+               const list = currentList;
+               list.shift();
+               setCurrentList(list);
             }, 3000);
-
-            clearTimeout(timeoutId);
+            //
+            // clearTimeout(timeoutId);
         }
 
     }, [alert]);
@@ -27,9 +28,8 @@ const SystemAlert = () => {
 
     return (
         <div className={`${styles.alertBox} vetrino`}>
-
-            {currentList && currentList.map(x=>
-                <div className={styles.alert}>{x.message}</div>
+            {currentList && currentList.map((x, i) =>
+                <div key={i} className={styles.alert}>{x.message}</div>
             )}
         </div>
     );

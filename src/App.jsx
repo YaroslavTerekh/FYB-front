@@ -1,14 +1,9 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import ProfilePage from './modules/user/pages/ProfilePage/ProfilePage';
 import HomePage from './modules/user/pages/HomePage/HomePage';
 import DetailsPage from './modules/user/pages/DetailsPage/DetailsPage';
-
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-
-import { HEADER_NAVIGATION, ROUTES } from './constants';
+import { ROUTES } from './constants';
 import AdminHome from './modules/admin/AdminHome';
 import UserMainPage from './modules/user/UserMainPage';
 import CoachesPage from './modules/admin/pages/coaches/CoachesPage';
@@ -53,8 +48,6 @@ function App() {
                             <Route path={ROUTES.confirmNumber} element={<ConfirmPhoneNumberPage />} />
                         </Route>
 
-
-
                         {selectedUser?.role && selectedUser.role === AdminRole &&
                             <Route path={ROUTES.admin} element={<AdminHome />}
 
@@ -72,6 +65,7 @@ function App() {
                     </Routes>
                 </Router>
             </AxiosInterceptor>
+
             <SystemAlert />
         </div>
     );

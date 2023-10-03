@@ -31,9 +31,17 @@ const CustomInput = ({
            setInputIsValue(false);
        }
 
-        if (type === "number" && (+value === 0 || +value <= 0)) {
-            setInputIsValue(false);
-        }
+       if (type === "number" && (+value === 0 || +value <= 0)) {
+           setInputIsValue(false);
+       } else if (type === "tel") {
+           let phoneRegex = /^[+]?\d{10}$/;
+
+           if (phoneRegex.test(value)) {
+               setInputIsValue(true);
+           } else {
+               setInputIsValue(false);
+           }
+       }
 
     }, [value, type]);
 

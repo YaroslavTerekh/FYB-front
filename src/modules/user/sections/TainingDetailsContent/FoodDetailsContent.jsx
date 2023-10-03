@@ -13,11 +13,6 @@ const FoodDetailsContent = (props: { training: null }) => {
         setModalIsOpen(false);
     }
 
-    useEffect(() => {
-        debugger;
-        console.log(props.training);
-    }, [props.training]);
-
     return (
         <>
             <BuyAlertModal

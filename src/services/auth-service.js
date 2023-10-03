@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAccessToken, setAccessToken } from './local-storage-service';
 import { setToken, setUser } from '../context/auth-context/user-actions';
 import { getCurrentUserHelper } from '../context/auth-context/user-context-helper';
+import { setAlert } from '../context/alert-context/alert-actions';
 
 export default class AuthService {
      dispatch = useDispatch();
@@ -13,27 +14,44 @@ export default class AuthService {
      _user: BaseUserModel | undefined;
 
      async login(model: LoginModel): Promise<void> {
-        const response = await Login(model);
+          try {
+              const response = await Login(model);
 
-        if (response.data.token) {
-            this.dispatch(setToken(response.data.token));
-            setAccessToken(response.data.token);
+              if (response.data.token) {
+                  this.dispatch(setToken(response.data.token));
+                  setAccessToken(response.data.token);
 
-            getCurrentUserHelper(this.dispatch);
-        }
+                  getCurrentUserHelper(this.dispatch);
+              }
+          } catch (ex) {
+              this.dispatch(
+                  setAlert({
+                      icon:"",
+                      isSuccess: false,
+                      message: ex?.error ?? "Перевірте ваші дані, такого облікового запис не існує!"
+                  }));
+          }
     }
 
     async register(model: RegisterModel): Promise<boolean> {
-        const response = await Register(model);
+        try {
+            const response = await Register(model);
 
+            if (response.status === 200) {
+                this.dispatch(setUser(response.data));
 
-        if (response.status === 200) {
-            this.dispatch(setUser(response.data));
+                return true
+            }
 
-            return true
+            return false
+        } catch (ex) {
+            this.dispatch(
+                setAlert({
+                    icon:"",
+                    isSuccess: false,
+                    message: ex?.error ?? "Упс... Щось пішло не так!"
+                }));
         }
-
-        return false
     }
 
     requestCode(): Promise<boolean> {
@@ -47,7 +65,6 @@ export default class AuthService {
     }
 
     isAuthorized(): boolean {
-
          if (this.currentUser?.firstName) {
              return (getAccessToken() || this.currentUser.token);
          }

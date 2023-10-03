@@ -18,6 +18,7 @@ import FoodPageModal from './modals/FoodPageModal';
 import FoodPointModal from './modals/FoodPointModal';
 import PreventDeleteModal from '../../../../components/PreventDeleteModal/PreventDeleteModal';
 import FoodDetails from './modals/FoodDetails';
+import UploadFoodImages from './modals/UploadFoodImages';
 const FoodPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
@@ -34,6 +35,7 @@ const FoodPage = () => {
     const [editFoodPointMode, setIsEditFoodPointMode] = useState(false);
     const [selectedFoodPointItem, setSelectedFoodPointItem] = useState(null);
     const [editFoodDetails, setIsEditFoodDetails] = useState(false);
+    const [imagesIsOpenOpen, setImagesIsOpen] = useState(false);
 
     const handleToggle = (index) => {
         setSelectedToggleItem((prevSelectedItem) =>
@@ -124,8 +126,23 @@ const FoodPage = () => {
         setDeleteFoodPointIsOpen(false)
     }
 
+    function onImagesCloseHandler(id: string) {
+        setImagesIsOpen(false);
+        setSelectedItem(null);
+    }
+
+    function onImagesOpenHandler(id: string) {
+        setImagesIsOpen(true);
+        setSelectedItem(id);
+    }
+
+
     return (
         <>
+            <UploadFoodImages
+                isOpen={imagesIsOpenOpen}
+                onClose={onImagesCloseHandler}
+                foodId={selectedItem}/>
             <PreventDeleteModal
                 onClose={() => setDeleteFoodPointIsOpen(false)}
                 isOpen={deleteFoodPointIsOpen}
@@ -196,6 +213,12 @@ const FoodPage = () => {
                                             <div className={mainStyles.box}>
                                                 <img src={addIcon} alt='' />
                                                 <p>Деталі</p>
+                                            </div>
+                                        </button>
+                                        <button className={mainStyles.tableBtn}  onClick={() => onImagesOpenHandler(f.id)}>
+                                            <div className={mainStyles.box}>
+                                                <img src={addIcon} alt='' />
+                                                <p>Фото</p>
                                             </div>
                                         </button>
                                     </div>

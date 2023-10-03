@@ -70,7 +70,6 @@ const CoachingModal = ({ isOpen, onClose }) => {
     }
 
     function onSaveHandler() {
-        debugger;
         if(name && coach && coach.value && description && price && days && avatar && video) {
             const form = new FormData();
 

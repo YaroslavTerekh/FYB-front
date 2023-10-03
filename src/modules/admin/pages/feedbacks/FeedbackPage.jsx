@@ -6,15 +6,14 @@ import deleteIcon from '../../../../img/components/delete_icon.png';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
-    deleteCoachingHelper, deleteFeedbackHelper,
-    getCoachesHelper,
+    deleteFeedbackHelper,
     getCoachingHelper,
     getFeedbacksHelper,
 } from '../../../../context/admin-data-context/admin-context.helper';
 import FeedbackModal from './modals/FeedbackModal';
-import UpdateCoaching from '../coaching/modals/UpdateCoaching';
 import FeedbackModalUpdate from './modals/FeedbackModalUpdate';
 import PreventDeleteModal from '../../../../components/PreventDeleteModal/PreventDeleteModal';
+
 const FeedbackPage = () => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);

@@ -36,7 +36,7 @@ const customStyles = {
     }),
 };
 
-const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
+const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCount: number } ) => {
     const [currentImages, setCurrentImages] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -69,7 +69,7 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
 
     function handleSelectChange(e) {
 
-        if(e < 1 || e > 4) return;
+        if(e < 1 || e > props?.maxCount) return;
 
         const data = currentImages.findIndex(x => x.index === e);
         const selected = currentImages.findIndex(x => x.index === selectedImage.index);
@@ -103,8 +103,16 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
                     name: selectedImageData.name,
                 });
 
-                const newList = currentImages.length > 0
+                let newList = currentImages.length > 0
                     ? [...currentImages] : [];
+
+                // приховування старих фото
+                if (newList &&
+                    newList.length > 0 &&
+                    newList?.find(x=> x?.filePath)) {
+
+                    newList = newList.filter(x=> !x.filePath);
+                }
 
                 newList.push({data: blob, name: selectedImageData.name, index: currentImages.length + 1});
 
@@ -125,11 +133,17 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any } ) => {
     }
 
     function onOk() {
-        props.onOk(currentImages);
+        if(currentImages.length === props.maxCount) {
+            props.onOk(currentImages.filter(x=> !x.filePath));
+        }
     }
 
     return <div className={styles.box}>
         <div className={styles.imgBox}>
+            { currentImages &&
+              currentImages.length > 0 &&
+              currentImages?.find(x=> x?.filePath) &&
+                <p>* Для зміни існуючих фотографій, потрібно буде заново додати усі фото, а попередні фото буде автоматично видалено</p> }
             <div className={styles.imgInput} onClick={handleButtonClick}>
                 <p className={styles.placeholder}>Upload new photo</p>
                 <img src={selectIcon} alt='' />

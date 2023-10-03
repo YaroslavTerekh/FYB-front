@@ -8,7 +8,7 @@ import {
     addFeedback,
     addFood, addFoodDetail,
     addFoodPoint, addFoodPointParentDay, addPhotosToCoach,
-    addPhotosToCoaching,
+    addPhotosToCoaching, addPhotosToFood,
     addVideoToCoaching,
     deleteCoach,
     deleteCoachDetails,
@@ -29,6 +29,8 @@ import { Dispatch } from 'redux';
 import { AnyAction } from 'redux';
 import { setCoaches, setCoaching, setFAQ, setFeedbacks, setFood, setUsers } from './admin-actions';
 import { getCoaches, getCoaching, getFaq, getFeedbacks, getFood } from '../../api/content-api';
+import { setAlert } from '../alert-context/alert-actions';
+import { writeError } from '../alert-context/alert-context-helper';
 
 export function addNewCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData) {
     addCoach(data).then(res => {
@@ -36,9 +38,13 @@ export function addNewCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData)
             .then(res => {
                 dispatch(setCoaches(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
@@ -47,9 +53,13 @@ export function deleteCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
             .then(res => {
                 dispatch(setCoaches(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function updateCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData, coachId: string) {
@@ -58,9 +68,13 @@ export function updateCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData,
             .then(res => {
                 dispatch(setCoaches(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteCoachHelper(dispatch: Dispatch<AnyAction>, coachId: string) {
@@ -69,9 +83,13 @@ export function deleteCoachHelper(dispatch: Dispatch<AnyAction>, coachId: string
             .then(res => {
                 dispatch(setCoaches(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteCoachingHelper(dispatch: Dispatch<AnyAction>, coachId: string) {
@@ -80,9 +98,13 @@ export function deleteCoachingHelper(dispatch: Dispatch<AnyAction>, coachId: str
             .then(res => {
                 dispatch(setCoaching(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
@@ -91,9 +113,13 @@ export function deleteCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
             .then(res => {
                 dispatch(setCoaching(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteCoachingParentDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
@@ -102,9 +128,13 @@ export function deleteCoachingParentDetailsHelper(dispatch: Dispatch<AnyAction>,
             .then(res => {
                 dispatch(setCoaching(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 
@@ -113,7 +143,9 @@ export function getCoachesHelper(dispatch: Dispatch<AnyAction>){
         .then(res => {
             dispatch(setCoaches(res.data));
         })
-        .catch(err => {});
+        .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id, data) {
@@ -122,9 +154,13 @@ export function addNewCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id, data
             .then(res => {
                 dispatch(setCoaches(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function getFeedbacksHelper(dispatch: Dispatch<AnyAction>){
@@ -132,7 +168,9 @@ export function getFeedbacksHelper(dispatch: Dispatch<AnyAction>){
         .then(res => {
             dispatch(setFeedbacks(res.data));
         })
-        .catch(err => {});
+        .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewFeedbacksHelper(dispatch: Dispatch<AnyAction>, data) {
@@ -142,9 +180,13 @@ export function addNewFeedbacksHelper(dispatch: Dispatch<AnyAction>, data) {
 
                 dispatch(setFeedbacks(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function updateFeedbacksHelper(dispatch: Dispatch<AnyAction>, id, data) {
@@ -154,9 +196,13 @@ export function updateFeedbacksHelper(dispatch: Dispatch<AnyAction>, id, data) {
 
                 dispatch(setFeedbacks(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteFeedbackHelper(dispatch: Dispatch<AnyAction>, id: string) {
@@ -165,17 +211,22 @@ export function deleteFeedbackHelper(dispatch: Dispatch<AnyAction>, id: string) 
             .then(res => {
                 dispatch(setFeedbacks(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewCoachingHelper(dispatch: Dispatch<AnyAction>, data: FormData, video) {
     addCoaching(data).then(res => {
-        debugger;
         addVideoToCoachingHelper(dispatch, res.data.id, video);
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, dataParent, data) {
@@ -187,9 +238,15 @@ export function addNewCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, dataP
                 .then(res => {
                     dispatch(setCoaching(res.data));
                 })
-                .catch(err => {});
-        }).catch(err => {});
-    }).catch(err => {});
+                .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
+        }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 
 }
 
@@ -199,9 +256,28 @@ export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
             .then(res => {
                 dispatch(setCoaching(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
+}
+
+export function addPhotosToFoodHelper(dispatch: Dispatch<AnyAction>, data) {
+    addPhotosToFood(data).then(res => {
+        getFood()
+            .then(res => {
+                dispatch(setFood(res.data));
+            })
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
+        return res.status === 200;
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addPhotosToCoachHelper(dispatch: Dispatch<AnyAction>, data) {
@@ -210,9 +286,13 @@ export function addPhotosToCoachHelper(dispatch: Dispatch<AnyAction>, data) {
             .then(res => {
                 dispatch(setCoaches(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data) {
@@ -221,9 +301,13 @@ export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data
             .then(res => {
                 dispatch(setCoaching(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
@@ -231,7 +315,9 @@ export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
         .then(res => {
             dispatch(setCoaching(res.data));
         })
-        .catch(err => {});
+        .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function getFoodHelper(dispatch: Dispatch<AnyAction>){
@@ -239,7 +325,9 @@ export function getFoodHelper(dispatch: Dispatch<AnyAction>){
         .then(res => {
             dispatch(setFood(res.data));
         })
-        .catch(err => {});
+        .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewFoodHelper(dispatch: Dispatch<AnyAction>, data) {
@@ -248,9 +336,13 @@ export function addNewFoodHelper(dispatch: Dispatch<AnyAction>, data) {
             .then(res => {
                 dispatch(setFood(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewFoodDetailsHelper(dispatch: Dispatch<AnyAction>, id,  data) {
@@ -259,9 +351,13 @@ export function addNewFoodDetailsHelper(dispatch: Dispatch<AnyAction>, id,  data
             .then(res => {
                 dispatch(setFood(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 
@@ -271,9 +367,13 @@ export function updateFoodHelper(dispatch: Dispatch<AnyAction>, id, data) {
             .then(res => {
                 dispatch(setFood(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewFoodPointHelper(dispatch: Dispatch<AnyAction>, data) {
@@ -294,9 +394,13 @@ export function deleteFoodHelper(dispatch: Dispatch<AnyAction>, id: string) {
             .then(res => {
                 dispatch(setFood(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteFoodPointHelper(dispatch: Dispatch<AnyAction>, id: string) {
@@ -305,9 +409,13 @@ export function deleteFoodPointHelper(dispatch: Dispatch<AnyAction>, id: string)
             .then(res => {
                 dispatch(setFood(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function updateFoodPointHelper(dispatch: Dispatch<AnyAction>, id, data) {
@@ -316,23 +424,31 @@ export function updateFoodPointHelper(dispatch: Dispatch<AnyAction>, id, data) {
             .then(res => {
                 dispatch(setFood(res.data));
             })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function getUsersHelper(dispatch: Dispatch<AnyAction>) {
     getUsers().then(res => {
         dispatch(setUsers(res.data));
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function getFAQHelper(dispatch: Dispatch<AnyAction>) {
     getFaq().then(res => {
         dispatch(setFAQ(res.data));
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function addNewFAQHelper(dispatch: Dispatch<AnyAction>, data) {
@@ -340,9 +456,13 @@ export function addNewFAQHelper(dispatch: Dispatch<AnyAction>, data) {
         getFaq().then(res => {
             dispatch(setFAQ(res.data));
         })
-        .catch(err => {});
+        .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function updateFAQHelper(dispatch: Dispatch<AnyAction>, id, data) {
@@ -350,9 +470,13 @@ export function updateFAQHelper(dispatch: Dispatch<AnyAction>, id, data) {
         getFaq().then(res => {
             dispatch(setFAQ(res.data));
         })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }
 
 export function deleteFAQHelper(dispatch: Dispatch<AnyAction>, id: string) {
@@ -360,7 +484,11 @@ export function deleteFAQHelper(dispatch: Dispatch<AnyAction>, id: string) {
         getFaq().then(res => {
             dispatch(setFAQ(res.data));
         })
-            .catch(err => {});
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
         return res.status === 200;
-    }).catch(err => {});
+    }).catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
 }

@@ -1,14 +1,18 @@
-import { REMOVE_ALERT, REMOVE_TOKEN, SET_ALERT, SET_TOKEN, SET_USER } from './alert-actions';
-import type { BaseUserModel } from '../../models/user-models/base-user-model';
+import { REMOVE_ALERT, SET_ALERT } from './alert-actions';
+import { object } from 'prop-types';
 
 const initialState = [];
 
 function alertReducer(state = initialState, action) {
     switch(action.type) {
         case SET_ALERT:
-            return [...initialState, action.payload];
+            const newList = [...state];
+            newList.push(action.payload);
+            return newList;
         case REMOVE_ALERT:
-            return [...initialState.shift()];
+            const removeList = [...state];
+            removeList.shift();
+            return [...removeList];
         default:
             return state;
     }

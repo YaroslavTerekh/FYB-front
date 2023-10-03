@@ -268,3 +268,27 @@
 .titleGrid .titleGridItem:nth-child(2) img {
     border-radius: 0px 400px 0px 0px;
 }
+
+@media screen and (max-width: 1000px) {
+    .video video {
+        width: 540px;
+        height: 310px;
+        box-sizing: border-box;
+    }
+
+    .infoBlock {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 576px) {
+
+}
+
+@media screen and (max-width: 385px) {
+
+}

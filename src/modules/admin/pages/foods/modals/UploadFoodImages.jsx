@@ -1,15 +1,14 @@
-import styles from '../CoachingPage.module.css';
+import styles from '../FoodPage.module.css';
 import ModalWindow from '../../../../../components/Modal/ModalWindow';
 import closeIcon from '../../../../../img/components/regularClose.png';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    addNewCoachingHelper,
-    addPhotosToCoachingHelper,
+    addPhotosToFoodHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
 import ImagesCarousel from '../../../../../components/ContentCarousel/ImagesCarousel';
 
-const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
+const UploadFoodImages = ({ isOpen, onClose, foodId }) => {
     const dispatch = useDispatch();
     const currentAdminState = useSelector(state => state.admin);
 
@@ -22,24 +21,25 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
     }
 
     useEffect(() => {
-        if(currentAdminState.coaching && currentAdminState.coaching.length > 0) {
-            const data = currentAdminState.coaching.find(x=> x.id === coachingId);
-            if (data?.examplePhotos) {
-                setCurrentImages(data.examplePhotos);
+        if(currentAdminState.food && currentAdminState.food.length > 0) {
+            const data = currentAdminState.food.find(x=> x.id === foodId);
+
+            if (data?.photos) {
+                setCurrentImages(data.photos);
             }
         }
-    }, [coachingId]);
+    }, [foodId]);
 
     function onSaveHandler(currentImages: []) {
 
         currentImages.forEach((image, index) => {
             const form = new FormData();
-            form.append('Id', coachingId);
-            form.append('PhotoFile', image.data);
-            form.append('OrderId', 1);
+            form.append('Id', foodId);
+            form.append('File', image.data);
+            form.append('OrderId', index);
             form.append('FileName', image.name);
 
-            addPhotosToCoachingHelper(dispatch, form);
+            addPhotosToFoodHelper(dispatch, form);
         });
 
         cleanUp();
@@ -55,7 +55,7 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
                                 imageList={currentImages}
                                 onOk={onSaveHandler}
                                 setList={setCurrentImages}
-                                maxCount={4}
+                                maxCount={6}
                             />
                         </section>
                     </>
@@ -75,4 +75,4 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
     );
 };
 
-export default UploadImagesCarousel;
+export default UploadFoodImages;

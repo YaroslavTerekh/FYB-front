@@ -28,6 +28,15 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
         onClose();
     }
 
+    useEffect(() => {
+        if(currentAdminState.coaching && currentAdminState.coaching.length > 0) {
+            const data = currentAdminState.coaching.find(x=> x.id === coachingId);
+            if (data?.videos) {
+                setCurrentVideos(data.videos.filter(x=> !x?.isPreview));
+            }
+        }
+    }, [coachingId]);
+
     function onSaveHandler(currentVideos: []) {
 
         currentVideos.forEach((video, index) => {
