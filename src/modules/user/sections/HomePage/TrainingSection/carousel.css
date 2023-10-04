@@ -9,10 +9,16 @@
     padding: 0 25px 0 25px;
 }
 
+.carusel-block__img {
+    width: 355px;
+    height: 400px;
+}
+
 .carusel-block__img img {
     border-radius: 200px 0px;
-    max-width: 100%;
-    min-height: 473px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .carusel-block div:not(:last-child) {
@@ -33,12 +39,12 @@
 
 .custom-arrow.slick-next {
     right: 450px;
-    top: 881px;
+    top: 731px;
 }
 
 .custom-arrow.slick-prev {
     left: 450px;
-    top: 870px;
+    top: 720px;
 }
 @media screen and (max-width: 1110px) {
     .custom-arrow.slick-next {

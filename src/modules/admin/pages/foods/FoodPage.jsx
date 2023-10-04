@@ -206,7 +206,7 @@ const FoodPage = () => {
                                         <button className={mainStyles.tableBtn}  onClick={() => onAddFoodPointHandler(f.id)}>
                                             <div className={mainStyles.box}>
                                                 <img src={addIcon} alt='' />
-                                                <p>Додати пункт харчування</p>
+                                                <p>Дні</p>
                                             </div>
                                         </button>
                                         <button className={mainStyles.tableBtn}  onClick={() => onAddFoodDetailsHandler(f.id)}>

@@ -140,6 +140,7 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
 
     return <div className={styles.box}>
         <div className={styles.imgBox}>
+            <p>Максимальна кількість фото: {props.maxCount}</p>
             { currentImages &&
               currentImages.length > 0 &&
               currentImages?.find(x=> x?.filePath) &&

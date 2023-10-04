@@ -108,7 +108,7 @@ export function addPhotosToCoaching(model): Promise<any> {
 }
 
 export function addPhotosToFood(model): Promise<any> {
-    return API.patch(`foods/photos/add`, model);
+    return API.patch(`admin/foods/photos/add`, model);
 }
 
 export function addPhotosToCoach(model): Promise<any> {

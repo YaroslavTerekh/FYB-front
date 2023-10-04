@@ -22,7 +22,8 @@ const TrainingCard = ({
     food,
     foodPoints,
     purchaseProductType,
-    isFood
+    isFood,
+    photos
 }) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -44,7 +45,11 @@ const TrainingCard = ({
         <div className='training-block'>
             <div className={`training-block__items items-training ${className}`}>
                 <div className='items-training__img'>
-                    <img className='img-training' src={coachingPhoto?.filePath} />
+                    { isFood
+                        ? <img className='img-training' src={photos?.find(x=>x.orderId === 0)?.filePath} />
+                        : <img className='img-training' src={coachingPhoto?.filePath} />
+                    }
+
                 </div>
                 <div className='items-training__info info-training'>
                     <div className='info-training__title vetrino'>{title}</div>

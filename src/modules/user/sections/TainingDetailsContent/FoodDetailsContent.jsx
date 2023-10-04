@@ -27,17 +27,17 @@ const FoodDetailsContent = (props: { training: null }) => {
                 <div className={styles.box}>
                     <div className={styles.headerBlock}>
                         <div className={styles.titlePhotos}>
-                            { props.training.examplePhotos || true &&
+                            { props.training?.photos &&
                                 <div className={styles.titleGrid}>
                                     <div className={styles.titleGridItem}>
-                                        {/*<div className={styles.gridImgBox}>*/}
-                                        {/*    <img src={props.training.examplePhotos[0]} alt='' />*/}
-                                        {/*</div>*/}
+                                        <div className={styles.gridImgBox}>
+                                            <img src={props.training.photos[0]?.filePath} alt='' />
+                                        </div>
                                     </div>
                                     <div className={styles.titleGridItem}>
-                                        {/*<div className={styles.gridImgBox}>*/}
-                                        {/*    <img src={props.training.examplePhotos[1]} alt='' />*/}
-                                        {/*</div>*/}
+                                        <div className={styles.gridImgBox}>
+                                            <img src={props.training.photos[1]?.filePath} alt='' />
+                                        </div>
                                     </div>
                                     <div className={styles.titleGridItem}>
                                         <div className={styles.infoBlock}>
@@ -87,15 +87,18 @@ const FoodDetailsContent = (props: { training: null }) => {
                             ) }
                         </div>
                     </div>
-                    {/*<div className={styles.photosGrid}>*/}
-                    {/*    { props.training.examplePhotos && props.training.examplePhotos.map((x, i) =>*/}
-                    {/*        <div className={styles.gridItem}>*/}
-                    {/*            <div className={styles.gridImgBox}>*/}
-                    {/*                <img src={x} alt='' />*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    ) }*/}
-                    {/*</div>*/}
+                    <div className={styles.photosGrid}>
+                        { props.training.photos && props.training.photos.map((x, i) => {
+                                if(i > 1) {
+                                    return (<div className={styles.gridItem}>
+                                        <div className={styles.gridImgBox}>
+                                            <img src={x.filePath} alt='' />
+                                        </div>
+                                    </div>)
+                                }
+                            }
+                        ) }
+                    </div>
 
                     <Button
                         className={styles.btn}
