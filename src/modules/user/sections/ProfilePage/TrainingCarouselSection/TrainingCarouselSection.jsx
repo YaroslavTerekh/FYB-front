@@ -108,7 +108,7 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
                                     <div className='carusel-block__img'>
                                         <img
                                             className=''
-                                            src={trainingData.coachingPhoto?.filePath}
+                                            src={trainingData.coachingPhoto?.filePath ?? trainingData?.photos?.find(x=>x.orderId === 0)?.filePath}
                                             alt={trainingData.alt}
                                         />
                                     </div>

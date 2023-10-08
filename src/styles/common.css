@@ -87,7 +87,7 @@ body {
 
 @media screen and (max-width: 768px) {
     .container {
-        max-width: 610px;
+        max-width: 710px;
     }
     .btn button {
         font-size: 16px;
@@ -103,7 +103,7 @@ body {
 
 @media screen and (max-width: 576px) {
     .container {
-        max-width: 460px;
+        max-width: 570px;
     }
     .tlt {
         margin: 0 0 20px 0;
@@ -112,6 +112,6 @@ body {
 
 @media screen and (max-width: 385px) {
     .container {
-        max-width: 340px;
+        max-width: 385px;
     }
 }

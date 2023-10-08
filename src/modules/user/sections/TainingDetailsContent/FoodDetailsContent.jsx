@@ -51,7 +51,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                                             <div className={styles.trainingPeriod}>
                                                 <div className={styles.data}>
                                                     <img src={trainingTimeIcon} alt='' />
-                                                    <p>Раціон на {props.training.count} днів</p>
+                                                    <p>Раціон на {props?.training.foodPoints?.length} днів</p>
                                                 </div>
                                             </div>
 
@@ -60,7 +60,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                                             </h3>
 
                                             <Button
-                                                className={styles.btn}
+                                                className={styles.btn + " " + styles.hide}
                                                 aria-expanded={true}
                                                 aria-controls={`coach-modal`}
                                                 onClick={() => setModalIsOpen(true)}
@@ -74,6 +74,16 @@ const FoodDetailsContent = (props: { training: null }) => {
                         </div>
 
                     </div>
+
+                    <Button
+                        className={styles.btn + " " + styles.hiddenBtn}
+                        aria-expanded={true}
+                        aria-controls={`coach-modal`}
+                        onClick={() => setModalIsOpen(true)}
+                    >
+                        <p>Купити</p>
+                    </Button>
+
                     <div className={styles.trainingDetailsBlock}>
                         <div className={styles.trainingDetailsList}>
                             { props.training.foodDetails && props.training.foodDetails.map(d =>

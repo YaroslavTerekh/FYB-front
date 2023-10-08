@@ -10,11 +10,15 @@ import styles from '../../sections/ProfilePage/VideoTrainingsSection/VideoTraini
 import Select from '../../../../components/Select/Select';
 import FoodSection from '../../sections/ProfilePage/FoodSection/FoodSection';
 import { useDispatch, useSelector } from 'react-redux';
+import { getCoachingHelper, getFoodHelper } from '../../../../context/content-context/content-context.helper';
 
 const ProfilePage = () => {
-    const [selectedTrainingType, setSelectedTrainingType] = useState(
-        MOCKED_TRAININGS_DATA[MOCKED_TRAININGS_TYPES.healthy_diet]
-    );
+    const [selectedTrainingType, setSelectedTrainingType] = useState();
+
+    useEffect(() => {
+        getCoachingHelper(dispatch);
+        getFoodHelper(dispatch);
+    }, []);
 
     const handleSelectChange = ({ value, label }) => {
         setSelectedTrainingType(value);
@@ -30,19 +34,18 @@ const ProfilePage = () => {
     const [food, setFoodList] = useState([]);
 
     useEffect(() => {
-        if (currentContentState.coaching) {
-            setList(currentContentState.coaching);
-        }
-    }, [currentContentState.coaching]);
+        if (currentContentState.coaching || currentContentState.food) {
+            setList(currentContentState.coaching ?? []);
+            setFoodList(currentContentState.food ?? []);
 
-    useEffect(() => {
-        if (currentContentState.food) {
-            setFoodList(currentContentState.food);
+            if(currentContentState.coaching && currentContentState.coaching.length > 0) {
+                const data = formatSelectOptions(currentContentState.coaching, currentContentState.food);
+                setSelectedTrainingType(data[0].value);
+            }
         }
-    }, [currentContentState.food]);
+    }, [currentContentState.coaching, currentContentState.food]);
 
     const formatSelectOptions = (coaching, food) => {
-        let res = [];
         let item1 = Object.entries(coaching).map(([itemType, itemData]) => ({
             value: itemData,
             label: itemData.title,
@@ -81,7 +84,7 @@ const ProfilePage = () => {
                 />
             </div>
 
-            { (selectedTrainingType && selectedTrainingType.isFood)
+            { (selectedTrainingType && selectedTrainingType.foodDetails)
                 ?   <FoodSection  selectedTrainingType={selectedTrainingType} filteredTrainingData={filteredTrainingData}/>
                 :   <VideoTrainingsSection
                         selectedTrainingType={selectedTrainingType}

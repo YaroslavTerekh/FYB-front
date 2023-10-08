@@ -10,7 +10,7 @@
     flex-direction: column;
     border-radius: 30px;
     background: #ffcdd2;
-
+    transition: all 0.3s ease 0s;
 }
 
 .reviews__slider {
@@ -151,11 +151,13 @@
         padding: 20px 0 30px 0;
     }
     .slick-prev {
-        left: -3%;
+        left: 1%;
+        width: 20px;
     }
 
     .slick-next {
-        right: -3%;
+        right: 2%;
+        width: 20px;
     }
     .slider-block__img img {
         max-width: 90%;
@@ -167,11 +169,16 @@
 }
 
 @media screen and (max-width: 450px) {
+
+    .slider-block {
+        padding: 0 20px;
+    }
+
     .slick-prev {
-        left: -5%;
+        left: -3%;
     }
 
     .slick-next {
-        right: -5%;
+        right: -3%;
     }
 }

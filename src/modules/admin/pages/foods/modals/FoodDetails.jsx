@@ -10,6 +10,7 @@ import {
     addNewCoachHelper, addNewCoachingDetailsHelper, addNewFoodDetailsHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
 import addIcon from  '../../../../../img/components/add_icon.png';
+import CustomTextArea from '../../../../../components/Input/CustomTextArea';
 
 const FoodDetails = ({ isOpen, onClose, foodId }) => {
     const dispatch = useDispatch();
@@ -96,8 +97,8 @@ const FoodDetails = ({ isOpen, onClose, foodId }) => {
 
                                 { nameList && nameList.map((n, i) =>
                                     <div className={styles.inputBox} key={n.id}>
-                                        <CustomInput
-                                            customInputContainer={styles.customInputContainer + " " + styles.imgInputWithBtn}
+                                        <CustomTextArea
+                                            customInputContainer={styles.customTextAreaContainer}
                                             className={styles.customInput}
                                             placeholder={"Деталі"} type={"text"}
                                             required={true}
@@ -106,9 +107,7 @@ const FoodDetails = ({ isOpen, onClose, foodId }) => {
                                             formRef={formRef}
                                             name={`FoodDetails${i}`}
                                         />
-                                        <div className={styles.addIcon} onClick={addItemHandler}>
-                                            <img src={addIcon} alt='' />
-                                        </div>
+
                                     </div>
                                 ) }
                                 <div className={styles.btnBox}>

@@ -68,8 +68,10 @@ export default class AuthService {
          if (this.currentUser?.firstName) {
              return (getAccessToken() || this.currentUser.token);
          }
-         else {
+         else if( getAccessToken() ){
              getCurrentUserHelper(this.dispatch);
          }
+
+         return false;
     }
 }

@@ -2,9 +2,6 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../../../../../../components/Button/Button';
 import { ROUTES } from '../../../../../../../constants';
-import { getPayForm } from '../../../../../../../api/content-api';
-import styles from '../../../../../buy-modal/modal.module.css';
-import ModalWindow from '../../../../../../../components/Modal/ModalWindow';
 import BuyAlertModal from '../../../../../buy-modal/BuyAlertModal';
 
 const TrainingCard = ({

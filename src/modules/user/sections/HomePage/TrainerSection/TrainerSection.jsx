@@ -40,8 +40,8 @@ const TrainerSection = () => {
 
                     { trainers && trainers.map((t, i) => {
                         return (i % 2 === 0)
-                            ? <TrainerLyda data={t} />
-                            : <TrainerLyda data={t} />
+                            ? <TrainerLyda data={t} key={i}/>
+                            : <TrainerLyda data={t} key={i}/>
                     }) }
 
 
