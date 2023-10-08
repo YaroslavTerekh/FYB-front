@@ -641,6 +641,10 @@ img {
 
 @media screen and (max-width: 540px) {
 
+    .trainingDetailsBlock {
+        padding: 0 10px;
+    }
+
     .titlePhotos .header {
         top: 0;
         font-size: 20px;

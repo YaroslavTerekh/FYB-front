@@ -20,7 +20,8 @@ const TrainingCard = ({
     foodPoints,
     purchaseProductType,
     isFood,
-    photos
+    photos,
+    coachingId
 }) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -75,9 +76,9 @@ const TrainingCard = ({
                                 {accessDays} місяці доступу
                             </div>
                         )}
-                        {gift && (
+                        {isFood && coachingId && (
                             <div className='picture-training__gift picture-training__text'>
-                                {gift}
+                                <p>+ харчування в подарунок</p>
                             </div>
                         )}
                     </div>

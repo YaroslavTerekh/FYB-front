@@ -35,6 +35,17 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
         return numbers;
     }
 
+    const [width, setWidth]   = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight);
+    const updateDimensions = () => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+    }
+    useEffect(() => {
+        window.addEventListener("resize", updateDimensions);
+        return () => window.removeEventListener("resize", updateDimensions);
+    }, []);
+
     return (
         <section className={styles.videoTrainings}>
             <div className={styles.container}>
@@ -56,7 +67,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                             <div className={styles.mainTitle}>
                                 <h3 className={styles.day}>{data?.title}</h3>
                                 <Button
-                                    className={`block-main__question ${styles.mainBtn} ${styles.arrowHidden}`}
+                                    className={`block-main__question ${styles.mainBtn} ${ width <= 799 ? '' : styles.arrowHidden}`}
                                     aria-expanded={selectedItem === data?.id}
                                     aria-controls={`example-panel-${data?.id}`}
                                     onClick={() => handleToggle(data?.id)}
@@ -74,7 +85,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                 id={`example-panel-${data?.id}`}
                                 duration={500}
                                 height={selectedItem === data?.id ? 'auto' : 0}
-                                className={styles.panelExpanded}
+                                className={width <= 799 ? '' : styles.panelExpanded}
                             >
                                 <div className={styles.panelExpandedData}>
                                     <div

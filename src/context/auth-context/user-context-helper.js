@@ -10,6 +10,6 @@ export function getCurrentUserHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setUser(res.data));
         })
         .catch(err => {
-            writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            // writeError(dispatch, err?.response?.data?.error ?? err?.message)
         });
 }

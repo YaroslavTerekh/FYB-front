@@ -84,7 +84,7 @@ const ProfilePage = () => {
                 />
             </div>
 
-            { (selectedTrainingType && selectedTrainingType.foodDetails)
+            { (selectedTrainingType && selectedTrainingType?.foodDetails)
                 ?   <FoodSection  selectedTrainingType={selectedTrainingType} filteredTrainingData={filteredTrainingData}/>
                 :   <VideoTrainingsSection
                         selectedTrainingType={selectedTrainingType}

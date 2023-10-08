@@ -55,13 +55,32 @@ export default class AuthService {
     }
 
     requestCode(): Promise<boolean> {
-        return RequestCode(this.currentUser.phoneNumber);
+        try {
+            return RequestCode(this.currentUser.phoneNumber);
+        } catch (ex) {
+            this.dispatch(
+                setAlert({
+                    icon:"",
+                    isSuccess: false,
+                    message: ex?.error ?? "Упс... Щось пішло не так!"
+                }));
+        }
+
     }
 
     async verifyCode(code: number): Promise<boolean> {
-        const response = await VerifyCode(this.currentUser.phoneNumber, code);
+        try {
+            const response = await VerifyCode(this.currentUser.phoneNumber, code);
 
-        return response.status === 200;
+            return response.status === 200;
+        } catch (ex) {
+            this.dispatch(
+                setAlert({
+                    icon:"",
+                    isSuccess: false,
+                    message: ex?.error ?? "Упс... Щось пішло не так!"
+                }));
+        }
     }
 
     isAuthorized(): boolean {
