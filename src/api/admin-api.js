@@ -121,3 +121,7 @@ export function addPhotosToCoach(model): Promise<any> {
 export function addVideoToCoaching(id, model): Promise<any> {
     return API.post(`admin/video/${id}/add`, model);
 }
+
+export function deleteCoachingVideo(id): Promise<any> {
+    return API.delete(`admin/coaching/video/delete/` + id);
+}

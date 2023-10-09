@@ -28,7 +28,7 @@ const customStyles = {
     }),
 };
 
-const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any } ) => {
+const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any, onDelete: any } ) => {
     const [currentVideos, setCurrentVideos] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -38,6 +38,7 @@ const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any } ) => {
     useEffect(() => {
         if (props.videoList && props.videoList.length > 0) {
             setCurrentVideos(props.videoList);
+            setSelectedVideo(props.videoList[0])
         }
     }, [props.videoList]);
 
@@ -97,7 +98,13 @@ const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any } ) => {
     };
 
     function deleteVideoHandler() {
-        setCurrentVideos(currentVideos.filter((video) => video.index !== selectedVideo.index));
+debugger;
+        if(selectedVideo?.filePath && props.onDelete) {
+            props.onDelete(selectedVideo.id);
+            setCurrentVideos(currentVideos.filter((video) => video.filePath !== selectedVideo.filePath));
+        } else {
+            setCurrentVideos(currentVideos.filter((video) => video.index !== selectedVideo.index));
+        }
     }
 
     function onOk() {
@@ -107,11 +114,6 @@ const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any } ) => {
     return (
         <div className={styles.box}>
             <div className={styles.imgBox}>
-                { currentVideos &&
-                    currentVideos.length > 0 &&
-                    currentVideos?.find(x=> x?.filePath) &&
-                    <p>* Для зміни існуючих відео, потрібно буде заново додати усі відео, а попередні відео буде автоматично видалено</p> }
-
                 <div className={styles.imgInput} onClick={handleButtonClick}>
                     <p className={styles.placeholder}>Upload new video</p>
                     <img src={addIcon} alt="" />
