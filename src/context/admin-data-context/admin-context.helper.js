@@ -13,7 +13,7 @@ import {
     deleteCoach,
     deleteCoachDetails,
     deleteCoaching,
-    deleteCoachingDetails, deleteCoachingParentDetails,
+    deleteCoachingDetails, deleteCoachingParentDetails, deleteCoachingVideo,
     deleteFAQ,
     deleteFeedback,
     deleteFood, deleteFoodDetails,
@@ -309,6 +309,22 @@ export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)
             });
 }
+
+export function deleteCoachingVideoHelper(dispatch: Dispatch<AnyAction>, id) {
+    deleteCoachingVideo(id).then(res => {
+        getCoaching()
+            .then(res => {
+                dispatch(setCoaching(res.data));
+            })
+            .catch(err => {
+                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            });
+        return res.status === 200;
+    }).catch(err => {
+        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    });
+}
+
 
 export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
     getCoaching()
