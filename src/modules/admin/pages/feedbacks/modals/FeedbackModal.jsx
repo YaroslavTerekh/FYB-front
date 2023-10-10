@@ -32,7 +32,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     function cleanUp() {
         setFeedback("");
         setInstagramLink("");
-        setCoaching([]);
+        // setCoaching([]);
         setFirstPhoto(null);
         setSecondPhoto(null);
         setCoachingId(null);

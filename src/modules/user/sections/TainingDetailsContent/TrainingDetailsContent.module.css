@@ -10,6 +10,7 @@
     margin-top: 20px;
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .headerBlock .header {
@@ -21,13 +22,15 @@
 }
 
 .infoBlock {
-    width: 485px;
+    position: relative;
+    /*width: 485px;*/
     color: white;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    width: 70%;
 }
 
 .infoBlock .subText {
@@ -40,11 +43,12 @@
 }
 
 .titlePhotos {
-    padding: 10px;
+    /*padding: 10px;*/
+    width: 100%;
 }
 
 .video video {
-    width: 700px;
+    /*width: 700px;*/
     height: 400px;
     box-sizing: border-box;
 }
@@ -61,13 +65,14 @@
 }
 
 .trainingPeriod .data img {
-    width: 65px;
-    height: 40px;
+    width: 50px;
+    height: 35px;
 }
 
 .trainingPeriod .data p {
-    margin: 0;
+    margin: auto 10px;
     height: 24px;
+    line-height: 24px;
 }
 
 .infoBlock .price {
@@ -88,6 +93,10 @@
     color: var(--torauoise-bg, #1E7689);
 }
 
+.hiddenBtn {
+    display: none;
+}
+
 .btn p {
     font-family: Montserrat;
     font-size: 20px;
@@ -103,7 +112,7 @@
 
 .trainingDetailsBlock .trainingDetailsList {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 50px;
 }
 
@@ -163,6 +172,10 @@
     grid-template-rows: 1fr 1fr 0fr;
     gap: 0px;
     margin-bottom: 50px;
+}
+
+img {
+    object-fit: cover;
 }
 
 .photosGrid .gridImgBox img{
@@ -229,10 +242,10 @@
 
 .titleGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 0fr 0fr 1fr;
     gap: 0px;
     height: 100%;
-
+    width: 100%;
 }
 
 .titleGrid .gridImgBox {
@@ -269,26 +282,527 @@
     border-radius: 0px 400px 0px 0px;
 }
 
+@media screen and (max-width: 1345px) {
+    .titleGrid .gridImgBox {
+        width: 340px;
+        height: 455px;
+    }
+
+    .titlePhotos .subText {
+        font-size: 16px;
+    }
+}
+
 @media screen and (max-width: 1000px) {
+    .titleGrid .gridImgBox {
+        width: 340px;
+        height: 455px;
+    }
+
+    .titlePhotos .infoBlock {
+        padding-top: 190px;
+    }
+
+    .titlePhotos .header {
+        top: 0;
+        font-size: 20px;
+        position: absolute;
+        text-align: center;
+        width: 300px;
+        transform: translateX(-28px);
+    }
+
+    .titlePhotos .data img {
+        width: 30px;
+        height: 25px;
+        margin-right: 10px;
+    }
+
+    .titlePhotos .subText {
+        transform: translateX(-28px);
+        position: absolute;
+        top: 50px;
+        width: 300px;
+    }
+
+    .titlePhotos .data p{
+        margin: auto;
+        line-height: 24px;
+    }
+
+    .titlePhotos .subText {
+        font-size: 16px;
+    }
+
+    .titlePhotos .btn {
+        width: 190px;
+        margin-left: 10px;
+    }
+
     .video video {
-        width: 540px;
+        /*width: 540px;*/
         height: 310px;
         box-sizing: border-box;
     }
 
     .infoBlock {
         width: auto;
+        padding-left: 5px;
+    }
+
+    .trainingDetailsBlock .trainingDetailsItem {
+        margin-left: 5px;
+        width: 33%;
+    }
+
+
+    .trainingDetailsBlock .trainingDetailsItem:first-child {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .titleGrid .gridImgBox {
+        width: 270px;
+        height: 440px;
+    }
+
+    .titlePhotos .infoBlock {
+        padding-top: 190px;
+    }
+
+    .titlePhotos .header {
+        top: 0;
+        font-size: 20px;
+        position: absolute;
+        text-align: center;
+        width: 300px;
+        transform: translateX(-28px);
+    }
+
+    .titlePhotos .data img {
+        width: 30px;
+        height: 25px;
+        margin-right: 10px;
+    }
+
+    .titlePhotos .subText {
+        transform: translateX(-28px);
+        position: absolute;
+        top: 50px;
+        width: 300px;
+    }
+
+    .titlePhotos .data p{
+        margin: auto;
+        line-height: 24px;
+    }
+
+    .titlePhotos .subText {
+        font-size: 16px;
+    }
+
+    .titlePhotos .btn {
+        width: 190px;
+        margin-left: 10px;
+    }
+
+    .video video {
+        /*width: 540px;*/
+        height: 310px;
+        box-sizing: border-box;
+    }
+
+    .infoBlock {
+        width: auto;
+        padding-left: 5px;
+    }
+
+    .trainingDetailsBlock .trainingDetailsItem {
+        margin-left: 5px;
+        width: 33%;
+    }
+
+
+    .trainingDetailsBlock .trainingDetailsItem:first-child {
+        margin-left: 0;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .headerBlock, .titlePhotos {
+        width: 100%;
+    }
 
+    .titleGrid .gridImgBox  {
+        width: 340px;
+        height: 540px;
+    }
+
+    .titlePhotos {
+        padding: 0;
+    }
+
+    .titleGrid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 0fr 0fr 0fr;
+        gap: 0px;
+        height: 100%;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem {
+        padding: 0;
+        width: 70%;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem:first-child {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-row-end: 2;
+        grid-column-end: 2;
+    }
+    .titlePhotos .titleGrid .titleGridItem:nth-child(2) {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-row-end: 2;
+        grid-column-end: 3;
+        padding-left: 0px;
+    }
+
+    .titlePhotos .infoBlock {
+        padding-top: 0;
+    }
+
+    .titlePhotos .header {
+        top: 0;
+        font-size: 16px;
+        position: relative;
+        text-align: center;
+        width: 300px;
+        transform: none;
+    }
+
+    .titlePhotos .data img {
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+    }
+
+    .titlePhotos .subText {
+        transform: none;
+        position: relative;
+        width: 300px;
+        top: 0;
+    }
+
+    .titleGrid .titleGridItem:first-child {
+        display: none;
+    }
+
+    .headerBlock {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .headerBlock .header {
+        margin-top: 30px;
+    }
+
+    .trainingDetailsBlock .trainingDetailsList {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .trainingDetailsBlock .trainingDetailsItem {
+        margin-left: 5px;
+        width: 48%;
+        margin-top: 20px;
+    }
+
+    .photosGrid .gridItem:nth-child(1) .gridImgBox {
+        width: 230px;
+        height: 365px;
+    }
+
+    .photosGrid .gridItem:nth-child(4) .gridImgBox {
+        width: 230px;
+        height: 365px;
+    }
+
+    .photosGrid .gridItem:nth-child(2) .gridImgBox {
+        width: 160px;
+        height: 220px;
+    }
+
+
+    .photosGrid .gridItem:nth-child(3) .gridImgBox {
+        width: 160px;
+        height: 220px;
+    }
 }
 
 @media screen and (max-width: 576px) {
 
+    .btn {
+        width: 310px;
+    }
+
+    .titleGrid .gridImgBox  {
+        width: 280px;
+        height: 370px;
+    }
+
+    .photosGrid {
+        display: grid;
+        grid-template-rows: 1fr 0fr 0fr;
+        gap: 0px;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem {
+        width: 100%;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .hiddenBtn {
+        display: block;
+        margin-top: 30px;
+    }
+
+    .photosGrid .gridItem:first-child {
+        grid-row-start: 1;
+        grid-column-start: 1;
+
+        grid-row-end: 2;
+        grid-column-end: 2;
+        margin: 5px;
+    }
+
+    .photosGrid .gridItem:nth-child(2) {
+        flex-direction: row-reverse;
+        display: flex;
+        grid-row-start: 2;
+        grid-column-start: 1;
+
+        grid-row-end: 3;
+        grid-column-end: 2;
+        margin: 5px;
+    }
+
+    .photosGrid .gridItem:nth-child(3) {
+        transform: translateY(-135px);
+        flex-direction: column-reverse;
+        display: flex;
+        grid-row-start: 1;
+        grid-column-start: 2;
+
+        grid-row-end: 2;
+        grid-column-end: 3;
+        margin: 5px;
+    }
+
+    .photosGrid .gridItem:nth-child(4) {
+        transform: translateY(-135px);
+        grid-row-start: 2;
+        grid-column-start: 2;
+
+        grid-row-end: 3;
+        grid-column-end: 3;
+        margin: 5px;
+    }
+
+    .photosGrid .gridItem:nth-child(1) .gridImgBox {
+        width: 225px;
+        height: 355px;
+    }
+
+    .photosGrid .gridItem:nth-child(4) .gridImgBox {
+        width: 225px;
+        height: 355px;
+    }
+
+    .photosGrid .gridItem:nth-child(2) .gridImgBox {
+        width: 160px;
+        height: 220px;
+    }
+
+    .photosGrid .gridItem:nth-child(3) .gridImgBox {
+        width: 160px;
+        height: 220px;
+    }
+
+    .trainingDetailsBlock {
+        margin-top: 10px;
+    }
 }
 
-@media screen and (max-width: 385px) {
+@media screen and (max-width: 540px) {
+
+    .trainingDetailsBlock {
+        padding: 0 10px;
+    }
+
+    .titlePhotos .header {
+        top: 0;
+        font-size: 20px;
+        position: relative;
+        text-align: center;
+        /*width: 300px;*/
+        transform: translateX(-28px);
+    }
+
+    .titlePhotos .data img {
+        width: 30px;
+        height: 25px;
+        margin-right: 10px;
+    }
+
+    .titlePhotos .subText {
+        position: relative;
+        /*top: 50px;*/
+        /*width: 300px;*/
+    }
+
+
+    .video video {
+        width: 340px;
+        height: 195px;
+    }
+
+    .titleGrid .gridImgBox  {
+        width: 185px;
+        height: 245px;
+    }
+
+    .titlePhotos .titleGrid {
+        display: flex;
+        grid: none;
+        justify-content: space-between;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem:first-child {
+        display: none;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem {
+        width: 60%;
+        display: flex;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem .infoBlock {
+        gap: 10px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem .infoBlock .header {
+        font-size: 15px;
+        margin: 0;
+        width: auto;
+        top: 0;
+        transform: none;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem .infoBlock .subText {
+        font-size: 12px;
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .titlePhotos .titleGrid .titleGridItem .infoBlock .price {
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .trainingDetailsBlock .trainingDetailsList {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .trainingDetailsBlock .trainingDetailsItem {
+        margin-left: 5px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .photosGrid {
+        display: grid;
+        grid-template-rows: 1fr 0fr 0fr;
+        gap: 0px;
+    }
+
+    .photosGrid .gridItem:first-child {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-end: 2;
+        /*grid-column-end: 2;*/
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .photosGrid .gridItem:nth-child(2) {
+        /*flex-direction: row-reverse;*/
+        /*display: flex;*/
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-row-end: 3;
+        grid-column-end: 2;
+        margin: 5px;
+    }
+
+    .photosGrid .gridItem:nth-child(3) {
+        transform: none;
+        flex-direction: column-reverse;
+        display: block;
+        grid-row-start: 2;
+        grid-column-start: 2;
+
+        grid-row-end: 2;
+        grid-column-end: 3;
+        margin: 5px;
+        width: 165px;
+        height: 220px;
+    }
+
+    .photosGrid .gridItem:nth-child(4) {
+        transform: none;
+        grid-row-start: 3;
+        grid-column-start: 1;
+        grid-row-end: 3;
+        grid-column-end: 3;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .photosGrid .gridItem:nth-child(1) .gridImgBox {
+        width: 225px;
+        height: 355px;
+    }
+
+    .photosGrid .gridItem:nth-child(4) .gridImgBox {
+        width: 225px;
+        height: 355px;
+    }
+
+    .photosGrid .gridItem:nth-child(2) .gridImgBox {
+        width: 160px;
+        height: 220px;
+    }
+
+    .photosGrid .gridItem:nth-child(3) .gridImgBox {
+        width: 160px;
+        height: 220px;
+    }
 
 }

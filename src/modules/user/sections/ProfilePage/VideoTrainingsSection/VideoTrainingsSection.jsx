@@ -10,6 +10,7 @@ import {
     MOCKED_TRAININGS_DATA,
     MOCKED_TRAININGS_TYPES,
 } from '../../../pages/ProfilePage/constants';
+import ReactPlayer from 'react-player';
 
 const VideoTrainingsSection = ({
     selectedTrainingType,
@@ -20,8 +21,10 @@ const VideoTrainingsSection = ({
     useEffect(() => {
         const selectedTraining = selectedTrainingType?.videos?.[0].filePath;
 
-        if (selectedTrainingType && trainingVideoSource === '') {
+        if (selectedTrainingType) {
             setTrainingVideoSource(selectedTraining);
+        } else {
+            setTrainingVideoSource(null);
         }
     }, [selectedTrainingType]);
 
@@ -58,11 +61,15 @@ const VideoTrainingsSection = ({
 
                     <div className={styles.videoTrainingsVideo}>
                         {trainingVideoSource && (
-                            <VideoPlayer
-                                videoSource={trainingVideoSource}
+                            <ReactPlayer
+                                url={trainingVideoSource}
+                                controls={true}
+                                width='100%'
+                                height='100%'
                             />
                         )}
                     </div>
+
                 </div>
             </div>
         </section>

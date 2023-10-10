@@ -60,6 +60,8 @@
     font-size: 20px;
     font-weight: 500;
     margin: 0 0 30px 0;
+    height: 100px;
+    overflow: hidden;
 }
 
 .picture-training {
@@ -91,8 +93,8 @@
     background-image: url(../../../../../img/components/icon3.png);
     background-repeat: no-repeat;
     background-position: 0 10px;
-    background-size: 40px 30px;
-    padding: 15px 0 15px 55px;
+    background-size: 30px 30px;
+    padding: 15px 0 10px 40px;
 }
 
 .picture-training__text {
@@ -188,6 +190,7 @@
     }
     .button-training__blu {
         font-size: 16px;
+        width: 207px;
     }
     .training-block {
         padding: 40px 13px;
@@ -231,7 +234,13 @@
     }
     .button-training__white {
         width: 85%;
+        /*margin: auto;*/
     }
+
+    .button-training__white button {
+        width: 100%;
+    }
+
     .button-training_blu {
         width: 100%;
         display: flex;

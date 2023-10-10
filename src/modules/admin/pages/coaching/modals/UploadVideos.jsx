@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewCoachingHelper,
-    addPhotosToCoachingHelper, addVideoToCoachingHelper,
+    addPhotosToCoachingHelper, addVideoToCoachingHelper, deleteCoachingVideoHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
 import ImagesCarousel from '../../../../../components/ContentCarousel/ImagesCarousel';
 import VideosCarousel from '../../../../../components/VideosCarousel/VideosCarousel';
@@ -51,13 +51,17 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
         cleanUp();
     }
 
+    function onDeleteVideo(id: string) {
+        deleteCoachingVideoHelper(dispatch, id);
+    }
+
     return (
         <>
             <ModalWindow
                 element={
                     <>
                         <section className={styles.modalBox} >
-                            <VideosCarousel videoList={currentVideos}  onOk={onSaveHandler} setList={setCurrentVideos} />
+                            <VideosCarousel videoList={currentVideos} onOk={onSaveHandler} onDelete={onDeleteVideo} setList={setCurrentVideos} />
                         </section>
                     </>
                 }

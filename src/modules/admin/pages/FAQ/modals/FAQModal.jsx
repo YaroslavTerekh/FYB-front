@@ -99,7 +99,7 @@ const FAQModal = ({ isOpen, onClose, selectedId, editMode }) => {
                                         name={"FAQAnswer"}
                                     />
                                 </div>
-                                <div className=''>
+                                <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}
                                         aria-expanded={true}

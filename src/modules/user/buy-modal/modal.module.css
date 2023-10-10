@@ -35,6 +35,10 @@
     margin-top: 72px;
 }
 
+.contentText {
+    font-size: 20px;
+}
+
 .mB35 {
     margin-bottom: 35px;
 }
@@ -168,4 +172,40 @@
     font-weight: 400;
     line-height: normal;
     margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .contentTitle {
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .btn p {
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .contentTitle {
+        font-size: 18px;
+        font-weight: 600;
+        width: 70%;
+        padding-top: 10px;
+    }
+
+    .btn {
+        padding: 10px 10px;
+        width: 70%;
+    }
+
+    .btn p {
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
 }

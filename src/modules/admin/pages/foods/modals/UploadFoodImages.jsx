@@ -34,7 +34,7 @@ const UploadFoodImages = ({ isOpen, onClose, foodId }) => {
 
         currentImages.forEach((image, index) => {
             const form = new FormData();
-            form.append('Id', foodId);
+            form.append('FoodId', foodId);
             form.append('File', image.data);
             form.append('OrderId', index);
             form.append('FileName', image.name);

@@ -2,9 +2,6 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../../../../../../components/Button/Button';
 import { ROUTES } from '../../../../../../../constants';
-import { getPayForm } from '../../../../../../../api/content-api';
-import styles from '../../../../../buy-modal/modal.module.css';
-import ModalWindow from '../../../../../../../components/Modal/ModalWindow';
 import BuyAlertModal from '../../../../../buy-modal/BuyAlertModal';
 
 const TrainingCard = ({
@@ -22,7 +19,9 @@ const TrainingCard = ({
     food,
     foodPoints,
     purchaseProductType,
-    isFood
+    isFood,
+    photos,
+    coachingId
 }) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -44,7 +43,11 @@ const TrainingCard = ({
         <div className='training-block'>
             <div className={`training-block__items items-training ${className}`}>
                 <div className='items-training__img'>
-                    <img className='img-training' src={coachingPhoto?.filePath} />
+                    { isFood
+                        ? <img className='img-training' src={photos?.find(x=>x.orderId === 0)?.filePath} />
+                        : <img className='img-training' src={coachingPhoto?.filePath} />
+                    }
+
                 </div>
                 <div className='items-training__info info-training'>
                     <div className='info-training__title vetrino'>{title}</div>
@@ -73,9 +76,9 @@ const TrainingCard = ({
                                 {accessDays} місяці доступу
                             </div>
                         )}
-                        {gift && (
+                        {isFood && coachingId && (
                             <div className='picture-training__gift picture-training__text'>
-                                {gift}
+                                <p>+ харчування в подарунок</p>
                             </div>
                         )}
                     </div>

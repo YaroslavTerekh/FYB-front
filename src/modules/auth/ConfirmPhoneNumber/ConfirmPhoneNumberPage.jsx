@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CustomInput from '../../../components/Input/CustomInput';
 import styles from '../Auth.module.css';
 import Button from '../../../components/Button/Button';
@@ -35,14 +35,25 @@ const ConfirmPhoneNumber = () => {
         }
     }
 
+    const formRef = useRef(null);
+
     return <>
-        <section className={styles.confNum} >
+        <section ref={formRef} className={styles.confNum} >
             <div className={`${styles.content} vetrino`} >
                 <p className={styles.text}>
                     Ми надіслаи код-підтвердження на Ваш номер телефону, будь ласка, введіть його в поле нижче:
                 </p>
                 <div className={styles.inputBox}>
-                    <CustomInput onChange={changeCodeHandler} className={styles.customInput} placeholder={"Введіть код"} type={"tel"} required={true}/>
+                    <CustomInput
+                        onChange={changeCodeHandler}
+                        className={styles.customInput}
+                        placeholder={"Введіть код"}
+                        type={"tel"}
+                        required={true}
+                        value={code}
+                        formRef={formRef}
+                        name={"RequestedCode"}
+                    />
                     <Button
                         className={styles.btn}
                         aria-expanded={true}

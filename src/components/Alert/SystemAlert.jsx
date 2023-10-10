@@ -18,9 +18,9 @@ const SystemAlert = () => {
                const list = currentList;
                list.shift();
                setCurrentList(list);
+
+                clearTimeout(timeoutId);
             }, 3000);
-            //
-            // clearTimeout(timeoutId);
         }
 
     }, [alert]);
@@ -29,7 +29,7 @@ const SystemAlert = () => {
     return (
         <div className={`${styles.alertBox} vetrino`}>
             {currentList && currentList.map((x, i) =>
-                <div key={i} className={styles.alert}>{x.message}</div>
+                <div key={i} className={`${styles.alert} ${!x.isSuccess ? styles.alertError : ''}`}>{x.message}</div>
             )}
         </div>
     );

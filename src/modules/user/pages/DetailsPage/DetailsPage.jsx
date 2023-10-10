@@ -6,9 +6,11 @@ import { MOCKED_TRAININGS_DATA } from '../ProfilePage/constants';
 import TrainingDetailsContent from '../../sections/TainingDetailsContent/TainingDetailsContent';
 import FoodDetailsContent from '../../sections/TainingDetailsContent/FoodDetailsContent';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCoachingHelper, getFoodHelper } from '../../../../context/content-context/content-context.helper';
 
 const DetailsPage = () => {
+    const dispatch = useDispatch();
     const [selectedTrainingType] = useState(MOCKED_TRAININGS_DATA);
     const { id } = useParams();
 
@@ -16,12 +18,20 @@ const DetailsPage = () => {
     const [selectedItem, setSelectedItem] = useState({});
 
     useEffect(() => {
+
+        if (!currentContentState.coaching || currentContentState?.coaching?.length === 0) {
+            getCoachingHelper(dispatch);
+        }
+
+    }, []);
+
+    useEffect(() => {
         if(id) {
             const item = currentContentState.coaching.find(x => x.id === id);
 
             setSelectedItem(item);
         }
-    }, [id]);
+    }, [id, currentContentState?.coaching]);
 
     const { [selectedTrainingType]: _, ...filteredTrainingData } = MOCKED_TRAININGS_DATA;
     return (

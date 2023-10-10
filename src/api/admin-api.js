@@ -74,6 +74,9 @@ export function deleteFood(id: string): Promise<any> {
 export function deleteFoodPoint(id: string): Promise<any> {
     return API.delete(`admin/food/point/delete/` + id);
 }
+export function deleteFoodDetails(id: string): Promise<any> {
+    return API.delete(`admin/foods/${id}/details/remove`);
+}
 
 export function addFoodPointParentDay(day, id): Promise<any> {
     return API.post(`food/${id}/point-parents/add`, { dayNumber: day, foodId: id });
@@ -108,7 +111,7 @@ export function addPhotosToCoaching(model): Promise<any> {
 }
 
 export function addPhotosToFood(model): Promise<any> {
-    return API.patch(`foods/photos/add`, model);
+    return API.patch(`admin/foods/photos/add`, model);
 }
 
 export function addPhotosToCoach(model): Promise<any> {
@@ -117,4 +120,8 @@ export function addPhotosToCoach(model): Promise<any> {
 
 export function addVideoToCoaching(id, model): Promise<any> {
     return API.post(`admin/video/${id}/add`, model);
+}
+
+export function deleteCoachingVideo(id): Promise<any> {
+    return API.delete(`admin/coaching/video/delete/` + id);
 }

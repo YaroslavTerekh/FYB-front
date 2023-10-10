@@ -11,7 +11,7 @@ const ReviewsCarouselArrow = ({ className, style, onClick, direction }) => (
         style={{
             ...style,
             display: 'block',
-            width: 'auto',
+            // width: 'auto',
             height: 'auto',
             transform: direction === 'prev' ? 'rotate(180deg)' : 'none',
         }}

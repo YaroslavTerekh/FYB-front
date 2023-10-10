@@ -2,11 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './VideoPlayer.css';
+import ReactPlayer from 'react-player';
 
 const VideoPlayer = ({ videoSource = '' }) => (
     <div>
-        <video controls src={videoSource}>
-        </video>
+        <ReactPlayer
+            url={videoSource}
+            controls={true}
+            style={{width:'1000px', height:'600px'}}
+        />
+        {/*<video controls src={videoSource}>*/}
+        {/*</video>*/}
     </div>
 );
 

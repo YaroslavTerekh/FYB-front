@@ -35,6 +35,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
             setName(data.title);
             setDescription(data.description);
             setWeight(data.portionMass);
+            setCoockingMethod(data.coockingMethod)
         }
     }, [selectedId, editMode, foodId]);
 

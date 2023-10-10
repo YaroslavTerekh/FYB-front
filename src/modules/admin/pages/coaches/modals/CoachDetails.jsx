@@ -20,7 +20,7 @@ const CoachDetails = ({ isOpen, onClose, coachId }) => {
     const [icon, setIcon] = useState(null);
 
     function cleanUp() {
-        setNameList("");
+        setNameList([{ id: 1, text: "" }]);
         setIcon("");
 
         onClose();

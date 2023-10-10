@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
     deleteCoachingDetailsHelper,
-    deleteCoachingHelper, deleteFoodHelper, deleteFoodPointHelper,
+    deleteCoachingHelper, deleteFoodDetailHelper, deleteFoodHelper, deleteFoodPointHelper,
     getCoachesHelper,
     getCoachingHelper, getFoodHelper,
 } from '../../../../context/admin-data-context/admin-context.helper';
@@ -29,7 +29,7 @@ const FoodPage = () => {
     const [editMode, setIsEditMode] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedToggleItem, setSelectedToggleItem] = useState(null);
-
+    const [selectedDetailsToggleItem, setSelectedDetailsToggleItem] = useState(null);
 
     const [addFoodPointIsOpen, setAddFoodPointIsOpen] = useState(false);
     const [editFoodPointMode, setIsEditFoodPointMode] = useState(false);
@@ -39,6 +39,12 @@ const FoodPage = () => {
 
     const handleToggle = (index) => {
         setSelectedToggleItem((prevSelectedItem) =>
+            prevSelectedItem === index ? null : index
+        );
+    };
+
+    const handleDetailsToggle = (index) => {
+        setSelectedDetailsToggleItem((prevSelectedItem) =>
             prevSelectedItem === index ? null : index
         );
     };
@@ -126,6 +132,10 @@ const FoodPage = () => {
         setDeleteFoodPointIsOpen(false)
     }
 
+    function deleteFoodDetail(id: string) {
+        deleteFoodDetailHelper(dispatch, id);
+    }
+
     function onImagesCloseHandler(id: string) {
         setImagesIsOpen(false);
         setSelectedItem(null);
@@ -206,7 +216,7 @@ const FoodPage = () => {
                                         <button className={mainStyles.tableBtn}  onClick={() => onAddFoodPointHandler(f.id)}>
                                             <div className={mainStyles.box}>
                                                 <img src={addIcon} alt='' />
-                                                <p>Додати пункт харчування</p>
+                                                <p>Дні</p>
                                             </div>
                                         </button>
                                         <button className={mainStyles.tableBtn}  onClick={() => onAddFoodDetailsHandler(f.id)}>
@@ -238,6 +248,22 @@ const FoodPage = () => {
                                             />
                                         </Button>
                                     </div>
+                                    <div className='toggle'>
+                                        <Button
+                                            className={mainStyles.toggleArrow}
+                                            aria-expanded={selectedDetailsToggleItem === f.id}
+                                            aria-controls={`example-panel-${f.id}`}
+                                            onClick={() => handleDetailsToggle(f.id)}
+                                        >
+                                            <img
+                                                className={
+                                                    selectedDetailsToggleItem === f.id ? mainStyles.active : ''
+                                                }
+                                                src={arrowIcon}
+                                                alt={`Toggle ${f.id}`}
+                                            />
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                             <AnimateHeight
@@ -258,6 +284,31 @@ const FoodPage = () => {
                                                         <img src={editIcon} alt='' />
                                                     </button>
                                                     <button className={mainStyles.tableBtn}  onClick={() => onDeleteFoodPointHandler(d.id)}>
+                                                        <img src={deleteIcon} alt='' />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </AnimateHeight>
+
+                            <AnimateHeight
+                                id={`example-panel-${f.id}`}
+                                duration={500}
+                                height={selectedDetailsToggleItem === f.id ? 'auto' : 0}
+                                className=''
+                            >
+                                { f.foodDetails && f.foodDetails.map(d =>
+                                    <div className=''>
+                                        <div className={mainStyles.bodyBlock} key={d.id}>
+                                            <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
+                                                <p>{d.title}</p>
+                                                <p style={{width:'100%'}}>{d.detail}</p>
+                                            </div>
+                                            <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
+                                                <div className={mainStyles.tableActions}>
+                                                    <button className={mainStyles.tableBtn}  onClick={() => deleteFoodDetail(d.id)}>
                                                         <img src={deleteIcon} alt='' />
                                                     </button>
                                                 </div>

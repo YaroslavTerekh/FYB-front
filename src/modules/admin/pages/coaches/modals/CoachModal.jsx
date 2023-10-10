@@ -162,7 +162,7 @@ const CoachModal = ({ isOpen, onClose }) => {
                                         value={birthDate}
                                     />
                                 </div>
-                                <div className=''>
+                                <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}
                                         aria-expanded={true}
