@@ -37,9 +37,13 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                 email,
                 password,
                 firstName: name,
-                phoneNumber: phone }).then(x=> onClose());
+                phoneNumber: phone })
+            .then(x=> {
+                setRegistrationFinished(x);
+                onClose();
+            });
 
-        setRegistrationFinished(isSuccess);
+
     }
 
     const formRef = useRef(null);
@@ -60,6 +64,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 formRef={formRef}
                                 name={"RegisterName"}
                                 value={name}
+                                customInputContainer={styles.customInputContainer}
                             />
                         </div>
                         <div className={styles.inputBox}>
@@ -72,6 +77,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 formRef={formRef}
                                 name={"RegisterPhone"}
                                 value={phone}
+                                customInputContainer={styles.customInputContainer}
                             />
                         </div>
                         <div className={styles.inputBox}>
@@ -84,6 +90,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 formRef={formRef}
                                 name={"RegisterEmail"}
                                 value={email}
+                                customInputContainer={styles.customInputContainer}
                             />
                         </div>
                         <div className=''>
@@ -95,6 +102,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 formRef={formRef}
                                 name={"RegisterPassword"}
                                 value={password}
+                                customInputContainer={styles.customInputContainer}
                             />
                         </div>
                         <Button
@@ -111,7 +119,10 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
             isOpen={isOpen}
             onClose={onClose}
             styles={{ bgColor:'var(--main-bg)', width: '609px', height: '480px', border: '2px solid var(--beige, #FFEDE4);', overlayBgColor: 'none' }}
+            className={styles.modalData}
         />
+
+
     </>
 }
 

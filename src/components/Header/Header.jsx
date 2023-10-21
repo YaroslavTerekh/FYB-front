@@ -121,7 +121,6 @@ export default function Header({ navigationData }) {
         setFinishRegistrationIsOpen(value);
     }
 
-
     function onRegisterFinishedModalCloseHandler() {
         setFinishRegistrationIsOpen(false);
         navigate("/confirm-number");
