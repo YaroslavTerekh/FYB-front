@@ -166,3 +166,41 @@
     line-height: normal;
     margin-top: 20px;
 }
+
+.modalData {
+    position: absolute;
+    inset: 40px;
+    background-image: initial;
+    background-position: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: var(--main-bg);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 0px;
+    color: lightsteelblue;
+    width: 609px;
+    height: 480px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 680px) {
+    .modalData {
+        width: 70% !important;
+        height: 480px;
+    }
+
+    .customInputContainer {
+        width: 95%;
+        height: 55px !important;
+        /*width: 400px;*/
+        display: flex;
+        box-sizing: border-box;
+        margin: auto;
+    }
+}

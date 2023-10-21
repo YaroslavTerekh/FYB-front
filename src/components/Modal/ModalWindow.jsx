@@ -9,7 +9,8 @@ type ModalType = {
     isOpen: boolean,
     onClose: () => void,
     styles: ModalStyles,
-    closeIcon: any
+    closeIcon: any,
+    className: string
 }
 
 type ModalStyles = {
@@ -31,6 +32,7 @@ const ModalWindow = (prop: ModalType) => {
         <Modal
             appElement={document.getElementById('root')}
             isOpen={prop.isOpen}
+            className={prop.className}
             style={{
                 overlay: {
                     // backgroundColor: prop.styles.overlayBgColor,
@@ -46,7 +48,8 @@ const ModalWindow = (prop: ModalType) => {
                     padding: 0,
                     boxSizing: 'border-box'
                 }
-            }}
+            }
+        }
         >
             <div className={styles.box}>
                 <button className={styles.closeBox} onClick={onCloseHandler}>

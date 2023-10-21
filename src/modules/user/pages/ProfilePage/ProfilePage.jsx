@@ -24,7 +24,6 @@ const ProfilePage = () => {
     }, []);
 
     const handleSelectChange = ({ value, label }) => {
-        debugger
         setSelectedTrainingType(value);
     };
 

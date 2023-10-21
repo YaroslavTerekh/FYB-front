@@ -60,10 +60,11 @@ const BuyAlertModal = ({ isOpen, onClose, text, purchaseProductType, productId }
             onClose={onClose}
             styles={{
                 bgColor:'var(--main-bg)',
-                width: '40vw',
+                width: '60vw',
                 height: '40vh',
                 border: '2px solid var(--beige, #FFEDE4);',
-                overlayBgColor: 'none'}}
+                overlayBgColor: 'none'
+        }}
         />
     </>
 }
