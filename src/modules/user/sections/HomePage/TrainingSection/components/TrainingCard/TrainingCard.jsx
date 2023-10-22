@@ -73,7 +73,7 @@ const TrainingCard = ({
                         }
                         { accessDays > 0 && !isFood && (
                             <div className='picture-training__time picture-training__text'>
-                                {accessDays} місяці доступу
+                                {accessDays} дні доступу
                             </div>
                         )}
                         {isFood && coachingId && (
@@ -82,7 +82,7 @@ const TrainingCard = ({
                             </div>
                         )}
                     </div>
-                    <div className='info-training__price vetrino'>{price}</div>
+                    <div className='info-training__price vetrino'>{price} грн</div>
                     <div className='info-training__button button-training'>
                         <div className='button-training__white'>
                             <Button onClick={() => setModalIsOpen(true)}>{'Купити'}</Button>
