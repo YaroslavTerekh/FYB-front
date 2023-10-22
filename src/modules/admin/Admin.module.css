@@ -66,6 +66,10 @@
     text-transform: uppercase;
 }
 
+.blockItemUsersTable {
+    display: block !important;
+}
+
 .blockItem {
     display: flex;
     justify-content: space-between;
