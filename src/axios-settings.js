@@ -8,7 +8,7 @@ import { setAlert } from './context/alert-context/alert-actions';
 import { useDispatch } from 'react-redux';
 
 const API = axios.create({
-    baseURL: "https://localhost:1488/api/",
+    baseURL: "https://fyb-back.azurewebsites.net/api/",
     withCredentials: true,
 });
 
