@@ -47,6 +47,7 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
 
         if(props.imageList && props.imageList.length && props.imageList.length > 0) {
             setCurrentImages(props.imageList);
+            setSelectedImage(props.imageList[0]);
         }
 
     }, [props.imageList]);
@@ -149,10 +150,12 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
                 <p className={styles.placeholder}>Upload new photo</p>
                 <img src={selectIcon} alt='' />
             </div>
-            <div className={styles.imgInput} onClick={deleteImageHandler}>
-                <p className={styles.placeholder}>Видалити фото</p>
-                <img src={deleteIcon} alt='' />
-            </div>
+            {
+                !selectedImage?.filePath &&
+                    <div className={styles.imgInput} onClick={deleteImageHandler}>
+                    <p className={styles.placeholder}>Видалити фото</p>
+                    <img src={deleteIcon} alt='' />
+            </div> }
             <Button
                 className={styles.btn}
                 aria-expanded={true}

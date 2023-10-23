@@ -31,7 +31,6 @@ const FoodPageModal = ({ isOpen, onClose, selectedId, editMode }) => {
     function cleanUp() {
         setName("");
         setDescription("");
-        setCoaching([]);
         setPrice(null);
         setCoachingId(null);
 

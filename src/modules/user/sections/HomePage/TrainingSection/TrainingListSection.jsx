@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import TrainingCard from './components/TrainingCard/TrainingCard';
 
-import { MOCKED_TRAININGS_LIST } from './constants';
+import { GetTrainingIconHelper, MOCKED_TRAININGS_LIST } from './constants';
 
 import './TrainingListSection.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,6 +27,26 @@ const TrainingListSection = () =>  {
         }
 
     }, [currentContentState.coaching]);
+
+    useEffect(() => {
+
+        let x = 0
+        const data = list;
+        for (let i = 0; i < data.length; i++) {
+
+            if(x === 4) {
+                x = 0
+            }
+
+            data[i].icon = x;
+            x++;
+        }
+
+        if(data.length > 0) {
+            setList(data);
+        }
+
+    }, [list]);
 
     useEffect(() => {
 

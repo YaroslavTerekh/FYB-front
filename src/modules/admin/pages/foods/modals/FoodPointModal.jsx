@@ -60,7 +60,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
             const data = { title: name, description: description,  portionMass: weight, FoodId: foodId , coockingMethod:coockingMethod };
 
             if(editMode && selectedId) {
-                updateFoodPointHelper(dispatch, foodId, data);
+                updateFoodPointHelper(dispatch, selectedId, data);
             } else {
                 addNewFoodPointHelper(dispatch, data);
             }

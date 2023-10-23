@@ -11,6 +11,7 @@
     border-radius: 30px;
     background: #ffcdd2;
     transition: all 0.3s ease 0s;
+    padding: 10px 10px;
 }
 
 .reviews__slider {
@@ -88,9 +89,16 @@
 
 .detal-spoiler__photo img {
     border-radius: 30px;
-    max-width: 55%;
-    max-height: 55%;
-    margin: 0 auto;
+    /*max-width: 55%;*/
+    /*max-height: 55%;*/
+    /*margin: 0 auto;*/
+
+    height: 190px;
+    width: 180px;
+}
+
+.detal-spoiler__photo img:last-child{
+    margin-left: auto;
 }
 
 .detal-spoiler__photo {

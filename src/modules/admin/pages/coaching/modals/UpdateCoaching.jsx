@@ -128,15 +128,15 @@ const UpdateCoaching = ({ isOpen, onClose, selectedCoachingId }) => {
                                     <PhotoUploader onChange={changeAvatarHandler} imgName={selectedCoachingData?.coachingPhoto?.filePath} removePhoto={removePhoto} setRemoved={setRemovePhoto}/>
                                 </div>
                                 <div className=''>
-                                    <Button
-                                        className={styles.rmvImgBtn}
-                                        aria-expanded={true}
-                                        aria-controls={`coach-modal`}
-                                        onClick={removePhotoHandler}
-                                    >
-                                        <img src={deleteIcon} alt='' />
-                                        <p>Видалити фото</p>
-                                    </Button>
+                                    {/*<Button*/}
+                                    {/*    className={styles.rmvImgBtn}*/}
+                                    {/*    aria-expanded={true}*/}
+                                    {/*    aria-controls={`coach-modal`}*/}
+                                    {/*    onClick={removePhotoHandler}*/}
+                                    {/*>*/}
+                                    {/*    <img src={deleteIcon} alt='' />*/}
+                                    {/*    <p>Видалити фото</p>*/}
+                                    {/*</Button>*/}
                                 </div>
                             </div>
                             <div className='inputsBox'>
