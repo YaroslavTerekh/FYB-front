@@ -55,7 +55,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                                 </div>
                                 <div className={styles.data}>
                                     <img src={trainingTimeIcon} alt='' />
-                                    <p>{props.training.accessDays} { props.training.accessDays > 1 ? ' місяці доступу' : 'місяць доступу'}</p>
+                                    <p>днів доступу - {props.training.accessDays}</p>
                                 </div>
                             </div>
 
