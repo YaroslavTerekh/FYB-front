@@ -31,6 +31,7 @@ import { setCoaches, setCoaching, setFAQ, setFeedbacks, setFood, setUsers } from
 import { getCoaches, getCoaching, getFaq, getFeedbacks, getFood } from '../../api/content-api';
 import { setAlert } from '../alert-context/alert-actions';
 import { writeError } from '../alert-context/alert-context-helper';
+import { removeSpinner, setSpinner } from '../spinner-context/spinner-actions';
 
 export function addNewCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData) {
     addCoach(data).then(res => {
@@ -222,6 +223,7 @@ export function deleteFeedbackHelper(dispatch: Dispatch<AnyAction>, id: string) 
 
 export function addNewCoachingHelper(dispatch: Dispatch<AnyAction>, data: FormData, video) {
     addCoaching(data).then(res => {
+        dispatch(setSpinner())
         addVideoToCoachingHelper(dispatch, res.data.id, video);
         return res.status === 200;
     }).catch(err => {
@@ -251,18 +253,23 @@ export function addNewCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, dataP
 }
 
 export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
-    addPhotosToCoaching(data).then(res => {
+    dispatch(setSpinner());
+    Promise.all(
+        data.map(x=>
+            addPhotosToCoaching(x)
+        )
+    ) .then((response) => {
         getCoaching()
             .then(res => {
                 dispatch(setCoaching(res.data));
+                dispatch(removeSpinner());
             })
             .catch(err => {
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)
             });
-        return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
-            });
+        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    });
 }
 
 export function addPhotosToFoodHelper(dispatch: Dispatch<AnyAction>, data) {
@@ -281,18 +288,64 @@ export function addPhotosToFoodHelper(dispatch: Dispatch<AnyAction>, data) {
 }
 
 export function addPhotosToCoachHelper(dispatch: Dispatch<AnyAction>, data) {
-    addPhotosToCoach(data).then(res => {
+    dispatch(setSpinner());
+
+    Promise.all(
+        data.map(x=>
+            addPhotosToCoach(x)
+        )
+    ) .then((response) => {
         getCoaches()
             .then(res => {
                 dispatch(setCoaches(res.data));
+                dispatch(removeSpinner());
             })
             .catch(err => {
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)
             });
-        return res.status === 200;
     }).catch(err => {
+        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    });
+}
+
+
+export function addVideoToCoachingArrayHelper(dispatch: Dispatch<AnyAction>, id, data) {
+
+    Promise.all(
+        data.map(x=>
+            addVideoToCoaching(id, x)
+        )
+    ) .then((response) => {
+        getCoaching()
+            .then(res => {
+                dispatch(setCoaching(res.data));
+                dispatch(removeSpinner())
+
+            })
+            .catch(err => {
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)
             });
+    }).catch(err => {
+        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    });
+
+    // addVideoToCoaching(id, data).then(res => {
+    //     getCoaching()
+    //         .then(res => {
+    //             dispatch(setCoaching(res.data));
+    //
+    //             if(func) {
+    //                 func(false);
+    //             }
+    //
+    //         })
+    //         .catch(err => {
+    //             writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    //         });
+    //     return res.status === 200;
+    // }).catch(err => {
+    //     writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    // });
 }
 
 export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data) {
@@ -300,6 +353,8 @@ export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data
         getCoaching()
             .then(res => {
                 dispatch(setCoaching(res.data));
+                dispatch(removeSpinner());
+
             })
             .catch(err => {
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)
