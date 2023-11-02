@@ -61,7 +61,7 @@ const ProfilePage = () => {
             const item2 = Object.entries(food).map(([itemType, itemData]) => ({
                 value: itemData,
                 label: itemData.title,
-                isPurchased: !!currentUser?.foodPurchases?.find(x => x?.product?.id === itemData.id),
+                isPurchased: true ,//!!currentUser?.foodPurchases?.find(x => x?.product?.id === itemData.id),
                 isFood: true
             }));
 

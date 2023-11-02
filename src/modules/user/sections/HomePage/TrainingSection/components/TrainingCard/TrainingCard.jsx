@@ -4,6 +4,7 @@ import Button from '../../../../../../../components/Button/Button';
 import { ROUTES } from '../../../../../../../constants';
 import BuyAlertModal from '../../../../../buy-modal/BuyAlertModal';
 import { GetTrainingIconHelper } from '../../constants';
+import sexyIcon from '../../../../../../../img/components/icon14.png';
 
 const TrainingCard = ({
     id,
@@ -61,9 +62,9 @@ const TrainingCard = ({
 
                         { !isFood
                             ? <div className='picture-training__numerosity'>
-                                {GetTrainingIconHelper(icon) !== "" && <div className='picture-training__icon'>
-                                        <img src={GetTrainingIconHelper(icon)} />
-                                    </div> }
+                                <div className='picture-training__icon'>
+                                        <img src={sexyIcon} />
+                                    </div>
                                     {videos && (
                                         <div className='picture-training__text'>
                                            тренувань -  {videos.length}

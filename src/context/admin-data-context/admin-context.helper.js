@@ -273,10 +273,16 @@ export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
 }
 
 export function addPhotosToFoodHelper(dispatch: Dispatch<AnyAction>, data) {
-    addPhotosToFood(data).then(res => {
+    dispatch(setSpinner());
+    Promise.all(
+        data.map(x=>
+            addPhotosToFood(x)
+        )
+    ).then(res => {
         getFood()
             .then(res => {
                 dispatch(setFood(res.data));
+                dispatch(removeSpinner());
             })
             .catch(err => {
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)
@@ -402,10 +408,12 @@ export function getFoodHelper(dispatch: Dispatch<AnyAction>){
 }
 
 export function addNewFoodHelper(dispatch: Dispatch<AnyAction>, data) {
+    dispatch(setSpinner());
     addFood(data).then(res => {
         getFood()
             .then(res => {
                 dispatch(setFood(res.data));
+                dispatch(removeSpinner());
             })
             .catch(err => {
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)
@@ -433,10 +441,12 @@ export function addNewFoodDetailsHelper(dispatch: Dispatch<AnyAction>, id,  data
 
 
 export function updateFoodHelper(dispatch: Dispatch<AnyAction>, id, data) {
+    dispatch(setSpinner());
     updateFood(id, data).then(res => {
         getFood()
             .then(res => {
-                dispatch(setFood(res.data));
+                dispatch(setFood(res.data))
+                dispatch(removeSpinner());
             })
             .catch(err => {
                 writeError(dispatch, err?.response?.data?.error ?? err?.message)

@@ -46,6 +46,10 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
         return () => window.removeEventListener("resize", updateDimensions);
     }, []);
 
+    const createMarkup = (e:string) => {
+        return { __html: e };
+    };
+
     return (
         <section className={styles.videoTrainings}>
             <div className={styles.container}>
@@ -102,7 +106,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                         <div className={styles.foodPoint}>
                                             <div className={styles.foodBody}>
                                                 <div className={styles.foodText}>
-                                                    {data?.description}
+                                                    <div dangerouslySetInnerHTML={createMarkup(data?.description)} />
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +128,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                         >
                                             <div className=''>
                                                 <div className={styles.foodText}>
-                                                    {data?.coockingMethod}
+                                                    <div dangerouslySetInnerHTML={createMarkup(data?.coockingMethod)} />
                                                 </div>
                                             </div>
                                         </AnimateHeight>

@@ -13,6 +13,8 @@ import { number } from 'prop-types';
 import deleteIcon from '../../img/components/delete_icon.png';
 import addIcon from  '../../img/components/add_icon.png';
 import Button from '../Button/Button';
+import { writeError } from '../../context/alert-context/alert-context-helper';
+import { useDispatch } from 'react-redux';
 
 const customStyles = {
     control: base => ({
@@ -37,6 +39,7 @@ const customStyles = {
 };
 
 const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCount: number } ) => {
+    const dispatch = useDispatch();
     const [currentImages, setCurrentImages] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -136,6 +139,8 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
     function onOk() {
         if(currentImages.length === props.maxCount) {
             props.onOk(currentImages.filter(x=> !x.filePath));
+        } else {
+            writeError(dispatch, "Кількість фото має бути - " + props.maxCount);
         }
     }
 

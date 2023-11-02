@@ -25,6 +25,7 @@
 .slider-block {
     flex: 0 0 50%;
     height: 100%;
+    width: 95% !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,11 +132,13 @@
 }
 
 .slick-prev {
-    left: 5px;
+    left: -30px;
+    width: 30px;
 }
 
 .slick-next {
-    right: 5px;
+    right: 0px;
+    width: 30px;
 }
 
 @media screen and (max-width: 890px) {

@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewFoodPointHelper, updateFoodPointHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { writeError } from '../../../../../context/alert-context/alert-context-helper';
 
 const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     const dispatch = useDispatch();
@@ -40,7 +43,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     }, [selectedId, editMode, foodId]);
 
     function changeCoockingMethodHandler(e) {
-        setCoockingMethod(e?.target?.value);
+        setCoockingMethod(e);
     }
 
     function changeNameHandler(e) {
@@ -48,7 +51,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
     }
 
     function changeDescriptionHandler(e) {
-        setDescription(e?.target?.value);
+        setDescription(e);
     }
 
     function changeWeightHandler(e) {
@@ -67,7 +70,7 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
 
             cleanUp();
         } else {
-            // TODO error
+            writeError(dispatch, "Всі поля повинні бути заповнені");
         }
     }
 
@@ -99,16 +102,33 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                                         name={"FoodPointName"}
                                     />
                                 </div>
-                                <div className={styles.inputBox}>
-                                    <CustomTextArea
-                                        customInputContainer={styles.customTextAreaContainer}
-                                        className={styles.customTextArea}
+                                {/*<div className={styles.inputBox}>*/}
+                                {/*    <CustomTextArea*/}
+                                {/*        customInputContainer={styles.customTextAreaContainer}*/}
+                                {/*        className={styles.customTextArea}*/}
+                                {/*        placeholder={"Опис"}*/}
+                                {/*        required={true}*/}
+                                {/*        onChange={changeDescriptionHandler}*/}
+                                {/*        value={description}*/}
+                                {/*        formRef={formRef}*/}
+                                {/*        name={"FoodPointDescription"}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
+                                <div className={styles.richTextEditor}>
+                                    <ReactQuill
                                         placeholder={"Опис"}
-                                        required={true}
-                                        onChange={changeDescriptionHandler}
+                                        style={{height:'125px', 'color': 'black',}}
                                         value={description}
-                                        formRef={formRef}
-                                        name={"FoodPointDescription"}
+                                        onChange={changeDescriptionHandler}
+                                        modules={{
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline', 'strike'],
+                                                ['link', 'image', 'video'],
+                                                [{ list: 'ordered' }, { list: 'bullet' }],
+                                                [{ align: [] }],
+                                                ['clean'], // Removes all formatting
+                                            ],
+                                        }}
                                     />
                                 </div>
                                 <div className={styles.inputBox}>
@@ -124,18 +144,39 @@ const FoodPointModal = ({ isOpen, onClose, foodId, selectedId, editMode }) => {
                                         name={"FoodPointWeight"}
                                     />
                                 </div>
-                                <div className={styles.inputBox}>
-                                    <CustomTextArea
-                                        customInputContainer={styles.customTextAreaContainer}
-                                        className={styles.customTextArea}
+                                {/*<div className={styles.inputBox}>*/}
+                                {/*    <CustomTextArea*/}
+                                {/*        customInputContainer={styles.customTextAreaContainer}*/}
+                                {/*        className={styles.customTextArea}*/}
+                                {/*        placeholder={"Спосіб приготування"}*/}
+                                {/*        required={true}*/}
+                                {/*        onChange={changeCoockingMethodHandler}*/}
+                                {/*        value={coockingMethod}*/}
+                                {/*        formRef={formRef}*/}
+                                {/*        name={"FoodPointСoockingMethod"}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
+
+                                <div className={styles.richTextEditor}>
+                                    <ReactQuill
                                         placeholder={"Спосіб приготування"}
-                                        required={true}
-                                        onChange={changeCoockingMethodHandler}
+                                        style={{height:'125px', 'color': 'black',}}
                                         value={coockingMethod}
-                                        formRef={formRef}
-                                        name={"FoodPointСoockingMethod"}
+                                        onChange={changeCoockingMethodHandler}
+                                        modules={{
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline', 'strike'],
+                                                ['link', 'image', 'video'],
+                                                [{ list: 'ordered' }, { list: 'bullet' }],
+                                                [{ align: [] }],
+                                                ['clean'], // Removes all formatting
+                                            ],
+
+                                        }}
+
                                     />
                                 </div>
+
                                 <div className={styles.btnBox}>
                                     <Button
                                         className={styles.btn}

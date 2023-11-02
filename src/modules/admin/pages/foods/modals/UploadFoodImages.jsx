@@ -32,6 +32,8 @@ const UploadFoodImages = ({ isOpen, onClose, foodId }) => {
 
     function onSaveHandler(currentImages: []) {
 
+        const dataArr = [];
+
         currentImages.forEach((image, index) => {
             const form = new FormData();
             form.append('FoodId', foodId);
@@ -39,8 +41,10 @@ const UploadFoodImages = ({ isOpen, onClose, foodId }) => {
             form.append('OrderId', index);
             form.append('FileName', image.name);
 
-            addPhotosToFoodHelper(dispatch, form);
+           dataArr.push(form);
         });
+
+        addPhotosToFoodHelper(dispatch, dataArr);
 
         cleanUp();
     }
