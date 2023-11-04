@@ -48,10 +48,10 @@ const FoodDetailsContent = (props: { training: null }) => {
                                                 {props.training.description}
                                             </p>
 
-                                            <div className={styles.trainingPeriod}>
+                                            <div className={styles.trainingPeriodFood}>
                                                 <div className={styles.data}>
                                                     <img src={trainingTimeIcon} alt='' />
-                                                    <p>Раціон на {props?.training.foodPoints?.length} днів</p>
+                                                    <p> Pаціон на кількість днів - {props?.training.foodPoints?.length}</p>
                                                 </div>
                                             </div>
 
@@ -100,22 +100,30 @@ const FoodDetailsContent = (props: { training: null }) => {
                     <div className={styles.photosGrid}>
                         <div className={styles.gridItem}>
                             <div className={styles.gridImgBox}>
-                                <img src={props.training?.photos[2]?.filePath} alt='' />
+                                { props.training?.photos?.[2]?.filePath &&
+                                    <img src={props.training?.photos[2]?.filePath} alt='' />
+                                }
                             </div>
                         </div>
                         <div className={styles.gridItem}>
                             <div className={styles.gridImgBox}>
-                                <img src={props.training?.photos[3]?.filePath} alt='' />
+                                { props.training?.photos?.[3]?.filePath  &&
+                                    <img src={props.training?.photos[3]?.filePath} alt='' />
+                                }
                             </div>
                         </div>
                         <div className={styles.gridItem}>
                             <div className={styles.gridImgBox}>
-                                <img src={props.training?.photos[4]?.filePath} alt='' />
+                                { props.training?.photos?.[4]?.filePath &&
+                                    <img src={props.training?.photos[4]?.filePath} alt='' />
+                                }
                             </div>
                         </div>
                         <div className={styles.gridItem}>
                             <div className={styles.gridImgBox}>
-                                <img src={props.training?.photos[5]?.filePath} alt='' />
+                                { props.training?.photos?.[5]?.filePath &&
+                                        <img src={props.training?.photos[5]?.filePath} alt='' />
+                                }
                             </div>
                         </div>
                     </div>

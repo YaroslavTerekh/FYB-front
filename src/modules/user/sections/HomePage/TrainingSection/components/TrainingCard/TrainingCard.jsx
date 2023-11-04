@@ -92,7 +92,7 @@ const TrainingCard = ({
                             <Button onClick={() => setModalIsOpen(true)}>{'Купити'}</Button>
                         </div>
                         { isFood
-                            ?   <div className='button-training_blu'>
+                            ?   <div className='button-training__white button-training_blu'>
                                     <Link
                                         className='button-training__blu'
                                         to={ROUTES.foodDetails+"/" + id}
@@ -100,7 +100,7 @@ const TrainingCard = ({
                                         Детальніше
                                     </Link>
                                 </div>
-                            :  <div className='button-training_blu'>
+                            :  <div className='button-training__white button-training_blu'>
                                     <Link
                                         className='button-training__blu'
                                         to={ROUTES.details+"/" + id}

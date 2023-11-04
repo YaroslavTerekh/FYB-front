@@ -31,7 +31,9 @@ const TrainingDetailsContent = (props: { training: null }) => {
                 productId={props.training.id}
             />
             <div className='container vetrino'>
-                <div className={styles.navigation}></div>
+                <div className={styles.navigation}>
+                    Головна <span>/</span> {props.training.title}
+                </div>
                 <div className={styles.box}>
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
@@ -60,7 +62,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                             </div>
 
                             <h3 className={styles.price}>
-                                {props.training.price}
+                                {props.training.price} ГРН
                             </h3>
 
                             <Button

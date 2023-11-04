@@ -3,3 +3,16 @@
     flex-direction: column;
 }
 
+@media screen and (max-width: 750px) {
+    .customSelectContainer {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .customSelectContainer {
+        width: 350px;
+    }
+}
+
+

@@ -52,6 +52,7 @@ export default function Header({ navigationData }) {
                 clearTimeout(timer);
             }, 200);
         }
+        setNav(false);
     };
 
     function navigateOnHomePage(elementText: string) {
@@ -100,6 +101,8 @@ export default function Header({ navigationData }) {
         } else {
             setLoginIsOpen(true);
         }
+
+        setNav(false);
     }
 
     function onLoginCloseModalHandler() {
@@ -145,8 +148,8 @@ export default function Header({ navigationData }) {
                 onClose={onRegisterFinishedModalCloseHandler}
                 isOpen={finishRegistrationIsOpen}
             />
-            <header className='header' style={{height:'120px'}}>
-                <div className='container'>
+            <header className='header' style={{height:'130px'}}>
+                <div className='container vetrino'>
 
                         <div className='header__row'>
                             <div className='header_box'>

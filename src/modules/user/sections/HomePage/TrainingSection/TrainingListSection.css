@@ -128,6 +128,22 @@
     width: 207px;
 }
 
+.button-training_blu a{
+    background-color: var(--main-bg);
+    box-shadow: none;
+    color: var(--second-bg);
+    font-size: 20px;
+    font-weight: 500;
+    padding: 13px 23px;
+    transition: all 0.3s ease 0s;
+    width: 207px;
+}
+
+.button-training_blu:hover a{
+    background-color: var(--main-bg);
+    box-shadow: none;
+    color: var(--second-bg);
+}
 
 .button-training__white button:hover {
     background-color: var(--main-bg);
@@ -229,7 +245,7 @@
     .button-training {
         width: 100%;
     }
-    .button-training__blu button {
+    .button-training__blu a {
         width: 85%;
     }
     .button-training__white {
@@ -248,6 +264,10 @@
         justify-content: center;
     }
     .button-training__blu {
+        width: 85%;
+    }
+
+    .button-training_blu a {
         width: 85%;
     }
 }

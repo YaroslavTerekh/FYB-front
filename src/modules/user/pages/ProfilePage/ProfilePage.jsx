@@ -77,7 +77,7 @@ const ProfilePage = () => {
     }
 
     return (
-        <>
+        <div className='container'>
             <BuyAlertModal
                 purchaseProductType={selectedTrainingType?.foodDetails ? PurchaseProductTypeFood :PurchaseProductTypeCoaching}
                 onClose={onModalCloseHandler}
@@ -85,6 +85,10 @@ const ProfilePage = () => {
                 text={"Підвердіть покупку"}
                 productId={selectedTrainingType?.id}
             />
+            <div className={styles.navigation}>
+                Головна <span>/</span> {selectedTrainingType?.title}
+            </div>
+
             <div
                 className={`videoTrainingsButton ${styles.videoTrainingsButton}`}
             >
@@ -130,7 +134,7 @@ const ProfilePage = () => {
             <TrainingCarouselSection
                 filteredTrainingData={filteredTrainingData}
             />
-        </>
+        </div>
     );
 };
 
