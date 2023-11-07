@@ -74,7 +74,7 @@
     align-items: flex-end;
     justify-content: space-between;
     /*gap: 60px;*/
-    width: 85%;
+    /*width: 85%;*/
 }
 
 .trainingPeriodFood {
@@ -84,16 +84,21 @@
     /*width: 100%;*/
 }
 
-.trainingPeriod, .trainingPeriodFood .data {
+.trainingPeriod .data, .trainingPeriodFood .data {
     display: flex;
 }
 
-.trainingPeriod, .trainingPeriodFood .data img {
+
+.trainingPeriod  .data img {
+    width: 45px;
+}
+
+.trainingPeriodFood .data img {
     width: 50px;
     height: 35px;
 }
 
-.trainingPeriod, .trainingPeriodFood .data p {
+.trainingPeriod .data p, .trainingPeriodFood .data p {
     margin: auto 10px;
     height: 24px;
     line-height: 24px;
@@ -328,6 +333,11 @@ img {
 }
 
 @media screen and (max-width: 1000px) {
+
+    .price {
+        margin-top: 10px;
+    }
+
     .titleGrid .gridImgBox {
         width: 340px;
         height: 455px;
@@ -674,6 +684,17 @@ img {
 }
 
 @media screen and (max-width: 540px) {
+    .price {
+        margin-top: 30px;
+    }
+
+    .data {
+        font-size: 12px;
+    }
+
+    .data img {
+        margin-left: 10px;
+    }
 
     .trainingDetailsBlock {
         padding: 0 10px;
@@ -751,7 +772,7 @@ img {
 
     .titlePhotos .titleGrid .titleGridItem .infoBlock .price {
         font-size: 15px;
-        margin: 0;
+        /*margin: 0;*/
     }
 
     .trainingDetailsBlock .trainingDetailsList {

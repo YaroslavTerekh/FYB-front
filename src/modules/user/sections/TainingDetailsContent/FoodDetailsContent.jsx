@@ -56,7 +56,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                                             </div>
 
                                             <h3 className={styles.price}>
-                                                {props.training.price}
+                                                {props.training.price} ГРН
                                             </h3>
 
                                             <Button
