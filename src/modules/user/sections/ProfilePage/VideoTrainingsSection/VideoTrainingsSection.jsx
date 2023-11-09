@@ -11,12 +11,34 @@ import {
     MOCKED_TRAININGS_TYPES,
 } from '../../../pages/ProfilePage/constants';
 import ReactPlayer from 'react-player';
+import { removeUserSpinner, setUserSpinner } from '../../../../../context/spinner-context/spinner-actions';
+import { useDispatch } from 'react-redux';
 
 const VideoTrainingsSection = ({
     selectedTrainingType,
     handleSelectChange,
 }) => {
     const [trainingVideoSource, setTrainingVideoSource] = useState('');
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setUserSpinner());
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+
+        if(selectedTrainingType?.id) {
+            const timer = setTimeout(() => {
+
+
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [selectedTrainingType]);
 
     useEffect(() => {
         const selectedTraining = selectedTrainingType?.videos?.[0].filePath;

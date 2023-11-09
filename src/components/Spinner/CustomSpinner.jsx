@@ -17,13 +17,13 @@ export function CustomSpinner(  ) {
     return (
         <div className={'spinner'} style={{ display:'flex', justifyContent:'center', alignItems:'center' }}>
             { show &&
-                <div style={{  position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.11)', backdropFilter:'blur(5px)', top:'0', width: '100vw', height: '100vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
+                <div style={{  position: 'fixed', backgroundColor: 'rgba(0, 0, 0, 0.11)', backdropFilter:'blur(5px)', top:'0', width: '100vw', height: '100%', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
                     <InfinitySpin
                         // width='200'
                         color="blue"
                     />
 
-                    <p style={{fontSize:'20px'}}>Завантаження даних на сервер!</p>
+                    { !spinner.user && <p style={{fontSize:'20px'}}>Завантаження даних на сервер!</p>}
                 </div>
             }
         </div>

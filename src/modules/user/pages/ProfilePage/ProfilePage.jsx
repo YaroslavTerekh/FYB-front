@@ -61,7 +61,7 @@ const ProfilePage = () => {
             const item2 = Object.entries(food).map(([itemType, itemData]) => ({
                 value: itemData,
                 label: itemData.title,
-                isPurchased: true ,//!!currentUser?.foodPurchases?.find(x => x?.product?.id === itemData.id),
+                isPurchased: !!currentUser?.foodPurchases?.find(x => x?.product?.id === itemData.id),
                 isFood: true
             }));
 
@@ -77,7 +77,7 @@ const ProfilePage = () => {
     }
 
     return (
-        <div className='container'>
+        <div className=''>
             <BuyAlertModal
                 purchaseProductType={selectedTrainingType?.foodDetails ? PurchaseProductTypeFood :PurchaseProductTypeCoaching}
                 onClose={onModalCloseHandler}
@@ -85,7 +85,7 @@ const ProfilePage = () => {
                 text={"Підвердіть покупку"}
                 productId={selectedTrainingType?.id}
             />
-            <div className={styles.navigation}>
+            <div className={'container ' + styles.navigation}>
                 Головна <span>/</span> {selectedTrainingType?.title}
             </div>
 

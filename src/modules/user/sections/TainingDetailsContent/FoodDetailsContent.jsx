@@ -1,13 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TrainingDetailsContent.module.css';
 import Button from '../../../../components/Button/Button';
-import trainingIcon from '../../../../img/components/icon10.svg';
 import trainingTimeIcon from '../../../../img/components/icon4.svg';
-import { GetIconHelper } from '../../../../constants/icons-const';
 import BuyAlertModal from '../../buy-modal/BuyAlertModal';
 import { PurchaseProductTypeFood } from '../../../../constants/roles';
+import {
+    removeUserSpinner,
+    setUserSpinner,
+} from '../../../../context/spinner-context/spinner-actions';
+import { useDispatch } from 'react-redux';
 
 const FoodDetailsContent = (props: { training: null }) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setUserSpinner());
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+
+        if(props.training && props.training?.id) {
+            const timer = setTimeout(() => {
+
+
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [props?.training]);
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
     function onModalCloseHandler() {
         setModalIsOpen(false);

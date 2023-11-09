@@ -6,9 +6,32 @@ import trainingTimeIcon from '../../../../img/components/icon4.svg';
 import { GetIconHelper } from '../../../../constants/icons-const';
 import BuyAlertModal from '../../buy-modal/BuyAlertModal';
 import { PurchaseProductTypeCoaching } from '../../../../constants/roles';
+import { removeUserSpinner, setUserSpinner } from '../../../../context/spinner-context/spinner-actions';
+import { useDispatch } from 'react-redux';
 
 const TrainingDetailsContent = (props: { training: null }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setUserSpinner());
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+
+        if(props.training && props.training?.id) {
+            const timer = setTimeout(() => {
+
+
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [props?.training]);
+
     function onModalCloseHandler() {
         setModalIsOpen(false);
     }

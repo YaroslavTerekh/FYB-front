@@ -5,11 +5,33 @@ import dropDown from '../../../../../img/components/iconDownArrowBold.svg';
 import Button from '../../../../../components/Button/Button';
 import faqIcon from '../../HomePage/FAQSection/images/icon1.png';
 import { string } from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { removeUserSpinner, setUserSpinner } from '../../../../../context/spinner-context/spinner-actions';
 
 const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
     const [selectedCookingItem, setSelectedCookingItem] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedFood, setSelectedFood] = useState("1");
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setUserSpinner());
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+
+        if(selectedTrainingType?.id) {
+            const timer = setTimeout(() => {
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [selectedTrainingType]);
+
 
     useEffect(() => {
         setSelectedFood(selectedTrainingType);
