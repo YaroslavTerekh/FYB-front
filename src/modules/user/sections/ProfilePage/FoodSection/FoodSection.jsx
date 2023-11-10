@@ -85,7 +85,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                 <div
                                     className={selectedCookingItem === "1" ? styles.foodItem + " " + styles.p0 + " " + styles.autoH : styles.foodItem + " " + styles.p0}>
 
-                                    <img src={selectedFood?.photos?.[1]?.filePath}/>
+                                    <img src={selectedFood?.photos?.[(i % 10 === 7) ? 0 : (i % 10 - 1)]?.filePath}/>
                                 </div>
                             }
                         <div
