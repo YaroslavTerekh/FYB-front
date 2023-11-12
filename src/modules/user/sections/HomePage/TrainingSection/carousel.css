@@ -146,6 +146,11 @@
     .info-training__subtitle {
         height: 100px;
     }
+
+    .carusel-block__img {
+        width: 310px;
+        height: 400px;
+    }
 }
 
 @media screen and (max-width: 300px) {

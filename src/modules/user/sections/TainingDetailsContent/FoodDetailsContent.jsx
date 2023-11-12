@@ -15,22 +15,21 @@ const FoodDetailsContent = (props: { training: null }) => {
 
     useEffect(() => {
         dispatch(setUserSpinner());
+
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: 'smooth',
         });
 
-        if(props.training && props.training?.id) {
+        if(props?.training && props?.training?.id) {
             const timer = setTimeout(() => {
-
-
                 dispatch(removeUserSpinner());
                 clearTimeout(timer);
             }, 1000);
         }
 
-    }, [props?.training]);
+    }, [props]);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     function onModalCloseHandler() {

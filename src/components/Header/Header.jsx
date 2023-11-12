@@ -92,7 +92,7 @@ export default function Header({ navigationData }) {
 
     function handleProfileClick(elementLink) {
         if(userService.isAuthorized()) {
-            window.scrollBy({
+            window.scrollTo({
                 top: 0,
                 left: 0,
                 behavior: 'smooth',

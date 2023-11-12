@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import VideoTrainingsSection from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection';
 import TrainingCarouselSection from '../../sections/ProfilePage/TrainingCarouselSection/TrainingCarouselSection';
-
 import { MOCKED_TRAININGS_DATA, MOCKED_TRAININGS_TYPES } from './constants';
-
 import './ProfilePage.css';
 import styles from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection.module.css';
 import Select from '../../../../components/Select/Select';

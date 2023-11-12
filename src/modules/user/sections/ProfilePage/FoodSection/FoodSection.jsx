@@ -4,7 +4,7 @@ import AnimateHeight from 'react-animate-height';
 import dropDown from '../../../../../img/components/iconDownArrowBold.svg';
 import Button from '../../../../../components/Button/Button';
 import faqIcon from '../../HomePage/FAQSection/images/icon1.png';
-import { string } from 'prop-types';
+import { object, string } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { removeUserSpinner, setUserSpinner } from '../../../../../context/spinner-context/spinner-actions';
 
@@ -34,7 +34,23 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
 
 
     useEffect(() => {
-        setSelectedFood(selectedTrainingType);
+        if(selectedTrainingType.foodPoints && selectedTrainingType.foodPoints.length > 0 ) {
+            let imagePath = 0;
+
+            let newFoodData = JSON.parse(JSON.stringify(selectedTrainingType));
+
+            newFoodData?.foodPoints.forEach((data, i) => {
+                if(i === 3 || i === 7 || ( i % 10  === 3) || ( i % 10  === 7)) {
+                    if(imagePath === 7) {
+                        imagePath = 0;
+                    }
+                    data.additionalImagePath = newFoodData?.photos?.[imagePath]?.filePath;
+                    imagePath++;
+                }
+            });
+
+            setSelectedFood(newFoodData);
+        }
     }, [selectedTrainingType]);
 
     function onCookingMethodClickHandler(id: string) {
@@ -72,6 +88,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
         return { __html: e };
     };
 
+
     return (
         <section className={styles.videoTrainings}>
             <div className={styles.container}>
@@ -85,7 +102,9 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                 <div
                                     className={selectedCookingItem === "1" ? styles.foodItem + " " + styles.p0 + " " + styles.autoH : styles.foodItem + " " + styles.p0}>
 
-                                    <img src={selectedFood?.photos?.[(i % 10 === 7) ? 0 : (i % 10 - 1)]?.filePath}/>
+                                    {
+                                        <img src={data?.additionalImagePath}/>
+                                    }
                                 </div>
                             }
                         <div

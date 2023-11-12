@@ -28,25 +28,25 @@ const TrainingListSection = () =>  {
 
     }, [currentContentState.coaching]);
 
-    useEffect(() => {
-
-        let x = 0
-        const data = list;
-        for (let i = 0; i < data.length; i++) {
-
-            if(x === 4) {
-                x = 0
-            }
-
-            data[i].icon = x;
-            x++;
-        }
-
-        if(data.length > 0) {
-            setList(data);
-        }
-
-    }, [list]);
+    // useEffect(() => {
+    //
+    //     let x = 0
+    //     const data = list;
+    //     for (let i = 0; i < data.length; i++) {
+    //
+    //         if(x === 4) {
+    //             x = 0
+    //         }
+    //
+    //         data[i].icon = x;
+    //         x++;
+    //     }
+    //
+    //     if(data.length > 0) {
+    //         setList(data);
+    //     }
+    //
+    // }, [list]);
 
     useEffect(() => {
 
