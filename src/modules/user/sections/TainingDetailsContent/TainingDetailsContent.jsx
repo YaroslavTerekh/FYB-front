@@ -80,7 +80,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
                             {video && (
-                                <video controls muted autoPlay>
+                                <video controls muted autoPlay playsInline>
                                     <source src={video} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
