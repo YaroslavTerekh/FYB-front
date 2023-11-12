@@ -44,6 +44,25 @@ const TrainingDetailsContent = (props: { training: null }) => {
         }
     }, [props.training]);
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    const handleCanPlay = () => {
+       const timer = setTimeout(() => {
+           // The video has loaded and can be played
+           setIsLoaded(true);
+
+           // Start playing the video
+           if (videoRef.current) {
+               videoRef.current.play();
+           }
+
+           clearTimeout(timer);
+
+       }, 1000);
+    };
+
+    const videoRef = React.createRef();
+
     return (
         <>
             <BuyAlertModal
@@ -60,10 +79,12 @@ const TrainingDetailsContent = (props: { training: null }) => {
                 <div className={styles.box}>
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
-                            { video &&
-                                <video controls preload="metadata" src={video}>
+                            {video && (
+                                <video controls muted autoPlay>
+                                    <source src={video} type="video/mp4" />
+                                    Your browser does not support the video tag.
                                 </video>
-                            }
+                            )}
                         </div>
                         <div className={styles.infoBlock}>
                             <h3 className={styles.header}>
