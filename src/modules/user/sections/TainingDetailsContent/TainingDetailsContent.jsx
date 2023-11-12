@@ -61,7 +61,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
                             { video &&
-                                <video controls src={video}>
+                                <video controls preload="metadata" src={video}>
                                 </video>
                             }
                         </div>
