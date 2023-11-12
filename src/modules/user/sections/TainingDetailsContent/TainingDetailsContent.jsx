@@ -8,6 +8,7 @@ import BuyAlertModal from '../../buy-modal/BuyAlertModal';
 import { PurchaseProductTypeCoaching } from '../../../../constants/roles';
 import { removeUserSpinner, setUserSpinner } from '../../../../context/spinner-context/spinner-actions';
 import { useDispatch } from 'react-redux';
+import ReactPlayer from 'react-player';
 
 const TrainingDetailsContent = (props: { training: null }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -80,10 +81,11 @@ const TrainingDetailsContent = (props: { training: null }) => {
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
                             {video && (
-                                <video controls muted autoPlay playsInline>
-                                    <source src={video} type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                </video>
+                                // <video controls muted autoPlay>
+                                //     <source src={video} type="video/mp4" />
+                                //     Your browser does not support the video tag.
+                                // </video>
+                                <ReactPlayer url={video}  playing={true} loop={true} controls={true} width={'100%'} height={'100%'} />
                             )}
                         </div>
                         <div className={styles.infoBlock}>
