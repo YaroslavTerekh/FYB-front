@@ -144,10 +144,12 @@
 }
 
 .confNum .inputBox {
-    width: 50%;
+    /*width: 50%;*/
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .confNum .text {
@@ -187,6 +189,14 @@
     height: 480px;
     margin: auto;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 668px) {
+    .confBtn {
+        margin-top: 10px !important;
+        width: 250px;
+        padding: 15px 20px !important;
+    }
 }
 
 @media screen and (max-width: 680px) {

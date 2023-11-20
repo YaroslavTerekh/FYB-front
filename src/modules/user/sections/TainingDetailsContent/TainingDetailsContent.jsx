@@ -85,7 +85,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                                 //     <source src={video} type="video/mp4" />
                                 //     Your browser does not support the video tag.
                                 // </video>
-                                <ReactPlayer url={video}  playing={true} loop={true} controls={true} width={'100%'} height={'100%'} />
+                                <ReactPlayer url={video} playing={false} loop={true} controls={true} width={'100%'} height={'100%'} />
                             )}
                         </div>
                         <div className={styles.infoBlock}>

@@ -54,6 +54,7 @@ const ConfirmPhoneNumber = () => {
                     <CustomInput
                         onChange={changeCodeHandler}
                         className={styles.customInput}
+                        customInputContainer={styles.customInputContainer}
                         placeholder={"Введіть код"}
                         type={"tel"}
                         required={true}
@@ -62,7 +63,7 @@ const ConfirmPhoneNumber = () => {
                         name={"RequestedCode"}
                     />
                     <Button
-                        className={styles.btn}
+                        className={styles.btn + " " + styles.confBtn}
                         aria-expanded={true}
                         aria-controls={`example-panel-`}
                         onClick={verifyCode}
