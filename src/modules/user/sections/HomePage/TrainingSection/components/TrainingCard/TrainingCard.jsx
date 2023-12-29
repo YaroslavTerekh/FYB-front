@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../../../../../../components/Button/Button';
 import { ROUTES } from '../../../../../../../constants';
 import BuyAlertModal from '../../../../../buy-modal/BuyAlertModal';
+import { GetTrainingIconHelper } from '../../constants';
+import sexyIcon from '../../../../../../../img/components/icon14.png';
 
 const TrainingCard = ({
     id,
@@ -31,6 +33,10 @@ const TrainingCard = ({
         setModalIsOpen(false);
     }
 
+    useEffect(() => {
+
+    }, [icon]);
+
     return (
         <>
         <BuyAlertModal
@@ -56,39 +62,37 @@ const TrainingCard = ({
 
                         { !isFood
                             ? <div className='picture-training__numerosity'>
-                                    {<img src={icon} /> && (
-                                        <div className='picture-training__icon'>
-                                            <img src={icon} />
-                                        </div>
-                                    )}
+                                <div className='picture-training__icon'>
+                                        <img src={sexyIcon} />
+                                    </div>
                                     {videos && (
                                         <div className='picture-training__text'>
-                                            {videos.length} тренувань
+                                           тренувань -  {videos?.filter(x=>!x?.isPreview).length}
                                         </div>
                                     )}
                             </div>
                             :  <div className='picture-training__time picture-training__text'>
-                                Раціон на {foodPoints.length} день
+                                {`Pаціон на кількість днів - `} <strong>{foodPoints.length}</strong>
                             </div>
                         }
                         { accessDays > 0 && !isFood && (
                             <div className='picture-training__time picture-training__text'>
-                                {accessDays} місяці доступу
+                                 днів доступу - <strong>{accessDays}</strong>
                             </div>
                         )}
-                        {isFood && coachingId && (
+                        {!isFood && foodId && (
                             <div className='picture-training__gift picture-training__text'>
                                 <p>+ харчування в подарунок</p>
                             </div>
                         )}
                     </div>
-                    <div className='info-training__price vetrino'>{price}</div>
+                    <div className='info-training__price vetrino'>{price} грн</div>
                     <div className='info-training__button button-training'>
                         <div className='button-training__white'>
                             <Button onClick={() => setModalIsOpen(true)}>{'Купити'}</Button>
                         </div>
                         { isFood
-                            ?   <div className='button-training_blu'>
+                            ?   <div className='button-training__white button-training_blu'>
                                     <Link
                                         className='button-training__blu'
                                         to={ROUTES.foodDetails+"/" + id}
@@ -96,7 +100,7 @@ const TrainingCard = ({
                                         Детальніше
                                     </Link>
                                 </div>
-                            :  <div className='button-training_blu'>
+                            :  <div className='button-training__white button-training_blu'>
                                     <Link
                                         className='button-training__blu'
                                         to={ROUTES.details+"/" + id}

@@ -6,9 +6,31 @@ import trainingTimeIcon from '../../../../img/components/icon4.svg';
 import { GetIconHelper } from '../../../../constants/icons-const';
 import BuyAlertModal from '../../buy-modal/BuyAlertModal';
 import { PurchaseProductTypeCoaching } from '../../../../constants/roles';
+import { removeUserSpinner, setUserSpinner } from '../../../../context/spinner-context/spinner-actions';
+import { useDispatch } from 'react-redux';
+import ReactPlayer from 'react-player';
+import { useLocation } from 'react-router-dom';
 
 const TrainingDetailsContent = (props: { training: null }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const location = useLocation();
+
+    useEffect(() => {
+        dispatch(setUserSpinner());
+        window.scrollTo(0, 0);
+
+        if(props.training && props.training?.id) {
+            const timer = setTimeout(() => {
+
+
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [props?.training, location.pathname]);
+
     function onModalCloseHandler() {
         setModalIsOpen(false);
     }
@@ -21,6 +43,25 @@ const TrainingDetailsContent = (props: { training: null }) => {
         }
     }, [props.training]);
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    const handleCanPlay = () => {
+       const timer = setTimeout(() => {
+           // The video has loaded and can be played
+           setIsLoaded(true);
+
+           // Start playing the video
+           if (videoRef.current) {
+               videoRef.current.play();
+           }
+
+           clearTimeout(timer);
+
+       }, 1000);
+    };
+
+    const videoRef = React.createRef();
+
     return (
         <>
             <BuyAlertModal
@@ -31,14 +72,19 @@ const TrainingDetailsContent = (props: { training: null }) => {
                 productId={props.training.id}
             />
             <div className='container vetrino'>
-                <div className={styles.navigation}></div>
+                <div className={styles.navigation}>
+                    Головна <span>/</span> {props.training.title}
+                </div>
                 <div className={styles.box}>
                     <div className={styles.headerBlock}>
                         <div className={styles.video}>
-                            { video &&
-                                <video controls src={video}>
-                                </video>
-                            }
+                            {video && (
+                                // <video controls muted autoPlay>
+                                //     <source src={video} type="video/mp4" />
+                                //     Your browser does not support the video tag.
+                                // </video>
+                                <ReactPlayer url={video} playing={false} loop={true} controls={true} width={'100%'} height={'100%'} />
+                            )}
                         </div>
                         <div className={styles.infoBlock}>
                             <h3 className={styles.header}>
@@ -51,16 +97,16 @@ const TrainingDetailsContent = (props: { training: null }) => {
                             <div className={styles.trainingPeriod}>
                                 <div className={styles.data}>
                                     <img src={trainingIcon} alt='' />
-                                    <p>{props.training.videos?.length} тренувань</p>
+                                    <p>{props.training.videos?.filter(x=>!x?.isPreview)?.length} тренувань</p>
                                 </div>
                                 <div className={styles.data}>
                                     <img src={trainingTimeIcon} alt='' />
-                                    <p>{props.training.accessDays} { props.training.accessDays > 1 ? ' місяці доступу' : 'місяць доступу'}</p>
+                                    <p>днів доступу - {props.training.accessDays}</p>
                                 </div>
                             </div>
 
                             <h3 className={styles.price}>
-                                {props.training.price}
+                                {props.training.price} ГРН
                             </h3>
 
                             <Button

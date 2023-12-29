@@ -34,24 +34,31 @@ const UsersPage = () => {
                             <p>Name</p>
                         </div>
                         <div className={mainStyles.blockItem}>
-                            <p>Actions</p>
+                            <p>Training</p>
                         </div>
                         <div className={mainStyles.blockItem}>
-                            <p>Status</p>
+                            <p>Доступ до</p>
                         </div>
                     </div>
 
                     {usersList && usersList.map(f =>
                         <div>
                             <div className={mainStyles.bodyBlock} key={f.id}>
-                                <div className={mainStyles.blockItem}>
+                                <div className={mainStyles.blockItem + " " + mainStyles.blockItemUsersTable}>
                                     <p>{f.firstName} {f.lastName}</p>
                                 </div>
-                                <div className={mainStyles.blockItem}>
-                                    <p>{f.title}</p>
+                                <div className={mainStyles.blockItem + " " + mainStyles.blockItemUsersTable}>
+                                    { f?.coachingPurchases &&  f?.coachingPurchases?.map(x=>
+                                        <>
+                                            <p>{x?.product.title}</p>
+                                            <p>{x?.product.title}</p>
+                                        </>
+                                    )}
                                 </div>
-                                <div className={mainStyles.blockItem}>
-                                    <p>{f.title}</p>
+                                <div className={mainStyles.blockItem + " " + mainStyles.blockItemUsersTable}>
+                                    { f?.coachingPurchases &&  f?.coachingPurchases?.map(x=>
+                                        <p>{new Date(x?.expireDate).toDateString()}</p>
+                                    )}
                                 </div>
                             </div>
                         </div>

@@ -45,7 +45,7 @@ const CustomInput = ({
 
     }, [value, type]);
 
-    const mainStyles = customInputContainer ?? styles.customInputContainer;
+    const mainStyles = `${styles.customInputContainer} ${customInputContainer} `;
     const errorStyles = mainStyles + " " + styles.inputError;
 
     return (

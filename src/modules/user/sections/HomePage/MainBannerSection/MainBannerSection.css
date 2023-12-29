@@ -45,11 +45,12 @@
 }
 
 .text-main__button button{
+    background: var(--beige, var(--second-bg));
     color: var(--main-bg);
     border: 2px solid var(--beige, var(--second-bg));
     display: block;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 500;
     padding: 13px 23px;
     transition: all 0.3s ease 0s;
 }

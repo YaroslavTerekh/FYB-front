@@ -13,6 +13,8 @@ import { number } from 'prop-types';
 import deleteIcon from '../../img/components/delete_icon.png';
 import addIcon from  '../../img/components/add_icon.png';
 import Button from '../Button/Button';
+import { writeError } from '../../context/alert-context/alert-context-helper';
+import { useDispatch } from 'react-redux';
 
 const customStyles = {
     control: base => ({
@@ -37,6 +39,7 @@ const customStyles = {
 };
 
 const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCount: number } ) => {
+    const dispatch = useDispatch();
     const [currentImages, setCurrentImages] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -47,6 +50,7 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
 
         if(props.imageList && props.imageList.length && props.imageList.length > 0) {
             setCurrentImages(props.imageList);
+            setSelectedImage(props.imageList[0]);
         }
 
     }, [props.imageList]);
@@ -135,6 +139,8 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
     function onOk() {
         if(currentImages.length === props.maxCount) {
             props.onOk(currentImages.filter(x=> !x.filePath));
+        } else {
+            writeError(dispatch, "Кількість фото має бути - " + props.maxCount);
         }
     }
 
@@ -149,10 +155,12 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
                 <p className={styles.placeholder}>Upload new photo</p>
                 <img src={selectIcon} alt='' />
             </div>
-            <div className={styles.imgInput} onClick={deleteImageHandler}>
-                <p className={styles.placeholder}>Видалити фото</p>
-                <img src={deleteIcon} alt='' />
-            </div>
+            {
+                !selectedImage?.filePath &&
+                    <div className={styles.imgInput} onClick={deleteImageHandler}>
+                    <p className={styles.placeholder}>Видалити фото</p>
+                    <img src={deleteIcon} alt='' />
+            </div> }
             <Button
                 className={styles.btn}
                 aria-expanded={true}

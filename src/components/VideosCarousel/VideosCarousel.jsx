@@ -98,7 +98,6 @@ const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any, onDelet
     };
 
     function deleteVideoHandler() {
-debugger;
         if(selectedVideo?.filePath && props.onDelete) {
             props.onDelete(selectedVideo.id);
             setCurrentVideos(currentVideos.filter((video) => video.filePath !== selectedVideo.filePath));

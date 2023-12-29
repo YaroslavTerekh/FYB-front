@@ -18,6 +18,10 @@
     position: relative;
 }
 
+.foodItem {
+    transition: opacity 0.3s ease-in-out;
+}
+
 .arrowHidden {
     display: none !important;
 }
@@ -55,7 +59,7 @@
 }
 
 .p0 {
-    padding: 0 !important;
+    padding: 0 !important ;
     max-height: 400px;
 }
 
@@ -185,5 +189,18 @@
 }
 
 @media screen and (max-width: 799px) {
+    .foodItem {
+        height: auto !important;
+    }
+}
 
+@media screen and (max-width: 376px) {
+    .foodItem {
+        padding: 10px 15px !important;
+    }
+
+    .p0 {
+        padding: 0 !important ;
+        max-height: 400px;
+    }
 }

@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCoachingHelper } from '../../../../../context/admin-data-context/admin-context.helper';
 import VideoUploader from '../../../../../components/VideoUploader/VideoUploader';
+import { removeSpinner, setSpinner } from '../../../../../context/spinner-context/spinner-actions';
 
 const CoachingModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
@@ -71,6 +72,8 @@ const CoachingModal = ({ isOpen, onClose }) => {
 
     function onSaveHandler() {
         if(name && coach && coach.value && description && price && days && avatar && video) {
+            dispatch(setSpinner())
+
             const form = new FormData();
 
             form.append('Title', name);

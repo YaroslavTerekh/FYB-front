@@ -19,6 +19,7 @@ import ConfirmPhoneNumberPage from './modules/auth/ConfirmPhoneNumber/ConfirmPho
 import SystemAlert from './components/Alert/SystemAlert';
 import AuthService from './services/auth-service';
 import FoodDetailsPage from './modules/user/pages/DetailsPage/FoodDetailsPage';
+import { CustomSpinner } from './components/Spinner/CustomSpinner';
 
 function App() {
     const userService = new AuthService();
@@ -36,6 +37,7 @@ function App() {
     }, [currentUserState]);
 
     return (
+        <>
         <div className=''>
             <AxiosInterceptor>
                 <Router>
@@ -67,7 +69,10 @@ function App() {
             </AxiosInterceptor>
 
             <SystemAlert />
+
         </div>
+            <CustomSpinner />
+        </>
     );
 }
 

@@ -11,6 +11,10 @@
     margin-top: 10px;
 }
 
+.header__logo {
+    margin-bottom: 5px;
+}
+
 .header__row {
     /*display: flex;*/
     /*justify-content: space-between;*/
@@ -44,6 +48,11 @@
 .nav__menu li:not(:last-child) {
     margin: 0px 100px 0px 0px;
 }
+
+.nav__menu_items {
+    margin-bottom: 0;
+}
+
 .nav__menu_items a, .nav__menu_items p {
     text-decoration: none;
     font-size: 20px;
@@ -123,7 +132,7 @@
     .header__row:before {
         z-index: 5;
     }
-    .nav__menu_items li a {
+    .nav__menu_items li a, .nav__menu_items p {
         color: var(--second-bg);
         font-size: 30px;
     }

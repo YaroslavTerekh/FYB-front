@@ -14,7 +14,14 @@ const ConfirmPhoneNumber = () => {
     const [requested, setRequested] = useState(false);
 
     useEffect(() => {
-        requestCode();
+       if (!requested) {
+           setRequested(true);
+           const timer =  setTimeout(() => {
+               requestCode();
+
+               clearTimeout(timer);
+           }, 200);
+       }
     }, []);
 
     function requestCode() {
@@ -47,6 +54,7 @@ const ConfirmPhoneNumber = () => {
                     <CustomInput
                         onChange={changeCodeHandler}
                         className={styles.customInput}
+                        customInputContainer={styles.customInputContainer}
                         placeholder={"Введіть код"}
                         type={"tel"}
                         required={true}
@@ -55,7 +63,7 @@ const ConfirmPhoneNumber = () => {
                         name={"RequestedCode"}
                     />
                     <Button
-                        className={styles.btn}
+                        className={styles.btn + " " + styles.confBtn}
                         aria-expanded={true}
                         aria-controls={`example-panel-`}
                         onClick={verifyCode}

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import VideoTrainingsSection from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection';
 import TrainingCarouselSection from '../../sections/ProfilePage/TrainingCarouselSection/TrainingCarouselSection';
-
 import { MOCKED_TRAININGS_DATA, MOCKED_TRAININGS_TYPES } from './constants';
-
 import './ProfilePage.css';
 import styles from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection.module.css';
 import Select from '../../../../components/Select/Select';
@@ -24,7 +21,6 @@ const ProfilePage = () => {
     }, []);
 
     const handleSelectChange = ({ value, label }) => {
-        debugger
         setSelectedTrainingType(value);
     };
 
@@ -54,7 +50,7 @@ const ProfilePage = () => {
         let item1 = Object.entries(coaching).map(([itemType, itemData]) => ({
             value: itemData,
             label: itemData.title,
-            isPurchased: !!currentUser?.coachingPurchases?.find(x => x?.id === itemData.id),
+            isPurchased: !!currentUser?.coachingPurchases?.find(x => x?.product?.id === itemData.id),
             isFood: false
         }));
 
@@ -62,7 +58,7 @@ const ProfilePage = () => {
             const item2 = Object.entries(food).map(([itemType, itemData]) => ({
                 value: itemData,
                 label: itemData.title,
-                isPurchased: !!currentUser?.foodPurchases?.find(x => x?.id === itemData.id),
+                isPurchased: !!currentUser?.foodPurchases?.find(x => x?.product?.id === itemData.id),
                 isFood: true
             }));
 
@@ -78,7 +74,7 @@ const ProfilePage = () => {
     }
 
     return (
-        <>
+        <div className=''>
             <BuyAlertModal
                 purchaseProductType={selectedTrainingType?.foodDetails ? PurchaseProductTypeFood :PurchaseProductTypeCoaching}
                 onClose={onModalCloseHandler}
@@ -86,6 +82,10 @@ const ProfilePage = () => {
                 text={"Підвердіть покупку"}
                 productId={selectedTrainingType?.id}
             />
+            <div className={'container ' + styles.navigation}>
+                Головна <span>/</span> {selectedTrainingType?.title}
+            </div>
+
             <div
                 className={`videoTrainingsButton ${styles.videoTrainingsButton}`}
             >
@@ -98,20 +98,20 @@ const ProfilePage = () => {
             </div>
 
             { (selectedTrainingType &&
-            (!!currentUser?.foodPurchases?.find(x => x?.id === selectedTrainingType?.id)) &&
+            (!!currentUser?.foodPurchases?.find(x => x?.product?.id === selectedTrainingType?.id)) &&
                 selectedTrainingType?.foodDetails)
                 ?   <FoodSection  selectedTrainingType={selectedTrainingType} filteredTrainingData={filteredTrainingData}/>
                 :
 
                 selectedTrainingType &&
-                !!currentUser?.coachingPurchases?.find(x => x?.id === selectedTrainingType?.id)
+                !!currentUser?.coachingPurchases?.find(x => x?.product?.id === selectedTrainingType?.id)
                     ?  <VideoTrainingsSection
                         selectedTrainingType={selectedTrainingType}
                         handleSelectChange={handleSelectChange}
                     />
                 : selectedTrainingType &&
-                    !(!!currentUser?.coachingPurchases?.find(x => x?.id === selectedTrainingType?.id) ||
-                        !!currentUser?.foodPurchases?.find(x => x?.id === selectedTrainingType?.id)
+                    !(!!currentUser?.coachingPurchases?.find(x => x?.product?.id === selectedTrainingType?.id) ||
+                        !!currentUser?.foodPurchases?.find(x => x?.product?.id === selectedTrainingType?.id)
                     )
                         ? <div className={styles.mainText}>
                             <p>Для перегляду цього тренування, потрібного його придбати</p>
@@ -131,7 +131,7 @@ const ProfilePage = () => {
             <TrainingCarouselSection
                 filteredTrainingData={filteredTrainingData}
             />
-        </>
+        </div>
     );
 };
 

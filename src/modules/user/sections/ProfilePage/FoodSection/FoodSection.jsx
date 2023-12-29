@@ -4,15 +4,49 @@ import AnimateHeight from 'react-animate-height';
 import dropDown from '../../../../../img/components/iconDownArrowBold.svg';
 import Button from '../../../../../components/Button/Button';
 import faqIcon from '../../HomePage/FAQSection/images/icon1.png';
-import { string } from 'prop-types';
+import { object, string } from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { removeUserSpinner, setUserSpinner } from '../../../../../context/spinner-context/spinner-actions';
 
 const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
     const [selectedCookingItem, setSelectedCookingItem] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedFood, setSelectedFood] = useState("1");
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        setSelectedFood(selectedTrainingType);
+        dispatch(setUserSpinner());
+        window.scrollTo(0, 0);
+
+        if(selectedTrainingType?.id) {
+            const timer = setTimeout(() => {
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [selectedTrainingType]);
+
+
+    useEffect(() => {
+        if(selectedTrainingType.foodPoints && selectedTrainingType.foodPoints.length > 0 ) {
+            let imagePath = 0;
+
+            let newFoodData = JSON.parse(JSON.stringify(selectedTrainingType));
+
+            newFoodData?.foodPoints.forEach((data, i) => {
+                if(i === 3 || i === 7 || ( i % 10  === 3) || ( i % 10  === 7)) {
+                    if(imagePath === 7) {
+                        imagePath = 0;
+                    }
+                    data.additionalImagePath = newFoodData?.photos?.[imagePath]?.filePath;
+                    imagePath++;
+                }
+            });
+
+            setSelectedFood(newFoodData);
+        }
     }, [selectedTrainingType]);
 
     function onCookingMethodClickHandler(id: string) {
@@ -46,6 +80,11 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
         return () => window.removeEventListener("resize", updateDimensions);
     }, []);
 
+    const createMarkup = (e:string) => {
+        return { __html: e };
+    };
+
+
     return (
         <section className={styles.videoTrainings}>
             <div className={styles.container}>
@@ -59,7 +98,9 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                 <div
                                     className={selectedCookingItem === "1" ? styles.foodItem + " " + styles.p0 + " " + styles.autoH : styles.foodItem + " " + styles.p0}>
 
-                                    <img src={selectedFood?.photos?.[1]?.filePath}/>
+                                    {
+                                        <img src={data?.additionalImagePath}/>
+                                    }
                                 </div>
                             }
                         <div
@@ -102,7 +143,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                         <div className={styles.foodPoint}>
                                             <div className={styles.foodBody}>
                                                 <div className={styles.foodText}>
-                                                    {data?.description}
+                                                    <div dangerouslySetInnerHTML={createMarkup(data?.description)} />
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +165,7 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                         >
                                             <div className=''>
                                                 <div className={styles.foodText}>
-                                                    {data?.coockingMethod}
+                                                    <div dangerouslySetInnerHTML={createMarkup(data?.coockingMethod)} />
                                                 </div>
                                             </div>
                                         </AnimateHeight>

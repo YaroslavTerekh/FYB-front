@@ -1,3 +1,17 @@
+.navigation {
+    color: var(--beige, #FFEDE4);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 20px 0;
+}
+
+.navigation span {
+    margin: 0 20px;
+}
+
 .videoTrainingsSelectCustom {
 	border: 1px solid var(--beige, var(--second-bg));
 	display: inline-flex;
@@ -159,8 +173,19 @@
     align-items: center;
     gap: 10px;
     color: var(--torauoise-bg, #1E7689);
+    border: 2px solid var(--beige, var(--second-bg));
+    transition: all 0.3s ease 0s;
 }
 
+.btn:hover {
+    background-color: var(--main-bg);
+    box-shadow: none;
+    color: var(--second-bg);
+}
+
+.btn:hover p{
+    color: var(--second-bg);
+}
 
 .btn p {
     font-family: Montserrat;
@@ -170,4 +195,5 @@
     line-height: normal;
     margin: auto;
     color: var(--main-bg);
+    transition: all 0.3s ease 0s;
 }

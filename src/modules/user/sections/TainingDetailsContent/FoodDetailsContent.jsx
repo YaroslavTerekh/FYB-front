@@ -1,13 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TrainingDetailsContent.module.css';
 import Button from '../../../../components/Button/Button';
-import trainingIcon from '../../../../img/components/icon10.svg';
 import trainingTimeIcon from '../../../../img/components/icon4.svg';
-import { GetIconHelper } from '../../../../constants/icons-const';
 import BuyAlertModal from '../../buy-modal/BuyAlertModal';
 import { PurchaseProductTypeFood } from '../../../../constants/roles';
+import {
+    removeUserSpinner,
+    setUserSpinner,
+} from '../../../../context/spinner-context/spinner-actions';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 const FoodDetailsContent = (props: { training: null }) => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+    useEffect(() => {
+        dispatch(setUserSpinner());
+
+        window.scrollTo(0, 0);
+
+        if(props?.training && props?.training?.id) {
+            const timer = setTimeout(() => {
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [props?.training, location.pathname]);
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
     function onModalCloseHandler() {
         setModalIsOpen(false);
@@ -48,15 +68,15 @@ const FoodDetailsContent = (props: { training: null }) => {
                                                 {props.training.description}
                                             </p>
 
-                                            <div className={styles.trainingPeriod}>
+                                            <div className={styles.trainingPeriodFood}>
                                                 <div className={styles.data}>
                                                     <img src={trainingTimeIcon} alt='' />
-                                                    <p>Раціон на {props?.training.foodPoints?.length} днів</p>
+                                                    <p> Pаціон на кількість днів - {props?.training.foodPoints?.length}</p>
                                                 </div>
                                             </div>
 
                                             <h3 className={styles.price}>
-                                                {props.training.price}
+                                                {props.training.price} ГРН
                                             </h3>
 
                                             <Button
@@ -98,16 +118,34 @@ const FoodDetailsContent = (props: { training: null }) => {
                         </div>
                     </div>
                     <div className={styles.photosGrid}>
-                        { props.training.photos && props.training.photos.map((x, i) => {
-                                if(i > 1) {
-                                    return (<div className={styles.gridItem}>
-                                        <div className={styles.gridImgBox}>
-                                            <img src={x.filePath} alt='' />
-                                        </div>
-                                    </div>)
+                        <div className={styles.gridItem}>
+                            <div className={styles.gridImgBox}>
+                                { props.training?.photos?.[2]?.filePath &&
+                                    <img src={props.training?.photos[2]?.filePath} alt='' />
                                 }
-                            }
-                        ) }
+                            </div>
+                        </div>
+                        <div className={styles.gridItem}>
+                            <div className={styles.gridImgBox}>
+                                { props.training?.photos?.[3]?.filePath  &&
+                                    <img src={props.training?.photos[3]?.filePath} alt='' />
+                                }
+                            </div>
+                        </div>
+                        <div className={styles.gridItem}>
+                            <div className={styles.gridImgBox}>
+                                { props.training?.photos?.[4]?.filePath &&
+                                    <img src={props.training?.photos[4]?.filePath} alt='' />
+                                }
+                            </div>
+                        </div>
+                        <div className={styles.gridItem}>
+                            <div className={styles.gridImgBox}>
+                                { props.training?.photos?.[5]?.filePath &&
+                                        <img src={props.training?.photos[5]?.filePath} alt='' />
+                                }
+                            </div>
+                        </div>
                     </div>
 
                     <Button

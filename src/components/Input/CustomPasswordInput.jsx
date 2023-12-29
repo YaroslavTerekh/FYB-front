@@ -16,7 +16,8 @@ const CustomPasswordInput = ({
      placeholder,
      value,
      formRef,
-     name
+     name,
+     customInputContainer,
      }) => {
     const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
@@ -35,7 +36,7 @@ const CustomPasswordInput = ({
         }
     }, [value, isPasswordVisible]);
 
-    const mainStyles = styles.customInputContainer;
+    const mainStyles = `${styles.customInputContainer} ${customInputContainer} `;
     const errorStyles = mainStyles + " " + styles.inputError;
 
     return (
