@@ -9,18 +9,16 @@ import { PurchaseProductTypeCoaching } from '../../../../constants/roles';
 import { removeUserSpinner, setUserSpinner } from '../../../../context/spinner-context/spinner-actions';
 import { useDispatch } from 'react-redux';
 import ReactPlayer from 'react-player';
+import { useLocation } from 'react-router-dom';
 
 const TrainingDetailsContent = (props: { training: null }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const dispatch = useDispatch();
+    const location = useLocation();
 
     useEffect(() => {
         dispatch(setUserSpinner());
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth',
-        });
+        window.scrollTo(0, 0);
 
         if(props.training && props.training?.id) {
             const timer = setTimeout(() => {
@@ -31,7 +29,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
             }, 1000);
         }
 
-    }, [props?.training]);
+    }, [props?.training, location.pathname]);
 
     function onModalCloseHandler() {
         setModalIsOpen(false);
@@ -99,7 +97,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                             <div className={styles.trainingPeriod}>
                                 <div className={styles.data}>
                                     <img src={trainingIcon} alt='' />
-                                    <p>{props.training.videos?.length} тренувань</p>
+                                    <p>{props.training.videos?.filter(x=>!x?.isPreview)?.length} тренувань</p>
                                 </div>
                                 <div className={styles.data}>
                                     <img src={trainingTimeIcon} alt='' />

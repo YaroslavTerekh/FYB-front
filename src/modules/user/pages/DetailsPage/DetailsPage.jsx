@@ -8,6 +8,7 @@ import FoodDetailsContent from '../../sections/TainingDetailsContent/FoodDetails
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCoachingHelper, getFoodHelper } from '../../../../context/content-context/content-context.helper';
+import { removeUserSpinner, setUserSpinner } from '../../../../context/spinner-context/spinner-actions';
 
 const DetailsPage = () => {
     const dispatch = useDispatch();

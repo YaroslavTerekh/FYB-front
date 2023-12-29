@@ -67,7 +67,7 @@ const TrainingCard = ({
                                     </div>
                                     {videos && (
                                         <div className='picture-training__text'>
-                                           тренувань -  {videos.length}
+                                           тренувань -  {videos?.filter(x=>!x?.isPreview).length}
                                         </div>
                                     )}
                             </div>

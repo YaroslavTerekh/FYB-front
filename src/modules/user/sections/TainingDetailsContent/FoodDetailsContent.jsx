@@ -9,18 +9,15 @@ import {
     setUserSpinner,
 } from '../../../../context/spinner-context/spinner-actions';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 const FoodDetailsContent = (props: { training: null }) => {
     const dispatch = useDispatch();
-
+    const location = useLocation();
     useEffect(() => {
         dispatch(setUserSpinner());
 
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth',
-        });
+        window.scrollTo(0, 0);
 
         if(props?.training && props?.training?.id) {
             const timer = setTimeout(() => {
@@ -29,7 +26,7 @@ const FoodDetailsContent = (props: { training: null }) => {
             }, 1000);
         }
 
-    }, [props]);
+    }, [props?.training, location.pathname]);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     function onModalCloseHandler() {
