@@ -166,8 +166,9 @@ export default function Header({ navigationData }) {
                                     {navigationData.map((item, index) => {
                                         if (item.name === "profile") {
                                             return (
-                                                <li key={index}>
+                                                <li key={index} >
                                                     <p
+                                                        id="profile-link"
                                                         onClick={() => handleProfileClick(item.href)}
                                                     >
                                                         {item.title}

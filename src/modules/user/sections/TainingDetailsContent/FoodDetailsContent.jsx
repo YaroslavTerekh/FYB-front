@@ -9,7 +9,11 @@ import {
     setUserSpinner,
 } from '../../../../context/spinner-context/spinner-actions';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import LoginModal from '../../../auth/LoginModal/LoginModal';
+import RegisterModal from '../../../auth/RegisterModal/RegisterModal';
+import FinishRegistrationModal from '../../../auth/FinishRegistrationModal/FinishRegistrationModal';
+import AuthService from '../../../../services/auth-service';
 
 const FoodDetailsContent = (props: { training: null }) => {
     const dispatch = useDispatch();
@@ -33,8 +37,58 @@ const FoodDetailsContent = (props: { training: null }) => {
         setModalIsOpen(false);
     }
 
+    function onLoginCloseModalHandler() {
+        setLoginIsOpen(false);
+    }
+
+    function onRegisterCloseModalHandler() {
+        setRegisterIsOpen(false);
+    }
+
+    function onRegisterRequestedModalHandler() {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(true);
+    }
+
+    function onRegisterRequestedModalHandler() {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(true);
+    }
+
+    function onRegisterFinishedModalHandler(value: boolean) {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(false);
+        setFinishRegistrationIsOpen(value);
+    }
+
+    function onRegisterFinishedModalCloseHandler() {
+        setFinishRegistrationIsOpen(false);
+        navigate("/confirm-number");
+    }
+
+    const [loginIsOpen, setLoginIsOpen] = useState(false);
+    const [registerIsOpen, setRegisterIsOpen] = useState(false);
+    const [finishRegistrationIsOpen, setFinishRegistrationIsOpen] = useState(false);
+
+    const navigate = useNavigate();
+    const userService = new AuthService();
+
     return (
         <>
+            <LoginModal
+                onClose={onLoginCloseModalHandler}
+                isOpen={loginIsOpen}
+                registerRequested={onRegisterRequestedModalHandler} />
+            <RegisterModal
+                onClose={onRegisterCloseModalHandler}
+                isOpen={registerIsOpen}
+                setRegistrationFinished={onRegisterFinishedModalHandler}
+            />
+            <FinishRegistrationModal
+                onClose={onRegisterFinishedModalCloseHandler}
+                isOpen={finishRegistrationIsOpen}
+            />
+
             <BuyAlertModal
                 purchaseProductType={PurchaseProductTypeFood}
                 onClose={onModalCloseHandler}
@@ -83,7 +137,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                                                 className={styles.btn + " " + styles.hide}
                                                 aria-expanded={true}
                                                 aria-controls={`coach-modal`}
-                                                onClick={() => setModalIsOpen(true)}
+                                                onClick={() => userService.isAuthorized() ?  setModalIsOpen(true) : setLoginIsOpen(true)}
                                             >
                                                 <p>Купити</p>
                                             </Button>
@@ -99,7 +153,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                         className={styles.btn + " " + styles.hiddenBtn}
                         aria-expanded={true}
                         aria-controls={`coach-modal`}
-                        onClick={() => setModalIsOpen(true)}
+                        onClick={() => userService.isAuthorized() ? setModalIsOpen(true) : setLoginIsOpen(true)}
                     >
                         <p>Купити</p>
                     </Button>
@@ -152,7 +206,7 @@ const FoodDetailsContent = (props: { training: null }) => {
                         className={styles.btn}
                         aria-expanded={true}
                         aria-controls={`coach-modal`}
-                        onClick={() => setModalIsOpen(true)}
+                        onClick={() => userService.isAuthorized() ?  setModalIsOpen(true) : setLoginIsOpen(true)}
                     >
                         <p>Купити</p>
                     </Button>
