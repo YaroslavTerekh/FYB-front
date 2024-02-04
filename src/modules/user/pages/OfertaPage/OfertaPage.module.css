@@ -1,0 +1,35 @@
+.title {
+    max-width: 550px;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin: auto auto 30px;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+
+.item, h5,p {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: white;
+}
+
+.item p {
+    margin: 0;
+}
+
+.item h5 {
+    text-transform: uppercase;
+}

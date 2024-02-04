@@ -20,6 +20,7 @@ import SystemAlert from './components/Alert/SystemAlert';
 import AuthService from './services/auth-service';
 import FoodDetailsPage from './modules/user/pages/DetailsPage/FoodDetailsPage';
 import { CustomSpinner } from './components/Spinner/CustomSpinner';
+import OfertaPage from './modules/user/pages/OfertaPage/OfertaPage';
 
 function App() {
     const userService = new AuthService();
@@ -48,6 +49,7 @@ function App() {
                             <Route path={`${ROUTES.details}/:id`} element={<DetailsPage />} />
                             <Route path={`${ROUTES.foodDetails}/:id`} element={<FoodDetailsPage />} />
                             <Route path={ROUTES.confirmNumber} element={<ConfirmPhoneNumberPage />} />
+                            <Route path={ROUTES.info} element={<OfertaPage />} />
                         </Route>
 
                         {selectedUser?.role && selectedUser.role === AdminRole &&

@@ -12,7 +12,8 @@ export const ROUTES = {
     food: 'food',
     users: 'users',
     faq: 'faq',
-    confirmNumber: 'confirm-number'
+    confirmNumber: 'confirm-number',
+    info: 'proposition-info'
 };
 
 export const HEADER_NAVIGATION_LINK_TYPES = {
