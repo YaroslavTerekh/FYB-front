@@ -24,6 +24,13 @@ const ContactsModal = ({ isOpen, onClose }) => {
                         <p className={'modal-info'}>
                             Телефон: <a href='tel:+30954677524'>+30954677524</a>
                         </p>
+                        <p className={'modal-info'}>
+                            Адреса:
+                            Україна, Волинська область,
+                            Ковельський район,
+                            С.Довгоноси,
+                            Вул.Івана Франка, буд.9
+                        </p>
                     </div>
                 </section>
             }
