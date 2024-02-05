@@ -206,7 +206,23 @@
     }
 
     .customInputContainer {
-        width: 95%;
+        width: 290px;
+        height: 55px !important;
+        /*width: 400px;*/
+        display: flex;
+        box-sizing: border-box;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .modalData {
+        width: 82% !important;
+        height: 480px;
+    }
+
+    .customInputContainer {
+        width: 250px;
         height: 55px !important;
         /*width: 400px;*/
         display: flex;

@@ -60,7 +60,7 @@ const ReviewsSection = () => {
                     {list.map((data, index) => (
                         <div className='slider-block' key={index}>
                             <div className='slider-block__img'>
-                                <p>@{data.instagramLink}</p>
+                                <p><a href={'https://www.instagram.com/'+ data.instagramLink}>{data.instagramLink}</a></p>
                                 <p>{data.feedbackText}</p>
                             </div>
 
