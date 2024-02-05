@@ -39,7 +39,7 @@ const ContactsModal = ({ isOpen, onClose }) => {
             styles={{
                 bgColor:'var(--main-bg)',
                 width: '609px',
-                height: '380px',
+                height: '400px',
                 border: '2px solid var(--beige, #FFEDE4);',
                 overlayBgColor: 'none'
             }}
