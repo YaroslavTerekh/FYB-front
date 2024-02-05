@@ -29,7 +29,14 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
         {
             breakpoint: 1110,
             settings: {
-                slidesToShow: 2.5,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+            },
+        },
+        {
+            breakpoint: 1025,
+            settings: {
+                slidesToShow: 2,
                 slidesToScroll: 1,
             },
         },

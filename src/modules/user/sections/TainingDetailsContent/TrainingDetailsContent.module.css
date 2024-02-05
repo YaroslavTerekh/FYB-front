@@ -119,9 +119,14 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    color: var(--torauoise-bg, #1E7689);
+
     border: 2px solid var(--beige, var(--second-bg));
     transition: all 0.3s ease 0s;
+}
+
+.btn p {
+    color: var(--torauoise-bg, #1E7689);
+    text-align: center;
 }
 
 .btn:hover {

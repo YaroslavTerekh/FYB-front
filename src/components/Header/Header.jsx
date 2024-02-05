@@ -167,12 +167,13 @@ export default function Header({ navigationData }) {
                                         if (item.name === "profile") {
                                             return (
                                                 <li key={index} >
-                                                    <p
+                                                    <a
+                                                        style={{color:'#ffede4'}}
                                                         id="profile-link"
                                                         onClick={() => handleProfileClick(item.href)}
                                                     >
                                                         {item.title}
-                                                    </p>
+                                                    </a>
                                                 </li>
                                             );
                                         } else {

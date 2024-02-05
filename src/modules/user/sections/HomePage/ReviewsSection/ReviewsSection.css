@@ -34,11 +34,11 @@
     transition: opacity 0.3s ease-in-out;
     margin: auto;
 }
-.slick-slide div:first-child {
+.reviews .slick-slide div:first-child {
     display: flex;
 }
 
-.slider-block__img {
+.reviews .slider-block__img {
     padding: 0 10px;
     background-color: white;
     border-radius: 10px;
@@ -49,7 +49,7 @@
     /*justify-content: space-between;*/
 }
 
-.slider-block__img p {
+.reviews .slider-block__img p {
     color: black;
     cursor: pointer;
 }
