@@ -135,6 +135,10 @@
     color: var(--second-bg);
 }
 
+.btn:hover p {
+    color: var(--second-bg);
+}
+
 .hiddenBtn {
     display: none;
 }
