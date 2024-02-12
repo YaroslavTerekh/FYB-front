@@ -45,11 +45,12 @@ export default class AuthService {
 
             return false
         } catch (ex) {
+            debugger
             this.dispatch(
                 setAlert({
                     icon:"",
                     isSuccess: false,
-                    message: ex?.error ?? "Упс... Щось пішло не так!"
+                    message: ex?.error ?? "Упс... Ви ввели не коректні дані!"
                 }));
         }
     }

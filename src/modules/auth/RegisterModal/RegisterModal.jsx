@@ -6,10 +6,12 @@ import styles from '../Auth.module.css';
 import closeIcon from '../../../img/components/icon8.png';
 import Button from '../../../components/Button/Button';
 import AuthService from '../../../services/auth-service';
+import { setAlert } from '../../../context/alert-context/alert-actions';
+import { useDispatch } from 'react-redux';
 
 const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
     const userService = new AuthService();
-
+    const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
@@ -32,19 +34,32 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
     }
 
     async function register() {
-        const isSuccess = await userService.register(
-            {
-                email,
-                password,
-                firstName: name,
-                phoneNumber: phone })
-            .then(x=> {
-                setRegistrationFinished(x);
-                onClose();
-            });
 
-
+        if(emailV && phoneV && nameV && passV) {
+            const isSuccess = await userService.register(
+                {
+                    email,
+                    password,
+                    firstName: name,
+                    phoneNumber: phone })
+                .then(x=> {
+                    setRegistrationFinished(x);
+                    onClose();
+                });
+        } else {
+            dispatch(
+                setAlert({
+                    icon:"",
+                    isSuccess: false,
+                    message: "Поля мають бути заповнені коректно!"
+                }));
+        }
     }
+
+    const [nameV, setNameV] = useState(false);
+    const [phoneV, setPhoneV] = useState(false);
+    const [emailV, setEmailV] = useState(false);
+    const [passV, setPassV] = useState(false);
 
     const formRef = useRef(null);
 
@@ -65,6 +80,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 name={"RegisterName"}
                                 value={name}
                                 customInputContainer={styles.customInputContainer}
+                                isValid={setNameV}
                             />
                         </div>
                         <div className={styles.inputBox}>
@@ -72,12 +88,13 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 onChange={changePhoneHandler}
                                 className={styles.customInput}
                                 placeholder={"Телефон"}
-                                type={"tel"}
+                                type={"tel-r"}
                                 required={true}
                                 formRef={formRef}
                                 name={"RegisterPhone"}
                                 value={phone}
                                 customInputContainer={styles.customInputContainer}
+                                isValid={setPhoneV}
                             />
                         </div>
                         <div className={styles.inputBox}>
@@ -91,6 +108,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 name={"RegisterEmail"}
                                 value={email}
                                 customInputContainer={styles.customInputContainer}
+                                isValid={setEmailV}
                             />
                         </div>
                         <div className=''>
@@ -103,6 +121,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 name={"RegisterPassword"}
                                 value={password}
                                 customInputContainer={styles.customInputContainer}
+                                isValid={setPassV}
                             />
                         </div>
                         <Button

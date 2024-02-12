@@ -6,7 +6,7 @@
     line-height: 37px;
     letter-spacing: 0em;
     text-align: center;
-    margin: auto auto 30px;
+    margin: auto auto 30px !important;
 }
 
 .items {
@@ -16,7 +16,7 @@
     gap: 30px;
 }
 
-.item, h5,p {
+.item, .item h5, .item p {
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 500;

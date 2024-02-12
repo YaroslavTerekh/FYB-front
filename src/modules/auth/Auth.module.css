@@ -169,6 +169,10 @@
     margin-top: 20px;
 }
 
+.errorMessage {
+    margin-top: 5px;
+}
+
 .modalData {
     position: absolute;
     inset: 40px;

@@ -18,6 +18,7 @@ const CustomPasswordInput = ({
      formRef,
      name,
      customInputContainer,
+     isValid
      }) => {
     const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
@@ -29,10 +30,16 @@ const CustomPasswordInput = ({
     const [inputIsValue, setInputIsValue] = useState(false);
 
     useEffect(() => {
-        if (value) {
+        if (value && value?.length > 0) {
             setInputIsValue(true);
+            if(isValid) {
+                isValid(true);
+            }
         } else {
             setInputIsValue(false);
+            if(isValid) {
+                isValid(false);
+            }
         }
     }, [value, isPasswordVisible]);
 

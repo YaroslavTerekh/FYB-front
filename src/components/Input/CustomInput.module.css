@@ -26,6 +26,15 @@
     padding-right: 30px;
 }
 
+.errorMessage {
+    margin-top: 5px;
+}
+
+.startNum {
+    margin: auto 0;
+    margin-left: 5px;
+}
+
 .inputError {
     border: 2px solid var(--Red, #FF9595);
 }

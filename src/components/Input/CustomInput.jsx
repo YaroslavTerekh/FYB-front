@@ -18,7 +18,8 @@ const CustomInput = ({
          icon,
          value,
          formRef,
-         name
+         name,
+         isValid
 }) => {
 
     const { inputValidator } = InputValidation(formRef)
@@ -27,19 +28,34 @@ const CustomInput = ({
     useEffect(() => {
        if (value) {
            setInputIsValue(true);
+           if(isValid) {
+               isValid(true);
+           }
        } else {
            setInputIsValue(false);
+           if(isValid) {
+               isValid(false);
+           }
        }
 
        if (type === "number" && (+value === 0 || +value <= 0)) {
            setInputIsValue(false);
-       } else if (type === "tel") {
-           let phoneRegex = /^[+]?\d{10}$/;
+           if(isValid) {
+               isValid(false);
+           }
+       } else if (type === "tel-r") {
+           const phoneRegex = /^[0-9]{10}$/.test(value)
 
-           if (phoneRegex.test(value)) {
+           if (phoneRegex) {
                setInputIsValue(true);
+               if(isValid) {
+                   isValid(true);
+               }
            } else {
                setInputIsValue(false);
+               if(isValid) {
+                   isValid(false);
+               }
            }
        }
 
@@ -49,35 +65,38 @@ const CustomInput = ({
     const errorStyles = mainStyles + " " + styles.inputError;
 
     return (
-        <div className={(inputValidator(name) && inputIsValue) ? mainStyles : errorStyles }>
-            <input
-                required={required}
-                onChange={onChange}
-                className={className}
-                placeholder={placeholder}
-                type={type}
-                value={value}
-                name={name}
-            />
-            { icon &&
-                <span
-                    className={styles.passwordIconBox}
-                >
+       <>
+           <div className={(inputValidator(name) && inputIsValue) ? mainStyles : errorStyles }>
+               { type === "tel-r" &&
+                   <div className={styles.startNum}>
+                      +38
+                   </div>
+               }
+
+               <input
+                   required={required}
+                   onChange={onChange}
+                   className={className}
+                   placeholder={placeholder}
+                   type={type}
+                   value={value}
+                   name={name}
+               />
+               { icon &&
+                   <span
+                       className={styles.passwordIconBox}
+                   >
                      <img src={icon}/>
                 </span>
-            }
-        </div>
+               }
+           </div>
+           { type === "tel-r" &&
+               <div className={styles.errorMessage}>
+                    номер повинен починатися з 0: 0900000000
+               </div>
+           }
+       </>
     );
-};
-
-CustomInput.propTypes = {
-    options: PropTypes.arrayOf(
-        PropTypes.shape({
-            formRef: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-        })
-    ).isRequired,
-    onChange: PropTypes.func.isRequired,
 };
 
 export default CustomInput;
