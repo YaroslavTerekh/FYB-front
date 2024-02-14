@@ -54,8 +54,7 @@ export default class AuthService {
                 }));
         }
     }
-
-    async requestCode() {
+    requestCode() {
         try {
             const data = localStorage.getItem("CODEREQUEST");
             let res = false;
@@ -72,9 +71,9 @@ export default class AuthService {
             if(!data || res) {
                 localStorage.setItem("CODEREQUEST", JSON.stringify({ date: new Date().toString(), phone:this.currentUser.phoneNumber }));
 
-               await RequestCode(this.currentUser.phoneNumber);
+                RequestCode(this.currentUser.phoneNumber).then(() => true);
             }
-            
+
         } catch (ex) {
             this.dispatch(
                 setAlert({

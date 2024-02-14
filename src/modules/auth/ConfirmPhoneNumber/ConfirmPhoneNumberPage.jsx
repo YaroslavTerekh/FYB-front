@@ -14,19 +14,12 @@ const ConfirmPhoneNumber = () => {
     const [requested, setRequested] = useState(false);
 
     useEffect(() => {
-        debugger
-       if (!requested) {
-           setRequested(true);
-           const timer =  setTimeout(async () => {
-               await requestCode();
 
-               clearTimeout(timer);
-           }, 200);
-       }
+        requestCode();
     }, []);
 
-    async function requestCode() {
-        await userService.requestCode();
+     function requestCode() {
+        userService.requestCode();
     }
 
     function changeCodeHandler(e) {
