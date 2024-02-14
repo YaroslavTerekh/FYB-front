@@ -17,16 +17,16 @@ const ConfirmPhoneNumber = () => {
         debugger
        if (!requested) {
            setRequested(true);
-           const timer =  setTimeout(() => {
-               requestCode();
+           const timer =  setTimeout(async () => {
+               await requestCode();
 
                clearTimeout(timer);
            }, 200);
        }
     }, []);
 
-    function requestCode() {
-        userService.requestCode().then(r => {});
+    async function requestCode() {
+        await userService.requestCode();
     }
 
     function changeCodeHandler(e) {

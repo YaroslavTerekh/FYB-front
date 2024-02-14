@@ -18,7 +18,8 @@ const CustomPasswordInput = ({
      formRef,
      name,
      customInputContainer,
-     isValid
+     isValid,
+    isRegistr
      }) => {
     const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
@@ -30,12 +31,22 @@ const CustomPasswordInput = ({
     const [inputIsValue, setInputIsValue] = useState(false);
 
     useEffect(() => {
-        if (value && value?.length > 0) {
+        if (value && value?.length > 0 &&
+            validatePassword(value)
+            && isRegistr
+            ) {
             setInputIsValue(true);
-            if(isValid) {
+            if(isValid ) {
                 isValid(true);
             }
-        } else {
+        }
+        else if(!isRegistr && value && value?.length > 0) {
+            setInputIsValue(true);
+            if(isValid ) {
+                isValid(true);
+            }
+        }
+        else {
             setInputIsValue(false);
             if(isValid) {
                 isValid(false);
@@ -43,25 +54,47 @@ const CustomPasswordInput = ({
         }
     }, [value, isPasswordVisible]);
 
+    const validatePassword = (password) => {
+        // Define the password requirements
+        const minLength = 6;
+        const hasNumber = /\d/.test(password);
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasSpecialChar = /[!#$]/.test(password);
+
+        // Check if all requirements are met
+        return (
+            password.length >= minLength &&
+            hasNumber &&
+            hasUpperCase &&
+            hasSpecialChar
+        );
+    };
+
     const mainStyles = `${styles.customInputContainer} ${customInputContainer} `;
     const errorStyles = mainStyles + " " + styles.inputError;
 
     return (
-        <div className={(inputValidator(name) && inputIsValue) ? mainStyles : errorStyles }>
-            <input
-                onChange={onChange}
-                className={styles.customInput}
-                type={isPasswordVisible ? 'text' : 'password'} // Toggle input type
-                placeholder={placeholder}
-                required={true}
-                name={name}
-            />
-            <span
-                className={styles.passwordIconBox}
-                onClick={togglePasswordVisibility}
-            >
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+            <div className={(inputValidator(name) && inputIsValue) ? mainStyles : errorStyles }>
+                <input
+                    onChange={onChange}
+                    className={styles.customInput}
+                    type={isPasswordVisible ? 'text' : 'password'} // Toggle input type
+                    placeholder={placeholder}
+                    required={true}
+                    name={name}
+                />
+                <span
+                    className={styles.passwordIconBox}
+                    onClick={togglePasswordVisibility}
+                >
             {isPasswordVisible ? <img src={eye}/> :  <img src={eyeOff}/>}
             </span>
+
+            </div>
+            { isRegistr && <div className={styles.errorMessage} style={{width:'70%'}}>
+                пароль повинен бути не менше 6 символів, містити цифри, великі літери, та спец знаки (!,#,$)
+            </div> }
         </div>
     );
 };

@@ -55,9 +55,32 @@ export default class AuthService {
         }
     }
 
-    requestCode(): Promise<boolean> {
+    async requestCode() {
         try {
-            return RequestCode(this.currentUser.phoneNumber);
+            const data = localStorage.getItem("CODEREQUEST");
+            let res = false;
+
+            if(data) {
+                const value = JSON.parse(data);
+                const data1 = new Date(data.date);
+                const timeDifference = new Date().getTime() - data1.getTime();
+                const minutesDifference = timeDifference / (1000 * 60);
+
+                res =  minutesDifference > 10 || this.currentUser.phoneNumber !== value.phone ;
+            }
+
+            if(!data || res) {
+                localStorage.setItem("CODEREQUEST", JSON.stringify({ date: new Date().toString(), phone:this.currentUser.phoneNumber }));
+
+               await RequestCode(this.currentUser.phoneNumber);
+            }
+
+            // this.dispatch(
+            //     setAlert({
+            //         icon:"",
+            //         isSuccess: true,
+            //         message: "Код уже був надісланий"
+            //     }));
         } catch (ex) {
             this.dispatch(
                 setAlert({

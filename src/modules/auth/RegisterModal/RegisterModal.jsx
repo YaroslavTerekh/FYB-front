@@ -122,6 +122,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                                 value={password}
                                 customInputContainer={styles.customInputContainer}
                                 isValid={setPassV}
+                                isRegistr={true}
                             />
                         </div>
                         <Button
@@ -137,7 +138,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
             }
             isOpen={isOpen}
             onClose={onClose}
-            styles={{ bgColor:'var(--main-bg)', width: '609px', height: '480px', border: '2px solid var(--beige, #FFEDE4);', overlayBgColor: 'none' }}
+            styles={{ bgColor:'var(--main-bg)', width: '609px', height: '550px', border: '2px solid var(--beige, #FFEDE4);', overlayBgColor: 'none' }}
             className={styles.modalData}
         />
 
