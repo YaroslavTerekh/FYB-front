@@ -74,13 +74,7 @@ export default class AuthService {
 
                await RequestCode(this.currentUser.phoneNumber);
             }
-
-            // this.dispatch(
-            //     setAlert({
-            //         icon:"",
-            //         isSuccess: true,
-            //         message: "Код уже був надісланий"
-            //     }));
+            
         } catch (ex) {
             this.dispatch(
                 setAlert({
