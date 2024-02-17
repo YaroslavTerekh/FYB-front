@@ -44,6 +44,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                     phoneNumber: phone })
                 .then(x=> {
                     setRegistrationFinished(x);
+                    userService.requestCode(phone);
                     onClose();
                 });
         } else {

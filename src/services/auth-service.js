@@ -54,25 +54,9 @@ export default class AuthService {
                 }));
         }
     }
-    requestCode() {
+    requestCode(phone: string) {
         try {
-            const data = localStorage.getItem("CODEREQUEST");
-            let res = false;
-
-            if(data) {
-                const value = JSON.parse(data);
-                const data1 = new Date(data.date);
-                const timeDifference = new Date().getTime() - data1.getTime();
-                const minutesDifference = timeDifference / (1000 * 60);
-
-                res =  minutesDifference > 10 || this.currentUser.phoneNumber !== value.phone ;
-            }
-
-            if(!data || res) {
-                localStorage.setItem("CODEREQUEST", JSON.stringify({ date: new Date().toString(), phone:this.currentUser.phoneNumber }));
-
-                RequestCode(this.currentUser.phoneNumber).then(() => true);
-            }
+            RequestCode(phone).then(() => true);
 
         } catch (ex) {
             this.dispatch(
