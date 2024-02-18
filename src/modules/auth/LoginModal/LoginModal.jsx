@@ -58,10 +58,10 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                                 customInputContainer={styles.customInputContainer}
                             />
                         </div>
-                        <button className={styles.linkBox} onClick={registerRequested}>
+                        <p tabIndex={'1'} className={styles.linkBox} onClick={registerRequested}>
                             <p className={styles.text}>Ще не маєте особистого кабінету?</p>
                             <p className={styles.link}>Зареєструватися</p>
-                        </button>
+                        </p>
                         <Button
                             className={styles.btn}
                             aria-expanded={true}

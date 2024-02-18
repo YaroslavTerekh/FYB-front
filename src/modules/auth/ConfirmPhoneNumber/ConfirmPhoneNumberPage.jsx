@@ -33,7 +33,7 @@ const ConfirmPhoneNumber = () => {
         const isSuccess = await userService.verifyCode(+code);
 
         if (isSuccess) {
-            dispatch(setAlert({ icon:"", isSuccess: true, message: "Номер телефону, підтверджено! А зараз, зпробуйте увійти))" }));
+            dispatch(setAlert({ icon:"", isSuccess: true, message: "Ви успішно увійшли та можете користуватися сайтом!" }));
             navigate("/");
         } else {
             dispatch(setAlert({ icon:"", isSuccess: false, message: "Упс, щось пішло не так!" }))

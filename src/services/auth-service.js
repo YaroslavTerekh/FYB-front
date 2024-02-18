@@ -73,6 +73,12 @@ export default class AuthService {
         try {
             const response = await VerifyCode(this.currentUser.phoneNumber, code);
 
+            if (response.data.token) {
+                this.dispatch(setToken(response.data.token));
+                setAccessToken(response.data.token);
+
+                getCurrentUserHelper(this.dispatch);
+            }
             return response.status === 200;
         } catch (ex) {
             this.dispatch(

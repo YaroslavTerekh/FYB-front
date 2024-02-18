@@ -31,16 +31,7 @@ const CustomPasswordInput = ({
     const [inputIsValue, setInputIsValue] = useState(false);
 
     useEffect(() => {
-        if (value && value?.length > 0 &&
-            validatePassword(value)
-            && isRegistr
-            ) {
-            setInputIsValue(true);
-            if(isValid ) {
-                isValid(true);
-            }
-        }
-        else if(!isRegistr && value && value?.length > 0) {
+        if(value && value?.length > 0) {
             setInputIsValue(true);
             if(isValid ) {
                 isValid(true);
@@ -92,9 +83,6 @@ const CustomPasswordInput = ({
             </span>
 
             </div>
-            { isRegistr && <div className={styles.errorMessage} style={{width:'70%'}}>
-                пароль повинен бути не менше 6 символів, містити цифри, великі літери, та спец знаки (!,#,$)
-            </div> }
         </div>
     );
 };
