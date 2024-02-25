@@ -79,12 +79,7 @@ const VideoTrainingsSection = ({
 
                     <div className={styles.videoTrainingsVideo}>
                         {trainingVideoSource && (
-                            <ReactPlayer
-                                url={trainingVideoSource}
-                                controls={true}
-                                width='100%'
-                                height='100%'
-                            />
+                            <ReactPlayer url={trainingVideoSource} playing={false} loop={true} controls={true} width={'100%'} height={'100%'} />
                         )}
                     </div>
 
