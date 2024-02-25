@@ -79,15 +79,15 @@ const VideoTrainingsSection = ({
 
                     <div className={styles.videoTrainingsVideo}>
                         {trainingVideoSource && (
-                            
-                            <video
-                            muted
-                            playsInline
-                            loop
-                            controls
-                            src={trainingVideoSource}
-                            >
-                            </video>
+
+                            <iframe
+                                title="Training Video"
+                                width="100%"
+                                height="100%"
+                                src={trainingVideoSource}
+                                frameBorder="0"
+                                allowFullScreen
+                            ></iframe>
                         )}
                     </div>
 
