@@ -52,7 +52,9 @@
     position: relative;
     padding: 0px 0px 10px 0px;
 }
-
+.videoTrainingsVideo   video {
+    width: 100%;
+}
 /*.videoTrainingsVideo video {*/
 /*    position: absolute;*/
 /*    width: 100%;*/
