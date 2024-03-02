@@ -45,7 +45,6 @@ export default class AuthService {
 
             return false
         } catch (ex) {
-            debugger
             this.dispatch(
                 setAlert({
                     icon:"",

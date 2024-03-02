@@ -24,14 +24,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
         dispatch(setUserSpinner());
         window.scrollTo(0, 0);
 
-        if(props.training && props.training?.id) {
-            const timer = setTimeout(() => {
-
-
-                dispatch(removeUserSpinner());
-                clearTimeout(timer);
-            }, 1000);
-        }
+        dispatch(removeUserSpinner());
 
     }, [props?.training, location.pathname]);
 
