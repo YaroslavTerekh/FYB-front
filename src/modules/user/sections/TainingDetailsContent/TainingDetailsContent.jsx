@@ -24,9 +24,12 @@ const TrainingDetailsContent = (props: { training: null }) => {
         dispatch(setUserSpinner());
         window.scrollTo(0, 0);
 
-        dispatch(removeUserSpinner());
+        const timer = setTimeout(() => {
+            dispatch(removeUserSpinner());
+            clearTimeout(timer);
+        }, 4000);
 
-    }, [props?.training, location.pathname]);
+    }, []);
 
     function onModalCloseHandler() {
         setModalIsOpen(false);

@@ -78,7 +78,7 @@ const VideoTrainingsSection = ({
 
                     <div className={styles.videoTrainingsVideo}>
                         {trainingVideoSource && (
-                           <>i=
+                           <>
                                {/*<video controls="true" autoPlay="false" src={"https://firebasestorage.googleapis.com/v0/b/feel-your-body.appspot.com/o/videos%2FIMG_2379-001_done%202.mp4?alt=media&amp;token=9bd37a85-ed5d-43cb-86a5-29eff2f07f2d"}>*/}
                                {/*</video>*/}
                                {/*<iframe*/}
