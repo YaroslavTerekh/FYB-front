@@ -7,7 +7,22 @@ import photo2 from './images/photo2.jpg';
 
 import './MainBannerSection.css';
 
-const MainBannerSection = () => (
+const  MainBannerSection = () => {
+
+    function onBtnClickHandler() {
+        const trainingElement = document.getElementById('training');
+        if (trainingElement) {
+            const elementPosition =
+                trainingElement.getBoundingClientRect().top;
+            window.scrollBy({
+                top: elementPosition - 110,
+                left: 0,
+                behavior: 'smooth',
+            });
+        }
+    }
+
+    return (
     <section className='main'>
         <div className='container'>
             <div className='main-block'>
@@ -19,7 +34,7 @@ const MainBannerSection = () => (
                         вмикай та повторюй!
                     </div>
                     <div className='text-main__button'>
-                        <Button >Обрати тренування</Button>
+                        <Button onClick={onBtnClickHandler}>Обрати тренування</Button>
                     </div>
                 </div>
                 <div className='main-block__img'>
@@ -29,6 +44,6 @@ const MainBannerSection = () => (
             </div>
         </div>
     </section>
-);
+)};
 
 export default MainBannerSection;

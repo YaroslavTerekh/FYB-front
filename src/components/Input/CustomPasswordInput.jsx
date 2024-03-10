@@ -16,7 +16,10 @@ const CustomPasswordInput = ({
      placeholder,
      value,
      formRef,
-     name
+     name,
+     customInputContainer,
+     isValid,
+    isRegistr
      }) => {
     const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
@@ -28,32 +31,58 @@ const CustomPasswordInput = ({
     const [inputIsValue, setInputIsValue] = useState(false);
 
     useEffect(() => {
-        if (value) {
+        if(value && value?.length > 0) {
             setInputIsValue(true);
-        } else {
+            if(isValid ) {
+                isValid(true);
+            }
+        }
+        else {
             setInputIsValue(false);
+            if(isValid) {
+                isValid(false);
+            }
         }
     }, [value, isPasswordVisible]);
 
-    const mainStyles = styles.customInputContainer;
+    const validatePassword = (password) => {
+        // Define the password requirements
+        const minLength = 6;
+        const hasNumber = /\d/.test(password);
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasSpecialChar = /[!#$]/.test(password);
+
+        // Check if all requirements are met
+        return (
+            password.length >= minLength &&
+            hasNumber &&
+            hasUpperCase &&
+            hasSpecialChar
+        );
+    };
+
+    const mainStyles = `${styles.customInputContainer} ${customInputContainer} `;
     const errorStyles = mainStyles + " " + styles.inputError;
 
     return (
-        <div className={(inputValidator(name) && inputIsValue) ? mainStyles : errorStyles }>
-            <input
-                onChange={onChange}
-                className={styles.customInput}
-                type={isPasswordVisible ? 'text' : 'password'} // Toggle input type
-                placeholder={placeholder}
-                required={true}
-                name={name}
-            />
-            <span
-                className={styles.passwordIconBox}
-                onClick={togglePasswordVisibility}
-            >
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+            <div className={(inputValidator(name) && inputIsValue) ? mainStyles : errorStyles }>
+                <input
+                    onChange={onChange}
+                    className={styles.customInput}
+                    type={isPasswordVisible ? 'text' : 'password'} // Toggle input type
+                    placeholder={placeholder}
+                    required={true}
+                    name={name}
+                />
+                <span
+                    className={styles.passwordIconBox}
+                    onClick={togglePasswordVisibility}
+                >
             {isPasswordVisible ? <img src={eye}/> :  <img src={eyeOff}/>}
             </span>
+
+            </div>
         </div>
     );
 };

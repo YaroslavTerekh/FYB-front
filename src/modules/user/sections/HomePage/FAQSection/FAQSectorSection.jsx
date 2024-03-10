@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AnimateHeight from 'react-animate-height';
-
 import Button from '../../../../../components/Button/Button';
-
-import { MOCKED_FAQ_DATA } from './constants';
-
 import './FAQSectorSection.css';
-
 import faqIcon from './images/icon1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFAQHelper } from '../../../../../context/content-context/content-context.helper';

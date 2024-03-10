@@ -38,6 +38,7 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                             <CustomInput
                                 onChange={changeEmailHandler}
                                 className={styles.customInput}
+                                customInputContainer={styles.customInputContainer}
                                 placeholder={"Email"}
                                 type={"email"}
                                 required={true}
@@ -54,12 +55,13 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                                 formRef={formRef}
                                 name={"LoginPassword"}
                                 value={password}
+                                customInputContainer={styles.customInputContainer}
                             />
                         </div>
-                        <button className={styles.linkBox} onClick={registerRequested}>
+                        <p tabIndex={'1'} className={styles.linkBox} onClick={registerRequested}>
                             <p className={styles.text}>Ще не маєте особистого кабінету?</p>
                             <p className={styles.link}>Зареєструватися</p>
-                        </button>
+                        </p>
                         <Button
                             className={styles.btn}
                             aria-expanded={true}
@@ -74,7 +76,13 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
             }
             isOpen={isOpen}
             onClose={onClose}
-            styles={{ bgColor:'var(--main-bg)', width: '609px', height: '480px', border: '2px solid var(--beige, #FFEDE4);', overlayBgColor: 'none'}}
+            styles={{
+                bgColor:'var(--main-bg)',
+                width: '609px',
+                height: '480px',
+                border: '2px solid var(--beige, #FFEDE4);',
+                overlayBgColor: 'none'}}
+            className={styles.modalData}
         />
     </>
 }

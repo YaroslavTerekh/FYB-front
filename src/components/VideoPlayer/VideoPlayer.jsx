@@ -11,8 +11,6 @@ const VideoPlayer = ({ videoSource = '' }) => (
             controls={true}
             style={{width:'1000px', height:'600px'}}
         />
-        {/*<video controls src={videoSource}>*/}
-        {/*</video>*/}
     </div>
 );
 

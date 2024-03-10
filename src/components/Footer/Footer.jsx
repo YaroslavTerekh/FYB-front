@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './Footer.css';
 
@@ -6,9 +6,27 @@ import footerPhoto1 from '../../img/photo/photo4.jpg';
 import footerPhoto2 from '../../img/photo/photo5.jpg';
 import logo from '../../img/darklogo.svg';
 import instagram from '../../img/instagram.svg';
+import FinishRegistrationModal from '../../modules/auth/FinishRegistrationModal/FinishRegistrationModal';
+import ContactsModal from './ContactsModal';
+import PaymentModal from './PaymentModal';
 
-const Footer = () => (
-    <footer className='footer'>
+const Footer = () => {
+
+    const [contactsModalIsOpen, setContactsModalIsOpen] = useState(false);
+    const [paymentModalIsOpen, setPaymentModalIsOpen] = useState(false);
+
+    return <>
+        <ContactsModal
+            onClose={() => setContactsModalIsOpen(false)}
+            isOpen={contactsModalIsOpen}
+        />
+
+        <PaymentModal
+            onClose={() => setPaymentModalIsOpen(false)}
+            isOpen={paymentModalIsOpen}
+        />
+
+        <footer className='footer'>
         <div className='container'>
             <div className='footer__block-main'>
                 <div className='footer__logo footer-main'>
@@ -31,6 +49,17 @@ const Footer = () => (
                             </li>
                             <li>
                                 <a href='/'>Мої тренування</a>
+                            </li>
+                        </ul>
+                        <ul className='footer__menu_items'>
+                            <li>
+                                <a onClick={() => setContactsModalIsOpen(true)}>Контакти</a>
+                            </li>
+                            <li>
+                                <a onClick={() => setPaymentModalIsOpen(true)}>Оплата</a>
+                            </li>
+                            <li>
+                                <a href='/proposition-info'>Договір публічної оферти</a>
                             </li>
                         </ul>
                     </nav>
@@ -60,6 +89,7 @@ const Footer = () => (
             </div>
         </div>
     </footer>
-);
+    </>
+};
 
 export default Footer;

@@ -20,7 +20,7 @@ const SystemAlert = () => {
                setCurrentList(list);
 
                 clearTimeout(timeoutId);
-            }, 3000);
+            }, 6000);
         }
 
     }, [alert]);

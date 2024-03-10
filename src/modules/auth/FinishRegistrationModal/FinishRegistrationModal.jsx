@@ -32,6 +32,7 @@ const FinishRegistrationModal = ({ isOpen, onClose }) => {
                 border: '2px solid var(--beige, #FFEDE4);',
                 overlayBgColor: 'none'
             }}
+            className={styles.modalData}
         />
     </>
 }

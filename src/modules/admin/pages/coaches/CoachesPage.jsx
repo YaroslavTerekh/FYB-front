@@ -118,9 +118,9 @@ const CoachesPage = () => {
                         </div>
                     </div>
 
-                    {coachesList && coachesList.map(c =>
-                        <div>
-                            <div className={mainStyles.bodyBlock} key={c.id}>
+                    {coachesList && coachesList.map((c, i) =>
+                        <div key={(i*23) + c.id}>
+                            <div className={mainStyles.bodyBlock} >
                                 <div className={mainStyles.blockItem}>
                                     <p>{c.firstName}</p>
                                 </div>
@@ -171,9 +171,9 @@ const CoachesPage = () => {
                                 height={selectedItem === c.id ? 'auto' : 0}
                                 className=''
                             >
-                                { c.details && c.details.map(d =>
-                                    <div className=''>
-                                        <div className={mainStyles.bodyBlock} key={d.id}>
+                                { c.details && c.details.map((d, i) =>
+                                    <div className='' key={(i*2) + d.id}>
+                                        <div className={mainStyles.bodyBlock} >
                                             <div className={`${mainStyles.blockItem} ${mainStyles.blockSubItem}` }>
                                                 <p>{d.detail}</p>
                                             </div>
