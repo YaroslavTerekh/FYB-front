@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import TrainingCard from './components/TrainingCard/TrainingCard';
 
-import { GetTrainingIconHelper, MOCKED_TRAININGS_LIST } from './constants';
 
 import './TrainingListSection.css';
 import { useDispatch, useSelector } from 'react-redux';

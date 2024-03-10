@@ -6,28 +6,6 @@ import deleteIcon from '../../img/components/delete_icon.png';
 import addIcon from  '../../img/components/add_icon.png';
 import Button from '../Button/Button';
 
-const customStyles = {
-    control: base => ({
-        ...base,
-        border: 0,
-        // This line disable the blue border
-        boxShadow: 'none'
-    }),
-    option: () => ({
-        textAlign: 'center',
-        display: 'flex',
-        width: 'auto',
-        padding: '5px 10px',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderBottom: '0.5px solid rgb(165, 165, 165)',
-        background: 'white',
-        color: '#000',
-        fontSize: '14px',
-        cursor: 'pointer'
-    }),
-};
-
 const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any, onDelete: any } ) => {
     const [currentVideos, setCurrentVideos] = useState([]);
     const fileInputRef = useRef(null);
@@ -45,25 +23,6 @@ const VideosCarousel = ( props: { videoList:[], onOk: any, setList: any, onDelet
     function onChange(index) {
         setSelectedIndex(index);
         setSelectedVideo(currentVideos[index]);
-    }
-
-    function handleSelectChange(e) {
-        if (e < 1 || e > 4) return;
-
-        const data = currentVideos.findIndex((video) => video.index === e);
-        const selected = currentVideos.findIndex((video) => video.index === selectedVideo.index);
-
-        const newList = currentVideos.map((video) => ({ ...video }));
-
-        if (data > -1) {
-            newList[data].index = selectedVideo.index;
-        }
-
-        newList[selected].index = e;
-
-        setCurrentVideos(newList);
-        props.setList(newList);
-        setSelectedVideo(newList[selected]);
     }
 
     const handleButtonClick = () => {

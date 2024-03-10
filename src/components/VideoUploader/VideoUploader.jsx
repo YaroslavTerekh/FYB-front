@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import defaultImg from '../../img/components/video.svg';
 import styles from './VideoUploader.module.css';
 
 function VideoUploader( { onChange, icon, inputMode, placeholder, imgName, removePhoto, setRemoved } ) {

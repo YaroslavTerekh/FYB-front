@@ -1,49 +1,18 @@
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import imgP from '../../img/photo/trainings/photo1.jpg';
 import styles from './ImagesCarousel.module.css';
 import React, { useEffect, useRef, useState } from 'react';
 import defaultImg from '../../img/components/admin-img-def.svg';
-import PhotoUploader from '../PhotoUploader/PhotoUploader';
 import selectIcon from '../../img/components/vector.png';
-import Select from '../Select/Select';
-import { MOCKED_TRAININGS_DATA } from '../../modules/user/pages/ProfilePage/constants';
-import CustomSelectChiplets from '../CustomSelectChiplets/CustomSelectChiplets';
-import { number } from 'prop-types';
 import deleteIcon from '../../img/components/delete_icon.png';
-import addIcon from  '../../img/components/add_icon.png';
 import Button from '../Button/Button';
 import { writeError } from '../../context/alert-context/alert-context-helper';
 import { useDispatch } from 'react-redux';
-
-const customStyles = {
-    control: base => ({
-        ...base,
-        border: 0,
-        // This line disable the blue border
-        boxShadow: 'none'
-    }),
-    option: () => ({
-        textAlign: 'center',
-        display: 'flex',
-        width: 'auto',
-        padding: '5px 10px',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderBottom: '0.5px solid rgb(165, 165, 165)',
-        background: 'white',
-        color: '#000',
-        fontSize: '14px',
-        cursor: 'pointer'
-    }),
-};
 
 const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCount: number } ) => {
     const dispatch = useDispatch();
     const [currentImages, setCurrentImages] = useState([]);
     const fileInputRef = useRef(null);
-
-    const [selectedIndex, setSelectedIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState(currentImages[0]);
 
     useEffect(() => {
@@ -57,38 +26,15 @@ const ImagesCarousel = ( props: { imageList:[], onOk: any, setList: any, maxCoun
 
 
     function onChange(e) {
-        setSelectedIndex(e);
         setSelectedImage(currentImages[e]);
     }
 
     function onClickItem(e) {
-        setSelectedIndex(e);
         setSelectedImage(currentImages[e]);
     }
 
     function onClickThumb(e) {
-        setSelectedIndex(e);
         setSelectedImage(currentImages[e]);
-    }
-
-    function handleSelectChange(e) {
-
-        if(e < 1 || e > props?.maxCount) return;
-
-        const data = currentImages.findIndex(x => x.index === e);
-        const selected = currentImages.findIndex(x => x.index === selectedImage.index);
-
-        const newList = currentImages.map(a => Object.assign({}, a));
-
-        if (data > -1) {
-            newList[data].index = selectedImage.index;
-        }
-
-        newList[selected].index = e;
-
-        setCurrentImages(newList);
-        props.setList(newList);
-        setSelectedImage(newList[selected]);
     }
 
     const handleButtonClick = () => {

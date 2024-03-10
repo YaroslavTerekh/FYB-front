@@ -4,7 +4,6 @@ import AnimateHeight from 'react-animate-height';
 import dropDown from '../../../../../img/components/iconDownArrowBold.svg';
 import Button from '../../../../../components/Button/Button';
 import faqIcon from '../../HomePage/FAQSection/images/icon1.png';
-import { object, string } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { removeUserSpinner, setUserSpinner } from '../../../../../context/spinner-context/spinner-actions';
 
@@ -57,16 +56,6 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
     function handleToggle(id: string) {
         setSelectedItem((prevSelectedItem) =>
             prevSelectedItem === id ? null : id);
-    }
-
-    const [numbers, setNumbers] = useState(0);
-
-    function getNumber(): number {
-        if(numbers === 6) {
-            setNumbers(0);
-        }
-        setNumbers(numbers + 1);
-        return numbers;
     }
 
     const [width, setWidth]   = useState(window.innerWidth);
@@ -131,14 +120,6 @@ const FoodSection = ({ selectedTrainingType, handleSelectChange }) => {
                                 <div className={styles.panelExpandedData}>
                                     <div
                                         className={selectedCookingItem === "1" ? styles.pointList + " " + styles.autoH : styles.pointList}>
-                                        {/*<div className={styles.foodPoint}>*/}
-                                        {/*    <h3 className={styles.title}>Сніданок: </h3>*/}
-
-                                        {/*    <div className={styles.foodBody}>*/}
-                                        {/*        <strong className={styles.foodMass}>30гр</strong>*/}
-                                        {/*        <div className={styles.foodText}>Омлет з 2-х яєць з сиром, помідором та зеленню</div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
 
                                         <div className={styles.foodPoint}>
                                             <div className={styles.foodBody}>

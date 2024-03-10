@@ -18,7 +18,6 @@ import AuthService from '../../../../services/auth-service';
 const TrainingDetailsContent = (props: { training: null }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const dispatch = useDispatch();
-    const location = useLocation();
 
     useEffect(() => {
         dispatch(setUserSpinner());
@@ -42,25 +41,6 @@ const TrainingDetailsContent = (props: { training: null }) => {
             setVideo(props.training?.videos?.find(x => x?.isPreview)?.filePath)
         }
     }, [props.training]);
-
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    const handleCanPlay = () => {
-       const timer = setTimeout(() => {
-           // The video has loaded and can be played
-           setIsLoaded(true);
-
-           // Start playing the video
-           if (videoRef.current) {
-               videoRef.current.play();
-           }
-
-           clearTimeout(timer);
-
-       }, 1000);
-    };
-
-    const videoRef = React.createRef();
 
     function onLoginCloseModalHandler() {
         setLoginIsOpen(false);
