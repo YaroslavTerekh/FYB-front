@@ -8,7 +8,7 @@ import { setAlert } from './context/alert-context/alert-actions';
 import { useDispatch } from 'react-redux';
 
 const API = axios.create({
-    baseURL: "http://fybfeelyourbody-001-site1.etempurl.com/api/",
+    baseURL: "https://fybfeelyourbody-001-site1.etempurl.com/api/",
     withCredentials: true,
 });
 
