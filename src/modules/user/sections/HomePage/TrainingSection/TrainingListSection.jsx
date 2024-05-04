@@ -56,7 +56,7 @@ const TrainingListSection = () =>  {
     }, [currentContentState.food]);
 
     return (
-        <section id='training' className='training'>
+        <section id='training' className='training' style={{marginTop:'30px'}}>
             <div className='container'>
                 <div className='training__title tlt vetrino'>
                     <h2>Тренування</h2>
