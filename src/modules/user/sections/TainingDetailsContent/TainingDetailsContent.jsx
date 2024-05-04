@@ -30,6 +30,12 @@ const TrainingDetailsContent = (props: { training: null }) => {
 
     }, []);
 
+    const location = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
+
     function onModalCloseHandler() {
         setModalIsOpen(false);
     }
@@ -151,12 +157,12 @@ const TrainingDetailsContent = (props: { training: null }) => {
                     </div>
                     <div className={styles.trainingDetailsBlock}>
                         <div className={styles.trainingDetailsList}>
-                            { props.training.coachingDetailParents && props.training.coachingDetailParents.map(d =>
-                                <div className={styles.trainingDetailsItem}>
+                            { props.training.coachingDetailParents && props.training.coachingDetailParents.map((d,i) =>
+                                <div className={styles.trainingDetailsItem} key={i + d.title}>
                                     <h4>{d.title}</h4>
 
-                                    { d.details && d.details.map(details =>
-                                        <div className={styles.detailsData}>
+                                    { d.details && d.details.map((details, i) =>
+                                        <div className={styles.detailsData} key={i+details.detail}>
                                             <img src={GetIconHelper(details.icon)} alt='' />
                                             <p>{details.detail}</p>
                                         </div>
@@ -167,7 +173,7 @@ const TrainingDetailsContent = (props: { training: null }) => {
                     </div>
                     <div className={styles.photosGrid}>
                         { props.training?.examplePhotos && props.training.examplePhotos.map((x, i) =>
-                            <div className={styles.gridItem}>
+                            <div className={styles.gridItem} key={i}>
                                 <div className={styles.gridImgBox}>
                                     <img src={x.filePath} alt='' />
                                 </div>

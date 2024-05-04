@@ -15,7 +15,7 @@ import LoginModal from '../../../auth/LoginModal/LoginModal';
 import RegisterModal from '../../../auth/RegisterModal/RegisterModal';
 import FinishRegistrationModal from '../../../auth/FinishRegistrationModal/FinishRegistrationModal';
 import AuthService from '../../../../services/auth-service';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
     const [selectedTrainingType, setSelectedTrainingType] = useState();

@@ -7,7 +7,13 @@ import closeIcon from '../../../img/components/icon8.png';
 import Button from '../../../components/Button/Button';
 import AuthService from '../../../services/auth-service';
 import { setAlert } from '../../../context/alert-context/alert-actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    removeSpinner,
+    removeUserSpinner,
+    setSpinner,
+    setUserSpinner,
+} from '../../../context/spinner-context/spinner-actions';
 
 const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
     const userService = new AuthService();
@@ -16,6 +22,9 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const spinner = useSelector(state => state.spinner);
+
+    const [disabled, setDisabled] = useState(false);
 
     function changeNameHandler(e) {
         setName(e?.target?.value);
@@ -36,6 +45,8 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
     async function register() {
 
         if(emailV && phoneV && nameV && passV) {
+            dispatch(setUserSpinner());
+            setDisabled(true);
             const isSuccess = await userService.register(
                 {
                     email,
@@ -46,8 +57,12 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                     setRegistrationFinished(x);
                     userService.requestCode(phone);
                     onClose();
+                    dispatch(removeUserSpinner());
+                    setDisabled(false);
                 });
         } else {
+            dispatch(removeUserSpinner());
+            setDisabled(false);
             dispatch(
                 setAlert({
                     icon:"",
@@ -127,6 +142,7 @@ const RegisterModal = ({ isOpen, onClose, setRegistrationFinished }) => {
                             />
                         </div>
                         <Button
+                            disabled={disabled}
                             className={styles.btn}
                             aria-expanded={true}
                             aria-controls={`example-panel-`}

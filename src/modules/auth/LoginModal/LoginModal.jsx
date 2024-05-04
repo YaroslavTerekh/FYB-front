@@ -5,13 +5,23 @@ import ModalWindow from '../../../components/Modal/ModalWindow';
 import styles from '../Auth.module.css';
 import Button from '../../../components/Button/Button';
 import AuthService from '../../../services/auth-service';
+import { useDispatch } from 'react-redux';
+import {
+    removeSpinner,
+    removeUserSpinner,
+    setSpinner,
+    setUserSpinner,
+} from '../../../context/spinner-context/spinner-actions';
 
 const LoginModal = ({ isOpen, onClose, registerRequested }) => {
     const userService = new AuthService();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
+
+    const [disabled, setDisabled] = useState(false);
     function changeEmailHandler(e) {
         setEmail(e?.target?.value);
     }
@@ -22,7 +32,13 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
 
     async function login() {
         if(email && email.length > 0 && password && password.length > 0) {
-            await userService.login({ email, password }).then(x=> onClose());
+            dispatch(setUserSpinner());
+            setDisabled(true);
+            await userService.login({ email, password }).then(x=> {
+                onClose();
+                dispatch(removeUserSpinner());
+                setDisabled(false);
+            });
         }
     }
 
@@ -67,6 +83,7 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                             aria-expanded={true}
                             aria-controls={`example-panel-`}
                             onClick={login}
+                            disabled={disabled}
                         >
                             <p>Далі</p>
                         </Button>

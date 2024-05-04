@@ -135,7 +135,7 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
                                 }
 
                                 { trainingData.id && !(trainingData?.foodPoints && trainingData?.foodDetails) &&
-                                    <div className='carusel-block__button'>
+                                    <div className='carusel-block__button' >
                                         <Link
                                             className='button-training__blu'
                                             to={ROUTES.details + "/" + trainingData.id}

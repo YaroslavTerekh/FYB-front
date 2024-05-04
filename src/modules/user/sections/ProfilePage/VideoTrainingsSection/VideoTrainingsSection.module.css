@@ -12,6 +12,11 @@
     margin: 0 20px;
 }
 
+.selected {
+    background-color: white !important;
+    color: var(--main-bg) !important;
+}
+
 .videoTrainingsSelectCustom {
 	border: 1px solid var(--beige, var(--second-bg));
 	display: inline-flex;

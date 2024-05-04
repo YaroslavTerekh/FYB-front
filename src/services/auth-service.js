@@ -28,7 +28,7 @@ export default class AuthService {
                   setAlert({
                       icon:"",
                       isSuccess: false,
-                      message: ex?.error ?? "Перевірте ваші дані, такого облікового запис не існує!"
+                      message: ex?.response?.data?.error?.[0] ?? "Перевірте ваші дані, такого облікового запис не існує!"
                   }));
           }
     }
@@ -49,7 +49,7 @@ export default class AuthService {
                 setAlert({
                     icon:"",
                     isSuccess: false,
-                    message: ex?.error ?? "Упс... Ви ввели не коректні дані!"
+                    message: ex?.response?.data?.error?.[0] ?? "Упс... Ви ввели не коректні дані!"
                 }));
         }
     }
@@ -62,7 +62,7 @@ export default class AuthService {
                 setAlert({
                     icon:"",
                     isSuccess: false,
-                    message: ex?.error ?? "Упс... Щось пішло не так!"
+                    message: ex?.response?.data?.error?.[0] ?? "Упс... Щось пішло не так!"
                 }));
         }
 
@@ -84,7 +84,7 @@ export default class AuthService {
                 setAlert({
                     icon:"",
                     isSuccess: false,
-                    message: ex?.error ?? "Упс... Щось пішло не так!"
+                    message: ex?.response?.data?.error?.[0] ?? "Упс... Щось пішло не так!"
                 }));
         }
     }

@@ -51,6 +51,7 @@ const VideoTrainingsSection = ({
                                 && selectedTrainingType.videos.filter(x => !x?.isPreview).map(
                                     (videoSource, videoIndex) => (
                                         <Button
+                                            className={videoSource?.filePath === trainingVideoSource ? styles.selected: ''}
                                             key={videoIndex}
                                             onClick={() =>
                                                 handleSelectTrainingVideo(

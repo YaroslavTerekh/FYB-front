@@ -40,11 +40,11 @@ export function addNewCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData)
                 dispatch(setCoaches(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -55,11 +55,11 @@ export function deleteCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
                 dispatch(setCoaches(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -70,11 +70,11 @@ export function updateCoachHelper(dispatch: Dispatch<AnyAction>, data: FormData,
                 dispatch(setCoaches(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -85,11 +85,11 @@ export function deleteCoachHelper(dispatch: Dispatch<AnyAction>, coachId: string
                 dispatch(setCoaches(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -100,11 +100,11 @@ export function deleteCoachingHelper(dispatch: Dispatch<AnyAction>, coachId: str
                 dispatch(setCoaching(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -115,11 +115,11 @@ export function deleteCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, id) {
                 dispatch(setCoaching(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -130,11 +130,11 @@ export function deleteCoachingParentDetailsHelper(dispatch: Dispatch<AnyAction>,
                 dispatch(setCoaching(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -145,7 +145,7 @@ export function getCoachesHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setCoaches(res.data));
         })
         .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -156,11 +156,11 @@ export function addNewCoachDetailsHelper(dispatch: Dispatch<AnyAction>, id, data
                 dispatch(setCoaches(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -170,7 +170,7 @@ export function getFeedbacksHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setFeedbacks(res.data));
         })
         .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -182,11 +182,11 @@ export function addNewFeedbacksHelper(dispatch: Dispatch<AnyAction>, data) {
                 dispatch(setFeedbacks(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -198,11 +198,11 @@ export function updateFeedbacksHelper(dispatch: Dispatch<AnyAction>, id, data) {
                 dispatch(setFeedbacks(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -213,11 +213,11 @@ export function deleteFeedbackHelper(dispatch: Dispatch<AnyAction>, id: string) 
                 dispatch(setFeedbacks(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -227,7 +227,7 @@ export function addNewCoachingHelper(dispatch: Dispatch<AnyAction>, data: FormDa
         addVideoToCoachingHelper(dispatch, res.data.id, video);
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -241,13 +241,13 @@ export function addNewCoachingDetailsHelper(dispatch: Dispatch<AnyAction>, dataP
                     dispatch(setCoaching(res.data));
                 })
                 .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 
 }
@@ -265,10 +265,10 @@ export function addPhotosToCoachingHelper(dispatch: Dispatch<AnyAction>, data) {
                 dispatch(removeSpinner());
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
     }).catch(err => {
-        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+        writeError(dispatch, err?.response?.data?.error?.[0])
     });
 }
 
@@ -285,11 +285,11 @@ export function addPhotosToFoodHelper(dispatch: Dispatch<AnyAction>, data) {
                 dispatch(removeSpinner());
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -307,10 +307,10 @@ export function addPhotosToCoachHelper(dispatch: Dispatch<AnyAction>, data) {
                 dispatch(removeSpinner());
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
     }).catch(err => {
-        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+        writeError(dispatch, err?.response?.data?.error?.[0])
     });
 }
 
@@ -329,10 +329,10 @@ export function addVideoToCoachingArrayHelper(dispatch: Dispatch<AnyAction>, id,
 
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
     }).catch(err => {
-        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+        writeError(dispatch, err?.response?.data?.error?.[0])
     });
 
     // addVideoToCoaching(id, data).then(res => {
@@ -346,11 +346,11 @@ export function addVideoToCoachingArrayHelper(dispatch: Dispatch<AnyAction>, id,
     //
     //         })
     //         .catch(err => {
-    //             writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    //             writeError(dispatch, err?.response?.data?.error?.[0])
     //         });
     //     return res.status === 200;
     // }).catch(err => {
-    //     writeError(dispatch, err?.response?.data?.error ?? err?.message)
+    //     writeError(dispatch, err?.response?.data?.error?.[0])
     // });
 }
 
@@ -363,11 +363,11 @@ export function addVideoToCoachingHelper(dispatch: Dispatch<AnyAction>, id, data
 
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -378,11 +378,11 @@ export function deleteCoachingVideoHelper(dispatch: Dispatch<AnyAction>, id) {
                 dispatch(setCoaching(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+        writeError(dispatch, err?.response?.data?.error?.[0])
     });
 }
 
@@ -393,7 +393,7 @@ export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setCoaching(res.data));
         })
         .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -403,7 +403,7 @@ export function getFoodHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setFood(res.data));
         })
         .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -416,11 +416,11 @@ export function addNewFoodHelper(dispatch: Dispatch<AnyAction>, data) {
                 dispatch(removeSpinner());
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -431,11 +431,11 @@ export function addNewFoodDetailsHelper(dispatch: Dispatch<AnyAction>, id,  data
                 dispatch(setFood(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -449,11 +449,11 @@ export function updateFoodHelper(dispatch: Dispatch<AnyAction>, id, data) {
                 dispatch(removeSpinner());
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -476,11 +476,11 @@ export function deleteFoodHelper(dispatch: Dispatch<AnyAction>, id: string) {
                 dispatch(setFood(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -491,11 +491,11 @@ export function deleteFoodPointHelper(dispatch: Dispatch<AnyAction>, id: string)
                 dispatch(setFood(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -506,11 +506,11 @@ export function deleteFoodDetailHelper(dispatch: Dispatch<AnyAction>, id: string
                 dispatch(setFood(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+        writeError(dispatch, err?.response?.data?.error?.[0])
     });
 }
 
@@ -521,11 +521,11 @@ export function updateFoodPointHelper(dispatch: Dispatch<AnyAction>, id, data) {
                 dispatch(setFood(res.data));
             })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -534,7 +534,7 @@ export function getUsersHelper(dispatch: Dispatch<AnyAction>) {
         dispatch(setUsers(res.data));
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -543,7 +543,7 @@ export function getFAQHelper(dispatch: Dispatch<AnyAction>) {
         dispatch(setFAQ(res.data));
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -553,11 +553,11 @@ export function addNewFAQHelper(dispatch: Dispatch<AnyAction>, data) {
             dispatch(setFAQ(res.data));
         })
         .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -567,11 +567,11 @@ export function updateFAQHelper(dispatch: Dispatch<AnyAction>, id, data) {
             dispatch(setFAQ(res.data));
         })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
 
@@ -581,10 +581,10 @@ export function deleteFAQHelper(dispatch: Dispatch<AnyAction>, id: string) {
             dispatch(setFAQ(res.data));
         })
             .catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
         return res.status === 200;
     }).catch(err => {
-                writeError(dispatch, err?.response?.data?.error ?? err?.message)
+                writeError(dispatch, err?.response?.data?.error?.[0])
             });
 }
