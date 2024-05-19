@@ -15,6 +15,42 @@ const Footer = () => {
     const [contactsModalIsOpen, setContactsModalIsOpen] = useState(false);
     const [paymentModalIsOpen, setPaymentModalIsOpen] = useState(false);
 
+
+    function navigateOnHomePage(elementText: string) {
+        if (elementText === 'Тренування') {
+            const trainingElement = document.getElementById('training');
+            if (trainingElement) {
+                const elementPosition =
+                    trainingElement.getBoundingClientRect().top;
+                window.scrollBy({
+                    top: elementPosition - 110,
+                    left: 0,
+                    behavior: 'smooth',
+                });
+            }
+        } else if (elementText === 'Тренери') {
+            const trainersElement = document.getElementById('trainers');
+            if (trainersElement) {
+                const elementPosition =
+                    trainersElement.getBoundingClientRect().top;
+                window.scrollBy({
+                    top: elementPosition - 40,
+                    left: 0,
+                    behavior: 'smooth',
+                });
+            }
+        } else if (elementText === 'FAQ') {
+            const FAQElement = document.getElementById('FAQ');
+            if (FAQElement) {
+                const elementPosition = FAQElement.getBoundingClientRect().top;
+                window.scrollBy({
+                    top: elementPosition - 40,
+                    behavior: 'smooth',
+                });
+            }
+        }
+    }
+
     return <>
         <ContactsModal
             onClose={() => setContactsModalIsOpen(false)}
@@ -39,16 +75,16 @@ const Footer = () => {
                     <nav className='footer__menu'>
                         <ul className='footer__menu_items'>
                             <li>
-                                <a href='/'>Тренування</a>
+                                <a onClick={() => navigateOnHomePage('Тренування')}>Тренування</a>
                             </li>
                             <li>
-                                <a href='/'>Тренери</a>
+                                <a onClick={() => navigateOnHomePage('Тренери')}>Тренери</a>
                             </li>
                             <li>
-                                <a href='/'>FAQ</a>
+                                <a onClick={() => navigateOnHomePage('FAQ')}>FAQ</a>
                             </li>
                             <li>
-                                <a href='/'>Мої тренування</a>
+                                <a href='/profile'>Мої тренування</a>
                             </li>
                         </ul>
                         <ul className='footer__menu_items'>
