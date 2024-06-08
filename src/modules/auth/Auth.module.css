@@ -99,7 +99,7 @@
     align-items: center;
     gap: 10px;
     background: var(--beige, #FFEDE4);
-    margin-top: 35px;
+    margin-top: 15px;
 }
 .btn p {
     color: var(--torauoise-bg, #1E7689);

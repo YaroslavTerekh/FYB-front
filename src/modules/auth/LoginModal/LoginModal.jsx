@@ -12,6 +12,7 @@ import {
     setSpinner,
     setUserSpinner,
 } from '../../../context/spinner-context/spinner-actions';
+import { useNavigate } from 'react-router-dom';
 
 const LoginModal = ({ isOpen, onClose, registerRequested }) => {
     const userService = new AuthService();
@@ -40,6 +41,12 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                 setDisabled(false);
             });
         }
+    }
+
+    const navigate = useNavigate();
+    function forgotPass() {
+        onClose();
+        navigate('/forgot-password');
     }
 
     const formRef = useRef(null);
@@ -77,6 +84,9 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                         <p tabIndex={'1'} className={styles.linkBox} onClick={registerRequested}>
                             <p className={styles.text}>Ще не маєте особистого кабінету?</p>
                             <p className={styles.link}>Зареєструватися</p>
+                        </p>
+                        <p tabIndex={'2'} className={styles.linkBox} onClick={forgotPass}>
+                            <p className={styles.text}>Забули пароль?</p>
                         </p>
                         <Button
                             className={styles.btn}

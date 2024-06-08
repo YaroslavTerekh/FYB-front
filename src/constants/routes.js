@@ -13,7 +13,8 @@ export const ROUTES = {
     users: 'users',
     faq: 'faq',
     confirmNumber: 'confirm-number',
-    info: 'proposition-info'
+    info: 'proposition-info',
+    forgotPassword: 'forgot-password'
 };
 
 export const HEADER_NAVIGATION_LINK_TYPES = {

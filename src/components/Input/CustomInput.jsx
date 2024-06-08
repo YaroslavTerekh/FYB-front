@@ -43,7 +43,7 @@ const CustomInput = ({
            if(isValid) {
                isValid(false);
            }
-       } else if (type === "tel-r") {
+       } else if (type === "tel-r" || type === "tel-l") {
            const phoneRegex = /^0[0-9]{9}$/.test(value)
 
            if (phoneRegex) {
