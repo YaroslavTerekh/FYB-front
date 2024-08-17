@@ -21,6 +21,8 @@ const ProfilePage = () => {
     const [selectedTrainingType, setSelectedTrainingType] = useState();
     const userService = new AuthService();
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         getCoachingHelper(dispatch);
         getFoodHelper(dispatch);
     }, []);
