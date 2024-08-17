@@ -4,13 +4,14 @@
 }
 
 .review_photos {
-    width: 400px;
+    width: 380px;
     height: 400px;
     display: flex;
     flex-direction: column;
     border-radius: 30px;
     background: #ffcdd2;
     transition: all 0.3s ease 0s;
+    padding: 10px 10px;
 }
 
 .reviews__slider {
@@ -22,13 +23,35 @@
 }
 
 .slider-block {
-    flex: 0 0 50%;
+    /*flex: 0 0 50%;*/
     height: 100%;
+    padding: 0 30px;
+    width: 95% !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: opacity 0.3s ease-in-out;
+    margin: auto;
+}
+.reviews .slick-slide div:first-child {
+    display: flex;
+}
+
+.reviews .slider-block__img {
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    min-height: 120px;
+    display: flex;
+    /*justify-content: space-between;*/
+}
+
+.reviews .slider-block__img p {
+    color: black;
+    cursor: pointer;
 }
 
 .slider-block.active {
@@ -88,9 +111,16 @@
 
 .detal-spoiler__photo img {
     border-radius: 30px;
-    max-width: 55%;
-    max-height: 55%;
-    margin: 0 auto;
+    /*max-width: 55%;*/
+    /*max-height: 55%;*/
+    /*margin: 0 auto;*/
+
+    height: 190px;
+    width: 180px;
+}
+
+.detal-spoiler__photo img:last-child{
+    margin-left: auto;
 }
 
 .detal-spoiler__photo {
@@ -123,11 +153,26 @@
 }
 
 .slick-prev {
-    left: 5px;
+    left: -30px;
+    width: 30px;
 }
 
 .slick-next {
-    right: 5px;
+    right: 0px;
+    width: 30px;
+}
+
+
+@media screen and (max-width: 1030px) {
+    .slick-prev {
+        left: -3px;
+        width: 25px;
+    }
+
+    .slick-next {
+        right: 10px;
+        width: 25px;
+    }
 }
 
 @media screen and (max-width: 890px) {
@@ -141,6 +186,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    .slick-prev {
+        left: -5px;
+    }
+
     .reviews {
         padding: 30px 0 40px 0;
     }
@@ -180,5 +229,9 @@
 
     .slick-next {
         right: -3%;
+    }
+
+    .review_photos {
+        width: 338px;
     }
 }

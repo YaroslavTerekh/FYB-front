@@ -5,6 +5,7 @@ import Button from '../../../components/Button/Button';
 import AuthService from '../../../services/auth-service';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAlert } from '../../../context/alert-context/alert-actions';
+import { useNavigate } from 'react-router-dom';
 
 const ConfirmPhoneNumber = () => {
     const userService = new AuthService();
@@ -13,13 +14,16 @@ const ConfirmPhoneNumber = () => {
     const [code, setCode] = useState("");
     const [requested, setRequested] = useState(false);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        requestCode();
+        window.scrollTo(0, 0);
+        // requestCode();
     }, []);
 
-    function requestCode() {
-        userService.requestCode().then(r => {});
-    }
+    //  function requestCode() {
+    //     userService.requestCode();
+    // }
 
     function changeCodeHandler(e) {
         setCode(e?.target?.value);
@@ -29,7 +33,8 @@ const ConfirmPhoneNumber = () => {
         const isSuccess = await userService.verifyCode(+code);
 
         if (isSuccess) {
-            dispatch(setAlert({ icon:"", isSuccess: true, message: "Номер телефону, підтверджено!" }))
+            dispatch(setAlert({ icon:"", isSuccess: true, message: "Ви успішно увійшли та можете користуватися сайтом!" }));
+            navigate("/");
         } else {
             dispatch(setAlert({ icon:"", isSuccess: false, message: "Упс, щось пішло не так!" }))
         }
@@ -47,6 +52,7 @@ const ConfirmPhoneNumber = () => {
                     <CustomInput
                         onChange={changeCodeHandler}
                         className={styles.customInput}
+                        customInputContainer={styles.customInputContainer}
                         placeholder={"Введіть код"}
                         type={"tel"}
                         required={true}
@@ -55,7 +61,7 @@ const ConfirmPhoneNumber = () => {
                         name={"RequestedCode"}
                     />
                     <Button
-                        className={styles.btn}
+                        className={styles.btn + " " + styles.confBtn}
                         aria-expanded={true}
                         aria-controls={`example-panel-`}
                         onClick={verifyCode}

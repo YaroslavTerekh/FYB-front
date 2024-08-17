@@ -19,6 +19,9 @@ import ConfirmPhoneNumberPage from './modules/auth/ConfirmPhoneNumber/ConfirmPho
 import SystemAlert from './components/Alert/SystemAlert';
 import AuthService from './services/auth-service';
 import FoodDetailsPage from './modules/user/pages/DetailsPage/FoodDetailsPage';
+import { CustomSpinner } from './components/Spinner/CustomSpinner';
+import OfertaPage from './modules/user/pages/OfertaPage/OfertaPage';
+import ForgotPassword from './modules/auth/ForgotPassowrd/ForgotPassword';
 
 function App() {
     const userService = new AuthService();
@@ -36,6 +39,7 @@ function App() {
     }, [currentUserState]);
 
     return (
+        <>
         <div className=''>
             <AxiosInterceptor>
                 <Router>
@@ -46,6 +50,8 @@ function App() {
                             <Route path={`${ROUTES.details}/:id`} element={<DetailsPage />} />
                             <Route path={`${ROUTES.foodDetails}/:id`} element={<FoodDetailsPage />} />
                             <Route path={ROUTES.confirmNumber} element={<ConfirmPhoneNumberPage />} />
+                            <Route path={ROUTES.info} element={<OfertaPage />} />
+                            <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
                         </Route>
 
                         {selectedUser?.role && selectedUser.role === AdminRole &&
@@ -67,7 +73,10 @@ function App() {
             </AxiosInterceptor>
 
             <SystemAlert />
+
         </div>
+            <CustomSpinner />
+        </>
     );
 }
 

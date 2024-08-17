@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import VideoTrainingsSection from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection';
 import TrainingCarouselSection from '../../sections/ProfilePage/TrainingCarouselSection/TrainingCarouselSection';
-
 import { MOCKED_TRAININGS_DATA, MOCKED_TRAININGS_TYPES } from './constants';
-
 import './ProfilePage.css';
 import styles from '../../sections/ProfilePage/VideoTrainingsSection/VideoTrainingsSection.module.css';
 import Select from '../../../../components/Select/Select';
@@ -14,17 +11,23 @@ import { getCoachingHelper, getFoodHelper } from '../../../../context/content-co
 import BuyAlertModal from '../../buy-modal/BuyAlertModal';
 import { PurchaseProductTypeCoaching, PurchaseProductTypeFood } from '../../../../constants/roles';
 import Button from '../../../../components/Button/Button';
+import LoginModal from '../../../auth/LoginModal/LoginModal';
+import RegisterModal from '../../../auth/RegisterModal/RegisterModal';
+import FinishRegistrationModal from '../../../auth/FinishRegistrationModal/FinishRegistrationModal';
+import AuthService from '../../../../services/auth-service';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
     const [selectedTrainingType, setSelectedTrainingType] = useState();
-
+    const userService = new AuthService();
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         getCoachingHelper(dispatch);
         getFoodHelper(dispatch);
     }, []);
 
     const handleSelectChange = ({ value, label }) => {
-        debugger
         setSelectedTrainingType(value);
     };
 
@@ -54,7 +57,7 @@ const ProfilePage = () => {
         let item1 = Object.entries(coaching).map(([itemType, itemData]) => ({
             value: itemData,
             label: itemData.title,
-            isPurchased: !!currentUser?.coachingPurchases?.find(x => x?.id === itemData.id),
+            isPurchased: !!currentUser?.coachingPurchases?.find(x => x?.product?.id === itemData.id),
             isFood: false
         }));
 
@@ -62,7 +65,7 @@ const ProfilePage = () => {
             const item2 = Object.entries(food).map(([itemType, itemData]) => ({
                 value: itemData,
                 label: itemData.title,
-                isPurchased: !!currentUser?.foodPurchases?.find(x => x?.id === itemData.id),
+                isPurchased: !!currentUser?.foodPurchases?.find(x => x?.product?.id === itemData.id),
                 isFood: true
             }));
 
@@ -77,8 +80,59 @@ const ProfilePage = () => {
         setModalIsOpen(false);
     }
 
+    function onLoginCloseModalHandler() {
+        setLoginIsOpen(false);
+    }
+
+    function onRegisterCloseModalHandler() {
+        setRegisterIsOpen(false);
+    }
+
+    function onRegisterRequestedModalHandler() {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(true);
+    }
+
+    function onRegisterRequestedModalHandler() {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(true);
+    }
+
+    function onRegisterFinishedModalHandler(value: boolean) {
+        setLoginIsOpen(false);
+        setRegisterIsOpen(false);
+        setFinishRegistrationIsOpen(value);
+    }
+
+    function onRegisterFinishedModalCloseHandler() {
+        setFinishRegistrationIsOpen(false);
+        navigate("/confirm-number");
+    }
+
+    const [loginIsOpen, setLoginIsOpen] = useState(false);
+    const [registerIsOpen, setRegisterIsOpen] = useState(false);
+    const [finishRegistrationIsOpen, setFinishRegistrationIsOpen] = useState(false);
+
+    const navigate = useNavigate();
+
+
     return (
-        <>
+        <div className=''>
+            <LoginModal
+                onClose={onLoginCloseModalHandler}
+                isOpen={loginIsOpen}
+                registerRequested={onRegisterRequestedModalHandler} />
+            <RegisterModal
+                onClose={onRegisterCloseModalHandler}
+                isOpen={registerIsOpen}
+                setRegistrationFinished={onRegisterFinishedModalHandler}
+            />
+            <FinishRegistrationModal
+                onClose={onRegisterFinishedModalCloseHandler}
+                isOpen={finishRegistrationIsOpen}
+            />
+
+
             <BuyAlertModal
                 purchaseProductType={selectedTrainingType?.foodDetails ? PurchaseProductTypeFood :PurchaseProductTypeCoaching}
                 onClose={onModalCloseHandler}
@@ -86,6 +140,10 @@ const ProfilePage = () => {
                 text={"Підвердіть покупку"}
                 productId={selectedTrainingType?.id}
             />
+            <div className={'container ' + styles.navigation}>
+                Головна <span>/</span> {selectedTrainingType?.title}
+            </div>
+
             <div
                 className={`videoTrainingsButton ${styles.videoTrainingsButton}`}
             >
@@ -98,20 +156,20 @@ const ProfilePage = () => {
             </div>
 
             { (selectedTrainingType &&
-            (!!currentUser?.foodPurchases?.find(x => x?.id === selectedTrainingType?.id)) &&
+            (!!currentUser?.foodPurchases?.find(x => x?.product?.id === selectedTrainingType?.id)) &&
                 selectedTrainingType?.foodDetails)
                 ?   <FoodSection  selectedTrainingType={selectedTrainingType} filteredTrainingData={filteredTrainingData}/>
                 :
 
                 selectedTrainingType &&
-                !!currentUser?.coachingPurchases?.find(x => x?.id === selectedTrainingType?.id)
+                !!currentUser?.coachingPurchases?.find(x => x?.product?.id === selectedTrainingType?.id)
                     ?  <VideoTrainingsSection
                         selectedTrainingType={selectedTrainingType}
                         handleSelectChange={handleSelectChange}
                     />
                 : selectedTrainingType &&
-                    !(!!currentUser?.coachingPurchases?.find(x => x?.id === selectedTrainingType?.id) ||
-                        !!currentUser?.foodPurchases?.find(x => x?.id === selectedTrainingType?.id)
+                    !(!!currentUser?.coachingPurchases?.find(x => x?.product?.id === selectedTrainingType?.id) ||
+                        !!currentUser?.foodPurchases?.find(x => x?.product?.id === selectedTrainingType?.id)
                     )
                         ? <div className={styles.mainText}>
                             <p>Для перегляду цього тренування, потрібного його придбати</p>
@@ -119,7 +177,7 @@ const ProfilePage = () => {
                                 className={styles.btn}
                                 aria-expanded={true}
                                 aria-controls={`coach-modal`}
-                                onClick={() => setModalIsOpen(true)}
+                                onClick={() => userService.isAuthorized() ? setModalIsOpen(true) : setLoginIsOpen(true)}
                             >
                                 <p>Купити</p>
                             </Button>
@@ -131,7 +189,7 @@ const ProfilePage = () => {
             <TrainingCarouselSection
                 filteredTrainingData={filteredTrainingData}
             />
-        </>
+        </div>
     );
 };
 

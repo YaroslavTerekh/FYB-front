@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import ReviewsCarouselArrow from './components/ReviewsCarouselArrow/ReviewsCarouselArrow';
-import { BEFORE_AFTER_PHOTOS, MOCKED_REVIEWS_PHOTOS } from './constants';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ReviewsSection.css';
-import ReviewsAnimateHeight from './components/ReviewsCarouselArrow/ReviewsAnimateHeight';
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFeedbacksHelper } from '../../../../../context/content-context/content-context.helper';
@@ -60,7 +58,7 @@ const ReviewsSection = () => {
                     {list.map((data, index) => (
                         <div className='slider-block' key={index}>
                             <div className='slider-block__img'>
-                                <p>@{data.instagramLink}</p>
+                                <p><a href={'https://www.instagram.com/'+ data.instagramLink}>{data.instagramLink}</a></p>
                                 <p>{data.feedbackText}</p>
                             </div>
 

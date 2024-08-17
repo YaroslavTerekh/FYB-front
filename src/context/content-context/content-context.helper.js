@@ -16,7 +16,7 @@ export function getContentCoachesHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setContentCoaches(res.data));
         })
         .catch(err => {
-            writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            // writeError(dispatch, err?.response?.data?.error ?? err?.message)
         });
 }
 
@@ -26,7 +26,7 @@ export function getFeedbacksHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setContentFeedbacks(res.data));
         })
         .catch(err => {
-            writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            // writeError(dispatch, err?.response?.data?.error ?? err?.message)
         });
 }
 
@@ -36,7 +36,7 @@ export function getCoachingHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setContentCoaching(res.data));
         })
         .catch(err => {
-            writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            // writeError(dispatch, err?.response?.data?.error ?? err?.message)
         });
 }
 
@@ -46,7 +46,7 @@ export function getFoodHelper(dispatch: Dispatch<AnyAction>){
             dispatch(setContentFood(res.data));
         })
         .catch(err => {
-            writeError(dispatch, err?.response?.data?.error ?? err?.message)
+            // writeError(dispatch, err?.response?.data?.error ?? err?.message)
         });
 }
 export function getFAQHelper(dispatch: Dispatch<AnyAction>) {
@@ -54,6 +54,6 @@ export function getFAQHelper(dispatch: Dispatch<AnyAction>) {
         dispatch(setContentFAQ(res.data));
         return res.status === 200;
     }).catch(err => {
-        writeError(dispatch, err?.response?.data?.error ?? err?.message)
+        // writeError(dispatch, err?.response?.data?.error ?? err?.message)
     });
 }

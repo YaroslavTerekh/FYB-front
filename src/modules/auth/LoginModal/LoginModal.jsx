@@ -5,13 +5,24 @@ import ModalWindow from '../../../components/Modal/ModalWindow';
 import styles from '../Auth.module.css';
 import Button from '../../../components/Button/Button';
 import AuthService from '../../../services/auth-service';
+import { useDispatch } from 'react-redux';
+import {
+    removeSpinner,
+    removeUserSpinner,
+    setSpinner,
+    setUserSpinner,
+} from '../../../context/spinner-context/spinner-actions';
+import { useNavigate } from 'react-router-dom';
 
 const LoginModal = ({ isOpen, onClose, registerRequested }) => {
     const userService = new AuthService();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
+
+    const [disabled, setDisabled] = useState(false);
     function changeEmailHandler(e) {
         setEmail(e?.target?.value);
     }
@@ -22,8 +33,20 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
 
     async function login() {
         if(email && email.length > 0 && password && password.length > 0) {
-            await userService.login({ email, password }).then(x=> onClose());
+            dispatch(setUserSpinner());
+            setDisabled(true);
+            await userService.login({ email, password }).then(x=> {
+                onClose();
+                dispatch(removeUserSpinner());
+                setDisabled(false);
+            });
         }
+    }
+
+    const navigate = useNavigate();
+    function forgotPass() {
+        onClose();
+        navigate('/forgot-password');
     }
 
     const formRef = useRef(null);
@@ -38,6 +61,7 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                             <CustomInput
                                 onChange={changeEmailHandler}
                                 className={styles.customInput}
+                                customInputContainer={styles.customInputContainer}
                                 placeholder={"Email"}
                                 type={"email"}
                                 required={true}
@@ -54,17 +78,22 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
                                 formRef={formRef}
                                 name={"LoginPassword"}
                                 value={password}
+                                customInputContainer={styles.customInputContainer}
                             />
                         </div>
-                        <button className={styles.linkBox} onClick={registerRequested}>
+                        <p tabIndex={'1'} className={styles.linkBox} onClick={registerRequested}>
                             <p className={styles.text}>Ще не маєте особистого кабінету?</p>
                             <p className={styles.link}>Зареєструватися</p>
-                        </button>
+                        </p>
+                        <p tabIndex={'2'} className={styles.linkBox} onClick={forgotPass}>
+                            <p className={styles.text}>Забули пароль?</p>
+                        </p>
                         <Button
                             className={styles.btn}
                             aria-expanded={true}
                             aria-controls={`example-panel-`}
                             onClick={login}
+                            disabled={disabled}
                         >
                             <p>Далі</p>
                         </Button>
@@ -74,7 +103,13 @@ const LoginModal = ({ isOpen, onClose, registerRequested }) => {
             }
             isOpen={isOpen}
             onClose={onClose}
-            styles={{ bgColor:'var(--main-bg)', width: '609px', height: '480px', border: '2px solid var(--beige, #FFEDE4);', overlayBgColor: 'none'}}
+            styles={{
+                bgColor:'var(--main-bg)',
+                width: '609px',
+                height: '480px',
+                border: '2px solid var(--beige, #FFEDE4);',
+                overlayBgColor: 'none'}}
+            className={styles.modalData}
         />
     </>
 }

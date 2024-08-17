@@ -19,6 +19,18 @@ export function VerifyCode(phoneNumber: string, code: number): any {
     return API.post(`auth/verify-code`, { phoneNumber, code });
 }
 
+export function requestCodeForPasswordChange(phone: string) {
+    return API.post(`auth/code-request-password`, { phoneNumber: phone });
+}
+
+export function confirmCodeForPasswordChange(model: any) {
+    return API.post(`auth/code-request-password-confirm`, { ...model });
+}
+
+export function changePasswordConfirm(model: any) {
+    return API.post(`auth/confirm-forgot-password-change`, model);
+}
+
 export function getCurrentUser(): any {
     return API.get(`auth/get-user`);
 }

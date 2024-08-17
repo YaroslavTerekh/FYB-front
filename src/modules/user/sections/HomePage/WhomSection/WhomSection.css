@@ -1,3 +1,7 @@
+.container {
+    position: relative;
+}
+
 .whom {
     padding: 51px 0;
     background-color: var(--second-bg);
@@ -159,6 +163,17 @@
 @media screen and (max-width: 450px) {
     .whom__subtitle {
         padding: 50px 0 0 0;
+        position: absolute;
+        top: 65%;
+        width: 172px;
+        font-size: 16px;
+        right: 10px;
+        text-align: center;
+        font-family: Vetrino;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
     .info-whom__img img {
         border-radius: 40px;
@@ -176,6 +191,7 @@
     }
     .info-whom {
         grid-template-rows: repeat(1, 1fr);
+        margin-bottom: 30px;
     }
     .text-info__item {
         padding: 35px 0px 0px 45px;

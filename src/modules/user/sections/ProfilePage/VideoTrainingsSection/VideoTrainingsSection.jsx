@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-
-import Select from '../../../../../components/Select/Select';
-import VideoPlayer from '../../../../../components/VideoPlayer/VideoPlayer';
 import Button from '../../../../../components/Button/Button';
 import styles from './VideoTrainingsSection.module.css';
-
-import {
-    MOCKED_TRAININGS_DATA,
-    MOCKED_TRAININGS_TYPES,
-} from '../../../pages/ProfilePage/constants';
 import ReactPlayer from 'react-player';
+import { removeUserSpinner, setUserSpinner } from '../../../../../context/spinner-context/spinner-actions';
+import { useDispatch } from 'react-redux';
 
 const VideoTrainingsSection = ({
     selectedTrainingType,
     handleSelectChange,
 }) => {
-    const [trainingVideoSource, setTrainingVideoSource] = useState('');
+    const [trainingVideoSource, setTrainingVideoSource] = useState(null);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setUserSpinner());
+        window.scrollTo(0, 0);
+
+        if(selectedTrainingType?.id) {
+            const timer = setTimeout(() => {
+
+
+                dispatch(removeUserSpinner());
+                clearTimeout(timer);
+            }, 1000);
+        }
+
+    }, [selectedTrainingType]);
 
     useEffect(() => {
         const selectedTraining = selectedTrainingType?.videos?.[0].filePath;
-
-        if (selectedTrainingType) {
+        if (selectedTrainingType && selectedTraining && typeof selectedTraining === "string") {
             setTrainingVideoSource(selectedTraining);
         } else {
             setTrainingVideoSource(null);
@@ -43,6 +51,7 @@ const VideoTrainingsSection = ({
                                 && selectedTrainingType.videos.filter(x => !x?.isPreview).map(
                                     (videoSource, videoIndex) => (
                                         <Button
+                                            className={videoSource?.filePath === trainingVideoSource ? styles.selected: ''}
                                             key={videoIndex}
                                             onClick={() =>
                                                 handleSelectTrainingVideo(
@@ -61,12 +70,10 @@ const VideoTrainingsSection = ({
 
                     <div className={styles.videoTrainingsVideo}>
                         {trainingVideoSource && (
-                            <ReactPlayer
-                                url={trainingVideoSource}
-                                controls={true}
-                                width='100%'
-                                height='100%'
-                            />
+                           <>
+                               <ReactPlayer url={trainingVideoSource} muted={true}  playing={false} loop={true} controls={true} width={'100%'} height={'100%'} />
+
+                           </>
                         )}
                     </div>
 
@@ -74,11 +81,6 @@ const VideoTrainingsSection = ({
             </div>
         </section>
     );
-};
-
-VideoTrainingsSection.propTypes = {
-    selectedTrainingType: PropTypes.string.isRequired,
-    handleSelectChange: PropTypes.func.isRequired,
 };
 
 export default VideoTrainingsSection;

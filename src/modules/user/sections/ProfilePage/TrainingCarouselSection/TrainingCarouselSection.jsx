@@ -29,7 +29,14 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
         {
             breakpoint: 1110,
             settings: {
-                slidesToShow: 2.5,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+            },
+        },
+        {
+            breakpoint: 1025,
+            settings: {
+                slidesToShow: 2,
                 slidesToScroll: 1,
             },
         },
@@ -61,12 +68,8 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
     }, []);
 
     useEffect(() => {
-
-
         const a = [...currentContentState.coaching, ...currentContentState.food];
-
         setList(a);
-
     }, [currentContentState.coaching, currentContentState.food]);
 
 
@@ -119,18 +122,31 @@ const TrainingCarouselSection = ({ filteredTrainingData }) => {
                                         <p style={{textOverflow: "ellipsis"}}>{trainingData.description}</p>
                                     </div>
                                 </div>
-                                <div className='carusel-block__button'>
-                                    <Link
-                                        className='button-training__blu'
-                                        to={ROUTES.details}
-                                    >
-                                        Детальніше
-                                    </Link>
-                                </div>
+
+                                { trainingData.id && (trainingData?.foodPoints && trainingData?.foodDetails) &&
+                                    <div className='carusel-block__button'>
+                                        <Link
+                                            className='button-training__blu'
+                                            to={ROUTES.foodDetails + "/" + trainingData.id}
+                                        >
+                                            Детальніше
+                                        </Link>
+                                    </div>
+                                }
+
+                                { trainingData.id && !(trainingData?.foodPoints && trainingData?.foodDetails) &&
+                                    <div className='carusel-block__button' >
+                                        <Link
+                                            className='button-training__blu'
+                                            to={ROUTES.details + "/" + trainingData.id}
+                                        >
+                                            Детальніше
+                                        </Link>
+                                    </div>
+                                }
                             </div>
                         )
                     )}
-
                 </Slider>
             </div>
         </section>

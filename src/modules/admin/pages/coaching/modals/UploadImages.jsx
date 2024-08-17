@@ -32,6 +32,8 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
 
     function onSaveHandler(currentImages: []) {
 
+        const arr: any = [];
+
         currentImages.forEach((image, index) => {
             const form = new FormData();
             form.append('Id', coachingId);
@@ -39,8 +41,10 @@ const UploadImagesCarousel = ({ isOpen, onClose, coachingId }) => {
             form.append('OrderId', 1);
             form.append('FileName', image.name);
 
-            addPhotosToCoachingHelper(dispatch, form);
+            arr.push(form);
         });
+
+        addPhotosToCoachingHelper(dispatch, arr);
 
         cleanUp();
     }

@@ -13,6 +13,7 @@ import { PurchaseProductTypeCoaching } from '../../../constants/roles';
 const BuyAlertModal = ({ isOpen, onClose, text, purchaseProductType, productId }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user);
+    const userService = new AuthService();
     const currentContentState = useSelector(state => state.content);
     useEffect(() => {
         getCoachingHelper(dispatch);
@@ -60,10 +61,11 @@ const BuyAlertModal = ({ isOpen, onClose, text, purchaseProductType, productId }
             onClose={onClose}
             styles={{
                 bgColor:'var(--main-bg)',
-                width: '40vw',
+                width: '60vw',
                 height: '40vh',
                 border: '2px solid var(--beige, #FFEDE4);',
-                overlayBgColor: 'none'}}
+                overlayBgColor: 'none'
+        }}
         />
     </>
 }

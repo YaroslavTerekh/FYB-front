@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import styles from './AdminHeader.module.css'
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import logOutIcon from '../../../img/components/logout.png';
 import { deleteAccessToken } from '../../../services/local-storage-service';
 
 const AdminHeader = () => {
+    const navigate = useNavigate();
     const currentAdminState = useSelector(state => state.user);
     const [selectedUser, setSelectedUser] = useState(null);
 
@@ -26,7 +27,7 @@ const AdminHeader = () => {
                         </div>
                         <div className='logOut'>
                             <button className={styles.tableBtn}  >
-                                <div className={styles.box} onClick={deleteAccessToken}>
+                                <div className={styles.box} onClick={() => deleteAccessToken(navigate)}>
                                     <p>Log out</p>
                                     <img src={logOutIcon} alt='' />
                                 </div>

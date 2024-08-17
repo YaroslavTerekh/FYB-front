@@ -45,16 +45,13 @@ function PhotoUploader( { onChange, icon, inputMode, placeholder, imgName, remov
                     <img src={icon} alt='' />
                 </div>
                 :
-                <div className={ imageBlob ? styles.imgData : ''} onClick={handleButtonClick}>
+                <div className={ styles.imgData } onClick={handleButtonClick} >
                     { imageBlob  ?
                         <img src={URL.createObjectURL(imageBlob)} alt="Uploaded" className={styles.img} />
                         :
                         imgName
-
-                            ? <div className={styles.imgData} >
-                                <img src={imgName} alt='' className={styles.img}/>
-                            </div>
-                            : <img src={icon ?? defaultImg}   alt='' />
+                            ? <img src={imgName}  alt='' className={styles.img}/>
+                            : <img src={icon ?? defaultImg}  style={{width:'56px', height:'56px', margin:'auto'}}  alt='' />
 
                     }
 

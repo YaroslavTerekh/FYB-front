@@ -15,7 +15,7 @@
 }
 
 .carusel-block__img img {
-    border-radius: 200px 0px;
+    border-radius: 120px 0px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -123,7 +123,7 @@
         top: 650px;
     }
     .carusel-block__img img {
-        border-radius: 70px 0px;
+        /*border-radius: 70px 0px;*/
         min-height: 285px;
     }
     .info-training__subtitle {
@@ -145,6 +145,11 @@
     }
     .info-training__subtitle {
         height: 100px;
+    }
+
+    .carusel-block__img {
+        width: 310px;
+        height: 400px;
     }
 }
 

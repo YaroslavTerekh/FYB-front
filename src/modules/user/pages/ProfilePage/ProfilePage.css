@@ -1,3 +1,17 @@
 .profile {
     margin: 190px 0 0px 0;
 }
+
+.navigation {
+    color: var(--beige, #FFEDE4);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 20px 0;
+}
+
+.navigation span {
+    margin: 0 20px;
+}

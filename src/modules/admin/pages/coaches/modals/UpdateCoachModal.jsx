@@ -88,7 +88,7 @@ const UpdateCoachModal = ({ isOpen, onClose, selectedCoachId }) => {
             form.append('InstagramLink', instagramLink);
             form.append('BirthDate', birthDate.toDateString());
 
-            updateCoachHelper(dispatch, form);
+            updateCoachHelper(dispatch, form, selectedCoachId);
             cleanUp();
         } else {
             // TODO error

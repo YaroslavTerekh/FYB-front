@@ -11,10 +11,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addNewCoachingHelper,
-    addPhotosToCoachingHelper, addVideoToCoachingHelper, deleteCoachingVideoHelper,
+    addPhotosToCoachingHelper, addVideoToCoachingArrayHelper, addVideoToCoachingHelper, deleteCoachingVideoHelper,
 } from '../../../../../context/admin-data-context/admin-context.helper';
 import ImagesCarousel from '../../../../../components/ContentCarousel/ImagesCarousel';
 import VideosCarousel from '../../../../../components/VideosCarousel/VideosCarousel';
+import { InfinitySpin } from 'react-loader-spinner';
+import { CustomSpinner } from '../../../../../components/Spinner/CustomSpinner';
+import { removeSpinner, setSpinner } from '../../../../../context/spinner-context/spinner-actions';
 
 const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
     const dispatch = useDispatch();
@@ -37,7 +40,12 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
         }
     }, [coachingId]);
 
+    const [showSpinner, setShowSpinner] = useState(false);
+
     function onSaveHandler(currentVideos: []) {
+
+        const dataArr: any = []
+        dispatch(setSpinner());
 
         currentVideos.forEach((video, index) => {
             const form = new FormData();
@@ -45,8 +53,10 @@ const UploadVideosCarousel = ({ isOpen, onClose, coachingId }) => {
             form.append('IsPreview', false);
             form.append('FileName', video.name);
 
-            addVideoToCoachingHelper(dispatch, coachingId, form);
+            dataArr.push(form);
         });
+
+        addVideoToCoachingArrayHelper(dispatch, coachingId, dataArr)
 
         cleanUp();
     }

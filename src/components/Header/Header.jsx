@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import './Header.css';
 
@@ -14,6 +14,7 @@ import logOutIcon from '../../img/components/logout.png';
 import FinishRegistrationModal from '../../modules/auth/FinishRegistrationModal/FinishRegistrationModal';
 import { AdminRole } from '../../constants/roles';
 import adminIcon from '../../img/components/admin.svg';
+import { ROUTES } from '../../constants';
 
 export default function Header({ navigationData }) {
     const currentUserState = useSelector(state => state.user);
@@ -34,11 +35,27 @@ export default function Header({ navigationData }) {
     const [registerIsOpen, setRegisterIsOpen] = useState(false);
     const [finishRegistrationIsOpen, setFinishRegistrationIsOpen] = useState(false);
 
+    const location = useLocation();
     const handleHeaderClick = (event) => {
         event.preventDefault();
         const clickedElement = event.target;
         const elementText = clickedElement.innerText;
 
+
+        if(location.pathname === ROUTES.home) {
+            navigateOnHomePage(elementText);
+        } else {
+            navigate(ROUTES.home);
+            const timer = setTimeout(() => {
+                navigateOnHomePage(elementText);
+
+                clearTimeout(timer);
+            }, 200);
+        }
+        setNav(false);
+    };
+
+    function navigateOnHomePage(elementText: string) {
         if (elementText === 'Тренування') {
             const trainingElement = document.getElementById('training');
             if (trainingElement) {
@@ -71,14 +88,17 @@ export default function Header({ navigationData }) {
                 });
             }
         }
-    };
+    }
 
     function handleProfileClick(elementLink) {
         if(userService.isAuthorized()) {
+            window.scrollTo(0, 0);
             navigate(elementLink);
         } else {
             setLoginIsOpen(true);
         }
+
+        setNav(false);
     }
 
     function onLoginCloseModalHandler() {
@@ -99,7 +119,6 @@ export default function Header({ navigationData }) {
         setRegisterIsOpen(false);
         setFinishRegistrationIsOpen(value);
     }
-
 
     function onRegisterFinishedModalCloseHandler() {
         setFinishRegistrationIsOpen(false);
@@ -125,8 +144,8 @@ export default function Header({ navigationData }) {
                 onClose={onRegisterFinishedModalCloseHandler}
                 isOpen={finishRegistrationIsOpen}
             />
-            <header className='header' style={{height:'120px'}}>
-                <div className='container'>
+            <header className='header' style={{height:'130px'}}>
+                <div className='container vetrino'>
 
                         <div className='header__row'>
                             <div className='header_box'>
@@ -147,12 +166,14 @@ export default function Header({ navigationData }) {
                                     {navigationData.map((item, index) => {
                                         if (item.name === "profile") {
                                             return (
-                                                <li key={index}>
-                                                    <p
+                                                <li key={index} >
+                                                    <a
+                                                        style={{color:'#ffede4'}}
+                                                        id="profile-link"
                                                         onClick={() => handleProfileClick(item.href)}
                                                     >
                                                         {item.title}
-                                                    </p>
+                                                    </a>
                                                 </li>
                                             );
                                         } else {
@@ -171,7 +192,7 @@ export default function Header({ navigationData }) {
                                     <li>
                                         {userService.isAuthorized() &&
                                             <>
-                                                <img src={logOutIcon} alt='' onClick={deleteAccessToken} />
+                                                <img src={logOutIcon} alt='' onClick={() => deleteAccessToken(navigate)} />
 
                                                 {currentUserState.role === AdminRole &&
                                                     <div className='admin-nav' onClick={goToAdmin}>

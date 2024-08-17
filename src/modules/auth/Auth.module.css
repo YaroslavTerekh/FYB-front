@@ -99,7 +99,7 @@
     align-items: center;
     gap: 10px;
     background: var(--beige, #FFEDE4);
-    margin-top: 35px;
+    margin-top: 15px;
 }
 .btn p {
     color: var(--torauoise-bg, #1E7689);
@@ -144,10 +144,12 @@
 }
 
 .confNum .inputBox {
-    width: 50%;
+    /*width: 50%;*/
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .confNum .text {
@@ -165,4 +167,70 @@
     font-weight: 400;
     line-height: normal;
     margin-top: 20px;
+}
+
+.errorMessage {
+    margin-top: 5px;
+}
+
+.modalData {
+    position: absolute;
+    inset: 40px;
+    background-image: initial;
+    background-position: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: var(--main-bg);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 0px;
+    color: lightsteelblue;
+    width: 609px;
+    height: 480px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 668px) {
+    .confBtn {
+        margin-top: 10px !important;
+        width: 250px;
+        padding: 15px 20px !important;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .modalData {
+        width: 82% !important;
+        height: 480px;
+    }
+
+    .customInputContainer {
+        width: 290px;
+        height: 55px !important;
+        /*width: 400px;*/
+        display: flex;
+        box-sizing: border-box;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .modalData {
+        width: 82% !important;
+        height: 480px;
+    }
+
+    .customInputContainer {
+        width: 250px;
+        height: 55px !important;
+        /*width: 400px;*/
+        display: flex;
+        box-sizing: border-box;
+        margin: auto;
+    }
 }
